@@ -26,15 +26,15 @@ In [`description.en.md`](description.en.md), ready to paste as-is.
 
 ## Other fields
 
-| Field                   | Value                                                                         |
-| ----------------------- | ----------------------------------------------------------------------------- |
-| Categories              | Other (up to two allowed; add a second only if it truly fits)                 |
-| Tags                    | Pick from the fixed list in the form; privacy and productivity fit if offered |
-| Platforms               | Windows, macOS, Linux; not Android                                            |
-| Support email / website | Mozilla recommends at least a support email (shown publicly)                  |
-| License                 | Your choice: MIT if others may reuse the code, All Rights Reserved if not     |
-| Privacy policy          | Not required; optional text in `../privacy-policy.md`                         |
-| Notes to reviewer       | `reviewer-notes.md`                                                           |
+| Field                   | Value                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Categories              | Other (up to two allowed; add a second only if it truly fits)                                                                         |
+| Tags                    | Pick from the fixed list in the form; privacy and productivity fit if offered                                                         |
+| Platforms               | Windows, macOS, Linux; not Android                                                                                                    |
+| Support email / website | Mozilla recommends at least a support email (shown publicly)                                                                          |
+| License                 | Your choice: MIT if others may reuse the code, All Rights Reserved if not                                                             |
+| Privacy policy          | Optional for Firefox (nothing is transmitted); paste the text of [`PRIVACY.md`](../../PRIVACY.md) so both stores show the same policy |
+| Notes to reviewer       | `reviewer-notes.md`                                                                                                                   |
 
 ## Screenshots
 
