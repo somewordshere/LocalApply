@@ -16,11 +16,9 @@ LocalApply – Private Job Application Autofill
 localapply
 ```
 
-## Summary (224 / 250 characters)
+## Summary (up to 250 characters)
 
-```
-Fill job applications in one click from a profile saved in your browser: contact details, address, links, salary expectation, start date and CV. Understands 8 languages. No account, no AI service, nothing leaves your device.
-```
+In [`summary.en.txt`](summary.en.txt), ready to paste as-is.
 
 ## Description
 

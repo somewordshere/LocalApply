@@ -8,11 +8,9 @@ Add under "Manage translations" → Deutsch. The extension's own interface is En
 LocalApply – Bewerbungen privat ausfüllen
 ```
 
-## Summary (233 / 250 characters)
+## Summary (up to 250 characters)
 
-```
-Füllt Bewerbungsformulare mit einem Klick aus deinem gespeicherten Profil: Kontaktdaten, Adresse, Links, Gehaltsvorstellung, Eintrittstermin und Lebenslauf. Versteht 8 Sprachen. Kein Konto, keine KI, keine Daten verlassen dein Gerät.
-```
+In [`summary.de.txt`](summary.de.txt), ready to paste as-is.
 
 ## Description
 
