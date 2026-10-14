@@ -1,0 +1,49 @@
+<html lang="en-US">
+  <body>
+    <input type="search" name="q" placeholder="Search jobs" />
+    <form>
+      <label for="fn">First name *</label><input id="fn" required />
+      <label for="ln">Last name *</label><input id="ln" required />
+      <label>Email address <input type="email" name="applicant_email" /></label>
+      <div class="row"><span>Phone</span><input type="tel" name="p1" /></div>
+      <div class="row"><div class="lbl">Street address</div><div><input name="a1" /></div></div>
+      <label for="zip">ZIP / Postal code</label><input id="zip" />
+      <label for="city">City</label><input id="city" />
+      <label for="country">Country</label>
+      <select id="country">
+        <option value="">Please select</option>
+        <option value="FR">France</option>
+        <option value="DE">Germany</option>
+        <option value="US">United States</option>
+      </select>
+      <label for="li">LinkedIn profile URL</label><input id="li" type="url" />
+      <label for="gh">GitHub</label><input id="gh" />
+      <label for="pf">Portfolio or personal website</label><input id="pf" />
+      <label for="sal">Salary expectations (gross per year)</label><input id="sal" type="number" />
+      <label for="np">Notice period</label><input id="np" />
+      <label for="sd">Earliest start date</label><input id="sd" placeholder="MM/DD/YYYY" />
+      <label for="dob">Date of birth</label><input id="dob" type="date" />
+
+      <fieldset>
+        <legend>Are you legally authorized to work in the country where this job is located?</legend>
+        <label><input type="radio" name="auth" value="1" /> Yes</label>
+        <label><input type="radio" name="auth" value="0" /> No</label>
+      </fieldset>
+      <fieldset>
+        <legend>Will you now or in the future require sponsorship for an employment visa?</legend>
+        <label><input type="radio" name="spons" value="1" /> Yes</label>
+        <label><input type="radio" name="spons" value="0" /> No</label>
+      </fieldset>
+
+      <label for="hear">How did you hear about us?</label><input id="hear" />
+      <label for="why">Why do you want to work here?</label><textarea id="why"></textarea>
+      <label for="cl">Cover letter</label><textarea id="cl"></textarea>
+      <label for="ref">Reference name</label><input id="ref" />
+      <label for="mid">Middle name</label><input id="mid" value="Kept" />
+      <input type="hidden" name="token" value="abc" />
+      <input type="password" name="pw" />
+      <label><input type="checkbox" name="privacy" required /> I accept the privacy policy</label>
+      <button type="submit">Submit application</button>
+    </form>
+  </body>
+</html>

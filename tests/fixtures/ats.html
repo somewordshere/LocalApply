@@ -1,0 +1,54 @@
+<html>
+  <body>
+    <!-- Approximations of each system's markup, reduced to the attributes the adapters rely on. -->
+    <form id="greenhouse">
+      <input id="first_name" name="job_application[first_name]" aria-label="x" />
+      <input id="last_name" name="job_application[last_name]" aria-label="x" />
+      <input id="email" name="job_application[email]" aria-label="x" />
+      <input id="phone" name="job_application[phone]" aria-label="x" />
+      <div data-field="resume"><input type="file" /></div>
+      <div data-field="cover_letter"><input type="file" /></div>
+      <label for="q1">LinkedIn Profile</label><input id="q1" name="job_application[answers_attributes][0][text_value]" />
+    </form>
+
+    <form id="lever">
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="org" />
+      <input name="urls[LinkedIn]" />
+      <input name="urls[GitHub]" />
+      <input name="urls[Portfolio]" />
+      <textarea name="comments"></textarea>
+    </form>
+
+    <form id="workday">
+      <div data-automation-id="formField-legalNameSection_firstName">
+        <label for="name--legalName--firstName">Given Name(s)</label>
+        <input id="name--legalName--firstName" data-automation-id="legalNameSection_firstName" />
+      </div>
+      <div>
+        <label for="name--legalName--lastName">Family Name</label>
+        <input id="name--legalName--lastName" data-automation-id="legalNameSection_lastName" />
+      </div>
+      <input id="address--addressLine1" />
+      <input id="address--city" />
+      <input id="address--postalCode" />
+      <input id="phoneNumber--phoneNumber" />
+    </form>
+
+    <form id="ashby">
+      <input id="_systemfield_name" name="_systemfield_name" />
+      <input id="_systemfield_email" name="_systemfield_email" />
+    </form>
+
+    <form id="personio">
+      <input name="first_name" />
+      <input name="last_name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="available_from" />
+      <input name="salary_expectations" />
+    </form>
+  </body>
+</html>

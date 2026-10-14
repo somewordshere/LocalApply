@@ -1,0 +1,45 @@
+import type { Locale } from '../types';
+
+const ORGANISATION = ['azienda', 'utente'];
+
+export const it: Locale = {
+  fields: {
+    coverLetterFile: ['lettera di presentazione'],
+    workAuthorized: ['permesso di lavoro'],
+    willingToRelocate: ['trasferi\\p{L}*'],
+    salaryCurrency: ['valuta'],
+    salary: ['retribuzione', 'ral', 'stipendio'],
+    noticePeriod: ['preavviso'],
+    startDate: ['data di inizio', 'disponibilita'],
+    yearsOfExperience: ['anni di esperienza'],
+    disability: ['disabilita'],
+    gender: ['genere', 'sesso'],
+    coverLetterText: ['lettera di presentazione'],
+    website: ['sito web'],
+    fullName: ['nome completo', 'nome e cognome'],
+    firstName: ['nome'],
+    lastName: ['cognome'],
+    email: ['posta elettronica'],
+    phoneCountryCode: ['prefisso'],
+    phone: ['telefono', 'cellulare'],
+    dateOfBirth: ['data di nascita'],
+    nationality: ['nazionalita', 'cittadinanza'],
+    houseNumber: ['numero civico'],
+    postcode: ['cap'],
+    city: ['citta', 'comune'],
+    state: ['provincia', 'regione'],
+    country: ['paese', 'nazione'],
+    street: ['indirizzo', 'via'],
+    currentTitle: ['posizione attuale'],
+    currentEmployer: ['azienda', 'datore di lavoro'],
+    school: ['universita', 'scuola'],
+    fieldOfStudy: ['corso di studi'],
+    degree: ['titolo di studio', 'laurea'],
+  },
+  exclude: {
+    fullName: ORGANISATION,
+    firstName: ORGANISATION,
+    lastName: ORGANISATION,
+  },
+  otherPerson: ['emergenza'],
+};
