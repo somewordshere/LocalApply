@@ -31,7 +31,7 @@ store/
 | `npm run store-assets` | `screenshots/*.png` and `chrome/promo-tile-440x280.png` from the built UI    |
 | `npm run icons`        | `public/icon/*.png` (in the extension) and `chrome/icon-128.png` (the store) |
 
-The screenshots show the real extension filling fictional job pages for a made-up person (Alex Morgan). Regenerate them whenever the popup, the profile page or the in-page highlights change. The first run needs `npx playwright install chromium`.
+The screenshots show the real extension at its real size, in a plain browser frame with the popup under its toolbar button, filling fictional job pages for a made-up person (Alex Morgan). They contain no marketing text, as Mozilla recommends; the captions in `firefox/listing.*.md` carry the story. Regenerate them whenever the popup, the profile page or the in-page highlights change. The first run needs `npx playwright install chromium`.
 
 ## Where each piece goes
 

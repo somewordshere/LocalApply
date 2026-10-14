@@ -18,10 +18,10 @@ In [`description.de.md`](description.de.md), ready to paste as-is.
 
 ## Screenshot captions
 
-| File                      | Caption                                                                                  |
-| ------------------------- | ---------------------------------------------------------------------------------------- |
-| `1-fill-in-one-click.png` | Ein Klick, und die Bewerbung ist aus deinem Profil ausgefüllt. Du prüfst und sendest ab. |
-| `2-profile.png`           | Einmal eingeben: Kontakt, Adresse, Links, Gehalt, Verfügbarkeit und Dokumente.           |
-| `3-whats-left.png`        | Grün ist ausgefüllt, Gelb braucht dich. Gespeicherte Antworten werden wiederverwendet.   |
-| `4-languages.png`         | Erkennt Feldbezeichnungen in acht Sprachen, hier eine deutsche Bewerbung.                |
-| `5-private.png`           | Alles bleibt in deinem Browser. Daten jederzeit exportieren oder löschen.                |
+| File                       | Caption                                                                                                                                                           |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `1-fill-in-one-click.png`  | Ein Klick füllt die Bewerbung aus deinem Profil aus: Kontaktdaten, Links, Gehalt, Arbeitserlaubnis und Lebenslauf. Grüne Rahmen zeigen, was ausgefüllt wurde.     |
+| `2-saved-answers.png`      | Eine gespeicherte Antwort füllt „Why do you want to join?" aus. Offene Fragen werden gelb umrandet; speichere deine Antwort einmal, und sie wird wiederverwendet. |
+| `3-any-language.png`       | Funktioniert in acht Sprachen, hier eine deutsche Bewerbung: Anrede, Adresse, Geburtsdatum und Eintrittstermin im passenden Format.                               |
+| `4-profile.png`            | Gib deine Daten einmal auf der Profilseite ein. Alles bleibt nur in deinem Browser.                                                                               |
+| `5-answers-and-backup.png` | Antworten auf wiederkehrende Fragen speichern und alle Daten jederzeit exportieren oder löschen.                                                                  |

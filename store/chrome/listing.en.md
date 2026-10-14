@@ -27,4 +27,4 @@ In [`description.en.txt`](description.en.txt), ready to paste as-is.
 | Marquee promo tile                   | Optional (1400×560); not provided                       |
 | Official / homepage URL, support URL | Optional; your project page if you have one             |
 
-Chrome shows no per-screenshot captions; the headline is in each image.
+Chrome shows no per-screenshot captions, and the screenshots carry no text, so the description does the explaining.

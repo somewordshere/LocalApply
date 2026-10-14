@@ -6,6 +6,10 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+### Fixed
+
+- The on-page notice after filling ("Filled 12 fields") showed in the page's default serif font instead of the system font.
+
 ## [0.1.0] - 2026-10-14
 
 First release, for Firefox and Chromium browsers (Chrome, Edge, Brave).

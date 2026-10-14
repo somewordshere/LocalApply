@@ -1,8 +1,13 @@
-// Renders the store screenshots (1280x800) from the real built extension.
-// Demo job pages are fictional and served through request interception; the profile is made up.
-// Run with `npm run store-assets` (builds first).
-// Output: store/screenshots/*.png (both stores) and store/chrome/promo-tile-440x280.png (Chrome Web Store).
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+// Renders the store images from the real built extension.
+//   store/screenshots/*.png             1280x800, used by both stores
+//   store/chrome/promo-tile-440x280.png Chrome Web Store small promo tile
+// Run with `npm run store-assets` (builds first). The first run needs `npx playwright install chromium`.
+//
+// Screenshots show the extension at its real size inside a plain browser frame, with the popup
+// opening under its toolbar button. They carry no marketing text: Mozilla asks for text-free
+// screenshots because one set is shown in every language; captions live in store/*/listing.*.md.
+// Job pages, companies and the person are fictional; pages are served through request interception.
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { chromium } from 'playwright';
@@ -13,6 +18,12 @@ const outDir = join(root, 'store/screenshots');
 const chromeDir = join(root, 'store/chrome');
 mkdirSync(outDir, { recursive: true });
 mkdirSync(chromeDir, { recursive: true });
+
+const WIDTH = 1280;
+const HEIGHT = 800;
+const CHROME_HEIGHT = 82; // tab strip + toolbar drawn by frame()
+const PAGE = { width: WIDTH, height: HEIGHT - CHROME_HEIGHT };
+const POPUP_WIDTH = 360;
 
 const PROFILE = {
   version: 1,
@@ -61,7 +72,8 @@ const PROFILE = {
     {
       id: 'demo',
       keywords: 'why do you want to join, why us',
-      answer: 'Your platform team works on exactly the testing problems I enjoy most.',
+      answer:
+        'Your platform team works on exactly the testing problems I enjoy most, and I would like to help you ship faster with fewer regressions.',
     },
   ],
   gender: '',
@@ -71,103 +83,136 @@ const PROFILE = {
 
 const FORM_CSS = `
   * { box-sizing: border-box; }
-  body { margin: 0; font: 14px/1.45 "Segoe UI", system-ui, sans-serif; color: #0f172a; background: #f1f5f9; }
-  .top { background: #0f766e; color: #fff; padding: 14px 32px; font-weight: 600; letter-spacing: .2px; }
-  .top small { font-weight: 400; opacity: .8; margin-left: 10px; }
-  main { max-width: 1000px; margin: 22px auto; background: #fff; border-radius: 14px; padding: 26px 32px; box-shadow: 0 1px 3px rgba(15,23,42,.08); }
-  h1 { font-size: 22px; margin: 0 0 2px; }
-  .sub { color: #64748b; margin: 0 0 18px; }
-  form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; }
-  label, legend { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; }
-  input:not([type=radio]):not([type=file]), textarea, select { width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 10px; font: inherit; background: #fff; }
-  textarea { height: 64px; resize: none; }
+  body { margin: 0; font: 15px/1.5 "Segoe UI", system-ui, sans-serif; color: #0f172a; background: #f1f5f9; }
+  .top { background: var(--brand); color: #fff; padding: 16px 40px; font-weight: 600; font-size: 16px; }
+  .top small { font-weight: 400; opacity: .8; margin-left: 12px; font-size: 14px; }
+  main { max-width: 980px; margin: 24px auto; background: #fff; border-radius: 14px; padding: 28px 36px; box-shadow: 0 1px 3px rgba(15,23,42,.08); }
+  h1 { font-size: 24px; margin: 0 0 2px; }
+  .sub { color: #64748b; margin: 0 0 20px; }
+  form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+  label, legend { display: block; font-weight: 600; font-size: 14px; margin-bottom: 5px; }
+  input:not([type=radio]):not([type=file]), textarea, select { width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px 11px; font: inherit; background: #fff; }
+  textarea { height: 76px; resize: none; }
   .wide { grid-column: 1 / -1; }
   fieldset { border: 0; margin: 0; padding: 0; }
-  .choices { display: flex; gap: 18px; font-weight: 400; }
-  .choices label { font-weight: 400; display: flex; gap: 6px; align-items: center; margin: 0; }
-  .drop { border: 1.5px dashed #94a3b8; border-radius: 8px; padding: 9px 12px; color: #475569; display: flex; align-items: center; gap: 10px; }
+  .choices { display: flex; gap: 20px; }
+  .choices label { font-weight: 400; display: flex; gap: 7px; align-items: center; margin: 0; padding: 2px 6px 2px 2px; }
+  .drop { border: 1.5px dashed #94a3b8; border-radius: 8px; padding: 10px 12px; color: #475569; display: flex; align-items: center; gap: 10px; }
   .drop input { display: none; }
-  .drop b { color: #0f766e; }
+  .drop b { color: var(--brand); }
   .req { color: #dc2626; }
 `;
 
-const ENGLISH_JOB = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Senior QA Engineer · Northwind Labs</title><style>${FORM_CSS}</style></head><body>
-<div class="top">Northwind Labs <small>Careers</small></div>
-<main>
-  <h1>Senior QA Engineer</h1>
-  <p class="sub">Berlin · Hybrid · Full-time</p>
-  <form>
-    <div><label for="fn">First name <span class="req">*</span></label><input id="fn" required></div>
-    <div><label for="ln">Last name <span class="req">*</span></label><input id="ln" required></div>
-    <div><label for="em">Email <span class="req">*</span></label><input id="em" type="email" required></div>
-    <div><label for="ph">Phone <span class="req">*</span></label><input id="ph" type="tel" required></div>
-    <div><label for="li">LinkedIn profile</label><input id="li"></div>
-    <div><label for="gh">GitHub</label><input id="gh"></div>
-    <div><label for="sal">Salary expectation (yearly, gross) <span class="req">*</span></label><input id="sal" required></div>
-    <div><label for="np">Notice period</label><input id="np"></div>
-    <fieldset><legend>Are you authorized to work in Germany? <span class="req">*</span></legend>
-      <div class="choices"><label><input type="radio" name="auth" value="y"> Yes</label><label><input type="radio" name="auth" value="n"> No</label></div></fieldset>
-    <fieldset><legend>Will you require visa sponsorship? <span class="req">*</span></legend>
-      <div class="choices"><label><input type="radio" name="visa" value="y"> Yes</label><label><input type="radio" name="visa" value="n"> No</label></div></fieldset>
-    <div><label for="cv">Resume / CV <span class="req">*</span></label>
-      <div class="drop"><input id="cv" type="file" required><span id="cvname">Drop your file here or <b>browse</b></span></div></div>
-    <div><label for="hear">How did you hear about us? <span class="req">*</span></label><input id="hear" required></div>
-    <div class="wide"><label for="cl">Cover letter</label><textarea id="cl"></textarea></div>
-  </form>
-</main>
-<script>document.getElementById('cv').addEventListener('change', (e) => { document.getElementById('cvname').textContent = '📄 ' + e.target.files[0].name; });</script>
-</body></html>`;
+const page = ({ lang, title, brand, company, area, heading, sub, form }) =>
+  `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title}</title>
+  <style>${FORM_CSS} :root { --brand: ${brand}; }</style></head><body>
+  <div class="top">${company} <small>${area}</small></div>
+  <main><h1>${heading}</h1><p class="sub">${sub}</p><form>${form}</form></main>
+  <script>for (const input of document.querySelectorAll('.drop input')) input.addEventListener('change', (e) => {
+    e.target.nextElementSibling.textContent = '📄 ' + e.target.files[0].name; });</script>
+  </body></html>`;
 
-const GERMAN_JOB = `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Softwaretester (m/w/d) · Weber Sensorik</title><style>${FORM_CSS} .top { background: #1d4ed8; }</style></head><body>
-<div class="top">Weber Sensorik GmbH <small>Karriere</small></div>
-<main>
-  <h1>Softwaretester (m/w/d)</h1>
-  <p class="sub">Stuttgart · Vollzeit · ab sofort</p>
-  <form>
-    <div><label for="an">Anrede</label><select id="an"><option value="">Bitte wählen</option><option>Frau</option><option>Herr</option><option>Divers</option></select></div>
-    <div><label for="gd">Geburtsdatum</label><input id="gd" placeholder="TT.MM.JJJJ"></div>
-    <div><label for="vn">Vorname <span class="req">*</span></label><input id="vn" required></div>
-    <div><label for="nn">Nachname <span class="req">*</span></label><input id="nn" required></div>
-    <div><label for="st">Straße</label><input id="st"></div>
-    <div><label for="hn">Hausnummer</label><input id="hn"></div>
-    <div><label for="plz">PLZ</label><input id="plz"></div>
-    <div><label for="ort">Ort</label><input id="ort"></div>
-    <div><label for="em">E-Mail-Adresse <span class="req">*</span></label><input id="em" required></div>
-    <div><label for="tel">Telefonnummer</label><input id="tel"></div>
-    <div><label for="geh">Gehaltsvorstellung (brutto/Jahr)</label><input id="geh"></div>
-    <div><label for="ein">Frühester Eintrittstermin</label><input id="ein" placeholder="TT.MM.JJJJ"></div>
-    <div><label for="kf">Kündigungsfrist</label><input id="kf"></div>
-    <div><label for="ll">Lebenslauf <span class="req">*</span></label>
-      <div class="drop"><input id="ll" type="file" required><span id="llname">Datei hierher ziehen oder <b>auswählen</b></span></div></div>
-  </form>
-</main>
-<script>document.getElementById('ll').addEventListener('change', (e) => { document.getElementById('llname').textContent = '📄 ' + e.target.files[0].name; });</script>
-</body></html>`;
+const PAGES = {
+  northwind: {
+    url: 'https://careers.northwind.example/jobs/senior-qa-engineer/apply',
+    html: page({
+      lang: 'en',
+      title: 'Senior QA Engineer · Northwind Labs',
+      brand: '#0f766e',
+      company: 'Northwind Labs',
+      area: 'Careers',
+      heading: 'Senior QA Engineer',
+      sub: 'Berlin · Hybrid · Full-time',
+      form: `
+        <div><label for="fn">First name <span class="req">*</span></label><input id="fn" required></div>
+        <div><label for="ln">Last name <span class="req">*</span></label><input id="ln" required></div>
+        <div><label for="em">Email <span class="req">*</span></label><input id="em" type="email" required></div>
+        <div><label for="ph">Phone <span class="req">*</span></label><input id="ph" type="tel" required></div>
+        <div><label for="li">LinkedIn profile</label><input id="li"></div>
+        <div><label for="gh">GitHub</label><input id="gh"></div>
+        <div><label for="sal">Salary expectation (yearly, gross) <span class="req">*</span></label><input id="sal" required></div>
+        <div><label for="np">Notice period</label><input id="np"></div>
+        <fieldset><legend>Are you authorized to work in Germany? <span class="req">*</span></legend>
+          <div class="choices"><label><input type="radio" name="auth"> Yes</label><label><input type="radio" name="auth"> No</label></div></fieldset>
+        <div><label for="cv">Resume / CV <span class="req">*</span></label>
+          <div class="drop"><input id="cv" type="file" required><span>Drop your file here or <b>browse</b></span></div></div>
+        <div class="wide"><label for="hear">How did you hear about us? <span class="req">*</span></label><input id="hear" required></div>`,
+    }),
+  },
+  brightwave: {
+    url: 'https://jobs.brightwave-health.example/test-automation-engineer',
+    html: page({
+      lang: 'en',
+      title: 'Test Automation Engineer · Brightwave Health',
+      brand: '#7c3aed',
+      company: 'Brightwave Health',
+      area: 'Jobs',
+      heading: 'Test Automation Engineer',
+      sub: 'Remote (EU) · Full-time',
+      form: `
+        <div><label for="nm">Full name <span class="req">*</span></label><input id="nm" required></div>
+        <div><label for="em">Email <span class="req">*</span></label><input id="em" type="email" required></div>
+        <div><label for="sd">Earliest start date</label><input id="sd" type="date"></div>
+        <fieldset><legend>Will you require visa sponsorship? <span class="req">*</span></legend>
+          <div class="choices"><label><input type="radio" name="visa"> Yes</label><label><input type="radio" name="visa"> No</label></div></fieldset>
+        <div class="wide"><label for="why">Why do you want to join Brightwave? <span class="req">*</span></label><textarea id="why" required></textarea></div>
+        <div class="wide"><label for="hear">How did you hear about us? <span class="req">*</span></label>
+          <select id="hear" required><option value="">Select…</option><option>LinkedIn</option><option>Job board</option><option>Referral</option><option>Other</option></select></div>`,
+    }),
+  },
+  weber: {
+    url: 'https://karriere.weber-sensorik.example/stellen/softwaretester',
+    html: page({
+      lang: 'de',
+      title: 'Softwaretester (m/w/d) · Weber Sensorik',
+      brand: '#1d4ed8',
+      company: 'Weber Sensorik GmbH',
+      area: 'Karriere',
+      heading: 'Softwaretester (m/w/d)',
+      sub: 'Stuttgart · Vollzeit · ab sofort',
+      form: `
+        <div><label for="an">Anrede</label><select id="an"><option value="">Bitte wählen</option><option>Frau</option><option>Herr</option><option>Divers</option></select></div>
+        <div><label for="gd">Geburtsdatum</label><input id="gd" placeholder="TT.MM.JJJJ"></div>
+        <div><label for="vn">Vorname <span class="req">*</span></label><input id="vn" required></div>
+        <div><label for="nn">Nachname <span class="req">*</span></label><input id="nn" required></div>
+        <div><label for="st">Straße</label><input id="st"></div>
+        <div><label for="hn">Hausnummer</label><input id="hn"></div>
+        <div><label for="plz">PLZ</label><input id="plz"></div>
+        <div><label for="ort">Ort</label><input id="ort"></div>
+        <div><label for="em">E-Mail-Adresse <span class="req">*</span></label><input id="em" required></div>
+        <div><label for="tel">Telefonnummer</label><input id="tel"></div>
+        <div><label for="geh">Gehaltsvorstellung (brutto/Jahr)</label><input id="geh"></div>
+        <div><label for="ein">Frühester Eintrittstermin</label><input id="ein" placeholder="TT.MM.JJJJ"></div>`,
+    }),
+  },
+};
+
+// --- Capture -----------------------------------------------------------------------------------
 
 const userData = mkdtempSync(join(tmpdir(), 'localapply-shots-'));
 const context = await chromium.launchPersistentContext(userData, {
   channel: 'chromium',
   headless: true,
   deviceScaleFactor: 2,
-  viewport: { width: 1100, height: 780 },
+  viewport: PAGE,
   args: [`--disable-extensions-except=${extension}`, `--load-extension=${extension}`],
 });
 
-const shots = {};
+const captures = {};
 try {
-  const html = (body) => (route) => route.fulfill({ contentType: 'text/html; charset=utf-8', body });
-  await context.route('https://careers.northwind.example/**', html(ENGLISH_JOB));
-  await context.route('https://karriere.weber-sensorik.example/**', html(GERMAN_JOB));
-
+  for (const { url, html } of Object.values(PAGES)) {
+    await context.route(url, (route) => route.fulfill({ contentType: 'text/html; charset=utf-8', body: html }));
+  }
   const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
   const id = new URL(worker.url()).host;
   await worker.evaluate((profile) => chrome.storage.local.set({ profile }), PROFILE);
 
-  const fillWithPopup = async (url) => {
+  /** Opens a job page and fills it through the real popup. */
+  const fill = async (url) => {
     const job = await context.newPage();
     await job.goto(url);
     const popup = await context.newPage();
-    await popup.setViewportSize({ width: 360, height: 640 });
+    await popup.setViewportSize({ width: POPUP_WIDTH, height: 700 });
     await popup.goto(`chrome-extension://${id}/popup.html`);
     await job.bringToFront();
     await popup.getByRole('button', { name: 'Fill this page' }).click();
@@ -176,125 +221,150 @@ try {
     await job.mouse.move(0, 0);
     return { job, popup };
   };
+  const hideToast = (job) => job.evaluate(() => document.getElementById('localapply-ui')?.remove());
 
-  // 1 + 3: English application, then the popup's follow-up for the open question.
+  // 1: one click fills the form; the popup reports what happened.
   {
-    const { job, popup } = await fillWithPopup('https://careers.northwind.example/jobs/senior-qa/apply');
-    shots.form = await job.screenshot();
-    shots.popup = await popup.locator('main').screenshot();
+    const { job, popup } = await fill(PAGES.northwind.url);
+    await hideToast(job);
+    captures.northwind = { page: await job.screenshot(), popup: await popup.locator('main').screenshot() };
+    await popup.close();
+    await job.close();
+  }
+
+  // 2: a saved answer filled "Why do you want to join?"; the popup offers to save the open question.
+  {
+    const { job, popup } = await fill(PAGES.brightwave.url);
+    await hideToast(job);
     await popup.getByRole('button', { name: 'Save answer' }).first().click();
     await popup.getByPlaceholder('Your answer').fill('LinkedIn');
-    shots.popupAnswer = await popup.locator('main').screenshot();
+    captures.brightwave = { page: await job.screenshot(), popup: await popup.locator('main').screenshot() };
     await popup.close();
     await job.close();
   }
 
-  // 2: profile page.
+  // 3: a German form, with the on-page summary the extension shows after filling.
+  {
+    const { job, popup } = await fill(PAGES.weber.url);
+    await popup.close();
+    captures.weber = { page: await job.screenshot() };
+    await job.close();
+  }
+
+  // 4 and 5: the profile page, top (personal details) and bottom (saved answers, export and delete).
   {
     const options = await context.newPage();
-    await options.setViewportSize({ width: 760, height: 860 });
     await options.goto(`chrome-extension://${id}/options.html`);
     await options.getByText('All changes saved').waitFor();
-    shots.profile = await options.screenshot();
-    await options.locator('#job').scrollIntoViewIfNeeded();
-    await options.evaluate(() => window.scrollTo(0, document.getElementById('job').offsetTop - 24));
-    shots.profileJob = await options.screenshot();
-    await options.evaluate(() => window.scrollTo(0, document.getElementById('documents').offsetTop - 24));
-    shots.profileData = await options.screenshot();
+    captures.profile = { page: await options.screenshot() };
+    await options.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    captures.profileData = { page: await options.screenshot() };
     await options.close();
-  }
-
-  // 4: German form.
-  {
-    const { job, popup } = await fillWithPopup('https://karriere.weber-sensorik.example/stellen/softwaretester');
-    shots.german = await job.screenshot();
-    await popup.close();
-    await job.close();
   }
 } finally {
   await context.close();
   rmSync(userData, { recursive: true, force: true });
 }
 
-const img = (name) => `data:image/png;base64,${shots[name].toString('base64')}`;
+// --- Compose -----------------------------------------------------------------------------------
 
-const SLIDE_CSS = `
+const dataUrl = (png) => `data:image/png;base64,${png.toString('base64')}`;
+const toolbarIcon = dataUrl(readFileSync(join(root, 'public/icon/32.png')));
+
+const ICON = {
+  back: '<path d="M15 6l-6 6 6 6"/>',
+  forward: '<path d="M9 6l6 6-6 6"/>',
+  reload: '<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>',
+  lock: '<rect x="6" y="11" width="12" height="9" rx="2"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/>',
+  puzzle:
+    '<path d="M10 4h4v3a1.5 1.5 0 0 0 3 0V4h3v6h-3a1.5 1.5 0 0 0 0 3h3v7h-6v-3a1.5 1.5 0 0 0-3 0v3H4v-7h3a1.5 1.5 0 0 0 0-3H4V4h6z"/>',
+  menu: '<path d="M5 7h14M5 12h14M5 17h14"/>',
+};
+const svg = (name, size = 18) =>
+  `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[name]}</svg>`;
+
+const FRAME_CSS = `
   * { box-sizing: border-box; }
-  body { margin: 0; width: 1280px; height: 800px; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; color: #0f172a;
-    background: radial-gradient(circle at 85% 10%, #e0e7ff 0, transparent 45%), linear-gradient(160deg, #f8fafc 0%, #eef2ff 100%); }
-  .head { position: absolute; left: 64px; top: 52px; width: 1150px; }
-  .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #4338ca; font-size: 15px; letter-spacing: .3px; }
-  .brand i { width: 20px; height: 20px; border-radius: 5px; background: #4f46e5; display: inline-block; position: relative; }
-  .brand i::after { content: ""; position: absolute; left: 6px; top: 3px; width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
-  h1 { font-size: 40px; line-height: 1.15; margin: 10px 0 8px; letter-spacing: -.5px; }
-  p.lead { font-size: 19px; color: #475569; margin: 0; }
-  .window { position: absolute; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px -12px rgba(30,41,59,.35), 0 0 0 1px rgba(15,23,42,.08); }
-  .bar { height: 34px; background: #e2e8f0; display: flex; align-items: center; gap: 7px; padding: 0 12px; }
-  .bar span { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; }
-  .bar div { margin-left: 10px; flex: 1; height: 22px; border-radius: 6px; background: #fff; font-size: 12px; color: #475569; display: flex; align-items: center; padding: 0 10px; }
-  .window img { display: block; width: 100%; }
-  .popup { position: absolute; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 70px -10px rgba(30,41,59,.45), 0 0 0 1px rgba(15,23,42,.1); background: #fff; }
-  .popup img { display: block; width: 100%; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .chips span { background: #fff; border: 1px solid #c7d2fe; color: #3730a3; border-radius: 999px; padding: 5px 12px; font-size: 14px; font-weight: 600; }
-  ul.points { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 16px; }
-  ul.points li { font-size: 18px; color: #334155; padding-left: 34px; position: relative; }
-  ul.points li::before { content: ""; position: absolute; left: 0; top: 2px; width: 22px; height: 22px; border-radius: 6px; background: #dcfce7; }
-  ul.points li::after { content: ""; position: absolute; left: 8px; top: 6px; width: 5px; height: 10px; border: solid #16a34a; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  body { margin: 0; width: ${WIDTH}px; height: ${HEIGHT}px; overflow: hidden; background: #fff;
+    font: 13px "Segoe UI", system-ui, sans-serif; color: #1f2937; position: relative; }
+  .tabs { height: 38px; background: #e4e7ec; display: flex; align-items: flex-end; padding: 0 8px; }
+  .tab { height: 32px; width: 280px; background: #fff; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 8px;
+    padding: 0 12px; font-size: 12.5px; white-space: nowrap; overflow: hidden; }
+  .tab .fav { width: 14px; height: 14px; border-radius: 4px; flex: none; }
+  .bar { height: 44px; display: flex; align-items: center; gap: 4px; padding: 0 8px; border-bottom: 1px solid #e2e8f0; color: #475569; }
+  .btn { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 6px; }
+  .btn.active { background: #e0e7ff; }
+  .btn img { width: 18px; height: 18px; }
+  .url { flex: 1; height: 32px; margin: 0 8px; border-radius: 8px; background: #f1f3f5; display: flex; align-items: center;
+    gap: 8px; padding: 0 12px; font-size: 13.5px; color: #334155; }
+  .url .muted { color: #94a3b8; }
+  .page { position: absolute; left: 0; top: ${CHROME_HEIGHT}px; width: ${WIDTH}px; }
+  .popup { position: absolute; top: ${CHROME_HEIGHT - 4}px; right: 52px; width: ${POPUP_WIDTH}px; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 12px 32px rgba(15,23,42,.28), 0 0 0 1px rgba(15,23,42,.12); background: #fff; }
+  .popup img, .page img { display: block; width: 100%; }
 `;
 
-const browserWindow = (src, url, style) =>
-  `<div class="window" style="${style}"><div class="bar"><span></span><span></span><span></span><div>🔒 ${url}</div></div><img src="${src}"></div>`;
+function frame({ title, favicon, url, page, popup }) {
+  const [scheme, rest] = url.split('://');
+  const shownUrl =
+    scheme === 'https'
+      ? `${svg('lock', 15)}<span>${rest}</span>`
+      : `<span><span class="muted">${scheme}://</span>${rest}</span>`;
+  return `<!doctype html><html><head><meta charset="utf-8"><style>${FRAME_CSS}</style></head><body>
+    <div class="tabs"><div class="tab"><span class="fav" style="background:${favicon}"></span>${title}</div></div>
+    <div class="bar">
+      <span class="btn">${svg('back')}</span><span class="btn">${svg('forward')}</span><span class="btn">${svg('reload')}</span>
+      <div class="url">${shownUrl}</div>
+      <span class="btn${popup ? ' active' : ''}"><img src="${toolbarIcon}" alt=""></span>
+      <span class="btn">${svg('puzzle')}</span><span class="btn">${svg('menu')}</span>
+    </div>
+    <div class="page"><img src="${dataUrl(page)}"></div>
+    ${popup ? `<div class="popup"><img src="${dataUrl(popup)}"></div>` : ''}
+  </body></html>`;
+}
 
-const head = (title, lead, extra = '') =>
-  `<div class="head"><div class="brand"><i></i>LocalApply</div><h1>${title}</h1><p class="lead">${lead}</p>${extra}</div>`;
-
-const SLIDES = {
-  '1-fill-in-one-click': `
-    ${head('Fill job applications in one click', 'Your details, links, salary expectation and CV go in. You review and press submit.')}
-    ${browserWindow(img('form'), 'careers.northwind.example/jobs/senior-qa/apply', 'left:64px; top:190px; width:800px;')}
-    <div class="popup" style="left:896px; top:190px; width:320px;"><img src="${img('popup')}"></div>`,
-  '2-profile': `
-    ${head('Save your profile once', 'Personal details, address, links, salary, availability, documents and your own answers.')}
-    ${browserWindow(img('profile'), 'LocalApply · Your profile', 'left:64px; top:200px; width:540px;')}
-    ${browserWindow(img('profileJob'), 'LocalApply · Your profile', 'left:676px; top:200px; width:540px;')}`,
-  '3-whats-left': `
-    ${head('See what is done and what is left', 'Green means filled, amber means it needs you. Save an answer once and it is reused next time.')}
-    ${browserWindow(img('form'), 'careers.northwind.example/jobs/senior-qa/apply', 'left:64px; top:205px; width:700px; opacity:.97;')}
-    <div class="popup" style="left:800px; top:205px; width:416px;"><img src="${img('popupAnswer')}"></div>`,
-  '4-languages': `
-    ${head(
-      'Understands forms in 8 languages',
-      'Vorname, Prénom, Nombre, Imię: labels are recognised whatever language the job is posted in.',
-      '<div class="chips"><span>English</span><span>Deutsch</span><span>Français</span><span>Español</span><span>Italiano</span><span>Nederlands</span><span>Português</span><span>Polski</span></div>',
-    )}
-    ${browserWindow(img('german'), 'karriere.weber-sensorik.example/stellen/softwaretester', 'left:64px; top:262px; width:1152px; height:520px;')}`,
-  '5-private': `
-    <div class="head" style="width:540px; top:170px;"><div class="brand"><i></i>LocalApply</div>
-      <h1>Private by design</h1>
-      <p class="lead">No account, no server, no AI service. Your profile stays in your browser.</p>
-      <ul class="points">
-        <li>Nothing is uploaded or tracked</li>
-        <li>Never presses Submit or ticks consent boxes</li>
-        <li>Skips fields you already filled in</li>
-        <li>Export and delete your data any time</li>
-      </ul></div>
-    ${browserWindow(img('profileData'), 'LocalApply · Your profile', 'left:676px; top:60px; width:540px;')}`,
+const OPTIONS_URL = 'moz-extension://localapply/options.html';
+const SHOTS = {
+  '1-fill-in-one-click': {
+    title: 'Senior QA Engineer · Northwind Labs',
+    favicon: '#0f766e',
+    url: PAGES.northwind.url,
+    ...captures.northwind,
+  },
+  '2-saved-answers': {
+    title: 'Test Automation Engineer · Brightwave',
+    favicon: '#7c3aed',
+    url: PAGES.brightwave.url,
+    ...captures.brightwave,
+  },
+  '3-any-language': {
+    title: 'Softwaretester (m/w/d) · Weber Sensorik',
+    favicon: '#1d4ed8',
+    url: PAGES.weber.url,
+    ...captures.weber,
+  },
+  '4-profile': { title: 'Your profile · LocalApply', favicon: '#4f46e5', url: OPTIONS_URL, ...captures.profile },
+  '5-answers-and-backup': {
+    title: 'Your profile · LocalApply',
+    favicon: '#4f46e5',
+    url: OPTIONS_URL,
+    ...captures.profileData,
+  },
 };
 
 const browser = await chromium.launch({ channel: 'chromium', headless: true });
 try {
-  const page = await browser.newPage({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 });
-  for (const [name, body] of Object.entries(SLIDES)) {
-    await page.setContent(
-      `<!doctype html><html><head><meta charset="utf-8"><style>${SLIDE_CSS}</style></head><body>${body}</body></html>`,
-    );
-    await page.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
-    writeFileSync(join(outDir, `${name}.png`), await page.screenshot());
+  // Old screenshots may have other names; start from an empty folder.
+  for (const name of readdirSync(outDir).filter((n) => n.endsWith('.png'))) rmSync(join(outDir, name));
+  const shot = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: 1 });
+  for (const [name, spec] of Object.entries(SHOTS)) {
+    await shot.setContent(frame(spec));
+    await shot.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
+    writeFileSync(join(outDir, `${name}.png`), await shot.screenshot());
   }
 
-  // Chrome Web Store small promo tile: shown in search results and category pages.
-  const icon = `data:image/png;base64,${readFileSync(join(root, 'public/icon/128.png')).toString('base64')}`;
+  // Chrome Web Store small promo tile: shown in search results and category pages. Chrome allows text here.
+  const icon = dataUrl(readFileSync(join(root, 'public/icon/128.png')));
   const tile = await browser.newPage({ viewport: { width: 440, height: 280 }, deviceScaleFactor: 1 });
   await tile.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>
     body { margin: 0; width: 440px; height: 280px; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; color: #fff;
@@ -315,6 +385,4 @@ try {
 } finally {
   await browser.close();
 }
-console.log(
-  `Wrote ${Object.keys(SLIDES).length} screenshots to store/screenshots/ and the promo tile to store/chrome/`,
-);
+console.log(`Wrote ${Object.keys(SHOTS).length} screenshots to store/screenshots/ and the promo tile to store/chrome/`);
