@@ -4,7 +4,6 @@ Everything the Firefox Add-ons site and the Chrome Web Store ask for, kept next 
 
 ```
 store/
-  privacy-policy.md          shared privacy statement (optional for both stores; see below)
   screenshots/               1280×800 PNGs, used by both stores (generated)
   firefox/
     description.en.md        description, ready to paste (Firefox supports a limited Markdown)
@@ -47,20 +46,20 @@ The screenshots show the real extension at its real size, in a plain browser fra
 | Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`               |
 | Notes to reviewer                 | `firefox/reviewer-notes.md`                                       |
 | Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                            |
-| Privacy policy                    | Not required (the manifest declares no data collection)           |
+| Privacy policy                    | Optional; paste the text of `PRIVACY.md` (repository root)        |
 
 ### Chrome Web Store → Developer Dashboard
 
-| Tab / field       | Source                                                                       |
-| ----------------- | ---------------------------------------------------------------------------- |
-| Package           | `releases/v<version>/localapply-<version>-chrome.zip`                        |
-| Title and summary | Taken from the manifest (`wxt.config.ts`: `name`, `description` ≤ 132 chars) |
-| Description       | `chrome/description.en.txt`                                                  |
-| Category          | `chrome/listing.en.md`                                                       |
-| Store icon        | `chrome/icon-128.png`                                                        |
-| Screenshots       | `screenshots/` (up to 5)                                                     |
-| Small promo tile  | `chrome/promo-tile-440x280.png`                                              |
-| Privacy practices | `chrome/privacy-practices.md`                                                |
+| Tab / field                           | Source                                                                       |
+| ------------------------------------- | ---------------------------------------------------------------------------- |
+| Package                               | `releases/v<version>/localapply-<version>-chrome.zip`                        |
+| Title and summary                     | Taken from the manifest (`wxt.config.ts`: `name`, `description` ≤ 132 chars) |
+| Description                           | `chrome/description.en.txt`                                                  |
+| Category                              | `chrome/listing.en.md`                                                       |
+| Store icon                            | `chrome/icon-128.png`                                                        |
+| Screenshots                           | `screenshots/` (up to 5)                                                     |
+| Small promo tile                      | `chrome/promo-tile-440x280.png`                                              |
+| Privacy practices, privacy policy URL | `chrome/privacy-practices.md` (policy: `PRIVACY.md` in the repository root)  |
 
 A Chrome Web Store developer account costs a one-time US$5 registration fee.
 

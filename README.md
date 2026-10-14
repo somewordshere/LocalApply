@@ -61,4 +61,5 @@ docs/               architecture, extending, releasing
 - [Extending](docs/extending.md): adding a profile field, a language, a job site, a profile migration
 - [Releasing](docs/releasing.md): versioning, changelog, building a release, uploading to the stores
 - [Store listings](store/README.md): what goes into each store form
+- [Privacy policy](PRIVACY.md)
 - [Changelog](CHANGELOG.md)
