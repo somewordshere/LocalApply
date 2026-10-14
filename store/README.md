@@ -9,8 +9,10 @@ store/
   firefox/
     description.en.html      description, ready to paste (Firefox accepts a small HTML subset)
     description.de.html      German description
-    listing.en.md            name, summary, captions, categories and other form fields
-    listing.de.md            German name, summary and captions
+    summary.en.txt           summary, ready to paste (≤ 250 characters)
+    summary.de.txt           German summary
+    listing.en.md            name, captions, categories and other form fields
+    listing.de.md            German name and captions
     reviewer-notes.md        "Notes to reviewer" field: how to rebuild from source, why each permission
   chrome/
     description.en.txt       description, ready to paste (plain text)
@@ -39,7 +41,8 @@ The screenshots show the real extension filling fictional job pages for a made-u
 | --------------------------------- | --------------------------------------------------------------------- |
 | Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`                |
 | Source code                       | `releases/v<version>/localapply-<version>-sources.zip`                |
-| Name, summary                     | `firefox/listing.en.md` (German under Manage translations)            |
+| Name                              | `firefox/listing.en.md` (German under Manage translations)            |
+| Summary                           | `firefox/summary.en.txt` (German: `firefox/summary.de.txt`)           |
 | Description                       | `firefox/description.en.html` (German: `firefox/description.de.html`) |
 | Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`                   |
 | Notes to reviewer                 | `firefox/reviewer-notes.md`                                           |
