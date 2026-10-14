@@ -1,0 +1,7 @@
+.output/
+.wxt/
+node_modules/
+releases/
+package-lock.json
+store/**/*.png
+tests/fixtures/

@@ -1,0 +1,51 @@
+{
+  "name": "localapply",
+  "version": "0.1.0",
+  "description": "Private job application autofill for Firefox and Chrome: fills forms from a profile stored in the browser.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "package": "wxt zip && wxt zip -b firefox",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:firefox": "wxt build -b firefox && web-ext lint --source-dir .output/firefox-mv2",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:e2e": "wxt build && node tests/e2e/chrome.mjs",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run lint:firefox",
+    "icons": "node scripts/make-icons.mjs",
+    "store-assets": "wxt build && node scripts/store-assets.mjs",
+    "release": "node scripts/release.mjs",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@wxt-dev/module-react": "^1.2.2",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "fflate": "^0.8.3",
+    "globals": "^17.13.0",
+    "jsdom": "^26.0.0",
+    "playwright": "^1.64.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.4",
+    "web-ext": "^10.7.0",
+    "wxt": "^0.21.4"
+  }
+}
