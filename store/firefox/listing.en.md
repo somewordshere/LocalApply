@@ -1,6 +1,6 @@
 # Firefox listing (English, default locale)
 
-Copy each block into the matching field at addons.mozilla.org → Developer Hub → Submit a New Add-on → "On this site". The description field accepts only these HTML tags: `<b> <i> <strong> <em> <ul> <ol> <li> <a> <code> <blockquote>`. Line breaks are kept.
+Copy each block into the matching field at addons.mozilla.org → Developer Hub → Submit a New Add-on → "On this site". The summary is plain text; the description supports a limited Markdown (bold, italic, links, lists, blockquotes, code; no headings). Written following Mozilla's [Create an appealing listing](https://extensionworkshop.com/documentation/develop/create-an-appealing-listing/) guide.
 
 **Compatible with:** Firefox for desktop only (the add-on relies on a toolbar popup and a keyboard shortcut).
 
@@ -22,17 +22,19 @@ In [`summary.en.txt`](summary.en.txt), ready to paste as-is.
 
 ## Description
 
-In [`description.en.html`](description.en.html), ready to paste as-is.
+In [`description.en.md`](description.en.md), ready to paste as-is.
 
 ## Other fields
 
-| Field                   | Value                                                                     |
-| ----------------------- | ------------------------------------------------------------------------- |
-| Categories              | Other                                                                     |
-| Support email / website | Your own address or project page (optional, shown publicly)               |
-| License                 | Your choice: MIT if others may reuse the code, All Rights Reserved if not |
-| Privacy policy          | Not required; optional text in `../privacy-policy.md`                     |
-| Notes to reviewer       | `reviewer-notes.md`                                                       |
+| Field                   | Value                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| Categories              | Other (up to two allowed; add a second only if it truly fits)                 |
+| Tags                    | Pick from the fixed list in the form; privacy and productivity fit if offered |
+| Platforms               | Windows, macOS, Linux; not Android                                            |
+| Support email / website | Mozilla recommends at least a support email (shown publicly)                  |
+| License                 | Your choice: MIT if others may reuse the code, All Rights Reserved if not     |
+| Privacy policy          | Not required; optional text in `../privacy-policy.md`                         |
+| Notes to reviewer       | `reviewer-notes.md`                                                           |
 
 ## Screenshots
 

@@ -14,7 +14,7 @@ In [`summary.de.txt`](summary.de.txt), ready to paste as-is.
 
 ## Description
 
-In [`description.de.html`](description.de.html), ready to paste as-is.
+In [`description.de.md`](description.de.md), ready to paste as-is.
 
 ## Screenshot captions
 

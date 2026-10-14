@@ -7,8 +7,8 @@ store/
   privacy-policy.md          shared privacy statement (optional for both stores; see below)
   screenshots/               1280×800 PNGs, used by both stores (generated)
   firefox/
-    description.en.html      description, ready to paste (Firefox accepts a small HTML subset)
-    description.de.html      German description
+    description.en.md        description, ready to paste (Firefox supports a limited Markdown)
+    description.de.md        German description
     summary.en.txt           summary, ready to paste (≤ 250 characters)
     summary.de.txt           German summary
     listing.en.md            name, captions, categories and other form fields
@@ -37,17 +37,17 @@ The screenshots show the real extension filling fictional job pages for a made-u
 
 ### Firefox: addons.mozilla.org → Developer Hub
 
-| Form field                        | Source                                                                |
-| --------------------------------- | --------------------------------------------------------------------- |
-| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`                |
-| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`                |
-| Name                              | `firefox/listing.en.md` (German under Manage translations)            |
-| Summary                           | `firefox/summary.en.txt` (German: `firefox/summary.de.txt`)           |
-| Description                       | `firefox/description.en.html` (German: `firefox/description.de.html`) |
-| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`                   |
-| Notes to reviewer                 | `firefox/reviewer-notes.md`                                           |
-| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                                |
-| Privacy policy                    | Not required (the manifest declares no data collection)               |
+| Form field                        | Source                                                            |
+| --------------------------------- | ----------------------------------------------------------------- |
+| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`            |
+| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`            |
+| Name                              | `firefox/listing.en.md` (German under Manage translations)        |
+| Summary                           | `firefox/summary.en.txt` (German: `firefox/summary.de.txt`)       |
+| Description                       | `firefox/description.en.md` (German: `firefox/description.de.md`) |
+| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`               |
+| Notes to reviewer                 | `firefox/reviewer-notes.md`                                       |
+| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                            |
+| Privacy policy                    | Not required (the manifest declares no data collection)           |
 
 ### Chrome Web Store → Developer Dashboard
 
