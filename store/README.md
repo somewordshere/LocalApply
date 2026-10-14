@@ -7,12 +7,16 @@ store/
   privacy-policy.md          shared privacy statement (optional for both stores; see below)
   screenshots/               1280×800 PNGs, used by both stores (generated)
   firefox/
-    listing.en.md            name, summary, description (HTML subset), captions, categories
-    listing.de.md            German translation of the listing
+    description.en.html      description, ready to paste (Firefox accepts a small HTML subset)
+    description.de.html      German description
+    listing.en.md            name, summary, captions, categories and other form fields
+    listing.de.md            German name, summary and captions
     reviewer-notes.md        "Notes to reviewer" field: how to rebuild from source, why each permission
   chrome/
-    listing.en.md            description (plain text), category, captions
-    listing.de.md            German description, for when the extension is localised
+    description.en.txt       description, ready to paste (plain text)
+    description.de.txt       German description, for when the extension is localised
+    listing.en.md            category, images and other form fields
+    listing.de.md            notes on the German listing
     privacy-practices.md     answers for the Privacy practices tab: single purpose, permissions, data use
     icon-128.png             store icon, 96 px artwork with 16 px padding (generated)
     promo-tile-440x280.png   small promo tile, required by Chrome (generated)
@@ -31,27 +35,29 @@ The screenshots show the real extension filling fictional job pages for a made-u
 
 ### Firefox: addons.mozilla.org → Developer Hub
 
-| Form field                        | Source                                                     |
-| --------------------------------- | ---------------------------------------------------------- |
-| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`     |
-| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`     |
-| Name, summary, description        | `firefox/listing.en.md` (German under Manage translations) |
-| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`        |
-| Notes to reviewer                 | `firefox/reviewer-notes.md`                                |
-| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                     |
-| Privacy policy                    | Not required (the manifest declares no data collection)    |
+| Form field                        | Source                                                                |
+| --------------------------------- | --------------------------------------------------------------------- |
+| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`                |
+| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`                |
+| Name, summary                     | `firefox/listing.en.md` (German under Manage translations)            |
+| Description                       | `firefox/description.en.html` (German: `firefox/description.de.html`) |
+| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`                   |
+| Notes to reviewer                 | `firefox/reviewer-notes.md`                                           |
+| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                                |
+| Privacy policy                    | Not required (the manifest declares no data collection)               |
 
 ### Chrome Web Store → Developer Dashboard
 
-| Tab / field           | Source                                                                       |
-| --------------------- | ---------------------------------------------------------------------------- |
-| Package               | `releases/v<version>/localapply-<version>-chrome.zip`                        |
-| Title and summary     | Taken from the manifest (`wxt.config.ts`: `name`, `description` ≤ 132 chars) |
-| Description, category | `chrome/listing.en.md`                                                       |
-| Store icon            | `chrome/icon-128.png`                                                        |
-| Screenshots           | `screenshots/` (up to 5)                                                     |
-| Small promo tile      | `chrome/promo-tile-440x280.png`                                              |
-| Privacy practices     | `chrome/privacy-practices.md`                                                |
+| Tab / field       | Source                                                                       |
+| ----------------- | ---------------------------------------------------------------------------- |
+| Package           | `releases/v<version>/localapply-<version>-chrome.zip`                        |
+| Title and summary | Taken from the manifest (`wxt.config.ts`: `name`, `description` ≤ 132 chars) |
+| Description       | `chrome/description.en.txt`                                                  |
+| Category          | `chrome/listing.en.md`                                                       |
+| Store icon        | `chrome/icon-128.png`                                                        |
+| Screenshots       | `screenshots/` (up to 5)                                                     |
+| Small promo tile  | `chrome/promo-tile-440x280.png`                                              |
+| Privacy practices | `chrome/privacy-practices.md`                                                |
 
 A Chrome Web Store developer account costs a one-time US$5 registration fee.
 
