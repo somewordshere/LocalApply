@@ -25,8 +25,8 @@ function ui(): ShadowRoot {
     host.attachShadow({ mode: 'open' });
     const style = document.createElement('style');
     style.textContent = `
-      :host { font: 13px/1.4 system-ui, sans-serif; }
-      .stack { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+      /* The host is reset with "all: initial", which beats :host rules, so the font is set here. */
+      .stack { font: 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
       button { all: unset; cursor: pointer; background: #4f46e5; color: #fff; padding: 9px 14px; border-radius: 999px;
         font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
       button:hover { background: #4338ca; }
