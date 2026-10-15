@@ -10,7 +10,7 @@ WHAT IT FILLS
 • Your own answers to recurring questions such as "How did you hear about us?"
 
 WORKS WHERE YOU APPLY
-Works on Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career pages, and includes site-specific handling for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply. Form labels are recognised in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish.
+Works on the application forms of most applicant tracking systems and on ordinary company career pages, including forms inside embedded frames. Some of the most widely used job sites get extra, site-specific handling. Form labels are recognised in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish.
 
 HOW IT WORKS
 1. Enter your details once on the profile page.
