@@ -1,6 +1,6 @@
 {
   "name": "localapply",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Private job application autofill for Firefox and Chrome: fills forms from a profile stored in the browser.",
   "private": true,
   "type": "module",
