@@ -1,4 +1,4 @@
-// End-to-end check of the built Chrome extension: profile page, popup, page button and shortcut path.
+// End-to-end check of the built Chrome extension: profile page, popup, undo and shortcut path.
 // Job pages are served from fixtures through request interception, so nothing goes to the network.
 // Run with `npm run test:e2e`.
 import assert from 'node:assert/strict';
@@ -63,6 +63,12 @@ try {
   const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
   const extensionId = new URL(worker.url()).host;
   const storedProfile = () => worker.evaluate(() => chrome.storage.local.get('profile').then((r) => r.profile));
+  // What the keyboard shortcut does: send `fill` to every frame of the active tab.
+  const fillActiveTab = () =>
+    worker.evaluate(async () => {
+      const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+      await chrome.tabs.sendMessage(tab.id, { type: 'fill' });
+    });
 
   await step('profile page saves details and the CV', async () => {
     const options = await context.newPage();
@@ -90,11 +96,15 @@ try {
     await options.close();
   });
 
-  await step('page button fills a Greenhouse form, attaches the CV and does not submit', async () => {
+  await step('fills a Greenhouse form, attaches the CV, does not submit, and undoes from the notice', async () => {
     const page = await context.newPage();
     await page.goto('https://boards.greenhouse.io/acme/jobs/1');
-    await page.getByRole('button', { name: 'Fill application' }).click();
-    await page.getByRole('status').filter({ hasText: 'Filled' }).waitFor();
+    await page.bringToFront();
+    await page.waitForTimeout(2000);
+    assert.equal(await page.getByRole('button', { name: 'Fill application' }).count(), 0, 'no floating button');
+    await fillActiveTab();
+    const notice = page.getByRole('status').filter({ hasText: 'Filled' });
+    await notice.waitFor();
     assert.equal(await page.inputValue('#first_name'), 'Max');
     assert.equal(await page.inputValue('#last_name'), 'Muster');
     assert.equal(await page.inputValue('#email'), 'max@example.com');
@@ -103,6 +113,15 @@ try {
     assert.equal(await page.$eval('#resume', (el) => el.files[0]?.name), 'cv.pdf');
     assert.equal(await page.isChecked('[name=consent]'), false);
     assert.equal(await page.evaluate(() => window.submitted), false);
+    assert.equal(await page.$eval('#first_name', (el) => el.style.outlineStyle), 'solid');
+    assert.equal(await page.$eval('#why', (el) => el.style.outlineStyle), '', 'optional open question is not outlined');
+
+    await notice.getByRole('button', { name: 'Undo' }).click();
+    await page.getByRole('status').filter({ hasText: 'Undid' }).waitFor();
+    assert.equal(await page.inputValue('#first_name'), '');
+    assert.equal(await page.inputValue('#phone'), '');
+    assert.equal(await page.$eval('#resume', (el) => el.files.length), 0);
+    assert.equal(await page.$eval('#first_name', (el) => el.style.outlineStyle), '');
     await page.close();
   });
 
@@ -130,6 +149,11 @@ try {
       (await storedProfile()).customAnswers.map((a) => [a.keywords, a.answer]),
       [['Wie haben Sie von uns erfahren?', 'LinkedIn']],
     );
+
+    await popup.getByRole('button', { name: 'Undo fill' }).click();
+    await popup.getByText('Fill undone.').waitFor();
+    await job.waitForFunction(() => document.querySelector('#a')?.value === '');
+    assert.equal(await job.inputValue('#k'), '');
     await popup.close();
     await job.close();
   });
@@ -138,10 +162,7 @@ try {
     const page = await context.newPage();
     await page.goto('https://karriere.example.de/stelle/2');
     await page.bringToFront();
-    await worker.evaluate(async () => {
-      const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-      await chrome.tabs.sendMessage(tab.id, { type: 'fill' });
-    });
+    await fillActiveTab();
     await page.waitForFunction(() => document.querySelector('#b')?.value === 'Muster');
     assert.equal(await page.inputValue('#z'), 'LinkedIn', 'answer saved from the popup is reused');
     await page.close();

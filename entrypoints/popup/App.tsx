@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { browser } from 'wxt/browser';
 import type { FillResult } from '@/src/engine/types';
+import type { UndoResult } from '@/src/engine/undo';
 import type { Message } from '@/src/core/messages';
 import { questionKeywords } from '@/src/profile/schema';
 import { loadProfile, saveProfile } from '@/src/profile/store';
 
-type Status = 'idle' | 'filling' | 'done' | 'unavailable';
+type Status = 'idle' | 'filling' | 'done' | 'undone' | 'unavailable';
 
 const EMPTY: FillResult = { adapter: null, total: 0, filled: [], missing: [], unmatched: [], skipped: 0 };
+const NOTHING_UNDONE: UndoResult = { restored: 0, manual: [] };
 const NO_REPLY_MS = 1500;
 
 function merge(a: FillResult, b: FillResult): FillResult {
@@ -70,10 +72,27 @@ function SaveAnswer({ label }: { label: string }) {
   );
 }
 
+/** Explains the outlines on the page by line style as well as colour. */
+function Legend() {
+  return (
+    <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+      <span className="flex items-center gap-1.5">
+        <span aria-hidden="true" className="inline-block h-3 w-5 rounded-sm border-2 border-solid border-[#16a34a]" />
+        Solid outline: filled
+      </span>
+      <span className="flex items-center gap-1.5">
+        <span aria-hidden="true" className="inline-block h-3 w-5 rounded-sm border-2 border-dashed border-[#d97706]" />
+        Dashed outline: needs you
+      </span>
+    </p>
+  );
+}
+
 export default function App() {
   const [status, setStatus] = useState<Status>('idle');
   const [overwrite, setOverwrite] = useState(false);
   const [result, setResult] = useState<FillResult>(EMPTY);
+  const [undone, setUndone] = useState<UndoResult>(NOTHING_UNDONE);
   const [profileEmpty, setProfileEmpty] = useState(false);
   const pending = useRef(0);
   const replied = useRef(false);
@@ -89,6 +108,11 @@ export default function App() {
         pending.current = Math.max(0, pending.current - 1);
         setResult((current) => merge(current, message.result));
         if (pending.current === 0) setStatus('done');
+      } else if (message?.type === 'undo-result') {
+        setUndone((current) => ({
+          restored: current.restored + message.result.restored,
+          manual: [...current.manual, ...message.result.manual],
+        }));
       }
     };
     browser.runtime.onMessage.addListener(onMessage);
@@ -107,6 +131,15 @@ export default function App() {
     setTimeout(() => {
       if (!replied.current) setStatus('unavailable');
     }, NO_REPLY_MS);
+  };
+
+  const undo = async () => {
+    setUndone(NOTHING_UNDONE);
+    setStatus('undone');
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tab?.id === undefined) return;
+    const message: Message = { type: 'undo' };
+    browser.tabs.sendMessage(tab.id, message).catch(() => {});
   };
 
   const open = [...new Map(result.unmatched.map((u) => [u.label, u])).values()].slice(0, 25);
@@ -157,14 +190,23 @@ export default function App() {
             {result.total === 0 ? (
               <p>No form fields found on this page.</p>
             ) : (
-              <p>
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                  {result.filled.length} filled
-                </span>
-                {result.skipped > 0 && <>, {result.skipped} already had a value</>}
-                {result.adapter && <span className="text-slate-500 dark:text-slate-400"> · {result.adapter}</span>}
-              </p>
+              <div className="flex items-start justify-between gap-3">
+                <p>
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                    {result.filled.length} filled
+                  </span>
+                  {result.skipped > 0 && <>, {result.skipped} already had a value</>}
+                  {result.adapter && <span className="text-slate-500 dark:text-slate-400"> · {result.adapter}</span>}
+                </p>
+                {result.filled.length > 0 && (
+                  <button className="btn-quiet shrink-0 py-1" onClick={undo}>
+                    Undo fill
+                  </button>
+                )}
+              </div>
             )}
+
+            {result.filled.length + result.missing.length + result.unmatched.length > 0 && <Legend />}
 
             {missing.length > 0 && (
               <div>
@@ -186,6 +228,28 @@ export default function App() {
                 <ul className="mt-1 max-h-56 divide-y divide-slate-200 overflow-y-auto dark:divide-slate-800">
                   {open.map((u) => (
                     <SaveAnswer key={u.label} label={u.label} />
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        )}
+
+        {status === 'undone' && (
+          <section className="mt-4 space-y-2 text-sm">
+            <p>
+              <span className="font-semibold">Fill undone.</span> {undone.restored} field
+              {undone.restored === 1 ? '' : 's'} put back.
+            </p>
+            {undone.manual.length > 0 && (
+              <div>
+                <h2 className="font-medium">Change these back by hand</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Custom dropdowns keep their choice; they are outlined with a dashed line.
+                </p>
+                <ul className="mt-1 list-inside list-disc text-slate-600 dark:text-slate-300">
+                  {[...new Set(undone.manual.map((m) => m.label))].map((label) => (
+                    <li key={label}>{label}</li>
                   ))}
                 </ul>
               </div>

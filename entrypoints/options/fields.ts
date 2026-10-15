@@ -19,6 +19,8 @@ export interface FieldDef {
 export interface FieldSectionDef {
   id: string;
   title: string;
+  /** Shorter name for the section links, when the title is long. */
+  navTitle?: string;
   note?: string;
   fields: FieldDef[];
 }
@@ -82,6 +84,7 @@ export const FIELD_SECTIONS: FieldSectionDef[] = [
   {
     id: 'job',
     title: 'Job preferences',
+    navTitle: 'Job',
     fields: [
       { key: 'salaryAmount', label: 'Salary expectation', placeholder: '65000' },
       { key: 'salaryCurrency', label: 'Currency', placeholder: 'EUR' },
@@ -108,6 +111,7 @@ export const FIELD_SECTIONS: FieldSectionDef[] = [
   {
     id: 'voluntary',
     title: 'Voluntary disclosures',
+    navTitle: 'Voluntary',
     note: 'Left blank unless you set them. Only used when a form asks.',
     fields: [
       {

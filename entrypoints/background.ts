@@ -3,11 +3,11 @@ import { browser } from 'wxt/browser';
 import type { Message } from '@/src/core/messages';
 
 export default defineBackground(() => {
-  const fillTab = (tabId: number) => {
-    const message: Message = { type: 'fill' };
+  const sendToTab = (tabId: number, message: Message) => {
     // Rejects on pages without the content script (browser pages, the extension store).
     browser.tabs.sendMessage(tabId, message).catch(() => {});
   };
+  const fillTab = (tabId: number) => sendToTab(tabId, { type: 'fill' });
 
   browser.commands.onCommand.addListener(async (command) => {
     if (command !== 'fill-form') return;
@@ -16,6 +16,8 @@ export default defineBackground(() => {
   });
 
   browser.runtime.onMessage.addListener((message: Message, sender) => {
-    if (message?.type === 'relay-fill' && sender.tab?.id !== undefined) fillTab(sender.tab.id);
+    if (sender.tab?.id === undefined) return;
+    if (message?.type === 'relay-fill') fillTab(sender.tab.id);
+    if (message?.type === 'relay-undo') sendToTab(sender.tab.id, { type: 'undo' });
   });
 });
