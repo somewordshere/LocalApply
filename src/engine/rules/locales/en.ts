@@ -14,7 +14,13 @@ export const en: Locale = {
       'eligible to work',
       'work permit',
     ],
-    needsSponsorship: ['sponsorship', 'sponsor', 'visa'],
+    // A bare "visa" is not enough: "Do you hold a valid visa?" asks the opposite question.
+    needsSponsorship: [
+      'sponsorship',
+      'sponsor',
+      '(?:need|require)\\p{L}*(?: \\p{L}+){0,3} visa',
+      'visa (?:required|needed|support)',
+    ],
     willingToRelocate: ['relocat\\p{L}*'],
     salaryCurrency: ['currency'],
     salary: ['salary', 'compensation', 'remuneration', 'desired pay', 'expected pay', 'pay expectations?'],
@@ -79,9 +85,10 @@ export const en: Locale = {
     lastName: ORGANISATION,
     state: ['marital'],
     country: ['code', 'phone'],
-    street: ['e ?mail', 'mail', 'web', 'url', 'ip'],
+    street: ['e ?mail', 'mail', 'web', 'url', 'ip', 'line ?[2-9]', 'address ?[2-9]'],
     location: ['region', 'province', 'state', 'work location', 'office'],
-    currentEmployer: ['hear about', 'why'],
+    // "What excites you about our company?" is a question, not a company name.
+    currentEmployer: ['hear about', 'why', 'our', 'about', 'join\\p{L}*', 'interest\\p{L}*', 'excit\\p{L}*'],
   },
   otherPerson: ['emergency', 'referee', 'references?', 'referr\\p{L}*', 'recruiter'],
 };

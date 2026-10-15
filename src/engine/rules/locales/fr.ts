@@ -43,8 +43,8 @@ export const fr: Locale = {
     fullName: ORGANISATION,
     firstName: ORGANISATION,
     lastName: ORGANISATION,
-    street: ['courriel'],
-    currentEmployer: ['pourquoi'],
+    street: ['courriel', 'complement'],
+    currentEmployer: ['pourquoi', 'notre', 'nous'],
   },
   otherPerson: ['urgence'],
 };

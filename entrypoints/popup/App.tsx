@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { browser } from 'wxt/browser';
 import type { FillResult } from '@/src/engine/types';
 import type { Message } from '@/src/core/messages';
+import { questionKeywords } from '@/src/profile/schema';
 import { loadProfile, saveProfile } from '@/src/profile/store';
 
 type Status = 'idle' | 'filling' | 'done' | 'unavailable';
@@ -28,7 +29,7 @@ function SaveAnswer({ label }: { label: string }) {
   const save = async () => {
     if (!answer.trim()) return;
     const profile = await loadProfile();
-    profile.customAnswers.push({ id: crypto.randomUUID(), keywords: label, answer: answer.trim() });
+    profile.customAnswers.push({ id: crypto.randomUUID(), keywords: questionKeywords(label), answer: answer.trim() });
     await saveProfile(profile);
     setSaved(true);
     setOpen(false);

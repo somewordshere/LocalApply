@@ -34,7 +34,7 @@ function collect(root: ParentNode, out: HTMLElement[]): void {
   }
 }
 
-function isVisible(el: Element): boolean {
+export function isVisible(el: Element): boolean {
   const check = (el as Element & { checkVisibility?: (o?: object) => boolean }).checkVisibility;
   if (typeof check === 'function') return check.call(el, { visibilityProperty: true });
   for (let node: Element | null = el; node; node = node.parentElement) {

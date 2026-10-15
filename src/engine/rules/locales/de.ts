@@ -7,7 +7,7 @@ export const de: Locale = {
     coverLetterFile: ['anschreiben', 'motivationsschreiben'],
     cv: ['lebenslauf'],
     workAuthorized: ['arbeitserlaubnis', 'arbeitsgenehmigung'],
-    needsSponsorship: ['visum'],
+    needsSponsorship: ['(?:benotig|brauch)\\p{L}*(?: \\p{L}+){0,3} visum', 'visum (?:erforderlich|notwendig|notig)'],
     willingToRelocate: ['umzug\\p{L}*', 'umziehen'],
     salaryCurrency: ['wahrung'],
     salary: ['gehalt\\p{L}*', '\\p{L}+gehalt', 'vergutung'],
@@ -53,7 +53,8 @@ export const de: Locale = {
     firstName: ORGANISATION,
     lastName: ORGANISATION,
     country: ['vorwahl'],
-    currentEmployer: ['warum'],
+    street: ['adresse ?[2-9]', 'zeile ?[2-9]'],
+    currentEmployer: ['warum', 'unser\\p{L}*', 'uns'],
   },
   otherPerson: ['notfall\\p{L}*', 'referenz\\p{L}*'],
 };

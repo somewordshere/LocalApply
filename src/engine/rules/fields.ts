@@ -47,7 +47,8 @@ export const FIELD_RULES: FieldRule[] = [
   { key: 'location', long: true },
 
   { key: 'currentTitle', auto: ['organization-title'] },
-  { key: 'currentEmployer', auto: ['organization'] },
+  // Never a text area: those hold questions about the company, not its name.
+  { key: 'currentEmployer', auto: ['organization'], kinds: ['text', 'select', 'combobox'] },
   { key: 'school' },
   { key: 'fieldOfStudy' },
   { key: 'degree' },
