@@ -1,6 +1,6 @@
 import type { CustomAnswer } from '../profile/schema';
 import { NOT_THE_APPLICANT, RULES, YES_NO_KEYS } from './rules';
-import { norm } from './text';
+import { escapeRegex, norm, phrases } from './text';
 import type { Field, FieldKey } from './types';
 
 export interface Hint {
@@ -50,13 +50,13 @@ export function matchField(field: Field, hints: Hint[] = []): FieldKey | null {
   return best;
 }
 
-/** Returns the saved answer whose keywords appear in the field label. */
+/** Returns the saved answer whose keywords appear as whole words in the field label. */
 export function matchCustom(field: Field, answers: CustomAnswer[]): string | null {
   const label = norm(field.label);
   if (!label) return null;
   for (const entry of answers) {
     const keys = entry.keywords.split(',').map(norm).filter(Boolean);
-    if (entry.answer && keys.some((k) => label.includes(k))) return entry.answer;
+    if (entry.answer && keys.some((k) => phrases([escapeRegex(k)]).test(label))) return entry.answer;
   }
   return null;
 }

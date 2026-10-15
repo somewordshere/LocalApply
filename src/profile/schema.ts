@@ -15,6 +15,14 @@ export interface CustomAnswer {
   answer: string;
 }
 
+/**
+ * Keywords for an answer saved against one question. Keywords are comma-separated,
+ * so a comma inside the question would split it into loose fragments ("when").
+ */
+export function questionKeywords(label: string): string {
+  return label.replace(/,/g, ' ');
+}
+
 export interface Profile {
   /** Schema version; see ./migrations.ts. */
   version: number;

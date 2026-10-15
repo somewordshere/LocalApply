@@ -38,6 +38,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
   for (const field of fields) keys.set(field, matchField(field, adapter?.hints));
 
   // Newsletter and contact forms share the page with the application; leave them alone.
+  // Uploads stay: some job sites put the CV upload in a form of its own.
   const formOf = (field: Field) => field.el.closest('form');
   const matchedPerForm = new Map<Element | null, number>();
   for (const field of fields) {
@@ -46,7 +47,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
   if (Math.max(0, ...matchedPerForm.values()) >= APPLICATION_FORM_MIN) {
     fields = fields.filter((field) => {
       const form = formOf(field);
-      return form === null || (matchedPerForm.get(form) ?? 0) > 1;
+      return form === null || field.kind === 'file' || (matchedPerForm.get(form) ?? 0) > 1;
     });
   }
 
@@ -67,12 +68,14 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
   };
 
   for (const field of fields) {
-    if (!options.overwrite && hasValue(field)) {
+    const key = keys.get(field) ?? null;
+    // Phone country pickers show a preselected country; like a prefilled dial code, that is not an answer yet.
+    const presetPicker = key === 'phoneCountryCode' && field.kind === 'combobox';
+    if (!options.overwrite && !presetPicker && hasValue(field)) {
       result.skipped++;
       continue;
     }
     const label = field.label || field.placeholder;
-    const key = keys.get(field) ?? null;
     const flagUnmatched = () => {
       // Optional consent boxes and controls nobody labelled are not worth the applicant's attention.
       if (!label || (field.kind === 'checkbox' && !field.required)) return;

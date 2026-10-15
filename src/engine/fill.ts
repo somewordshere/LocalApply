@@ -1,5 +1,6 @@
 import type { StoredFile } from '../profile/schema';
-import { pickOption } from './text';
+import { isVisible } from './scan';
+import { norm, pickOption } from './text';
 import type { Field } from './types';
 
 function fire(el: Element, type: string): void {
@@ -41,6 +42,35 @@ function typeInto(el: HTMLInputElement | HTMLTextAreaElement, value: string): bo
   return el.value !== '';
 }
 
+/**
+ * Rich text editors (ProseMirror, Draft.js, Quill) keep their own copy of the text and
+ * ignore direct DOM changes, so the text goes in as an edit the editor sees, replacing
+ * whatever is selected. Plain contenteditable elements get their text set directly.
+ */
+function typeIntoEditor(el: HTMLElement, value: string): boolean {
+  const doc = el.ownerDocument;
+  el.focus();
+  const selection = doc.getSelection();
+  let inserted = false;
+  if (selection && typeof doc.execCommand === 'function') {
+    const range = doc.createRange();
+    range.selectNodeContents(el);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    try {
+      inserted = doc.execCommand('insertText', false, value);
+    } catch {
+      inserted = false;
+    }
+  }
+  if (!inserted) {
+    el.textContent = value;
+    fire(el, 'input');
+  }
+  fire(el, 'blur');
+  return (el.textContent ?? '').trim() !== '';
+}
+
 function toFile(stored: StoredFile): File {
   const base64 = stored.dataUrl.slice(stored.dataUrl.indexOf(',') + 1);
   const binary = atob(base64);
@@ -76,12 +106,18 @@ function listOptions(el: HTMLElement): HTMLElement[] {
   const roots: ParentNode[] = controlled.length ? controlled : [el.getRootNode() as ParentNode, el.ownerDocument];
   const seen = new Set<HTMLElement>();
   for (const root of roots) {
-    for (const option of root.querySelectorAll<HTMLElement>('[role="option"]')) seen.add(option);
+    // Hidden options belong to other dropdowns that are closed, not to the one just opened.
+    for (const option of root.querySelectorAll<HTMLElement>('[role="option"]')) {
+      if (isVisible(option)) seen.add(option);
+    }
   }
   return [...seen];
 }
 
 const COMBOBOX_TIMEOUT_MS = 1500;
+/** Later search terms get less time: the list has usually loaded by then. */
+const RETYPE_TIMEOUT_MS = 600;
+const MAX_SEARCH_TERMS = 5;
 
 /** Opens a custom dropdown, waits for its options and clicks the matching one. */
 async function fillCombobox(el: HTMLElement, candidates: string[]): Promise<boolean> {
@@ -93,28 +129,36 @@ async function fillCombobox(el: HTMLElement, candidates: string[]): Promise<bool
   }
   el.focus();
   press(el);
-  if (typed) {
-    setNativeValue(el as HTMLInputElement, candidates[0]);
-    fire(el, 'input');
-  }
 
-  const deadline = Date.now() + COMBOBOX_TIMEOUT_MS;
-  while (Date.now() < deadline) {
-    await sleep(100);
-    const options = listOptions(el);
-    if (!options.length) continue;
-    const match = pickOption(
-      options.map((o) => ({ text: o.textContent ?? '', ref: o })),
-      candidates,
-    );
-    if (match) {
-      press(match);
-      return true;
+  // A searchable dropdown only lists what matches the typed text, so each alternative
+  // ("Deutschland", then "Germany") gets typed in turn. A plain one lists everything at once.
+  const terms = typed ? [...new Map(candidates.map((c) => [norm(c), c])).values()].slice(0, MAX_SEARCH_TERMS) : [''];
+  for (const [i, term] of terms.entries()) {
+    if (typed) {
+      setNativeValue(el as HTMLInputElement, term);
+      fire(el, 'input');
+    }
+    const deadline = Date.now() + (i === 0 ? COMBOBOX_TIMEOUT_MS : RETYPE_TIMEOUT_MS);
+    while (Date.now() < deadline) {
+      await sleep(100);
+      const options = listOptions(el);
+      if (!options.length) continue;
+      const match = pickOption(
+        options.map((o) => ({ text: o.textContent ?? '', ref: o })),
+        candidates,
+      );
+      if (match) {
+        press(match);
+        return true;
+      }
     }
   }
 
-  // Nothing matched: close the list again rather than leave it covering the form.
-  if (!typed) {
+  // Nothing matched: take the search text back out and close the list rather than leave it covering the form.
+  if (typed) {
+    setNativeValue(el as HTMLInputElement, '');
+    fire(el, 'input');
+  } else {
     el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', bubbles: true, cancelable: true }));
     if (el.getAttribute('aria-expanded') === 'true') press(el);
   }
@@ -123,6 +167,10 @@ async function fillCombobox(el: HTMLElement, candidates: string[]): Promise<bool
 }
 
 export const DIAL_CODE_ONLY = /^\s*\+?\d{0,4}\s*$/;
+
+/** Text a dropdown shows before anything is picked, in the languages the rules cover. */
+const PROMPT =
+  /^[-–—.…\s]*(?:$|(?:please )?(?:select|choose|pick)|none\b|bitte|(?:aus)?w[aä]hlen|s[ée]lectionne|choisi|selecciona|elige|seleziona|scegli|selecteer|kies|selecion|escolha|wybierz)/i;
 
 /** True when the control already holds a value the user (or the site) put there. */
 export function hasValue(field: Field): boolean {
@@ -141,6 +189,11 @@ export function hasValue(field: Field): boolean {
     }
     case 'combobox':
       if (el instanceof HTMLInputElement && el.value.trim() !== '') return true;
+      // A dropdown button shows the current choice as its text, or a prompt while nothing is chosen.
+      if (!(el instanceof HTMLInputElement)) {
+        const shown = (el.textContent ?? '').replace(/\s+/g, ' ').trim();
+        return shown !== '' && !PROMPT.test(shown) && shown !== field.label;
+      }
       // react-select keeps the chosen value in a sibling element, not in the input.
       return Boolean(
         el
@@ -205,9 +258,7 @@ export async function fillField(field: Field, candidates: string[]): Promise<boo
       return fillCombobox(el, candidates);
     default: {
       if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) return typeInto(el, candidates[0]);
-      el.textContent = candidates[0];
-      fire(el, 'input');
-      return true;
+      return typeIntoEditor(el, candidates[0]);
     }
   }
 }
