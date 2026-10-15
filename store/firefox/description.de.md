@@ -23,8 +23,8 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseit
 **So nutzt du es**
 
 1. Gib deine Daten einmal auf der Profilseite ein.
-2. Öffne eine Bewerbung und klicke auf das LocalApply-Symbol in der Symbolleiste, drücke **Alt+Umschalt+F** oder nutze die Schaltfläche **Fill application**, die auf unterstützten Jobportalen erscheint.
-3. Prüfe das Ergebnis. Ausgefüllte Felder werden grün umrandet; Pflichtfragen, die offen bleiben, werden gelb umrandet und aufgelistet, damit du sie ergänzen kannst.
+2. Öffne eine Bewerbung, klicke auf das LocalApply-Symbol in der Symbolleiste und dann auf **Fill this page**, oder drücke **Alt+Umschalt+F**.
+3. Prüfe das Ergebnis. Ausgefüllte Felder bekommen einen durchgehenden grünen Rahmen; Pflichtfragen, die offen bleiben, bekommen einen gestrichelten gelben Rahmen und werden aufgelistet, damit du sie ergänzen kannst. **Undo** setzt die Felder zurück.
 
 **Sicher von Grund auf**
 
@@ -34,4 +34,4 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseit
 
 **Warum Zugriff auf alle Websites nötig ist**
 
-Bewerbungsformulare liegen auf Tausenden Arbeitgeber- und Recruiting-Seiten, oft in eingebetteten Frames. Deshalb muss LocalApply Formulare auf jeder Seite ausfüllen können. Es füllt ein Formular nur aus, wenn du es darum bittest; auf bekannten Jobportalen prüft es außerdem, ob ein Bewerbungsformular geöffnet ist, um seine Ausfüllen-Schaltfläche anzuzeigen. Es stellt keine Netzwerkverbindungen her.
+Bewerbungsformulare liegen auf Tausenden Arbeitgeber- und Recruiting-Seiten, oft in eingebetteten Frames. Deshalb muss LocalApply Formulare auf jeder Seite ausfüllen können. Es liest und füllt ein Formular nur, wenn du es darum bittest. Es stellt keine Netzwerkverbindungen her.

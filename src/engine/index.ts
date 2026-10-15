@@ -7,6 +7,7 @@ import { resolve } from './resolve';
 import { DATE_KEYS } from './rules';
 import { scan } from './scan';
 import type { Field, FieldKey, FillResult } from './types';
+import { remember, rememberFill, type Change } from './undo';
 
 export interface FillOptions {
   /** Replace values that are already present. */
@@ -66,6 +67,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     unmatched: [],
     skipped: 0,
   };
+  const changes: Change[] = [];
 
   for (const field of fields) {
     const key = keys.get(field) ?? null;
@@ -86,7 +88,9 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     if (!key) {
       const answer =
         field.kind === 'file' || field.kind === 'checkbox' ? null : matchCustom(field, profile.customAnswers);
+      const restore = remember(field);
       if (answer && (await fillField(field, [answer]))) {
+        changes.push({ field, restore });
         result.filled.push({ label, key: 'custom answer' });
         highlight(field, 'filled');
       } else {
@@ -113,6 +117,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
       candidates = [formatDate(candidates[0], field)];
     }
 
+    const restore = remember(field);
     let done: boolean;
     if (field.kind === 'file') {
       const stored = key === 'coverLetterFile' ? profile.coverLetterFile : profile.cv;
@@ -122,6 +127,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     }
 
     if (done) {
+      changes.push({ field, restore });
       result.filled.push({ label: label || key, key });
       highlight(field, 'filled');
     } else {
@@ -129,7 +135,9 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     }
   }
 
+  rememberFill(changes);
   return result;
 }
 
 export type { FillResult } from './types';
+export { undoLastFill, type UndoResult } from './undo';

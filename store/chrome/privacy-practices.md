@@ -29,7 +29,7 @@ The user's CV and cover letter files are stored locally as data URLs and can exc
 **Host permission** (from the content script that runs on all sites)
 
 ```
-Job application forms are hosted on thousands of employer and applicant-tracking domains and are often embedded in iframes, so the form filler has to be able to run on any page. It reads and fills form fields only when the user clicks "Fill this page", presses the keyboard shortcut, or clicks the "Fill application" button. On a fixed list of applicant-tracking sites it also checks whether an application form is open, so it can show that button. It never submits forms, and it sends no data anywhere.
+Job application forms are hosted on thousands of employer and applicant-tracking domains and are often embedded in iframes, so the form filler has to be able to run on any page. It reads and fills form fields only when the user clicks "Fill this page" or presses the keyboard shortcut. It never submits forms, and it sends no data anywhere.
 ```
 
 ## Remote code

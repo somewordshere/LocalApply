@@ -3,7 +3,7 @@ import { isVisible } from './scan';
 import { norm, pickOption } from './text';
 import type { Field } from './types';
 
-function fire(el: Element, type: string): void {
+export function fire(el: Element, type: string): void {
   el.dispatchEvent(new Event(type, { bubbles: true, composed: true }));
 }
 
@@ -18,7 +18,7 @@ function press(el: Element): void {
  * setter on the element itself to track changes; going around it makes the following
  * input event register as a real edit.
  */
-function setNativeValue(el: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, value: string): void {
+export function setNativeValue(el: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, value: string): void {
   const proto =
     el instanceof HTMLTextAreaElement
       ? HTMLTextAreaElement.prototype
@@ -46,8 +46,9 @@ function typeInto(el: HTMLInputElement | HTMLTextAreaElement, value: string): bo
  * Rich text editors (ProseMirror, Draft.js, Quill) keep their own copy of the text and
  * ignore direct DOM changes, so the text goes in as an edit the editor sees, replacing
  * whatever is selected. Plain contenteditable elements get their text set directly.
+ * An empty value clears the editor.
  */
-function typeIntoEditor(el: HTMLElement, value: string): boolean {
+export function typeIntoEditor(el: HTMLElement, value: string): boolean {
   const doc = el.ownerDocument;
   el.focus();
   const selection = doc.getSelection();
@@ -58,7 +59,7 @@ function typeIntoEditor(el: HTMLElement, value: string): boolean {
     selection.removeAllRanges();
     selection.addRange(range);
     try {
-      inserted = doc.execCommand('insertText', false, value);
+      inserted = value ? doc.execCommand('insertText', false, value) : doc.execCommand('delete');
     } catch {
       inserted = false;
     }

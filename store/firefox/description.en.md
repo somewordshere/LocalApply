@@ -23,8 +23,8 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career p
 **How to use it**
 
 1. Enter your details once on the profile page.
-2. Open a job application and click the LocalApply toolbar button, press **Alt+Shift+F**, or use the **Fill application** button shown on supported job sites.
-3. Check the result. Filled fields are outlined in green; required questions it could not answer are outlined in amber and listed so you can finish them.
+2. Open a job application, click the LocalApply toolbar button and then **Fill this page**, or press **Alt+Shift+F**.
+3. Check the result. Filled fields get a solid green outline; required questions it could not answer get a dashed amber outline and are listed so you can finish them. **Undo** puts the fields back.
 
 **Safe by design**
 
@@ -34,4 +34,4 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career p
 
 **Why it needs access to all websites**
 
-Job applications are hosted on thousands of employer and recruiting sites, often inside embedded frames, so LocalApply must be able to fill forms on any page. It fills a form only when you ask it to; on known job sites it also checks whether an application form is open, so it can show its Fill button. It makes no network requests.
+Job applications are hosted on thousands of employer and recruiting sites, often inside embedded frames, so LocalApply must be able to fill forms on any page. It reads and fills a form only when you ask it to. It makes no network requests.

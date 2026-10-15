@@ -18,7 +18,7 @@ To decide which form field needs which piece of your information, LocalApply rea
 
 ## How the information is used
 
-Solely to fill application forms you choose to fill: when you click "Fill this page", press the keyboard shortcut, or click the "Fill application" button on a job site. LocalApply never submits a form for you.
+Solely to fill application forms you choose to fill: when you click "Fill this page" or press the keyboard shortcut. LocalApply never submits a form for you.
 
 ## Where it is stored
 

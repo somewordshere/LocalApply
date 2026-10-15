@@ -22,7 +22,7 @@ If the field picks up labels it shouldn't, add the giveaway word to that locale'
 1. Create `src/adapters/<site>.ts` exporting an `Adapter` (see `src/adapters/types.ts`; `lever.ts` is a short example):
    - `matches`: usually `host(/(^|\.)example\.com$/)`;
    - `hints`: CSS selectors that identify fields outright, for fields whose labels the generic rules get wrong;
-   - optional `scope` (limit scanning to the application dialog) and `ready` (when to show the in-page button on single-page sites).
+   - optional `scope` (limit scanning to the application dialog) and `ready` (when to show the in-page button on single-page sites; that button is currently turned off).
 2. Add it to `ADAPTERS` in `src/adapters/index.ts`.
 3. Add a reduced copy of the site's form to `tests/fixtures/ats.html` and a test to `tests/unit/adapters.test.ts`.
 4. Try it on a live posting before listing the site in the store descriptions.

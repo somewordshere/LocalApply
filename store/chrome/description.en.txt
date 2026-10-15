@@ -14,8 +14,8 @@ Works on the application forms of most applicant tracking systems and on ordinar
 
 HOW IT WORKS
 1. Enter your details once on the profile page.
-2. On an application, click the toolbar button, press Alt+Shift+F, or use the "Fill application" button that appears on supported job sites.
-3. Filled fields are outlined in green. Required fields it could not answer are outlined in amber and listed in the popup, where you can save an answer for next time.
+2. On an application, click the toolbar button and then "Fill this page", or press Alt+Shift+F.
+3. Filled fields get a solid green outline. Required fields it could not answer get a dashed amber outline and are listed in the popup, where you can save an answer for next time. Changed your mind? Undo puts the fields back.
 
 PRIVATE BY DESIGN
 • Your profile and documents are stored only in your browser on your computer.
@@ -25,4 +25,4 @@ PRIVATE BY DESIGN
 • Export your profile to a file, or delete everything with one click.
 
 WHY IT ASKS TO READ AND CHANGE DATA ON ALL WEBSITES
-Job applications live on thousands of different domains, often inside embedded frames, so LocalApply needs to be able to fill form fields on any page. It fills a page's form only when you ask it to. On known job sites it also checks whether an application form is open, so it can show its Fill button.
+Job applications live on thousands of different domains, often inside embedded frames, so LocalApply needs to be able to fill form fields on any page. It reads and fills a page's form only when you ask it to.

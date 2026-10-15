@@ -3,7 +3,8 @@ import type { Field } from './types';
 const MARK = 'data-jaf-mark';
 const PREVIOUS = 'data-jaf-outline';
 
-const COLORS = { filled: '#16a34a', attention: '#d97706' };
+/** Colour and line style differ, so the two states stay apart without telling green from amber. */
+const OUTLINES = { filled: '2px solid #16a34a', attention: '2px dashed #d97706' };
 
 function target(field: Field): HTMLElement {
   // For choices, outline the option that was picked, not whichever happens to come first.
@@ -14,11 +15,11 @@ function target(field: Field): HTMLElement {
   return hiddenControl ? (el.parentElement ?? el) : el;
 }
 
-export function highlight(field: Field, state: keyof typeof COLORS): void {
+export function highlight(field: Field, state: keyof typeof OUTLINES): void {
   const el = target(field);
   if (!el.hasAttribute(MARK)) el.setAttribute(PREVIOUS, el.style.outline);
   el.setAttribute(MARK, state);
-  el.style.outline = `2px solid ${COLORS[state]}`;
+  el.style.outline = OUTLINES[state];
   el.style.outlineOffset = '1px';
 }
 

@@ -13,7 +13,7 @@ The output in .output/firefox-mv2/ is identical to the uploaded file. Tooling: W
 
 The add-on makes no network requests and loads no remote code. It stores the user's profile in storage.local (unlimitedStorage because the user's CV file is stored as a data URL).
 
-The content script runs on <all_urls> in all frames because job application forms are hosted on arbitrary employer domains and are often embedded in iframes from applicant-tracking systems. It reads and writes form fields only when the user triggers a fill (toolbar popup, Alt+Shift+F, or the in-page button shown on known job sites). It never submits forms.
+The content script runs on <all_urls> in all frames because job application forms are hosted on arbitrary employer domains and are often embedded in iframes from applicant-tracking systems. It reads and writes form fields only when the user triggers a fill (toolbar popup or Alt+Shift+F). It never submits forms.
 
 To test: open the add-on's preferences, enter a first name and email, then open tests/fixtures/generic-en.html from the source zip (or any job application page), click the toolbar button and choose "Fill this page".
 ```

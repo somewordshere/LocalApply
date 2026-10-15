@@ -14,8 +14,8 @@ Funktioniert mit den Bewerbungsformularen der meisten Bewerbermanagementsysteme 
 
 SO FUNKTIONIERT ES
 1. Gib deine Daten einmal auf der Profilseite ein.
-2. Klicke in einer Bewerbung auf das Symbol in der Symbolleiste, drücke Alt+Umschalt+F oder nutze die Schaltfläche „Fill application", die auf unterstützten Jobportalen erscheint.
-3. Ausgefüllte Felder werden grün umrandet. Pflichtfelder, die offen bleiben, werden gelb umrandet und im Pop-up aufgelistet. Dort kannst du eine Antwort für das nächste Mal speichern.
+2. Klicke in einer Bewerbung auf das Symbol in der Symbolleiste und dann auf „Fill this page", oder drücke Alt+Umschalt+F.
+3. Ausgefüllte Felder bekommen einen durchgehenden grünen Rahmen. Pflichtfelder, die offen bleiben, bekommen einen gestrichelten gelben Rahmen und werden im Pop-up aufgelistet. Dort kannst du eine Antwort für das nächste Mal speichern. Doch anders überlegt? „Undo" setzt die Felder zurück.
 
 PRIVAT VON GRUND AUF
 • Profil und Dokumente liegen nur in deinem Browser auf deinem Rechner.
@@ -25,4 +25,4 @@ PRIVAT VON GRUND AUF
 • Exportiere dein Profil als Datei oder lösche alles mit einem Klick.
 
 WARUM ZUGRIFF AUF ALLE WEBSITES NÖTIG IST
-Bewerbungsformulare liegen auf Tausenden verschiedener Domains, oft in eingebetteten Frames. Deshalb muss LocalApply Formularfelder auf jeder Seite ausfüllen können. Es füllt ein Formular nur aus, wenn du es darum bittest. Auf bekannten Jobportalen prüft es außerdem, ob ein Bewerbungsformular geöffnet ist, um seine Ausfüllen-Schaltfläche anzuzeigen.
+Bewerbungsformulare liegen auf Tausenden verschiedener Domains, oft in eingebetteten Frames. Deshalb muss LocalApply Formularfelder auf jeder Seite ausfüllen können. Es liest und füllt ein Formular nur, wenn du es darum bittest.
