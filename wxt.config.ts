@@ -17,7 +17,8 @@ export default defineConfig({
     },
     browser_specific_settings: {
       gecko: {
-        id: 'localapply@addon',
+        // Must match the add-on's listing on addons.mozilla.org, which was created under this ID; it can never change.
+        id: 'job-application-filler@local',
         // Firefox asks extensions to declare what they send out; this one sends nothing.
         data_collection_permissions: { required: ['none'] },
       },
