@@ -285,5 +285,6 @@ export function formatDate(iso: string, field: Field): string {
   if (/^(de|pl)/.test(lang)) return `${d}.${m}.${y}`;
   if (/^(fr|es|it|pt|nl|en-gb)/.test(lang)) return `${d}/${m}/${y}`;
   if (/^en-us/.test(lang)) return `${m}/${d}/${y}`;
-  return iso;
+  // Nothing says which order the form wants: day first, as most of the world writes dates.
+  return `${d}-${m}-${y}`;
 }

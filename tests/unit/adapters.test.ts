@@ -64,7 +64,7 @@ describe('site adapters', () => {
     expect(result.adapter).toBe('Personio');
     expect(named('first_name').value).toBe('Max');
     expect(named('last_name').value).toBe('Muster');
-    expect(named('available_from').value).toBe('2027-01-01');
+    expect(named('available_from').value).toBe('01-01-2027');
     expect(named('salary_expectations').value).toBe('65000 EUR');
   });
 });
