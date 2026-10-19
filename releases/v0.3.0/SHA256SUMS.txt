@@ -1,0 +1,3 @@
+7dd460407f36934603d020d1639f08d4af722d55d29ebf6ce5714485bda17a00  localapply-0.3.0-firefox.zip
+9ca18f88468d17e2c2d1ea8729431c489ea259721b1bf6348afc4e7aa7f501ba  localapply-0.3.0-chrome.zip
+c2c7a428553fda0bbeb91f26bcca5cd6d30eb5ce97764e753acd916de78e5f4a  localapply-0.3.0-sources.zip
