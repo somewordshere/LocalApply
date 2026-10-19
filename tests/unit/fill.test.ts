@@ -35,4 +35,16 @@ describe('dates', () => {
     const [field] = scan(document);
     expect(formatDate('2027-03-09', field)).toBe('09-03-2027');
   });
+
+  it('writes DD-MM-YYYY when neither the field nor the page says which order', () => {
+    document.body.innerHTML = '<label for="d">Start date</label><input id="d" />';
+    const [field] = scan(document);
+    expect(formatDate('2027-03-09', field)).toBe('09-03-2027');
+  });
+
+  it('keeps ISO dates for native date pickers, which require them', () => {
+    document.body.innerHTML = '<input type="date" />';
+    const [field] = scan(document);
+    expect(formatDate('2027-03-09', field)).toBe('2027-03-09');
+  });
 });

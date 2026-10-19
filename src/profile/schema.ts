@@ -33,6 +33,8 @@ export interface Profile {
   email: string;
   phoneCountryCode: string;
   phoneNumber: string;
+  /** How the profile page asks for the phone: code and number in two boxes, or the full number in one. Storage is the same. */
+  phoneEntry: 'split' | 'full';
   dateOfBirth: string;
   nationality: string;
 
@@ -84,6 +86,7 @@ export const emptyProfile: Profile = {
   email: '',
   phoneCountryCode: '',
   phoneNumber: '',
+  phoneEntry: 'split',
   dateOfBirth: '',
   nationality: '',
   street: '',
@@ -149,5 +152,6 @@ export function migrate(raw: unknown): Profile {
   }
   out.version = PROFILE_VERSION;
   if (out.salaryPeriod !== 'month') out.salaryPeriod = 'year';
+  if (out.phoneEntry !== 'full') out.phoneEntry = 'split';
   return out;
 }

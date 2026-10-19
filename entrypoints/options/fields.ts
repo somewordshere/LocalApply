@@ -14,6 +14,8 @@ export interface FieldDef {
   placeholder?: string;
   /** Spans both columns. */
   wide?: boolean;
+  /** The phone number, with its choice of one box or two (see PhoneField). */
+  phone?: boolean;
 }
 
 export interface FieldSectionDef {
@@ -53,8 +55,7 @@ export const FIELD_SECTIONS: FieldSectionDef[] = [
       { key: 'firstName', label: 'First name' },
       { key: 'lastName', label: 'Last name' },
       { key: 'email', label: 'Email', type: 'email' },
-      { key: 'phoneCountryCode', label: 'Phone country code', placeholder: '+49' },
-      { key: 'phoneNumber', label: 'Phone number', type: 'tel', placeholder: '151 23456789' },
+      { key: 'phoneNumber', label: 'Phone', phone: true, wide: true },
       { key: 'dateOfBirth', label: 'Date of birth', type: 'date' },
       { key: 'nationality', label: 'Nationality' },
     ],

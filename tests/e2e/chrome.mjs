@@ -168,6 +168,26 @@ try {
     await page.close();
   });
 
+  await step('profile page takes a full phone number and keeps code and number apart', async () => {
+    const options = await context.newPage();
+    await options.goto(`chrome-extension://${extensionId}/options.html`);
+    await options.getByRole('button', { name: 'Full number' }).click();
+    const full = options.getByLabel('Full phone number', { exact: true });
+    assert.equal(await full.inputValue(), '+49 151 2345678');
+    await full.fill('+442079460123');
+    await options.getByText('Read as country code +44 and number 2079460123').waitFor();
+    await options.getByText('All changes saved').waitFor();
+    const profile = await storedProfile();
+    assert.equal(profile.phoneEntry, 'full');
+    assert.equal(profile.phoneCountryCode, '+44');
+    assert.equal(profile.phoneNumber, '2079460123');
+
+    await options.getByRole('button', { name: 'Country code + number' }).click();
+    assert.equal(await options.getByLabel('Phone country code', { exact: true }).inputValue(), '+44');
+    assert.equal(await options.getByLabel('Phone number', { exact: true }).inputValue(), '2079460123');
+    await options.close();
+  });
+
   await step('no button and no errors on an ordinary page', async () => {
     const page = await context.newPage();
     const errors = [];
