@@ -1,3 +1,4 @@
+import type { MessageKey } from '@/src/ui/i18n';
 import type { Profile } from '@/src/profile/schema';
 
 /** Profile properties that hold a single string, i.e. the ones a plain input can edit. */
@@ -5,13 +6,19 @@ export type TextKey = {
   [K in keyof Profile]: Profile[K] extends string ? K : never;
 }[keyof Profile];
 
+/** Brand names read the same in every language, so they are not translated. */
+type Brand = 'LinkedIn' | 'GitHub' | 'Xing';
+
 export interface FieldDef {
   key: TextKey;
-  label: string;
+  label: MessageKey | Brand;
   type?: 'text' | 'email' | 'tel' | 'url' | 'date';
-  /** Renders a dropdown of [value, label] pairs instead of a text input. */
-  options?: [value: string, label: string][];
-  placeholder?: string;
+  /** Renders a dropdown of [value, label] pairs instead of a text input. Values are stored as they are. */
+  options?: [value: string, label: MessageKey][];
+  /** Example text in the empty box, translated. */
+  placeholder?: MessageKey;
+  /** Example text that reads the same in every language (URLs, numbers, currency codes). */
+  example?: string;
   /** Spans both columns. */
   wide?: boolean;
   /** The phone number, with its choice of one box or two (see PhoneField). */
@@ -20,114 +27,114 @@ export interface FieldDef {
 
 export interface FieldSectionDef {
   id: string;
-  title: string;
+  title: MessageKey;
   /** Shorter name for the section links, when the title is long. */
-  navTitle?: string;
-  note?: string;
+  navTitle?: MessageKey;
+  note?: MessageKey;
   fields: FieldDef[];
 }
 
-const YES_NO: [string, string][] = [
-  ['', 'Not set'],
-  ['yes', 'Yes'],
-  ['no', 'No'],
+const YES_NO: [string, MessageKey][] = [
+  ['', 'notSet'],
+  ['yes', 'yes'],
+  ['no', 'no'],
 ];
 
 /**
  * The simple fields of the profile page, grouped into cards. A new string field in the
- * profile schema only needs an entry here to become editable.
+ * profile schema needs an entry here, and its label in src/ui/i18n, to become editable.
  */
 export const FIELD_SECTIONS: FieldSectionDef[] = [
   {
     id: 'personal',
-    title: 'Personal',
+    title: 'section.personal',
     fields: [
       {
         key: 'salutation',
-        label: 'Salutation',
+        label: 'field.salutation',
         options: [
-          ['', 'Not set'],
-          ['Mr', 'Mr'],
-          ['Ms', 'Ms'],
-          ['Mx', 'Mx'],
+          ['', 'notSet'],
+          ['Mr', 'field.salutation.mr'],
+          ['Ms', 'field.salutation.ms'],
+          ['Mx', 'field.salutation.mx'],
         ],
       },
-      { key: 'firstName', label: 'First name' },
-      { key: 'lastName', label: 'Last name' },
-      { key: 'email', label: 'Email', type: 'email' },
-      { key: 'phoneNumber', label: 'Phone', phone: true, wide: true },
-      { key: 'dateOfBirth', label: 'Date of birth', type: 'date' },
-      { key: 'nationality', label: 'Nationality' },
+      { key: 'firstName', label: 'field.firstName' },
+      { key: 'lastName', label: 'field.lastName' },
+      { key: 'email', label: 'field.email', type: 'email' },
+      { key: 'phoneNumber', label: 'phone.label', phone: true, wide: true },
+      { key: 'dateOfBirth', label: 'field.dateOfBirth', type: 'date' },
+      { key: 'nationality', label: 'field.nationality' },
     ],
   },
   {
     id: 'address',
-    title: 'Address',
+    title: 'section.address',
     fields: [
-      { key: 'street', label: 'Street' },
-      { key: 'houseNumber', label: 'House number' },
-      { key: 'postcode', label: 'Postcode' },
-      { key: 'city', label: 'City' },
-      { key: 'state', label: 'State / region' },
-      { key: 'country', label: 'Country', placeholder: 'Germany' },
+      { key: 'street', label: 'field.street' },
+      { key: 'houseNumber', label: 'field.houseNumber' },
+      { key: 'postcode', label: 'field.postcode' },
+      { key: 'city', label: 'field.city' },
+      { key: 'state', label: 'field.state' },
+      { key: 'country', label: 'field.country', placeholder: 'field.country.placeholder' },
     ],
   },
   {
     id: 'links',
-    title: 'Links',
+    title: 'section.links',
     fields: [
-      { key: 'linkedin', label: 'LinkedIn', type: 'url', placeholder: 'https://www.linkedin.com/in/…' },
-      { key: 'github', label: 'GitHub', type: 'url', placeholder: 'https://github.com/…' },
-      { key: 'website', label: 'Portfolio / website', type: 'url' },
+      { key: 'linkedin', label: 'LinkedIn', type: 'url', example: 'https://www.linkedin.com/in/…' },
+      { key: 'github', label: 'GitHub', type: 'url', example: 'https://github.com/…' },
+      { key: 'website', label: 'field.website', type: 'url' },
       { key: 'xing', label: 'Xing', type: 'url' },
     ],
   },
   {
     id: 'job',
-    title: 'Job preferences',
-    navTitle: 'Job',
+    title: 'section.job',
+    navTitle: 'section.job.nav',
     fields: [
-      { key: 'salaryAmount', label: 'Salary expectation', placeholder: '65000' },
-      { key: 'salaryCurrency', label: 'Currency', placeholder: 'EUR' },
-      { key: 'noticePeriod', label: 'Notice period', placeholder: '3 months' },
-      { key: 'startDate', label: 'Earliest start date', type: 'date' },
-      { key: 'yearsOfExperience', label: 'Years of experience', placeholder: '5' },
-      { key: 'workAuthorized', label: 'Authorised to work', options: YES_NO },
-      { key: 'needsSponsorship', label: 'Needs visa sponsorship', options: YES_NO },
-      { key: 'willingToRelocate', label: 'Willing to relocate', options: YES_NO },
-      { key: 'remotePreference', label: 'Work model', placeholder: 'Hybrid' },
+      { key: 'salaryAmount', label: 'field.salaryAmount', example: '65000' },
+      { key: 'salaryCurrency', label: 'field.salaryCurrency', example: 'EUR' },
+      { key: 'noticePeriod', label: 'field.noticePeriod', placeholder: 'field.noticePeriod.placeholder' },
+      { key: 'startDate', label: 'field.startDate', type: 'date' },
+      { key: 'yearsOfExperience', label: 'field.yearsOfExperience', example: '5' },
+      { key: 'workAuthorized', label: 'field.workAuthorized', options: YES_NO },
+      { key: 'needsSponsorship', label: 'field.needsSponsorship', options: YES_NO },
+      { key: 'willingToRelocate', label: 'field.willingToRelocate', options: YES_NO },
+      { key: 'remotePreference', label: 'field.remotePreference', placeholder: 'field.remotePreference.placeholder' },
     ],
   },
   {
     id: 'background',
-    title: 'Background',
+    title: 'section.background',
     fields: [
-      { key: 'currentTitle', label: 'Current job title' },
-      { key: 'currentEmployer', label: 'Current employer' },
-      { key: 'school', label: 'University / school' },
-      { key: 'degree', label: 'Degree' },
-      { key: 'fieldOfStudy', label: 'Field of study' },
+      { key: 'currentTitle', label: 'field.currentTitle' },
+      { key: 'currentEmployer', label: 'field.currentEmployer' },
+      { key: 'school', label: 'field.school' },
+      { key: 'degree', label: 'field.degree' },
+      { key: 'fieldOfStudy', label: 'field.fieldOfStudy' },
     ],
   },
   {
     id: 'voluntary',
-    title: 'Voluntary disclosures',
-    navTitle: 'Voluntary',
-    note: 'Left blank unless you set them. Only used when a form asks.',
+    title: 'section.voluntary',
+    navTitle: 'section.voluntary.nav',
+    note: 'section.voluntary.note',
     fields: [
       {
         key: 'gender',
-        label: 'Gender',
+        label: 'field.gender',
         options: [
-          ['', 'Not set'],
-          ['Male', 'Male'],
-          ['Female', 'Female'],
-          ['Non-binary', 'Non-binary'],
-          ['Prefer not to say', 'Prefer not to say'],
+          ['', 'notSet'],
+          ['Male', 'field.gender.male'],
+          ['Female', 'field.gender.female'],
+          ['Non-binary', 'field.gender.nonBinary'],
+          ['Prefer not to say', 'field.gender.preferNot'],
         ],
       },
-      { key: 'disability', label: 'Disability', options: YES_NO },
-      { key: 'veteran', label: 'Veteran', options: YES_NO },
+      { key: 'disability', label: 'field.disability', options: YES_NO },
+      { key: 'veteran', label: 'field.veteran', options: YES_NO },
     ],
   },
 ];

@@ -1,10 +1,10 @@
-// Draws the icon (white check on an indigo rounded square) as PNGs in public/icon/ and the store folder.
+// Draws the icon (white check on a deep green rounded square, the interface accent) as PNGs in public/icon/ and the store folder.
 // Run with `node scripts/make-icons.mjs`; no image libraries needed.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 
 const SIZES = [16, 32, 48, 96, 128];
-const BACKGROUND = [79, 70, 229];
+const BACKGROUND = [31, 107, 79];
 const SAMPLES = 4;
 
 function crc32(buf) {

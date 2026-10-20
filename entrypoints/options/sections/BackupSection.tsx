@@ -1,11 +1,22 @@
 import { useState } from 'react';
 import { Section } from '@/src/ui/components/Section';
+import { useI18n } from '@/src/ui/I18nProvider';
+import type { MessageKey } from '@/src/ui/i18n';
 import { emptyProfile, migrate, type Profile } from '@/src/profile/schema';
 
 const EXPORT_FILE_NAME = 'localapply-profile.json';
 
-export function BackupSection({ profile, update }: { profile: Profile; update: (patch: Partial<Profile>) => void }) {
-  const [notice, setNotice] = useState('');
+export function BackupSection({
+  number,
+  profile,
+  update,
+}: {
+  number: number;
+  profile: Profile;
+  update: (patch: Partial<Profile>) => void;
+}) {
+  const { t } = useI18n();
+  const [notice, setNotice] = useState<MessageKey | null>(null);
 
   const exportJson = () => {
     const url = URL.createObjectURL(new Blob([JSON.stringify(profile, null, 2)], { type: 'application/json' }));
@@ -20,20 +31,20 @@ export function BackupSection({ profile, update }: { profile: Profile; update: (
     if (!file) return;
     try {
       update(migrate(JSON.parse(await file.text())));
-      setNotice('Profile imported.');
+      setNotice('backup.imported');
     } catch {
-      setNotice('That file is not a valid profile export.');
+      setNotice('backup.importFailed');
     }
   };
 
   return (
-    <Section id="data" title="Backup" note="The export contains everything above, including your documents.">
+    <Section id="data" number={number} title={t('section.backup')} note={t('section.backup.note')}>
       <div className="flex flex-wrap items-center gap-3">
         <button className="btn-quiet" onClick={exportJson}>
-          Export profile
+          {t('backup.export')}
         </button>
         <label className="btn-quiet">
-          Import profile
+          {t('backup.import')}
           <input
             type="file"
             accept="application/json,.json"
@@ -42,16 +53,16 @@ export function BackupSection({ profile, update }: { profile: Profile; update: (
           />
         </label>
         <button
-          className="cursor-pointer text-sm text-red-600 hover:underline dark:text-red-400"
+          className="cursor-pointer text-sm font-medium text-danger underline-offset-3 hover:underline"
           onClick={() => {
-            if (confirm('Delete all stored profile data?')) update({ ...emptyProfile, customAnswers: [] });
+            if (confirm(t('backup.confirmDelete'))) update({ ...emptyProfile, customAnswers: [] });
           }}
         >
-          Delete all data
+          {t('backup.deleteAll')}
         </button>
         {notice && (
-          <span role="status" className="text-sm text-slate-600 dark:text-slate-300">
-            {notice}
+          <span role="status" className="text-sm text-ink-soft">
+            {t(notice)}
           </span>
         )}
       </div>

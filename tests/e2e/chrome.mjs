@@ -188,6 +188,25 @@ try {
     await options.close();
   });
 
+  await step('language switch translates the profile page and the popup', async () => {
+    const options = await context.newPage();
+    await options.goto(`chrome-extension://${extensionId}/options.html`);
+    await options.getByRole('combobox', { name: 'Language' }).selectOption('pl');
+    await options.getByRole('heading', { name: 'Twój profil' }).waitFor();
+    await options.getByLabel('Imię', { exact: true }).waitFor();
+    assert.equal(await options.evaluate(() => document.documentElement.lang), 'pl');
+    assert.equal(await worker.evaluate(() => chrome.storage.local.get('uiLanguage').then((r) => r.uiLanguage)), 'pl');
+
+    const popup = await context.newPage();
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await popup.getByRole('button', { name: 'Wypełnij tę stronę' }).waitFor();
+    await popup.close();
+
+    await options.getByRole('combobox', { name: 'Język' }).selectOption('en');
+    await options.getByRole('heading', { name: 'Your profile' }).waitFor();
+    await options.close();
+  });
+
   await step('no button and no errors on an ordinary page', async () => {
     const page = await context.newPage();
     const errors = [];

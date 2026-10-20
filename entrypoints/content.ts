@@ -4,6 +4,8 @@ import { pickAdapter } from '@/src/adapters';
 import { fillPage, undoLastFill, type FillResult, type UndoResult } from '@/src/engine';
 import type { Message } from '@/src/core/messages';
 import { loadProfile } from '@/src/profile/store';
+import { translator, type Translate } from '@/src/ui/i18n';
+import { loadLanguage } from '@/src/ui/language';
 
 const HOST_ID = 'localapply-ui';
 /** The floating "Fill application" button on known job sites. Off for now: fills start from the toolbar popup or the shortcut. */
@@ -29,17 +31,18 @@ function ui(): ShadowRoot {
     host.attachShadow({ mode: 'open' });
     const style = document.createElement('style');
     style.textContent = `
-      /* The host is reset with "all: initial", which beats :host rules, so the font is set here. */
-      .stack { font: 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-      button { all: unset; cursor: pointer; background: #4f46e5; color: #fff; padding: 9px 14px; border-radius: 999px;
-        font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
-      button:hover { background: #4338ca; }
-      button:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 2px; }
-      .toast { background: #111827; color: #f9fafb; padding: 10px 14px; border-radius: 10px; max-width: 300px;
-        box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+      /* The host is reset with "all: initial", which beats :host rules, so the font is set here.
+         Colours follow the extension's paper-and-ink palette; the page's own fonts are not touched. */
+      .stack { font: 13px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+      button { all: unset; cursor: pointer; background: #1f6b4f; color: #fff; padding: 9px 14px; border-radius: 8px;
+        font-weight: 600; box-shadow: 0 6px 18px rgba(28,26,22,.22); }
+      button:hover { background: #175a41; }
+      button:focus-visible { outline: 2px solid #74c79f; outline-offset: 2px; }
+      .toast { background: #1c1a16; color: #eee9df; padding: 11px 14px; border-radius: 8px; max-width: 320px;
+        border-left: 3px solid #74c79f; box-shadow: 0 6px 18px rgba(28,26,22,.28); }
       .toast button { background: none; box-shadow: none; padding: 0; border-radius: 0; margin-left: 10px;
-        color: #a5b4fc; text-decoration: underline; }
-      .toast button:hover { background: none; color: #c7d2fe; }
+        color: #93d6b5; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+      .toast button:hover { background: none; color: #b8e6cd; }
     `;
     const stack = document.createElement('div');
     stack.className = 'stack';
@@ -71,27 +74,28 @@ function toast(text: string, action?: { label: string; run: () => void }): void 
   setTimeout(() => el.remove(), action ? TOAST_WITH_ACTION_MS : TOAST_MS);
 }
 
-const fields = (n: number) => `${n} field${n === 1 ? '' : 's'}`;
+/** The notices speak the interface language chosen on the profile page. */
+async function texts(): Promise<Translate> {
+  return translator(await loadLanguage().catch(() => 'en' as const));
+}
 
-function summary(result: FillResult): string {
-  const parts = [`Filled ${fields(result.filled.length)}`];
+function summary(result: FillResult, t: Translate): string {
+  const parts = [t('notice.filled', { n: result.filled.length })];
   const open = result.unmatched.length + result.missing.length;
-  if (open) parts.push(`${open} left for you (dashed outline)`);
-  if (result.skipped) parts.push(`${result.skipped} already had a value`);
+  if (open) parts.push(t('notice.open', { n: open }));
+  if (result.skipped) parts.push(t('notice.skipped', { n: result.skipped }));
   return parts.join(' · ');
 }
 
-function undoSummary(result: UndoResult): string {
-  const manual = result.manual.length;
-  return manual
-    ? `Undid ${fields(result.restored)} · change ${manual} dropdown${manual === 1 ? '' : 's'} back by hand (dashed outline)`
-    : `Undid ${fields(result.restored)}`;
+function undoSummary(result: UndoResult, t: Translate): string {
+  const undid = t('notice.undid', { n: result.restored });
+  return result.manual.length ? `${undid} · ${t('notice.manual', { n: result.manual.length })}` : undid;
 }
 
-function undo(): void {
+async function undo(): Promise<void> {
   const result = undoLastFill(document);
   send({ type: 'undo-result', result });
-  if (result.restored || result.manual.length) toast(undoSummary(result));
+  if (result.restored || result.manual.length) toast(undoSummary(result, await texts()));
 }
 
 async function run(overwrite: boolean): Promise<void> {
@@ -100,11 +104,13 @@ async function run(overwrite: boolean): Promise<void> {
   send({ type: 'fill-start' });
   let result: FillResult = { adapter: null, total: 0, filled: [], missing: [], unmatched: [], skipped: 0 };
   try {
-    const profile = await loadProfile();
+    const [profile, t] = await Promise.all([loadProfile(), texts()]);
     result = await fillPage(document, profile, { overwrite, location });
     if (result.total > 0 && (window === window.top || result.filled.length > 0)) {
-      const action = result.filled.length ? { label: 'Undo', run: () => send({ type: 'relay-undo' }) } : undefined;
-      toast(summary(result), action);
+      const action = result.filled.length
+        ? { label: t('notice.undo'), run: () => send({ type: 'relay-undo' }) }
+        : undefined;
+      toast(summary(result, t), action);
     }
   } catch (error) {
     console.error('[LocalApply]', error);
@@ -128,6 +134,7 @@ function watchForForm(): void {
       button.type = 'button';
       button.className = 'fill';
       button.textContent = 'Fill application';
+      void texts().then((t) => (button.textContent = t('notice.fillButton')));
       button.addEventListener('click', () => send({ type: 'relay-fill' }));
       ui().querySelector('.stack')!.append(button);
     } else if (!show && existing) {
@@ -145,7 +152,7 @@ export default defineContentScript({
   main() {
     browser.runtime.onMessage.addListener((message: Message) => {
       if (message?.type === 'fill') void run(Boolean(message.overwrite));
-      if (message?.type === 'undo' && !running) undo();
+      if (message?.type === 'undo' && !running) void undo();
     });
     if (SHOW_PAGE_BUTTON) watchForForm();
   },

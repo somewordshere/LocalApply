@@ -1,6 +1,6 @@
 # Firefox listing (Deutsch)
 
-Add under "Manage translations" → Deutsch. The extension's own interface is English only, so this text describes what it recognises, not a German interface.
+Add under "Manage translations" → Deutsch. The extension's own interface is available in German too (switchable on the profile page).
 
 ## Name (41 / 50 characters)
 

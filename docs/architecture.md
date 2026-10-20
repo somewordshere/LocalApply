@@ -34,16 +34,17 @@ Nothing leaves the browser. The extension has no network code; keep it that way,
 
 ## Where to change things
 
-| Change                                        | Files                                                                    |
-| --------------------------------------------- | ------------------------------------------------------------------------ |
-| A label isn't recognised                      | `src/engine/rules/locales/<language>.ts`                                 |
-| A new kind of information to fill             | See [extending.md](extending.md#add-a-profile-field)                     |
-| A job site needs special handling             | `src/adapters/<site>.ts`                                                 |
-| How values are written into a kind of control | `src/engine/fill.ts`                                                     |
-| Which elements count as fields, label finding | `src/engine/scan.ts`                                                     |
-| Profile page                                  | `entrypoints/options/` (field list in `fields.ts`, cards in `sections/`) |
-| Popup                                         | `entrypoints/popup/App.tsx`                                              |
-| Manifest, permissions, build                  | `wxt.config.ts`                                                          |
+| Change                                        | Files                                                                        |
+| --------------------------------------------- | ---------------------------------------------------------------------------- |
+| A label isn't recognised                      | `src/engine/rules/locales/<language>.ts`                                     |
+| A new kind of information to fill             | See [extending.md](extending.md#add-a-profile-field)                         |
+| A job site needs special handling             | `src/adapters/<site>.ts`                                                     |
+| How values are written into a kind of control | `src/engine/fill.ts`                                                         |
+| Which elements count as fields, label finding | `src/engine/scan.ts`                                                         |
+| Profile page                                  | `entrypoints/options/` (field list in `fields.ts`, cards in `sections/`)     |
+| Popup                                         | `entrypoints/popup/App.tsx`                                                  |
+| Interface text, translations                  | `src/ui/i18n/` (`en.ts` is the base; every language must have every message) |
+| Manifest, permissions, build                  | `wxt.config.ts`                                                              |
 
 ## Tests
 

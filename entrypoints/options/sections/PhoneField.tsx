@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import type { Profile } from '@/src/profile/schema';
 import { joinPhone, splitPhone } from '@/src/profile/phone';
+import { useI18n } from '@/src/ui/I18nProvider';
+import type { MessageKey } from '@/src/ui/i18n';
 
-const MODES: [mode: Profile['phoneEntry'], label: string][] = [
-  ['split', 'Country code + number'],
-  ['full', 'Full number'],
+const MODES: [mode: Profile['phoneEntry'], label: MessageKey][] = [
+  ['split', 'phone.split'],
+  ['full', 'phone.full'],
 ];
 
 /**
@@ -13,6 +15,7 @@ const MODES: [mode: Profile['phoneEntry'], label: string][] = [
  * forms ask both ways.
  */
 export function PhoneField({ profile, update }: { profile: Profile; update: (patch: Partial<Profile>) => void }) {
+  const { t } = useI18n();
   const full = profile.phoneEntry === 'full';
   // What the person typed into the single box, spaces and all; the profile only keeps the two parts.
   const [text, setText] = useState(() => joinPhone(profile));
@@ -32,29 +35,33 @@ export function PhoneField({ profile, update }: { profile: Profile; update: (pat
 
   return (
     <div role="group" aria-labelledby="phone-label">
-      <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-        <span id="phone-label" className="text-sm font-medium">
-          Phone
+      <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
+        <span id="phone-label" className="text-sm font-medium text-ink">
+          {t('phone.label')}
         </span>
-        <div className="inline-flex rounded-lg border border-slate-300 p-0.5 text-xs dark:border-slate-700">
-          {MODES.map(([mode, label]) => (
-            <button
-              key={mode}
-              type="button"
-              aria-pressed={profile.phoneEntry === mode}
-              // Moving to one box tidies a full number typed into the number box into its two parts.
-              onClick={() =>
-                update(mode === 'full' ? { phoneEntry: mode, ...splitPhone(joinPhone(profile)) } : { phoneEntry: mode })
-              }
-              className={`cursor-pointer rounded-md px-2.5 py-1 font-medium ${
-                profile.phoneEntry === mode
-                  ? 'bg-indigo-600 text-white'
-                  : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+        {/* One control with two halves; the chosen half is solid ink, so neither depends on colour. */}
+        <div className="inline-flex divide-x divide-line-strong overflow-hidden rounded-md border border-line-strong text-xs">
+          {MODES.map(([mode, label]) => {
+            const chosen = profile.phoneEntry === mode;
+            return (
+              <button
+                key={mode}
+                type="button"
+                aria-pressed={chosen}
+                // Moving to one box tidies a full number typed into the number box into its two parts.
+                onClick={() =>
+                  update(
+                    mode === 'full' ? { phoneEntry: mode, ...splitPhone(joinPhone(profile)) } : { phoneEntry: mode },
+                  )
+                }
+                className={`cursor-pointer px-3 py-1.5 font-medium transition ${
+                  chosen ? 'bg-ink text-paper' : 'bg-sheet text-ink-soft hover:bg-paper hover:text-ink'
+                }`}
+              >
+                {t(label)}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -63,20 +70,16 @@ export function PhoneField({ profile, update }: { profile: Profile; update: (pat
           <input
             className="field"
             type="tel"
-            aria-label="Full phone number"
+            aria-label={t('phone.fullLabel')}
             placeholder="+442079460123"
             value={text}
             onChange={(e) => typeFull(e.target.value)}
           />
           {text.trim() && (
-            <p
-              className={`mt-1 text-xs ${
-                parts.phoneCountryCode ? 'text-slate-500 dark:text-slate-400' : 'text-amber-700 dark:text-amber-400'
-              }`}
-            >
+            <p className={`mt-1.5 text-xs ${parts.phoneCountryCode ? 'text-ink-faint' : 'text-warn'}`}>
               {parts.phoneCountryCode
-                ? `Read as country code ${parts.phoneCountryCode} and number ${parts.phoneNumber || '…'}`
-                : 'Start with + and the country code (for example +48) so forms with a separate country code box can be filled.'}
+                ? t('phone.readAs', { code: parts.phoneCountryCode, number: parts.phoneNumber || '…' })
+                : t('phone.noCode')}
             </p>
           )}
         </>
@@ -84,7 +87,7 @@ export function PhoneField({ profile, update }: { profile: Profile; update: (pat
         <div className="grid grid-cols-[7rem_1fr] gap-3">
           <input
             className="field"
-            aria-label="Phone country code"
+            aria-label={t('phone.codeLabel')}
             placeholder="+44"
             value={profile.phoneCountryCode}
             onChange={(e) => update({ phoneCountryCode: e.target.value })}
@@ -92,7 +95,7 @@ export function PhoneField({ profile, update }: { profile: Profile; update: (pat
           <input
             className="field"
             type="tel"
-            aria-label="Phone number"
+            aria-label={t('phone.numberLabel')}
             placeholder="20 7946 0123"
             value={profile.phoneNumber}
             onChange={(e) => update({ phoneNumber: e.target.value })}

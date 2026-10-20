@@ -67,5 +67,5 @@ A Chrome Web Store developer account costs a one-time US$5 registration fee.
 
 - Don't list job-site or ATS brand names in the Chrome description. The Chrome Web Store rejected v0.1.0 for keyword spam ("Yellow Argon") over a sentence naming Greenhouse, Workday, Lever and others. Describe coverage in general terms instead.
 - Only claim sites that have been tried on a real posting. Built-in support for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply exists in `src/adapters/` but had not been tried on live postings as of v0.1.0.
-- The extension's own interface is English only, so the German listings describe a German-recognising tool, not a German interface.
+- The extension's own interface (profile page, popup, on-page notice) is translated into the same eight languages it recognises in forms: English, German, French, Spanish, Italian, Dutch, Portuguese and Polish. It starts in the browser's language and can be switched on the profile page. New interface text goes into `src/ui/i18n/en.ts` and every other language file there; the compiler refuses a language that misses a message.
 - Update the "What it fills" lists when a profile field is added.

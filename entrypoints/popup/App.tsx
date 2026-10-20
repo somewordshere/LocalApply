@@ -5,6 +5,7 @@ import type { UndoResult } from '@/src/engine/undo';
 import type { Message } from '@/src/core/messages';
 import { questionKeywords } from '@/src/profile/schema';
 import { loadProfile, saveProfile } from '@/src/profile/store';
+import { useI18n } from '@/src/ui/I18nProvider';
 
 type Status = 'idle' | 'filling' | 'done' | 'undone' | 'unavailable';
 
@@ -24,6 +25,7 @@ function merge(a: FillResult, b: FillResult): FillResult {
 }
 
 function SaveAnswer({ label }: { label: string }) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [answer, setAnswer] = useState('');
   const [saved, setSaved] = useState(false);
@@ -40,15 +42,12 @@ function SaveAnswer({ label }: { label: string }) {
   return (
     <li className="py-1.5">
       <div className="flex items-start justify-between gap-2">
-        <span className="min-w-0 break-words">{label}</span>
+        <span className="min-w-0 break-words text-ink">{label}</span>
         {saved ? (
-          <span className="shrink-0 text-xs text-emerald-600 dark:text-emerald-400">Saved</span>
+          <span className="shrink-0 text-xs font-medium text-accent">{t('popup.answerSaved')}</span>
         ) : (
-          <button
-            className="shrink-0 cursor-pointer text-xs font-medium text-indigo-600 hover:underline dark:text-indigo-400"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? 'Cancel' : 'Save answer'}
+          <button className="link shrink-0 text-xs" onClick={() => setOpen(!open)}>
+            {open ? t('cancel') : t('popup.saveAnswer')}
           </button>
         )}
       </div>
@@ -57,14 +56,14 @@ function SaveAnswer({ label }: { label: string }) {
           <input
             className="field"
             autoFocus
-            aria-label={`Answer for ${label}`}
-            placeholder="Your answer"
+            aria-label={t('popup.answerFor', { label })}
+            placeholder={t('popup.yourAnswer')}
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && save()}
           />
           <button className="btn-quiet" onClick={save}>
-            Save
+            {t('save')}
           </button>
         </div>
       )}
@@ -74,21 +73,23 @@ function SaveAnswer({ label }: { label: string }) {
 
 /** Explains the outlines on the page by line style as well as colour. */
 function Legend() {
+  const { t } = useI18n();
   return (
-    <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+    <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-faint">
       <span className="flex items-center gap-1.5">
         <span aria-hidden="true" className="inline-block h-3 w-5 rounded-sm border-2 border-solid border-[#16a34a]" />
-        Solid outline: filled
+        {t('popup.legendFilled')}
       </span>
       <span className="flex items-center gap-1.5">
         <span aria-hidden="true" className="inline-block h-3 w-5 rounded-sm border-2 border-dashed border-[#d97706]" />
-        Dashed outline: needs you
+        {t('popup.legendAttention')}
       </span>
     </p>
   );
 }
 
 export default function App() {
+  const { t } = useI18n();
   const [status, setStatus] = useState<Status>('idle');
   const [overwrite, setOverwrite] = useState(false);
   const [result, setResult] = useState<FillResult>(EMPTY);
@@ -146,61 +147,60 @@ export default function App() {
   const missing = [...new Map(result.missing.map((m) => [m.label, m])).values()];
 
   return (
-    <main className="w-[360px] p-4">
-      <header className="mb-3 flex items-center justify-between">
-        <h1 className="text-base font-semibold">LocalApply</h1>
-        <button className="btn-quiet" onClick={() => browser.runtime.openOptionsPage()}>
-          Edit profile
+    <main className="w-[360px] bg-paper p-4 text-ink">
+      <header className="mb-4 flex items-center justify-between">
+        <h1 className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
+          <img src="/icon/48.png" alt="" className="size-6 rounded-md" />
+          LocalApply
+        </h1>
+        <button className="btn-quiet py-1 text-xs" onClick={() => browser.runtime.openOptionsPage()}>
+          {t('popup.editProfile')}
         </button>
       </header>
 
       {profileEmpty && (
-        <p className="mb-3 rounded-lg bg-amber-100 px-3 py-2 text-sm text-amber-900 dark:bg-amber-950 dark:text-amber-200">
-          Your profile is empty. Add your details first.
+        <p className="mb-3 rounded-md border border-warn/30 bg-warn/10 px-3 py-2 text-sm text-warn">
+          {t('popup.profileEmpty')}
         </p>
       )}
 
-      <button className="btn w-full py-2.5" onClick={fill} disabled={status === 'filling'}>
-        {status === 'filling' ? 'Filling…' : 'Fill this page'}
+      <button className="btn w-full py-3 text-[15px]" onClick={fill} disabled={status === 'filling'}>
+        {status === 'filling' ? t('popup.filling') : t('popup.fill')}
       </button>
 
-      <label className="mt-3 flex cursor-pointer items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+      <label className="mt-3 flex cursor-pointer items-center gap-2 text-sm text-ink-soft">
         <input
           type="checkbox"
-          className="size-4 accent-indigo-600"
+          className="size-4 accent-accent"
           checked={overwrite}
           onChange={(e) => setOverwrite(e.target.checked)}
         />
-        Overwrite fields that already have a value
+        {t('popup.overwrite')}
       </label>
 
-      <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-        Nothing is submitted. Review the form and send it yourself.
-      </p>
+      <p className="mt-1.5 text-xs text-ink-faint">{t('popup.nothingSubmitted')}</p>
 
       <div aria-live="polite">
-        {status === 'unavailable' && (
-          <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
-            This page can't be filled. If you just installed the extension, reload the tab and try again.
-          </p>
-        )}
+        {status === 'unavailable' && <p className="mt-4 text-sm text-ink-soft">{t('popup.unavailable')}</p>}
 
         {status === 'done' && (
-          <section className="mt-4 space-y-3 text-sm">
+          <section className="mt-4 space-y-4 border-t border-line pt-4 text-sm">
             {result.total === 0 ? (
-              <p>No form fields found on this page.</p>
+              <p>{t('popup.noFields')}</p>
             ) : (
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center justify-between gap-3">
                 <p>
-                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                    {result.filled.length} filled
+                  <span
+                    className={`font-display text-xl font-semibold ${result.filled.length ? 'text-accent' : 'text-ink'}`}
+                  >
+                    {t('popup.filled', { n: result.filled.length })}
                   </span>
-                  {result.skipped > 0 && <>, {result.skipped} already had a value</>}
-                  {result.adapter && <span className="text-slate-500 dark:text-slate-400"> · {result.adapter}</span>}
+                  {result.skipped > 0 && <>, {t('popup.skipped', { n: result.skipped })}</>}
+                  {result.adapter && <span className="text-ink-faint"> · {result.adapter}</span>}
                 </p>
                 {result.filled.length > 0 && (
                   <button className="btn-quiet shrink-0 py-1" onClick={undo}>
-                    Undo fill
+                    {t('popup.undoFill')}
                   </button>
                 )}
               </div>
@@ -210,8 +210,8 @@ export default function App() {
 
             {missing.length > 0 && (
               <div>
-                <h2 className="font-medium">Not in your profile yet</h2>
-                <ul className="mt-1 list-inside list-disc text-slate-600 dark:text-slate-300">
+                <h2 className="font-semibold">{t('popup.missing')}</h2>
+                <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-ink-soft marker:text-ink-faint">
                   {missing.map((m) => (
                     <li key={m.label}>{m.label}</li>
                   ))}
@@ -221,11 +221,9 @@ export default function App() {
 
             {open.length > 0 && (
               <div>
-                <h2 className="font-medium">Left for you</h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Save an answer and it is used the next time this question appears.
-                </p>
-                <ul className="mt-1 max-h-56 divide-y divide-slate-200 overflow-y-auto dark:divide-slate-800">
+                <h2 className="font-semibold">{t('popup.open')}</h2>
+                <p className="mt-0.5 text-xs text-ink-faint">{t('popup.openHint')}</p>
+                <ul className="mt-1 max-h-56 divide-y divide-line overflow-y-auto">
                   {open.map((u) => (
                     <SaveAnswer key={u.label} label={u.label} />
                   ))}
@@ -236,18 +234,15 @@ export default function App() {
         )}
 
         {status === 'undone' && (
-          <section className="mt-4 space-y-2 text-sm">
+          <section className="mt-4 space-y-3 border-t border-line pt-4 text-sm">
             <p>
-              <span className="font-semibold">Fill undone.</span> {undone.restored} field
-              {undone.restored === 1 ? '' : 's'} put back.
+              <span className="font-semibold">{t('popup.undone')}</span> {t('popup.restored', { n: undone.restored })}
             </p>
             {undone.manual.length > 0 && (
               <div>
-                <h2 className="font-medium">Change these back by hand</h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Custom dropdowns keep their choice; they are outlined with a dashed line.
-                </p>
-                <ul className="mt-1 list-inside list-disc text-slate-600 dark:text-slate-300">
+                <h2 className="font-semibold">{t('popup.changeBack')}</h2>
+                <p className="mt-0.5 text-xs text-ink-faint">{t('popup.changeBackHint')}</p>
+                <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-ink-soft marker:text-ink-faint">
                   {[...new Set(undone.manual.map((m) => m.label))].map((label) => (
                     <li key={label}>{label}</li>
                   ))}
