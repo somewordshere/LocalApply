@@ -6,6 +6,8 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-20
+
 ### Added
 
 - The extension speaks your language: the profile page, popup and on-page notice are translated into English, German, French, Spanish, Italian, Dutch, Portuguese and Polish. It starts in your browser's language; switch it with the language menu at the top of the profile page.

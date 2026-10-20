@@ -293,7 +293,7 @@ const FRAME_CSS = `
   .tab .fav { width: 14px; height: 14px; border-radius: 4px; flex: none; }
   .bar { height: 44px; display: flex; align-items: center; gap: 4px; padding: 0 8px; border-bottom: 1px solid #e2e8f0; color: #475569; }
   .btn { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 6px; }
-  .btn.active { background: #e0e7ff; }
+  .btn.active { background: #dfece4; }
   .btn img { width: 18px; height: 18px; }
   .url { flex: 1; height: 32px; margin: 0 8px; border-radius: 8px; background: #f1f3f5; display: flex; align-items: center;
     gap: 8px; padding: 0 12px; font-size: 13.5px; color: #334155; }
@@ -343,10 +343,10 @@ const SHOTS = {
     url: PAGES.weber.url,
     ...captures.weber,
   },
-  '4-profile': { title: 'Your profile · LocalApply', favicon: '#4f46e5', url: OPTIONS_URL, ...captures.profile },
+  '4-profile': { title: 'Your profile · LocalApply', favicon: '#1f6b4f', url: OPTIONS_URL, ...captures.profile },
   '5-answers-and-backup': {
     title: 'Your profile · LocalApply',
-    favicon: '#4f46e5',
+    favicon: '#1f6b4f',
     url: OPTIONS_URL,
     ...captures.profileData,
   },
@@ -366,18 +366,24 @@ try {
   // Chrome Web Store small promo tile: shown in search results and category pages. Chrome allows text here.
   const icon = dataUrl(readFileSync(join(root, 'public/icon/128.png')));
   const tile = await browser.newPage({ viewport: { width: 440, height: 280 }, deviceScaleFactor: 1 });
+  // Same paper, ink and green as the extension, with its heading typeface embedded (the tile is rendered offline).
+  const fraunces = `data:font/woff2;base64,${readFileSync(
+    join(root, 'node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2'),
+  ).toString('base64')}`;
   await tile.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>
-    body { margin: 0; width: 440px; height: 280px; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; color: #fff;
-      background: radial-gradient(circle at 90% 0%, #818cf8 0, transparent 55%), linear-gradient(150deg, #4f46e5 0%, #312e81 100%);
-      display: flex; flex-direction: column; justify-content: center; padding: 0 36px; box-sizing: border-box; }
-    .row { display: flex; align-items: center; gap: 14px; }
-    img { width: 56px; height: 56px; filter: drop-shadow(0 6px 14px rgba(15,23,42,.35)); }
-    h1 { margin: 0; font-size: 34px; letter-spacing: -.5px; }
-    p { margin: 18px 0 0; font-size: 21px; line-height: 1.3; font-weight: 600; }
-    small { display: block; margin-top: 10px; font-size: 14px; opacity: .85; }
+    @font-face { font-family: Fraunces; src: url(${fraunces}) format('woff2'); font-weight: 100 900; }
+    body { margin: 0; width: 440px; height: 280px; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif;
+      color: #1c1a16; background: #f3f0e8; display: flex; flex-direction: column; justify-content: center;
+      padding: 0 38px; box-sizing: border-box; border-left: 6px solid #1f6b4f; }
+    .row { display: flex; align-items: center; gap: 12px; }
+    img { width: 44px; height: 44px; border-radius: 10px; }
+    .name { font-family: Fraunces, Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: -.3px; }
+    h1 { margin: 22px 0 0; font-family: Fraunces, Georgia, serif; font-size: 33px; line-height: 1.1; font-weight: 500;
+      letter-spacing: -.6px; }
+    small { display: block; margin-top: 14px; font-size: 14px; color: #5d574c; }
   </style></head><body>
-    <div class="row"><img src="${icon}"><h1>LocalApply</h1></div>
-    <p>Fill job applications<br>in one click</p>
+    <div class="row"><img src="${icon}"><span class="name">LocalApply</span></div>
+    <h1>Fill job applications<br>in one click</h1>
     <small>Private: your data stays in your browser</small>
   </body></html>`);
   await tile.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
