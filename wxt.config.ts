@@ -1,5 +1,27 @@
 import { defineConfig } from 'wxt';
 import tailwindcss from '@tailwindcss/vite';
+import type { Plugin } from 'vite';
+
+/**
+ * React DOM can write raw HTML into the page (`dangerouslySetInnerHTML`). The extension never
+ * renders raw HTML, so both places that do it are replaced with an error: the capability is
+ * gone rather than merely unused, and Mozilla's linter stops flagging the two `innerHTML`
+ * assignments. If a React update changes that code, the build fails here instead of quietly
+ * shipping the old path.
+ */
+function noRawHtml(): Plugin {
+  const RAW_HTML = '(domElement.innerHTML = key)';
+  const REFUSED = '(function () { throw Error("LocalApply does not render raw HTML (dangerouslySetInnerHTML)"); })()';
+  return {
+    name: 'localapply:no-raw-html',
+    transform(code, id) {
+      if (!/react-dom[\\/]cjs[\\/]react-dom-client\.production\.js$/.test(id)) return null;
+      const found = code.split(RAW_HTML).length - 1;
+      if (found !== 2) this.error(`Expected 2 raw-HTML assignments in ${id}, found ${found}; review the React update.`);
+      return { code: code.split(RAW_HTML).join(REFUSED), map: null };
+    },
+  };
+}
 
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
@@ -28,5 +50,5 @@ export default defineConfig({
   zip: {
     excludeSources: ['releases/**', 'store/**', 'docs/**', 'scripts/store-assets.mjs', 'tests/e2e/**'],
   },
-  vite: () => ({ plugins: [tailwindcss()] }),
+  vite: () => ({ plugins: [tailwindcss(), noRawHtml()] }),
 });
