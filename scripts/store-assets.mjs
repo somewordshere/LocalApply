@@ -26,7 +26,7 @@ const PAGE = { width: WIDTH, height: HEIGHT - CHROME_HEIGHT };
 const POPUP_WIDTH = 360;
 
 const PROFILE = {
-  version: 1,
+  version: 2,
   salutation: 'Mr',
   firstName: 'Alex',
   lastName: 'Morgan',
@@ -55,12 +55,43 @@ const PROFILE = {
   willingToRelocate: 'yes',
   remotePreference: 'Hybrid',
   yearsOfExperience: '6',
-  currentTitle: 'QA Engineer',
-  currentEmployer: 'Brightline Software',
-  school: 'TU Berlin',
+  experience: [
+    {
+      id: 'w1',
+      title: 'QA Engineer',
+      employer: 'Brightline Software',
+      location: 'Berlin',
+      start: '2021-03',
+      end: '',
+      current: true,
+      description: 'Test automation for web and embedded products.',
+    },
+    {
+      id: 'w2',
+      title: 'Software Tester',
+      employer: 'Kestrel Systems',
+      location: 'Hamburg',
+      start: '2018-09',
+      end: '2021-02',
+      current: false,
+      description: '',
+    },
+  ],
   educationLevel: "Master's degree",
-  degree: 'M.Sc.',
-  fieldOfStudy: 'Computer Science',
+  education: [
+    {
+      id: 'e1',
+      school: 'TU Berlin',
+      degree: 'M.Sc.',
+      fieldOfStudy: 'Computer Science',
+      start: '2015-10',
+      end: '2017-09',
+    },
+  ],
+  languages: [
+    { id: 'l1', language: 'German', level: 'native' },
+    { id: 'l2', language: 'English', level: 'C1' },
+  ],
   coverLetterText:
     'Dear Northwind team,\n\nI have spent six years building test automation for web and embedded products and would love to bring that experience to your platform team.',
   cv: {

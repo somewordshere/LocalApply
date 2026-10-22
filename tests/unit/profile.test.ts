@@ -40,7 +40,47 @@ describe('profile versions', () => {
     expect(p.version).toBe(PROFILE_VERSION);
   });
 
-  it('treats a profile without a version as version 1', () => {
-    expect(upgrade({ firstName: 'A' })).toEqual({ firstName: 'A' });
+  it('treats a profile without a version as version 1 and upgrades it', () => {
+    expect(upgrade({ firstName: 'A' })).toEqual({ firstName: 'A', experience: [], education: [], version: 2 });
+  });
+
+  it('turns the single job and school of version 1 into the first entries of the lists', () => {
+    const p = migrate({
+      version: 1,
+      currentTitle: 'QA Engineer',
+      currentEmployer: 'Acme',
+      school: 'TU Berlin',
+      degree: 'M.Sc.',
+      fieldOfStudy: 'Computer Science',
+    });
+    expect(p.experience).toEqual([
+      {
+        id: 'w0',
+        title: 'QA Engineer',
+        employer: 'Acme',
+        location: '',
+        start: '',
+        end: '',
+        current: true,
+        description: '',
+      },
+    ]);
+    expect(p.education).toEqual([
+      { id: 'e0', school: 'TU Berlin', degree: 'M.Sc.', fieldOfStudy: 'Computer Science', start: '', end: '' },
+    ]);
+    expect('currentTitle' in p || 'school' in p).toBe(false);
+    expect(migrate({ version: 1, firstName: 'A' }).experience).toEqual([]);
+  });
+
+  it('keeps work and education entries, filling in missing parts and dropping wrong types', () => {
+    const p = migrate({
+      version: 2,
+      experience: [{ id: 'x', title: 'Dev', current: 'yes', start: '2020-01' }, null, 'junk'],
+      education: [{ school: 'Uni', end: 2019 }],
+    });
+    expect(p.experience).toEqual([
+      { id: 'x', title: 'Dev', employer: '', location: '', start: '2020-01', end: '', current: false, description: '' },
+    ]);
+    expect(p.education).toEqual([{ id: 'e0', school: 'Uni', degree: '', fieldOfStudy: '', start: '', end: '' }]);
   });
 });

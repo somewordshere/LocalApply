@@ -1,11 +1,11 @@
 import { pickAdapter } from '../adapters';
 import type { Profile } from '../profile/schema';
 import { fillPlaceholders, type Job } from './job';
-import { attachFile, DIAL_CODE_ONLY, fillField, formatDate, hasValue } from './fill';
+import { attachFile, DIAL_CODE_ONLY, fillField, formatDate, hasValue, monthCandidates } from './fill';
 import { matchCustom, matchField } from './match';
 import { clearHighlights, highlight } from './report';
 import { resolve } from './resolve';
-import { DATE_KEYS } from './rules';
+import { DATE_KEYS, MONTH_KEYS } from './rules';
 import { scan } from './scan';
 import type { Field, FieldKey, FillResult } from './types';
 import { remember, rememberFill, type Change } from './undo';
@@ -133,6 +133,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
       }
       candidates = [letter];
     }
+    if (MONTH_KEYS.has(key)) candidates = monthCandidates(candidates[0], field);
     if (DATE_KEYS.has(key) && (field.kind === 'text' || field.kind === 'date')) {
       candidates = [formatDate(candidates[0], field)];
     }

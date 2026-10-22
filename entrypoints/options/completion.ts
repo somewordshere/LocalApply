@@ -16,6 +16,18 @@ export function sectionProgress(section: FieldSectionDef, profile: Profile): Pro
   return { filled: counted.filter((f) => has(profile[f.key])).length, total: counted.length };
 }
 
+/** The current or latest job: its title and employer. */
+export function experienceProgress(profile: Profile): Progress {
+  const job = profile.experience[0];
+  return { filled: [job?.title, job?.employer].filter(has).length, total: 2 };
+}
+
+/** The highest level, and the latest school and degree. */
+export function educationProgress(profile: Profile): Progress {
+  const study = profile.education[0];
+  return { filled: [profile.educationLevel, study?.school, study?.degree].filter(has).length, total: 3 };
+}
+
 export function documentsProgress(profile: Profile): Progress {
   return { filled: [profile.cv, profile.coverLetterFile, profile.coverLetterText].filter(has).length, total: 3 };
 }
@@ -31,6 +43,8 @@ export function isUntouched(profile: Profile): boolean {
 export function completion(profile: Profile): number {
   const parts = [
     ...FIELD_SECTIONS.filter((s) => !OPTIONAL_SECTIONS.has(s.id)).map((s) => sectionProgress(s, profile)),
+    experienceProgress(profile),
+    educationProgress(profile),
     documentsProgress(profile),
   ];
   const filled = parts.reduce((sum, p) => sum + p.filled, 0);

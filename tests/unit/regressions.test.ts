@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { fillPage } from '../../src/engine';
 import { matchField } from '../../src/engine/match';
 import { scan } from '../../src/engine/scan';
+import { emptyEducation } from '../../src/profile/schema';
 import { profile, PHONE, nowhere, value } from './helpers';
 
 // Each case below reproduces markup that broke on a live posting.
@@ -160,16 +161,19 @@ describe('regressions from live sites', () => {
   });
 
   it('fills a "Degree" dropdown from the education level and types the free-text degree', async () => {
+    const person = {
+      ...profile,
+      educationLevel: "Master's degree",
+      education: [{ ...emptyEducation('e1'), degree: 'M.Sc. Computer Science' }],
+    };
     document.body.innerHTML = `
       <label for="d">Degree</label>
-      <select id="d"><option value="">Select</option><option value="ba">Bachelor</option><option value="ma">Master</option></select>
-      <label for="t">Degree</label><input id="t" />`;
-    await fillPage(
-      document,
-      { ...profile, educationLevel: "Master's degree", degree: 'M.Sc. Computer Science' },
-      { location: nowhere },
-    );
+      <select id="d"><option value="">Select</option><option value="ba">Bachelor</option><option value="ma">Master</option></select>`;
+    await fillPage(document, person, { location: nowhere });
     expect(value('d')).toBe('ma');
+    // A second "Degree" on the same page would be the second education entry, so the text box gets a page of its own.
+    document.body.innerHTML = '<label for="t">Degree</label><input id="t" />';
+    await fillPage(document, person, { location: nowhere });
     expect(value('t')).toBe('M.Sc. Computer Science');
   });
 

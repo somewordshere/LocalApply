@@ -264,6 +264,49 @@ export async function fillField(field: Field, candidates: string[]): Promise<boo
   }
 }
 
+const MONTH_WORDS = /(?<!\p{L})(?:month|monat|mois|mes|mese|maand|miesiac|mm)(?!\p{L})/u;
+const YEAR_WORDS = /(?<!\p{L})(?:year|jahr|annee|ano|anno|jaar|rok|yyyy|jjjj|aaaa|rrrr)(?!\p{L})/u;
+
+/**
+ * Values to try for a month (yyyy-mm) in this field, best first: a month input takes it as is; a box for the
+ * month alone (Workday's "MM") gets 03, 3 or the month's name; a year box gets the year; otherwise MM/YYYY in
+ * the order and separator the placeholder shows.
+ */
+export function monthCandidates(ym: string, field: Field): string[] {
+  const match = /^(\d{4})-(\d{2})$/.exec(ym.trim());
+  if (!match) return ym.trim() ? [ym.trim()] : [];
+  const [, y, m] = match;
+  if (field.type === 'month') return [`${y}-${m}`];
+  if (field.type === 'date') return [`${y}-${m}-01`];
+
+  const shown = `${field.placeholder} ${field.label}`.toLowerCase();
+  const pattern = /(yyyy|jjjj|aaaa|rrrr|mm)([./-])(yyyy|jjjj|aaaa|rrrr|mm)/.exec(shown);
+  if (pattern && pattern[1] !== pattern[3]) {
+    return [[pattern[1], pattern[3]].map((token) => (token === 'mm' ? m : y)).join(pattern[2])];
+  }
+
+  const hint = norm(`${field.placeholder} ${field.label} ${field.attrs.join(' ')}`);
+  const maxLength = (field.el as HTMLInputElement).maxLength;
+  const years = field.options.filter((o) => /^\d{4}$/.test(o.text.trim())).length;
+  if (
+    maxLength === 4 ||
+    (YEAR_WORDS.test(hint) && !MONTH_WORDS.test(hint)) ||
+    (years > 3 && years * 2 > field.options.length)
+  ) {
+    return [y];
+  }
+  if (maxLength === 2 || (MONTH_WORDS.test(hint) && !YEAR_WORDS.test(hint))) {
+    const lang = field.el.ownerDocument.documentElement.lang || 'en';
+    const date = new Date(Date.UTC(Number(y), Number(m) - 1, 15));
+    const names = [lang, 'en'].flatMap((l) =>
+      (['long', 'short'] as const).map((month) => new Intl.DateTimeFormat(l, { month, timeZone: 'UTC' }).format(date)),
+    );
+    return [m, String(Number(m)), ...new Set(names)];
+  }
+  const lang = (field.el.ownerDocument.documentElement.lang || '').toLowerCase();
+  return [/^(de|pl)/.test(lang) ? `${m}.${y}` : `${m}/${y}`];
+}
+
 /** Formats an ISO date (yyyy-mm-dd) the way the field expects it. */
 export function formatDate(iso: string, field: Field): string {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);

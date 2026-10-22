@@ -11,12 +11,16 @@ import {
   OPTIONAL_SECTIONS,
   sectionProgress,
   type Progress,
+  educationProgress,
+  experienceProgress,
 } from './completion';
 import { FIELD_SECTIONS } from './fields';
 import { ApplicationsSection } from './sections/ApplicationsSection';
 import { BackupSection } from './sections/BackupSection';
 import { CustomAnswersSection } from './sections/CustomAnswersSection';
 import { DocumentsSection } from './sections/DocumentsSection';
+import { EducationSection } from './sections/EducationSection';
+import { ExperienceSection } from './sections/ExperienceSection';
 import { FieldSection } from './sections/FieldSection';
 import { LanguagesSection } from './sections/LanguagesSection';
 import { usePalette } from './usePalette';
@@ -30,14 +34,15 @@ const EXTRA_SECTIONS: { id: string; title: MessageKey; navTitle?: MessageKey }[]
   { id: 'data', title: 'section.backup', navTitle: 'section.backup.nav' },
 ];
 
-/** The languages card follows the background section (education and jobs). */
-const LANGUAGES_AFTER = 'background';
-const LANGUAGES_SECTION: (typeof EXTRA_SECTIONS)[number] = { id: 'languages', title: 'section.languages' };
-
-const SECTIONS = [
-  ...FIELD_SECTIONS.flatMap((s) => (s.id === LANGUAGES_AFTER ? [s, LANGUAGES_SECTION] : [s])),
-  ...EXTRA_SECTIONS,
+/** Cards of their own (lists), placed after the job section: work history, education, languages. */
+const CARDS_AFTER = 'job';
+const CARDS: (typeof EXTRA_SECTIONS)[number][] = [
+  { id: 'experience', title: 'section.experience', navTitle: 'section.experience.nav' },
+  { id: 'education', title: 'section.education' },
+  { id: 'languages', title: 'section.languages' },
 ];
+
+const SECTIONS = [...FIELD_SECTIONS.flatMap((s) => (s.id === CARDS_AFTER ? [s, ...CARDS] : [s])), ...EXTRA_SECTIONS];
 
 /** The section being read: the first one whose top is in the upper part of the window. */
 function useSectionInView(ready: boolean): [string, (id: string) => void] {
@@ -68,6 +73,8 @@ function useSectionInView(ready: boolean): [string, (id: string) => void] {
 function progressOf(id: string, profile: Profile): Progress | null {
   const section = FIELD_SECTIONS.find((s) => s.id === id);
   if (section) return OPTIONAL_SECTIONS.has(id) ? null : sectionProgress(section, profile);
+  if (id === 'experience') return experienceProgress(profile);
+  if (id === 'education') return educationProgress(profile);
   return id === 'documents' ? documentsProgress(profile) : null;
 }
 
@@ -296,8 +303,22 @@ export default function App() {
                 profile={profile}
                 update={update}
               />
-              {section.id === LANGUAGES_AFTER && (
-                <LanguagesSection number={numbered('languages')} profile={profile} update={update} />
+              {section.id === CARDS_AFTER && (
+                <>
+                  <ExperienceSection
+                    number={numbered('experience')}
+                    meta={count('experience')}
+                    profile={profile}
+                    update={update}
+                  />
+                  <EducationSection
+                    number={numbered('education')}
+                    meta={count('education')}
+                    profile={profile}
+                    update={update}
+                  />
+                  <LanguagesSection number={numbered('languages')} profile={profile} update={update} />
+                </>
               )}
             </Fragment>
           ))}

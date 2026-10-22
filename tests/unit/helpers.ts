@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve as resolvePath } from 'node:path';
-import { emptyProfile, type Profile } from '../../src/profile/schema';
+import { emptyProfile, emptyWork, type Profile } from '../../src/profile/schema';
 
 /** A complete test profile; individual tests override fields with spread. */
 export const profile: Profile = {
@@ -28,7 +28,7 @@ export const profile: Profile = {
   startDate: '2027-01-01',
   workAuthorized: 'yes',
   needsSponsorship: 'no',
-  currentEmployer: 'Acme GmbH',
+  experience: [{ ...emptyWork('w1'), employer: 'Acme GmbH', current: true }],
   coverLetterText: 'Dear hiring team',
   customAnswers: [{ id: '1', keywords: 'hear about us', answer: 'LinkedIn' }],
 };

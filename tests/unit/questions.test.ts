@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { fillPage } from '../../src/engine';
 import { matchField } from '../../src/engine/match';
 import { scan } from '../../src/engine/scan';
+import { emptyEducation, emptyWork } from '../../src/profile/schema';
 import { nowhere, profile, value } from './helpers';
 
 const checked = (name: string) =>
@@ -107,5 +108,49 @@ describe('spoken languages', () => {
     expect(keysOf()).toEqual(['languageLevel', 'languageLevel', null]);
     await fillPage(document, speaker, { location: nowhere });
     expect(['a', 'b', 'x'].map(value)).toEqual(['C1', 'Native', '']);
+  });
+});
+
+describe('work history and education on ordinary forms', () => {
+  const keysOf = () => scan(document).map((f) => matchField(f));
+  const person = {
+    ...profile,
+    startDate: '2027-01-01',
+    experience: [
+      { ...emptyWork('w1'), title: 'QA Engineer', employer: 'Brightline', start: '2021-03', current: true },
+      { ...emptyWork('w2'), title: 'Tester', employer: 'Acme', start: '2018-09', end: '2021-02' },
+    ],
+    education: [{ ...emptyEducation('e1'), school: 'TU Berlin', start: '2015-10', end: '2017-09' }],
+  };
+
+  it('keeps employment dates apart from the availability date, in the format each box shows', async () => {
+    document.body.innerHTML = `
+      <label for="avail">Earliest start date</label><input id="avail" placeholder="DD/MM/YYYY" />
+      <label for="s">Employment start date</label><input id="s" placeholder="MM/YYYY" />
+      <label for="m">Beschäftigt seit</label><input id="m" type="month" />
+      <label for="g">Graduation date</label><input id="g" placeholder="YYYY-MM" />
+      <label for="y">Graduation year</label>
+      <select id="y"><option value="">-</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option></select>`;
+    expect(keysOf()).toEqual(['startDate', 'workStart', 'workStart', 'educationEnd', 'educationEndYear']);
+    await fillPage(document, person, { location: nowhere });
+    expect(['avail', 's', 'm', 'g', 'y'].map(value)).toEqual(['01/01/2027', '03/2021', '2018-09', '2017-09', '2017']);
+  });
+
+  it('names the month for a month dropdown, and leaves the end of a current job empty', async () => {
+    document.body.innerHTML = `
+      <label for="e">Employment end date (month)</label>
+      <select id="e"><option value="">Month</option><option>January</option><option>February</option><option>March</option></select>
+      <label for="e2">Employment end date (month)</label>
+      <select id="e2"><option value="">Month</option><option>January</option><option>February</option><option>March</option></select>`;
+    await fillPage(document, person, { location: nowhere });
+    expect([value('e'), value('e2')]).toEqual(['', 'February']);
+  });
+
+  it('gives the second "Current employer"-style field the second job', async () => {
+    document.body.innerHTML = `
+      <label for="a">Employer</label><input id="a" /><label for="b">Job title</label><input id="b" />
+      <label for="c">Employer</label><input id="c" /><label for="d">Job title</label><input id="d" />`;
+    await fillPage(document, person, { location: nowhere });
+    expect(['a', 'b', 'c', 'd'].map(value)).toEqual(['Brightline', 'QA Engineer', 'Acme', 'Tester']);
   });
 });

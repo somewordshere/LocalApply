@@ -17,6 +17,12 @@ export const de: Locale = {
     salaryCurrency: ['wahrung'],
     salary: ['gehalt\\p{L}*', '\\p{L}+gehalt', 'vergutung'],
     noticePeriod: ['kundigungsfrist'],
+    workStart: ['beschaftigt (?:seit|von|ab)', 'beschaftigungsbeginn', 'beginn der (?:tatigkeit|beschaftigung)'],
+    workEnd: ['beschaftigt bis', 'beschaftigungsende', 'ende der (?:tatigkeit|beschaftigung)'],
+    workDescription: ['tatigkeitsbeschreibung', 'aufgabenbeschreibung', 'aufgabenbereiche?'],
+    educationStart: ['studienbeginn', 'beginn des studiums', 'ausbildungsbeginn'],
+    educationEnd: ['studienende', 'ende des studiums', 'abschlussdatum', 'ausbildungsende'],
+    educationEndYear: ['abschlussjahr', 'jahr des abschlusses'],
     startDate: [
       'eintrittstermin',
       'eintrittsdatum',

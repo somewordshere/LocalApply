@@ -36,6 +36,19 @@ export interface FieldSectionDef {
   fields: FieldDef[];
 }
 
+/** Highest education level, stored in English (see EDUCATION_LEVELS in src/engine/resolve.ts). */
+export const EDUCATION_LEVEL_OPTIONS: [value: string, label: MessageKey][] = [
+  ['', 'notSet'],
+  ['High school', 'field.educationLevel.highSchool'],
+  ['Vocational training', 'field.educationLevel.vocational'],
+  ['Associate degree', 'field.educationLevel.associate'],
+  ["Bachelor's degree", 'field.educationLevel.bachelor'],
+  ["Master's degree", 'field.educationLevel.master'],
+  ['MBA', 'field.educationLevel.mba'],
+  ['PhD', 'field.educationLevel.doctorate'],
+  ['Other', 'field.educationLevel.other'],
+];
+
 const YES_NO: [string, MessageKey][] = [
   ['', 'notSet'],
   ['yes', 'yes'],
@@ -110,32 +123,6 @@ export const FIELD_SECTIONS: FieldSectionDef[] = [
       { key: 'drivingLicence', label: 'field.drivingLicence', options: YES_NO },
       { key: 'drivingLicenceClass', label: 'field.drivingLicenceClass', example: 'B', optional: true },
       { key: 'remotePreference', label: 'field.remotePreference', placeholder: 'field.remotePreference.placeholder' },
-    ],
-  },
-  {
-    id: 'background',
-    title: 'section.background',
-    fields: [
-      { key: 'currentTitle', label: 'field.currentTitle' },
-      { key: 'currentEmployer', label: 'field.currentEmployer' },
-      { key: 'school', label: 'field.school' },
-      {
-        key: 'educationLevel',
-        label: 'field.educationLevel',
-        options: [
-          ['', 'notSet'],
-          ['High school', 'field.educationLevel.highSchool'],
-          ['Vocational training', 'field.educationLevel.vocational'],
-          ['Associate degree', 'field.educationLevel.associate'],
-          ["Bachelor's degree", 'field.educationLevel.bachelor'],
-          ["Master's degree", 'field.educationLevel.master'],
-          ['MBA', 'field.educationLevel.mba'],
-          ['PhD', 'field.educationLevel.doctorate'],
-          ['Other', 'field.educationLevel.other'],
-        ],
-      },
-      { key: 'degree', label: 'field.degree' },
-      { key: 'fieldOfStudy', label: 'field.fieldOfStudy' },
     ],
   },
   {

@@ -19,6 +19,49 @@ export interface SpokenLanguage {
   level: LanguageLevel;
 }
 
+/** One job, most recent first. Dates are yyyy-mm, as a month input gives them. */
+export interface WorkEntry {
+  id: string;
+  title: string;
+  employer: string;
+  location: string;
+  start: string;
+  end: string;
+  /** Still working here: there is no end date. */
+  current: boolean;
+  description: string;
+}
+
+/** One school or degree, most recent first. Dates are yyyy-mm. */
+export interface EducationEntry {
+  id: string;
+  school: string;
+  degree: string;
+  fieldOfStudy: string;
+  start: string;
+  end: string;
+}
+
+export const emptyWork = (id: string): WorkEntry => ({
+  id,
+  title: '',
+  employer: '',
+  location: '',
+  start: '',
+  end: '',
+  current: false,
+  description: '',
+});
+
+export const emptyEducation = (id: string): EducationEntry => ({
+  id,
+  school: '',
+  degree: '',
+  fieldOfStudy: '',
+  start: '',
+  end: '',
+});
+
 export interface CustomAnswer {
   id: string;
   /** Comma-separated phrases; the answer is used when a field label contains one of them. */
@@ -77,13 +120,12 @@ export interface Profile {
   remotePreference: string;
   yearsOfExperience: string;
 
-  currentTitle: string;
-  currentEmployer: string;
-  school: string;
+  /** Most recent first; the first is the current or latest job. */
+  experience: WorkEntry[];
+  /** Most recent first. */
+  education: EducationEntry[];
   /** Stored in English ("Bachelor's degree"); see EDUCATION_LEVELS in src/engine/resolve.ts. */
   educationLevel: string;
-  degree: string;
-  fieldOfStudy: string;
   languages: SpokenLanguage[];
 
   coverLetterText: string;
@@ -133,12 +175,9 @@ export const emptyProfile: Profile = {
   drivingLicenceClass: '',
   remotePreference: '',
   yearsOfExperience: '',
-  currentTitle: '',
-  currentEmployer: '',
-  school: '',
+  experience: [],
+  education: [],
   educationLevel: '',
-  degree: '',
-  fieldOfStudy: '',
   languages: [],
   coverLetterText: '',
   cv: null,
@@ -155,7 +194,7 @@ export const emptyProfile: Profile = {
  * older versions are upgraded, missing fields get defaults, malformed parts are dropped.
  */
 export function migrate(raw: unknown): Profile {
-  const out: Profile = { ...emptyProfile, customAnswers: [], languages: [] };
+  const out: Profile = { ...emptyProfile, customAnswers: [], languages: [], experience: [], education: [] };
   if (!raw || typeof raw !== 'object') return out;
   const src = upgrade(raw as Record<string, unknown>);
   const target = out as unknown as Record<string, unknown>;
@@ -176,6 +215,21 @@ export function migrate(raw: unknown): Profile {
             language: l.language,
             level: (LANGUAGE_LEVELS as readonly string[]).includes(l.level) ? l.level : '',
           }));
+      }
+    } else if (key === 'experience' || key === 'education') {
+      if (Array.isArray(value)) {
+        const blank = key === 'experience' ? emptyWork : emptyEducation;
+        target[key] = value
+          .filter((entry) => entry && typeof entry === 'object')
+          .map((entry, i) => {
+            const clean: Record<string, unknown> = {
+              ...blank(typeof entry.id === 'string' ? entry.id : `${key[0]}${i}`),
+            };
+            for (const [field, initial] of Object.entries(clean)) {
+              if (field !== 'id' && typeof entry[field] === typeof initial) clean[field] = entry[field];
+            }
+            return clean;
+          });
       }
     } else if (key === 'customAnswers') {
       if (Array.isArray(value)) {

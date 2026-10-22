@@ -380,6 +380,9 @@ export interface ResolveContext {
  * the rest are alternatives for matching dropdown and radio options. Empty when the profile has no value.
  */
 export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[] {
+  const job = p.experience[ctx.index ?? 0];
+  const study = p.education[ctx.index ?? 0];
+  const year = (ym: string | undefined) => one((ym ?? '').slice(0, 4));
   const one = (s: string) => (s.trim() ? [s.trim()] : []);
   const join = (...parts: string[]) =>
     parts
@@ -451,11 +454,44 @@ export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[
       const level = withSynonyms(p.educationLevel, EDUCATION_LEVELS);
       // An MBA is a master's to forms that don't list it on its own.
       if (norm(p.educationLevel) === 'mba') level.push(...withSynonyms("Master's degree", EDUCATION_LEVELS));
-      return level.length ? level : one(p.degree);
+      return level.length ? level : one(p.education[0]?.degree ?? '');
     }
     // A "Degree" dropdown usually lists levels (Bachelor, Master), which the free-text degree rarely matches.
+    // The highest level only stands in for the first (most recent) degree.
     case 'degree':
-      return [...one(p.degree), ...withSynonyms(p.educationLevel, EDUCATION_LEVELS)];
+      return [
+        ...one(study?.degree ?? ''),
+        ...((ctx.index ?? 0) === 0 ? withSynonyms(p.educationLevel, EDUCATION_LEVELS) : []),
+      ];
+    case 'currentTitle':
+      return one(job?.title ?? '');
+    case 'currentEmployer':
+      return one(job?.employer ?? '');
+    case 'workLocation':
+      return one(job?.location ?? '');
+    case 'workDescription':
+      return one(job?.description ?? '');
+    case 'workStart':
+      return one(job?.start ?? '');
+    case 'workStartYear':
+      return year(job?.start);
+    // A current job has no end; the form's "I currently work here" box is the person's to tick.
+    case 'workEnd':
+      return job?.current ? [] : one(job?.end ?? '');
+    case 'workEndYear':
+      return job?.current ? [] : year(job?.end);
+    case 'school':
+      return one(study?.school ?? '');
+    case 'fieldOfStudy':
+      return one(study?.fieldOfStudy ?? '');
+    case 'educationStart':
+      return one(study?.start ?? '');
+    case 'educationStartYear':
+      return year(study?.start);
+    case 'educationEnd':
+      return one(study?.end ?? '');
+    case 'educationEndYear':
+      return year(study?.end);
     case 'drivingLicenceClass': {
       const classes = p.drivingLicenceClass.trim();
       // "B, BE" goes into a text box as written; a list of classes is tried one by one.

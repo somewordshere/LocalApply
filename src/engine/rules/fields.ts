@@ -22,6 +22,14 @@ export const FIELD_RULES: FieldRule[] = [
   { key: 'salaryMax', long: true },
   { key: 'salary', long: true },
   { key: 'noticePeriod', long: true },
+  // Before startDate: "Start date of employment" names both. Year boxes beside a month box, the job's
+  // location and the split Workday date parts are known from adapter hints only (src/adapters/).
+  { key: 'workStart', long: true },
+  { key: 'workEnd', long: true },
+  { key: 'educationStartYear', long: true },
+  { key: 'educationEndYear', long: true },
+  { key: 'educationStart', long: true },
+  { key: 'educationEnd', long: true },
   { key: 'startDate', long: true },
   { key: 'yearsOfExperience', long: true },
   { key: 'remotePreference', long: true },
@@ -31,6 +39,7 @@ export const FIELD_RULES: FieldRule[] = [
   { key: 'sexualOrientation', long: true },
   { key: 'gender', long: true, auto: ['sex'] },
   { key: 'salutation', auto: ['honorific-prefix'] },
+  { key: 'workDescription', kinds: ['textarea'], long: true },
   { key: 'coverLetterText', kinds: ['textarea'], long: true },
 
   { key: 'linkedin' },
@@ -79,6 +88,9 @@ export const YES_NO_KEYS = new Set<FieldKey>([
   'disability',
   'veteran',
 ]);
+
+/** Stored as yyyy-mm and reformatted for each form (month and year, month alone, year alone). */
+export const MONTH_KEYS = new Set<FieldKey>(['workStart', 'workEnd', 'educationStart', 'educationEnd']);
 
 /** Stored as yyyy-mm-dd and reformatted for each form. */
 export const DATE_KEYS = new Set<FieldKey>(['dateOfBirth', 'startDate']);

@@ -4,7 +4,7 @@ import { FIELD_RULES } from './fields';
 import { LOCALES } from './locales';
 import type { Locale, Rule } from './types';
 
-export { DATE_KEYS, YES_NO_KEYS } from './fields';
+export { DATE_KEYS, MONTH_KEYS, YES_NO_KEYS } from './fields';
 export type { FieldRule, Locale, Rule } from './types';
 
 function gather(part: 'fields' | 'exact' | 'exclude', key: FieldKey): string[] {

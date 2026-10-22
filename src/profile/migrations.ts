@@ -10,7 +10,22 @@ type StoredData = Record<string, unknown>;
  *
  * Adding a new field with a default needs no step: `migrate()` fills missing fields.
  */
-const MIGRATIONS: ((data: StoredData) => StoredData)[] = [];
+const MIGRATIONS: ((data: StoredData) => StoredData)[] = [
+  // 0.8.0: current job and school become the first entries of the work and education lists.
+  ({ currentTitle, currentEmployer, school, degree, fieldOfStudy, ...rest }) => {
+    const text = (value: unknown) => (typeof value === 'string' ? value : '');
+    const job = { title: text(currentTitle), employer: text(currentEmployer) };
+    const study = { school: text(school), degree: text(degree), fieldOfStudy: text(fieldOfStudy) };
+    return {
+      ...rest,
+      experience:
+        job.title || job.employer
+          ? [{ id: 'w0', ...job, location: '', start: '', end: '', current: true, description: '' }]
+          : [],
+      education: study.school || study.degree || study.fieldOfStudy ? [{ id: 'e0', ...study, start: '', end: '' }] : [],
+    };
+  },
+];
 
 /** Version written into every profile saved by this build. */
 export const PROFILE_VERSION = 1 + MIGRATIONS.length;

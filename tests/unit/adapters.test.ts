@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { fillPage } from '../../src/engine';
+import { emptyEducation, emptyWork } from '../../src/profile/schema';
 import { profile, PHONE, load, value, named, only } from './helpers';
 
 describe('site adapters', () => {
@@ -47,6 +48,53 @@ describe('site adapters', () => {
     expect(value('address--city')).toBe('Berlin');
     expect(value('address--postalCode')).toBe('10115');
     expect(value('phoneNumber--phoneNumber')).toBe(PHONE);
+  });
+
+  it('Workday experience: the n-th job block gets the n-th job, dates split into month and year', async () => {
+    only('workday-experience');
+    const job = (n: number, title: string, employer: string, start: string, end: string, current = false) => ({
+      ...emptyWork(`w${n}`),
+      title,
+      employer,
+      location: n === 1 ? 'Berlin' : '',
+      start,
+      end,
+      current,
+      description: `Did things at ${employer}`,
+    });
+    const person = {
+      ...profile,
+      educationLevel: "Master's degree",
+      experience: [
+        job(1, 'QA Engineer', 'Brightline', '2021-03', '', true),
+        job(2, 'Tester', 'Acme', '2018-09', '2021-02'),
+        job(3, 'Intern', 'Beta', '2018-01', '2018-06'),
+      ],
+      education: [
+        {
+          ...emptyEducation('e1'),
+          school: 'TU Berlin',
+          fieldOfStudy: 'Computer Science',
+          start: '2015-10',
+          end: '2017-09',
+        },
+      ],
+    };
+    await fillPage(document, person, { location: { hostname: 'acme.wd5.myworkdayjobs.com', pathname: '/x' } });
+    const row = (n: number) =>
+      ['title', 'company', 'location', 'from-m', 'from-y', 'to-m', 'to-y', 'desc'].map((part) =>
+        value(`job${n}-${part}`),
+      );
+    expect(row(1)).toEqual(['QA Engineer', 'Brightline', 'Berlin', '03', '2021', '', '', 'Did things at Brightline']);
+    expect(row(2)).toEqual(['Tester', 'Acme', '', '09', '2018', '02', '2021', 'Did things at Acme']);
+    expect(row(3)).toEqual(['Intern', 'Beta', '', '01', '2018', '06', '2018', 'Did things at Beta']);
+    expect(['edu-school', 'edu-degree', 'edu-field', 'edu-from', 'edu-to'].map(value)).toEqual([
+      'TU Berlin',
+      "Master's Degree",
+      'Computer Science',
+      '2015',
+      '2017',
+    ]);
   });
 
   it('Ashby', async () => {

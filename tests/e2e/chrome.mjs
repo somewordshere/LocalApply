@@ -248,6 +248,30 @@ try {
     await options.close();
   });
 
+  await step('work experience: jobs are added, reordered and saved as a list', async () => {
+    const options = await context.newPage();
+    await options.goto(`chrome-extension://${extensionId}/options.html#experience`);
+    const job = (n) => options.getByRole('listitem', { name: `Job ${n}`, exact: true });
+    await options.getByRole('button', { name: 'Add job' }).click();
+    await job(1).getByLabel('Job title').fill('Tester');
+    await job(1).getByLabel('Employer').fill('Acme');
+    await options.getByRole('button', { name: 'Add job' }).click();
+    await job(2).getByLabel('Job title').fill('QA Engineer');
+    await job(2).getByLabel('Employer').fill('Brightline');
+    await job(2).getByLabel('I currently work here').check();
+    await options.getByRole('button', { name: 'Move up: Job 2' }).click();
+    await options.getByText('All changes saved').waitFor();
+    const profile = await storedProfile();
+    assert.deepEqual(
+      profile.experience.map((j) => [j.title, j.employer, j.current]),
+      [
+        ['QA Engineer', 'Brightline', true],
+        ['Tester', 'Acme', false],
+      ],
+    );
+    await options.close();
+  });
+
   await step('profile page links the phone boxes: a full number fills code and number, and back', async () => {
     const options = await context.newPage();
     await options.goto(`chrome-extension://${extensionId}/options.html`);
