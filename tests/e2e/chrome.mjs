@@ -70,6 +70,18 @@ try {
       await chrome.tabs.sendMessage(tab.id, { type: 'fill' });
     });
 
+  await step('installing opens the profile page with a note on where to start', async () => {
+    // The tab may already exist, still loading, by the time this runs; look for it rather than wait for a new one.
+    let welcome;
+    for (let tries = 0; !welcome && tries < 50; tries++) {
+      welcome = context.pages().find((page) => page.url() === `chrome-extension://${extensionId}/options.html`);
+      if (!welcome) await new Promise((r) => setTimeout(r, 100));
+    }
+    assert.ok(welcome, 'the profile page opened by itself');
+    await welcome.getByText(/^Start here:/).waitFor();
+    await welcome.close();
+  });
+
   await step('profile page saves details and the CV', async () => {
     const options = await context.newPage();
     await options.goto(`chrome-extension://${extensionId}/options.html`);
@@ -226,6 +238,8 @@ try {
     assert.equal(await options.getByRole('radio', { name: 'Ocean' }).isChecked(), true);
     assert.notEqual(await accent(options), forest);
     assert.equal(await worker.evaluate(() => chrome.storage.local.get('uiPalette').then((r) => r.uiPalette)), 'ocean');
+    // The logo follows; the toolbar icon is set by the background script from the same setting.
+    await options.locator('img[src="/icon/ocean/48.png"]').waitFor();
 
     const popup = await context.newPage();
     await popup.goto(`chrome-extension://${extensionId}/popup.html`);

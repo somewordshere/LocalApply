@@ -81,6 +81,17 @@ export function watchPalette(onChange: (palette: Palette) => void): () => void {
   return () => browser.storage.onChanged.removeListener(listener);
 }
 
+/** The icon in the palette's accent (drawn by scripts/make-icons.mjs); Forest's is the extension's own icon. */
+export function iconPath(palette: Palette, size: 16 | 32 | 48 | 96 | 128): string {
+  return palette === DEFAULT_PALETTE ? `/icon/${size}.png` : `/icon/${palette}/${size}.png`;
+}
+
+/** The palette applied to this page, as set by applyPalette(). */
+export function currentPalette(): Palette {
+  const current = document.documentElement.dataset.palette;
+  return isPalette(current) ? current : DEFAULT_PALETTE;
+}
+
 /** Switches the page's colours; style.css keys the palettes on this attribute. */
 export function applyPalette(palette: Palette): void {
   document.documentElement.dataset.palette = palette;

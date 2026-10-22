@@ -1,4 +1,4 @@
-import type { Profile } from '@/src/profile/schema';
+import { emptyProfile, type Profile } from '@/src/profile/schema';
 import { FIELD_SECTIONS, type FieldSectionDef } from './fields';
 
 export interface Progress {
@@ -17,6 +17,13 @@ export function sectionProgress(section: FieldSectionDef, profile: Profile): Pro
 
 export function documentsProgress(profile: Profile): Progress {
   return { filled: [profile.cv, profile.coverLetterFile, profile.coverLetterText].filter(has).length, total: 3 };
+}
+
+/** Nothing entered yet: every field still has its default (defaults such as the EUR currency don't count as entered). */
+export function isUntouched(profile: Profile): boolean {
+  return (Object.keys(emptyProfile) as (keyof Profile)[]).every(
+    (key) => key === 'version' || JSON.stringify(profile[key]) === JSON.stringify(emptyProfile[key]),
+  );
 }
 
 /** How much of the profile is filled in, as a whole percentage, leaving out optional sections. */

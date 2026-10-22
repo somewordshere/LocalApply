@@ -6,6 +6,7 @@ import type { Message } from '@/src/core/messages';
 import { questionKeywords } from '@/src/profile/schema';
 import { loadProfile, saveProfile } from '@/src/profile/store';
 import { useI18n } from '@/src/ui/I18nProvider';
+import { currentPalette, iconPath } from '@/src/ui/palette';
 
 type Status = 'idle' | 'filling' | 'done' | 'undone' | 'unavailable';
 
@@ -150,7 +151,7 @@ export default function App() {
     <main className="w-[360px] bg-paper p-4 text-ink">
       <header className="mb-4 flex items-center justify-between">
         <h1 className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
-          <img src="/icon/48.png" alt="" className="size-6 rounded-md" />
+          <img src={iconPath(currentPalette(), 48)} alt="" className="size-6 rounded-md" />
           LocalApply
         </h1>
         <button className="btn-quiet py-1 text-xs" onClick={() => browser.runtime.openOptionsPage()}>

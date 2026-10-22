@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useI18n } from '@/src/ui/I18nProvider';
 import { LANGUAGES, isLang, type MessageKey } from '@/src/ui/i18n';
-import { PALETTES, type Palette } from '@/src/ui/palette';
+import { iconPath, PALETTES, type Palette } from '@/src/ui/palette';
 import { THEMES, type Theme } from '@/src/ui/theme';
 import type { Profile } from '@/src/profile/schema';
-import { completion, documentsProgress, OPTIONAL_SECTIONS, sectionProgress, type Progress } from './completion';
+import {
+  completion,
+  isUntouched,
+  documentsProgress,
+  OPTIONAL_SECTIONS,
+  sectionProgress,
+  type Progress,
+} from './completion';
 import { FIELD_SECTIONS } from './fields';
 import { BackupSection } from './sections/BackupSection';
 import { CustomAnswersSection } from './sections/CustomAnswersSection';
@@ -134,6 +141,7 @@ export default function App() {
   const { profile, state, justSaved, update } = useProfile();
   const { lang, t, setLang } = useI18n();
   const [active, setActive] = useSectionInView(Boolean(profile));
+  const [palette] = usePalette();
 
   useEffect(() => {
     document.title = t('options.pageTitle');
@@ -156,7 +164,7 @@ export default function App() {
       {/* The index: one row that sticks to the top on small screens, a column beside the sheet on wide ones. */}
       <aside className="sticky top-0 z-10 -mx-4 flex items-center gap-3 border-b border-line bg-paper/95 px-4 py-2 backdrop-blur md:mx-0 md:h-screen md:flex-col md:items-stretch md:gap-0 md:border-b-0 md:bg-transparent md:px-0 md:py-8 md:backdrop-blur-none xl:w-[15.5rem] xl:justify-self-end">
         <div className="hidden items-center gap-2.5 md:flex">
-          <img src="/icon/48.png" alt="" className="size-7 rounded-md" />
+          <img src={iconPath(palette, 48)} alt="" className="size-7 rounded-md" />
           <span className="font-display text-lg font-semibold tracking-tight">LocalApply</span>
         </div>
 
@@ -260,6 +268,13 @@ export default function App() {
             <ThemePicker />
           </div>
         </header>
+
+        {/* First visit (the page opens itself on install): say where to begin. Gone once anything is filled in. */}
+        {isUntouched(profile) && (
+          <p className="mb-6 rounded-xl border border-accent/30 bg-accent-soft px-5 py-4 text-[15px] leading-relaxed text-ink">
+            {t('options.startHere')}
+          </p>
+        )}
 
         <div className="rounded-xl border border-line bg-sheet">
           {FIELD_SECTIONS.map((section) => (

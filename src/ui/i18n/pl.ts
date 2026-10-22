@@ -12,6 +12,8 @@ export const pl: Translation = {
   'options.title': 'Twój profil',
   'options.subtitle':
     'Zapisany tylko w tej przeglądarce. Służy do wypełniania formularzy aplikacyjnych, gdy klikniesz Wypełnij.',
+  'options.startHere':
+    'Zacznij tutaj: wpisz dane, które mają trafiać do formularzy rekrutacyjnych. Wszystko zapisuje się podczas pisania i zostaje w tej przeglądarce. Potem otwórz formularz aplikacyjny i kliknij Wypełnij tę stronę w przycisku LocalApply na pasku narzędzi.',
   'options.loading': 'Wczytywanie…',
   'options.sections': 'Sekcje',
   'options.language': 'Język',

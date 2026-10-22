@@ -16,6 +16,8 @@ export const en = {
   'options.pageTitle': 'Your profile · LocalApply',
   'options.title': 'Your profile',
   'options.subtitle': 'Stored only in this browser. Used to fill application forms when you click Fill.',
+  'options.startHere':
+    'Start here: fill in the details you want application forms to get. Everything is saved as you type and stays in this browser. Then open a job application and click Fill this page in the LocalApply toolbar button.',
   'options.loading': 'Loading…',
   'options.sections': 'Sections',
   'options.language': 'Language',

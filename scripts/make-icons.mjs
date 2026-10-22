@@ -1,10 +1,20 @@
-// Draws the icon (white check on a deep green rounded square, the interface accent) as PNGs in public/icon/ and the store folder.
+// Draws the icon (white check on a rounded square in the interface accent) as PNGs: the Forest green in
+// public/icon/ and the store folder, and one set per other colour palette in public/icon/<palette>/, which the
+// toolbar button and page logos switch to.
 // Run with `node scripts/make-icons.mjs`; no image libraries needed.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 
 const SIZES = [16, 32, 48, 96, 128];
-const BACKGROUND = [31, 107, 79];
+/** The light-mode accent of each palette, as in PALETTES (src/ui/palette.ts). Forest is the default icon. */
+const ACCENTS = {
+  forest: '#1f6b4f',
+  ocean: '#24569c',
+  plum: '#6b3d8f',
+  clay: '#a3471f',
+  graphite: '#26262b',
+};
+const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const SAMPLES = 4;
 
 function crc32(buf) {
@@ -66,8 +76,8 @@ function onCheck(x, y, size) {
   return distanceToSegment(x, y, CHECK[0], CHECK[1]) <= half || distanceToSegment(x, y, CHECK[1], CHECK[2]) <= half;
 }
 
-/** Draws the icon at `size` pixels, leaving `padding` transparent pixels on every side. */
-function render(size, padding = 0) {
+/** Draws the icon at `size` pixels on `background`, leaving `padding` transparent pixels on every side. */
+function render(size, background, padding = 0) {
   const art = size - 2 * padding;
   const rgba = Buffer.alloc(size * size * 4);
   for (let py = 0; py < size; py++) {
@@ -85,18 +95,21 @@ function render(size, padding = 0) {
       }
       const i = (py * size + px) * 4;
       const w = cover ? white / cover : 0;
-      for (let c = 0; c < 3; c++) rgba[i + c] = Math.round(BACKGROUND[c] * (1 - w) + 255 * w);
+      for (let c = 0; c < 3; c++) rgba[i + c] = Math.round(background[c] * (1 - w) + 255 * w);
       rgba[i + 3] = Math.round((cover / SAMPLES ** 2) * 255);
     }
   }
   return png(size, rgba);
 }
 
-mkdirSync(new URL('../public/icon/', import.meta.url), { recursive: true });
-for (const size of SIZES) writeFileSync(new URL(`../public/icon/${size}.png`, import.meta.url), render(size));
-console.log(`Wrote ${SIZES.map((s) => `${s}.png`).join(', ')} to public/icon/`);
+for (const [palette, accent] of Object.entries(ACCENTS)) {
+  const dir = palette === 'forest' ? '../public/icon/' : `../public/icon/${palette}/`;
+  mkdirSync(new URL(dir, import.meta.url), { recursive: true });
+  for (const size of SIZES) writeFileSync(new URL(`${dir}${size}.png`, import.meta.url), render(size, rgb(accent)));
+  console.log(`Wrote ${SIZES.map((s) => `${s}.png`).join(', ')} to ${dir.slice(3)}`);
+}
 
 // The Chrome Web Store wants 96 px of artwork centred in a 128 px square.
 mkdirSync(new URL('../store/chrome/', import.meta.url), { recursive: true });
-writeFileSync(new URL('../store/chrome/icon-128.png', import.meta.url), render(128, 16));
+writeFileSync(new URL('../store/chrome/icon-128.png', import.meta.url), render(128, rgb(ACCENTS.forest), 16));
 console.log('Wrote store/chrome/icon-128.png');

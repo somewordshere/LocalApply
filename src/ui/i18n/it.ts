@@ -12,6 +12,8 @@ export const it: Translation = {
   'options.title': 'Il tuo profilo',
   'options.subtitle':
     'Salvato solo in questo browser. Serve a compilare i moduli di candidatura quando fai clic su Compila.',
+  'options.startHere':
+    'Inizia da qui: inserisci i dati che vuoi dare ai moduli di candidatura. Tutto viene salvato mentre scrivi e resta in questo browser. Poi apri una candidatura e fai clic su Compila questa pagina nel pulsante LocalApply della barra degli strumenti.',
   'options.loading': 'Caricamento…',
   'options.sections': 'Sezioni',
   'options.language': 'Lingua',
