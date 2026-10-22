@@ -23,6 +23,7 @@ export const de: Locale = {
     yearsOfExperience: ['berufserfahrung', 'jahre (?:\\p{L}+ )?erfahrung'],
     remotePreference: ['arbeitsmodell'],
     disability: ['schwerbehinder\\p{L}*', 'behinderung'],
+    sexualOrientation: ['sexuelle orientierung', 'sexuelle identitat'],
     gender: ['geschlecht'],
     salutation: ['anrede'],
     coverLetterText: ['anschreiben', 'motivationsschreiben'],

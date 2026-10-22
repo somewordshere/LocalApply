@@ -13,6 +13,7 @@ export const it: Locale = {
     startDate: ['data di inizio', 'disponibilita'],
     yearsOfExperience: ['anni di esperienza'],
     disability: ['disabilita'],
+    sexualOrientation: ['orientamento sessuale'],
     gender: ['genere', 'sesso'],
     coverLetterText: ['lettera di presentazione'],
     website: ['sito web'],

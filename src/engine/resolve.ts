@@ -264,6 +264,94 @@ const EDUCATION_LEVELS: string[][] = [
   ['Other', 'Sonstiges', 'Sonstige', 'Andere', 'Autre', 'Otro', 'Altro', 'Anders', 'Outro', 'Inne'],
 ];
 
+/** Names under which each sexual orientation appears in dropdowns and radio groups. */
+const ORIENTATIONS: string[][] = [
+  [
+    'Heterosexual',
+    'Straight',
+    'Heterosexual / straight',
+    'Heterosexual or straight',
+    'Hetero',
+    'Heterosexuell',
+    'Hétérosexuel',
+    'Hétérosexuelle',
+    'Eterosessuale',
+    'Heteroseksueel',
+    'Heteroseksualna',
+    'Heteroseksualny',
+    'Heterossexual',
+  ],
+  [
+    'Gay',
+    'Gay man',
+    'Schwul',
+    'Homo',
+    'Gej',
+    'Homosexual',
+    'Homosexuell',
+    'Homosexuel',
+    'Omosessuale',
+    'Homoseksueel',
+    'Homossexual',
+  ],
+  [
+    'Lesbian',
+    'Lesbisch',
+    'Lesbienne',
+    'Lesbiana',
+    'Lesbica',
+    'Lesbijka',
+    'Lésbica',
+    'Homosexual',
+    'Homosexuell',
+    'Homosexuelle',
+    'Omosessuale',
+    'Homoseksueel',
+    'Homossexual',
+  ],
+  [
+    'Bisexual',
+    'Bisexuell',
+    'Bisexuel',
+    'Bisexuelle',
+    'Bisessuale',
+    'Biseksueel',
+    'Biseksualna',
+    'Biseksualny',
+    'Bissexual',
+  ],
+  [
+    'Pansexual',
+    'Pansexuell',
+    'Pansexuel',
+    'Pansexuelle',
+    'Pansessuale',
+    'Panseksueel',
+    'Panseksualna',
+    'Panseksualny',
+    'Panssexual',
+  ],
+  ['Asexual', 'Asexuell', 'Asexuel', 'Asexuelle', 'Asessuale', 'Aseksueel', 'Aseksualna', 'Aseksualny', 'Assexual'],
+  ['Queer'],
+  [
+    'Prefer not to say',
+    "I don't wish to answer",
+    'Decline to self-identify',
+    'Decline to answer',
+    'Prefer not to answer',
+    'Keine Angabe',
+    'Ne souhaite pas répondre',
+    'Je préfère ne pas répondre',
+    'Prefiero no decirlo',
+    'Prefiero no responder',
+    'Preferisco non dirlo',
+    'Preferisco non rispondere',
+    'Zeg ik liever niet',
+    'Wolę nie podawać',
+    'Prefiro não dizer',
+  ],
+];
+
 function withSynonyms(value: string, table: string[][]): string[] {
   const v = norm(value);
   if (!v) return [];
@@ -352,6 +440,8 @@ export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[
     // A "Degree" dropdown usually lists levels (Bachelor, Master), which the free-text degree rarely matches.
     case 'degree':
       return [...one(p.degree), ...withSynonyms(p.educationLevel, EDUCATION_LEVELS)];
+    case 'sexualOrientation':
+      return withSynonyms(p.sexualOrientation, ORIENTATIONS);
     case 'cv':
     case 'coverLetterFile':
       return p[key] ? [p[key]!.name] : [];

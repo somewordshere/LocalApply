@@ -45,9 +45,7 @@ describe('interface translations', () => {
   });
 
   it('fill in the blanks', () => {
-    expect(translator('de')('phone.readAs', { code: '+44', number: '20 7946 0123' })).toBe(
-      'Erkannt als Ländervorwahl +44 und Nummer 20 7946 0123',
-    );
+    expect(translator('de')('section.count', { filled: 4, total: 7 })).toBe('4 von 7');
   });
 
   it("start in the browser's language, or English", () => {

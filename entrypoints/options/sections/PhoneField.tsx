@@ -1,28 +1,21 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { Profile } from '@/src/profile/schema';
 import { joinPhone, splitPhone } from '@/src/profile/phone';
 import { useI18n } from '@/src/ui/I18nProvider';
-import type { MessageKey } from '@/src/ui/i18n';
-
-const MODES: [mode: Profile['phoneEntry'], label: MessageKey][] = [
-  ['split', 'phone.split'],
-  ['full', 'phone.full'],
-];
 
 /**
- * The phone number, entered either as country code and number in two boxes or as one
- * full international number. Either way the profile keeps code and number apart, since
- * forms ask both ways.
+ * The phone number in three linked boxes: country code, number, and the full international
+ * number. Typing the full number splits it into the other two; typing either part rebuilds it.
+ * The profile keeps only code and number, since forms ask both ways.
  */
 export function PhoneField({ profile, update }: { profile: Profile; update: (patch: Partial<Profile>) => void }) {
   const { t } = useI18n();
-  const full = profile.phoneEntry === 'full';
-  // What the person typed into the single box, spaces and all; the profile only keeps the two parts.
+  // What the person typed into the full box, spaces and all; the profile only keeps the two parts.
   const [text, setText] = useState(() => joinPhone(profile));
   const parts = splitPhone(text);
 
-  // Take over changes made elsewhere (the two boxes, an imported profile). While typing here the
-  // two always agree, so this never fights the cursor.
+  // Take over changes made elsewhere (the two part boxes, an imported profile). While typing in the
+  // full box the two always agree, so this never fights the cursor.
   if (parts.phoneCountryCode !== profile.phoneCountryCode || parts.phoneNumber !== profile.phoneNumber) {
     const current = joinPhone(profile);
     if (current !== text) setText(current);
@@ -33,75 +26,51 @@ export function PhoneField({ profile, update }: { profile: Profile; update: (pat
     update(splitPhone(value));
   };
 
+  const box = (label: string, input: ReactNode, className = '') => (
+    <label className={className}>
+      <span className="mb-1 block text-xs text-ink-soft">{label}</span>
+      {input}
+    </label>
+  );
+
   return (
     <div role="group" aria-labelledby="phone-label">
-      <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
-        <span id="phone-label" className="text-sm font-medium text-ink">
-          {t('phone.label')}
-        </span>
-        {/* One control with two halves; the chosen half is solid ink, so neither depends on colour. */}
-        <div className="inline-flex divide-x divide-line-strong overflow-hidden rounded-md border border-line-strong text-xs">
-          {MODES.map(([mode, label]) => {
-            const chosen = profile.phoneEntry === mode;
-            return (
-              <button
-                key={mode}
-                type="button"
-                aria-pressed={chosen}
-                // Moving to one box tidies a full number typed into the number box into its two parts.
-                onClick={() =>
-                  update(
-                    mode === 'full' ? { phoneEntry: mode, ...splitPhone(joinPhone(profile)) } : { phoneEntry: mode },
-                  )
-                }
-                className={`cursor-pointer px-3 py-1.5 font-medium transition ${
-                  chosen ? 'bg-ink text-paper' : 'bg-sheet text-ink-soft hover:bg-paper hover:text-ink'
-                }`}
-              >
-                {t(label)}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {full ? (
-        <>
+      <span id="phone-label" className="mb-1.5 block text-sm font-medium text-ink">
+        {t('phone.label')}
+      </span>
+      <div className="grid grid-cols-[7rem_1fr] gap-3 sm:grid-cols-[7rem_1fr_1.25fr]">
+        {box(
+          t('phone.codeLabel'),
           <input
             className="field"
-            type="tel"
-            aria-label={t('phone.fullLabel')}
-            placeholder="+442079460123"
-            value={text}
-            onChange={(e) => typeFull(e.target.value)}
-          />
-          {text.trim() && (
-            <p className={`mt-1.5 text-xs ${parts.phoneCountryCode ? 'text-ink-faint' : 'text-warn'}`}>
-              {parts.phoneCountryCode
-                ? t('phone.readAs', { code: parts.phoneCountryCode, number: parts.phoneNumber || '…' })
-                : t('phone.noCode')}
-            </p>
-          )}
-        </>
-      ) : (
-        <div className="grid grid-cols-[7rem_1fr] gap-3">
-          <input
-            className="field"
-            aria-label={t('phone.codeLabel')}
             placeholder="+44"
             value={profile.phoneCountryCode}
             onChange={(e) => update({ phoneCountryCode: e.target.value })}
-          />
+          />,
+        )}
+        {box(
+          t('phone.numberLabel'),
           <input
             className="field"
             type="tel"
-            aria-label={t('phone.numberLabel')}
             placeholder="20 7946 0123"
             value={profile.phoneNumber}
             onChange={(e) => update({ phoneNumber: e.target.value })}
-          />
-        </div>
-      )}
+          />,
+        )}
+        {box(
+          t('phone.full'),
+          <input
+            className="field"
+            type="tel"
+            placeholder="+442079460123"
+            value={text}
+            onChange={(e) => typeFull(e.target.value)}
+          />,
+          'col-span-2 sm:col-span-1',
+        )}
+      </div>
+      {text.trim() && !parts.phoneCountryCode && <p className="mt-1.5 text-xs text-warn">{t('phone.noCode')}</p>}
     </div>
   );
 }

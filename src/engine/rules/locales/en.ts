@@ -37,6 +37,7 @@ export const en: Locale = {
     remotePreference: ['work model', 'work arrangement', 'work preference', 'remote preference'],
     disability: ['disabilit\\p{L}*', 'handicap'],
     veteran: ['veteran\\p{L}*'],
+    sexualOrientation: ['sexual orientation', 'sexuality'],
     gender: ['gender', 'sex'],
     salutation: ['salutation'],
     coverLetterText: ['cover letter', 'motivation', 'message to the hiring (?:team|manager)'],

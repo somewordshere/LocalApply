@@ -20,6 +20,8 @@ export const FIELD_RULES: FieldRule[] = [
   { key: 'remotePreference', long: true },
   { key: 'disability', long: true },
   { key: 'veteran', long: true },
+  // Before gender, whose "sex" must not take "sexual orientation" questions.
+  { key: 'sexualOrientation', long: true },
   { key: 'gender', long: true, auto: ['sex'] },
   { key: 'salutation', auto: ['honorific-prefix'] },
   { key: 'coverLetterText', kinds: ['textarea'], long: true },

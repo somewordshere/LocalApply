@@ -120,9 +120,11 @@ export default function App() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 md:grid md:grid-cols-[15.5rem_minmax(0,1fr)] md:gap-12 md:px-8">
+    // On wide screens the sheet sits in the middle of the window, with the index against its left
+    // edge and an equal empty column on the right; narrower screens put the two side by side.
+    <div className="mx-auto max-w-6xl px-4 md:grid md:grid-cols-[15.5rem_minmax(0,1fr)] md:gap-12 md:px-8 xl:max-w-none xl:grid-cols-[minmax(15.5rem,1fr)_minmax(0,52rem)_minmax(15.5rem,1fr)]">
       {/* The index: one row that sticks to the top on small screens, a column beside the sheet on wide ones. */}
-      <aside className="sticky top-0 z-10 -mx-4 flex items-center gap-3 border-b border-line bg-paper/95 px-4 py-2 backdrop-blur md:mx-0 md:h-screen md:flex-col md:items-stretch md:gap-0 md:border-b-0 md:bg-transparent md:px-0 md:py-8 md:backdrop-blur-none">
+      <aside className="sticky top-0 z-10 -mx-4 flex items-center gap-3 border-b border-line bg-paper/95 px-4 py-2 backdrop-blur md:mx-0 md:h-screen md:flex-col md:items-stretch md:gap-0 md:border-b-0 md:bg-transparent md:px-0 md:py-8 md:backdrop-blur-none xl:w-[15.5rem] xl:justify-self-end">
         <div className="hidden items-center gap-2.5 md:flex">
           <img src="/icon/48.png" alt="" className="size-7 rounded-md" />
           <span className="font-display text-lg font-semibold tracking-tight">LocalApply</span>

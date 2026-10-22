@@ -11,6 +11,7 @@ export const pt: Locale = {
     startDate: ['data de inicio', 'disponibilidade'],
     yearsOfExperience: ['anos de experiencia'],
     disability: ['deficiencia'],
+    sexualOrientation: ['orientacao sexual'],
     gender: ['genero', 'sexo'],
     coverLetterText: ['carta de apresentacao'],
     fullName: ['nome completo'],

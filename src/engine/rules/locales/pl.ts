@@ -12,6 +12,7 @@ export const pl: Locale = {
     startDate: ['data rozpoczecia', 'dostepnosc'],
     yearsOfExperience: ['lat doswiadczenia'],
     disability: ['niepelnosprawn\\p{L}*'],
+    sexualOrientation: ['orientacja seksualna'],
     gender: ['plec'],
     coverLetterText: ['list motywacyjny'],
     website: ['strona internetowa'],

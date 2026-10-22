@@ -12,6 +12,7 @@ export const nl: Locale = {
     noticePeriod: ['opzegtermijn'],
     startDate: ['beschikbaar vanaf', 'beschikbaarheid', 'startdatum'],
     yearsOfExperience: ['jaren ervaring'],
+    sexualOrientation: ['seksuele orientatie', '(?:seksuele )?geaardheid'],
     gender: ['geslacht'],
     salutation: ['aanhef'],
     coverLetterText: ['motivatiebrief'],

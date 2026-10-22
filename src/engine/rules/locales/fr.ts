@@ -14,6 +14,7 @@ export const fr: Locale = {
     yearsOfExperience: ['annees d experience'],
     remotePreference: ['teletravail'],
     disability: ['handicap'],
+    sexualOrientation: ['orientation sexuelle'],
     gender: ['genre', 'sexe'],
     salutation: ['civilite'],
     coverLetterText: ['lettre de motivation'],

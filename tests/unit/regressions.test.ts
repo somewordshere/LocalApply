@@ -172,4 +172,32 @@ describe('regressions from live sites', () => {
     expect(value('d')).toBe('ma');
     expect(value('t')).toBe('M.Sc. Computer Science');
   });
+
+  it('answers sexual orientation apart from gender, and falls back to "Homosexuell"', async () => {
+    document.body.innerHTML = `
+      <label for="g">Gender</label>
+      <select id="g"><option value="">Select</option><option>Male</option><option>Female</option></select>
+      <fieldset><legend>How would you describe your sexual orientation? (Select one)</legend>
+        <label><input type="radio" name="so" value="1" /> Heterosexual</label>
+        <label><input type="radio" name="so" value="2" /> Gay or Lesbian</label>
+        <label><input type="radio" name="so" value="3" /> Bisexual</label>
+        <label><input type="radio" name="so" value="4" /> I don't wish to answer</label>
+      </fieldset>
+      <label for="de">Sexuelle Orientierung</label>
+      <select id="de"><option value="">Bitte wählen</option><option value="he">Heterosexuell</option><option value="ho">Homosexuell</option><option value="na">Keine Angabe</option></select>`;
+    expect(keysOf()).toEqual(['gender', 'sexualOrientation', 'sexualOrientation']);
+    await fillPage(document, { ...profile, gender: 'Female', sexualOrientation: 'Lesbian' }, { location: nowhere });
+    expect(value('g')).toBe('Female');
+    expect((document.querySelector('input[name="so"]:checked') as HTMLInputElement | null)?.value).toBe('2');
+    expect(value('de')).toBe('ho');
+  });
+
+  it('leaves sexual orientation alone when the profile has none', async () => {
+    document.body.innerHTML = `
+      <label for="so">Sexual orientation</label>
+      <select id="so"><option value="">Select</option><option>Heterosexual</option><option>Prefer not to say</option></select>`;
+    const result = await fillPage(document, profile, { location: nowhere });
+    expect(value('so')).toBe('');
+    expect(result.missing.map((m) => m.key)).toEqual(['sexualOrientation']);
+  });
 });

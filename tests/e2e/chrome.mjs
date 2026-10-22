@@ -76,8 +76,8 @@ try {
     await options.getByLabel('First name', { exact: true }).fill('Max');
     await options.getByLabel('Last name', { exact: true }).fill('Muster');
     await options.getByLabel('Email', { exact: true }).fill('max@example.com');
-    await options.getByLabel('Phone country code', { exact: true }).fill('+49');
-    await options.getByLabel('Phone number', { exact: true }).fill('151 2345678');
+    await options.getByLabel('Country code', { exact: true }).fill('+49');
+    await options.getByLabel('Number', { exact: true }).fill('151 2345678');
     await options.getByLabel('Street', { exact: true }).fill('Hauptstr.');
     await options.getByLabel('House number', { exact: true }).fill('5');
     await options.getByLabel('Postcode', { exact: true }).fill('10115');
@@ -168,23 +168,29 @@ try {
     await page.close();
   });
 
-  await step('profile page takes a full phone number and keeps code and number apart', async () => {
+  await step('profile page links the phone boxes: a full number fills code and number, and back', async () => {
     const options = await context.newPage();
     await options.goto(`chrome-extension://${extensionId}/options.html`);
-    await options.getByRole('button', { name: 'Full number' }).click();
-    const full = options.getByLabel('Full phone number', { exact: true });
+    const code = options.getByLabel('Country code', { exact: true });
+    const number = options.getByLabel('Number', { exact: true });
+    const full = options.getByLabel('Full number', { exact: true });
     assert.equal(await full.inputValue(), '+49 151 2345678');
-    await full.fill('+442079460123');
-    await options.getByText('Read as country code +44 and number 2079460123').waitFor();
-    await options.getByText('All changes saved').waitFor();
-    const profile = await storedProfile();
-    assert.equal(profile.phoneEntry, 'full');
-    assert.equal(profile.phoneCountryCode, '+44');
-    assert.equal(profile.phoneNumber, '2079460123');
 
-    await options.getByRole('button', { name: 'Country code + number' }).click();
-    assert.equal(await options.getByLabel('Phone country code', { exact: true }).inputValue(), '+44');
-    assert.equal(await options.getByLabel('Phone number', { exact: true }).inputValue(), '2079460123');
+    await full.fill('+48791532218');
+    assert.equal(await code.inputValue(), '+48');
+    assert.equal(await number.inputValue(), '791532218');
+    await options.getByText('All changes saved').waitFor();
+    let profile = await storedProfile();
+    assert.equal(profile.phoneCountryCode, '+48');
+    assert.equal(profile.phoneNumber, '791532218');
+
+    await code.fill('+49');
+    await number.fill('151 2345678');
+    assert.equal(await full.inputValue(), '+49 151 2345678');
+    await options.getByText('All changes saved').waitFor();
+    profile = await storedProfile();
+    assert.equal(profile.phoneCountryCode, '+49');
+    assert.equal(profile.phoneNumber, '151 2345678');
     await options.close();
   });
 

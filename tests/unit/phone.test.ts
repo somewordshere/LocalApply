@@ -37,9 +37,9 @@ describe('full phone numbers', () => {
     expect(joinPhone({ phoneCountryCode: '', phoneNumber: '0151 2345678' })).toBe('0151 2345678');
   });
 
-  it('remembers which way the profile page asks for it', () => {
-    expect(migrate({}).phoneEntry).toBe('split');
-    expect(migrate({ phoneEntry: 'full' }).phoneEntry).toBe('full');
-    expect(migrate({ phoneEntry: 'nonsense' }).phoneEntry).toBe('split');
+  it('drops the old one-box-or-two setting and keeps the number', () => {
+    const profile = migrate({ phoneEntry: 'full', phoneCountryCode: '+48', phoneNumber: '791532218' });
+    expect(profile).not.toHaveProperty('phoneEntry');
+    expect(joinPhone(profile)).toBe('+48 791532218');
   });
 });

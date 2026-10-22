@@ -21,7 +21,7 @@ export interface FieldDef {
   example?: string;
   /** Spans both columns. */
   wide?: boolean;
-  /** The phone number, with its choice of one box or two (see PhoneField). */
+  /** The phone number: code, number and full number in linked boxes (see PhoneField). */
   phone?: boolean;
 }
 
@@ -145,6 +145,21 @@ export const FIELD_SECTIONS: FieldSectionDef[] = [
           ['Male', 'field.gender.male'],
           ['Female', 'field.gender.female'],
           ['Non-binary', 'field.gender.nonBinary'],
+          ['Prefer not to say', 'field.gender.preferNot'],
+        ],
+      },
+      {
+        key: 'sexualOrientation',
+        label: 'field.sexualOrientation',
+        options: [
+          ['', 'notSet'],
+          ['Heterosexual', 'field.sexualOrientation.heterosexual'],
+          ['Gay', 'field.sexualOrientation.gay'],
+          ['Lesbian', 'field.sexualOrientation.lesbian'],
+          ['Bisexual', 'field.sexualOrientation.bisexual'],
+          ['Pansexual', 'field.sexualOrientation.pansexual'],
+          ['Asexual', 'field.sexualOrientation.asexual'],
+          ['Queer', 'field.sexualOrientation.queer'],
           ['Prefer not to say', 'field.gender.preferNot'],
         ],
       },

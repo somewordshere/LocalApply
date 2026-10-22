@@ -41,6 +41,7 @@ export type FieldKey =
   | 'cv'
   | 'coverLetterFile'
   | 'gender'
+  | 'sexualOrientation'
   | 'disability'
   | 'veteran';
 
