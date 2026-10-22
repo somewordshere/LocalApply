@@ -2,6 +2,11 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.8.0 · October 22, 2026
+
+- **Work experience** and **Education** are now lists: add every job and school with dates, newest first. Forms that ask for several jobs or schools get one per block, in that order. Add the blocks on the form first, then fill. Your current job and school from before are already in the lists.
+- **Several profiles**: keep one per language or kind of job, such as a German CV. Make a new one (empty or as a copy) at the top of the profile page, and choose which one fills in the popup.
+
 ## 0.7.0 · October 22, 2026
 
 - New **Languages** card: add the languages you speak and how well. Forms that ask for your languages, or how good your German or English is, get the right answer in their own wording.
