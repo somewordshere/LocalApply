@@ -32,6 +32,7 @@ export const it: Locale = {
     street: ['indirizzo', 'via'],
     currentTitle: ['posizione attuale'],
     currentEmployer: ['azienda', 'datore di lavoro'],
+    educationLevel: ['livello di istruzione', 'grado di istruzione', 'titolo di studio piu alto'],
     school: ['universita', 'scuola'],
     fieldOfStudy: ['corso di studi'],
     degree: ['titolo di studio', 'laurea'],

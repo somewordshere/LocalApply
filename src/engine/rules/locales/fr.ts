@@ -35,6 +35,7 @@ export const fr: Locale = {
     location: ['lieu de residence'],
     currentTitle: ['poste actuel', 'intitule du poste'],
     currentEmployer: ['entreprise', 'employeur', 'societe'],
+    educationLevel: ['niveau d (?:etudes?|education)', 'niveau de (?:formation|diplome)', 'diplome le plus eleve'],
     school: ['ecole', 'universite'],
     fieldOfStudy: ['domaine d etudes', 'filiere'],
     degree: ['diplome'],

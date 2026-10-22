@@ -44,9 +44,10 @@ export const de: Locale = {
     location: ['standort'],
     currentTitle: ['aktuelle position', 'berufsbezeichnung', 'jobtitel'],
     currentEmployer: ['arbeitgeber', 'aktueller arbeitgeber', 'unternehmen', 'firma'],
+    educationLevel: ['bildungsabschluss', 'bildungsniveau', 'hochster abschluss', 'schulabschluss', 'bildungsstand'],
     school: ['hochschule', 'universitat'],
     fieldOfStudy: ['studiengang', 'studienfach', 'fachrichtung'],
-    degree: ['abschluss', 'hochster abschluss'],
+    degree: ['abschluss'],
   },
   exclude: {
     fullName: ORGANISATION,

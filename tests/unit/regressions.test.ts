@@ -129,4 +129,47 @@ describe('regressions from live sites', () => {
       '<div><div>Upload CV<script>initDropZone();</script></div><div><input type="file" /></div></div>';
     expect(scan(document)[0].label).toBe('Upload CV');
   });
+
+  it('picks the highest education level from radios, even with "Bachelor´s" spelled with an accent', async () => {
+    document.body.innerHTML = `
+      <fieldset><legend>Highest Education Level:*</legend>
+        <label><input type="radio" name="edu" value="0" /> High School</label>
+        <label><input type="radio" name="edu" value="1" /> Associate Degree</label>
+        <label><input type="radio" name="edu" value="2" /> Bachelor´s Degree</label>
+        <label><input type="radio" name="edu" value="3" /> Master's Degree</label>
+        <label><input type="radio" name="edu" value="4" /> MBA</label>
+        <label><input type="radio" name="edu" value="5" /> PhD</label>
+        <label><input type="radio" name="edu" value="6" /> Bootcamp / Technical Certification</label>
+        <label><input type="radio" name="edu" value="7" /> Other</label>
+      </fieldset>`;
+    expect(keysOf()).toEqual(['educationLevel']);
+    await fillPage(document, { ...profile, educationLevel: "Bachelor's degree" }, { location: nowhere });
+    expect((document.querySelector('input[name="edu"]:checked') as HTMLInputElement | null)?.value).toBe('2');
+  });
+
+  it('answers education level dropdowns in other languages, and a master for an MBA', async () => {
+    document.body.innerHTML = `
+      <label for="b">Höchster Bildungsabschluss</label>
+      <select id="b"><option value="">Bitte wählen</option><option value="1">Abitur</option><option value="2">Ausbildung</option><option value="3">Bachelor</option><option value="4">Master / Diplom</option><option value="5">Promotion</option></select>
+      <label for="n">Hoogst genoten opleiding</label>
+      <select id="n"><option value="">Kies</option><option value="h">HBO</option><option value="m">Master</option></select>`;
+    expect(keysOf()).toEqual(['educationLevel', 'educationLevel']);
+    await fillPage(document, { ...profile, educationLevel: 'MBA' }, { location: nowhere });
+    expect(value('b')).toBe('4');
+    expect(value('n')).toBe('m');
+  });
+
+  it('fills a "Degree" dropdown from the education level and types the free-text degree', async () => {
+    document.body.innerHTML = `
+      <label for="d">Degree</label>
+      <select id="d"><option value="">Select</option><option value="ba">Bachelor</option><option value="ma">Master</option></select>
+      <label for="t">Degree</label><input id="t" />`;
+    await fillPage(
+      document,
+      { ...profile, educationLevel: "Master's degree", degree: 'M.Sc. Computer Science' },
+      { location: nowhere },
+    );
+    expect(value('d')).toBe('ma');
+    expect(value('t')).toBe('M.Sc. Computer Science');
+  });
 });

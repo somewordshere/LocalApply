@@ -49,6 +49,8 @@ export const FIELD_RULES: FieldRule[] = [
   { key: 'currentTitle', auto: ['organization-title'] },
   // Never a text area: those hold questions about the company, not its name.
   { key: 'currentEmployer', auto: ['organization'], kinds: ['text', 'select', 'combobox'] },
+  // Before school and degree: "Highest degree", "Level of schooling" ask for the level.
+  { key: 'educationLevel', long: true, kinds: ['text', 'select', 'radio', 'combobox'] },
   { key: 'school' },
   { key: 'fieldOfStudy' },
   { key: 'degree' },

@@ -34,6 +34,7 @@ export type FieldKey =
   | 'currentTitle'
   | 'currentEmployer'
   | 'school'
+  | 'educationLevel'
   | 'degree'
   | 'fieldOfStudy'
   | 'coverLetterText'

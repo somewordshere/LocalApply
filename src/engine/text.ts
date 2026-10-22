@@ -11,7 +11,7 @@ export function norm(s: string): string {
     .replace(/ø/g, 'o')
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
-    .replace(/[_\-[\](){}/\\.:*?!¿¡,;|'’"“”<>=]+/g, ' ')
+    .replace(/[_\-[\](){}/\\.:*?!¿¡,;|'’´`"“”<>=]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }

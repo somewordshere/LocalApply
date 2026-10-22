@@ -64,6 +64,8 @@ export interface Profile {
   currentTitle: string;
   currentEmployer: string;
   school: string;
+  /** Stored in English ("Bachelor's degree"); see EDUCATION_LEVELS in src/engine/resolve.ts. */
+  educationLevel: string;
   degree: string;
   fieldOfStudy: string;
 
@@ -112,6 +114,7 @@ export const emptyProfile: Profile = {
   currentTitle: '',
   currentEmployer: '',
   school: '',
+  educationLevel: '',
   degree: '',
   fieldOfStudy: '',
   coverLetterText: '',

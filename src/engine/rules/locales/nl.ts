@@ -32,6 +32,7 @@ export const nl: Locale = {
     location: ['locatie'],
     currentTitle: ['huidige functie', 'functietitel'],
     currentEmployer: ['werkgever', 'bedrijf'],
+    educationLevel: ['opleidingsniveau', 'hoogst(?:e)? (?:genoten )?opleiding'],
     school: ['universiteit'],
     fieldOfStudy: ['studierichting', 'opleiding'],
   },

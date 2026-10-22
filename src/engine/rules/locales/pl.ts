@@ -31,6 +31,7 @@ export const pl: Locale = {
     location: ['lokalizacja'],
     currentTitle: ['obecne stanowisko', 'stanowisko'],
     currentEmployer: ['pracodawca'],
+    educationLevel: ['poziom wyksztalcenia'],
     school: ['uczelnia', 'szkola'],
     fieldOfStudy: ['kierunek studiow'],
     degree: ['wyksztalcenie'],

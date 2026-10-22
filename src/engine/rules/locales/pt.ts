@@ -28,6 +28,7 @@ export const pt: Locale = {
     street: ['endereco', 'morada', 'rua'],
     location: ['localizacao'],
     currentEmployer: ['empresa'],
+    educationLevel: ['escolaridade', 'nivel de (?:ensino|formacao)', 'habilitacoes literarias'],
     school: ['universidade'],
     degree: ['grau', 'diploma'],
   },

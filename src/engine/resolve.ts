@@ -151,6 +151,119 @@ const SALUTATIONS: string[][] = [
   ['Mx', 'Mx.', 'Divers', 'Diverse', 'Other', 'Keine Angabe'],
 ];
 
+/** Names under which each education level appears in dropdowns and radio groups. Profile values come first. */
+const EDUCATION_LEVELS: string[][] = [
+  [
+    'High school',
+    'High school diploma',
+    'Secondary school',
+    'Secondary education',
+    'GED',
+    'Abitur',
+    'Allgemeine Hochschulreife',
+    'Fachhochschulreife',
+    'Fachabitur',
+    'Baccalauréat',
+    'Bac',
+    'Bachillerato',
+    'Diploma di scuola superiore',
+    'Maturità',
+    'Middelbare school',
+    'VWO',
+    'HAVO',
+    'Ensino secundário',
+    'Ensino médio',
+    'Średnie',
+    'Matura',
+  ],
+  [
+    'Vocational training',
+    'Vocational qualification',
+    'Vocational',
+    'Apprenticeship',
+    'Trade school',
+    'Technical certification',
+    'Certification',
+    'Berufsausbildung',
+    'Abgeschlossene Berufsausbildung',
+    'Ausbildung',
+    'Formation professionnelle',
+    'CAP',
+    'Formación profesional',
+    'Formazione professionale',
+    'MBO',
+    'Ensino profissional',
+    'Zawodowe',
+  ],
+  [
+    'Associate degree',
+    "Associate's degree",
+    'Associate',
+    'Bac +2',
+    'BTS',
+    'DUT',
+    'Técnico superior',
+    'Diploma ITS',
+    'CTeSP',
+    'Policealne',
+  ],
+  [
+    "Bachelor's degree",
+    'Bachelor degree',
+    'Bachelors degree',
+    'Bachelor',
+    'Bachelors',
+    'Undergraduate degree',
+    'BSc',
+    'BA',
+    'Bachelorabschluss',
+    'Licence',
+    'Bac +3',
+    'Grado',
+    'Laurea triennale',
+    'Licenciatura',
+    'Licencjat',
+    'Inżynier',
+  ],
+  [
+    "Master's degree",
+    'Master degree',
+    'Masters degree',
+    'Master',
+    'Masters',
+    'Graduate degree',
+    'Postgraduate degree',
+    'MSc',
+    'MA',
+    'Masterabschluss',
+    'Diplom',
+    'Magister',
+    'Staatsexamen',
+    'Bac +5',
+    'Máster',
+    'Laurea magistrale',
+    'Mestrado',
+  ],
+  ['MBA', 'Master of Business Administration'],
+  [
+    'PhD',
+    'Doctorate',
+    'Doctoral degree',
+    'Doctor',
+    'Promotion',
+    'Doktor',
+    'Doktorat',
+    'Doctorat',
+    'Doctorado',
+    'Dottorato',
+    'Doctoraat',
+    'Promotie',
+    'Doutoramento',
+    'Doutorado',
+  ],
+  ['Other', 'Sonstiges', 'Sonstige', 'Andere', 'Autre', 'Otro', 'Altro', 'Anders', 'Outro', 'Inne'],
+];
+
 function withSynonyms(value: string, table: string[][]): string[] {
   const v = norm(value);
   if (!v) return [];
@@ -230,6 +343,15 @@ export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[
       return p.gender ? [...withSynonyms(p.gender, GENDERS), ...withSynonyms(p.salutation, SALUTATIONS)] : [];
     case 'salutation':
       return p.salutation ? [...withSynonyms(p.salutation, SALUTATIONS), ...withSynonyms(p.gender, GENDERS)] : [];
+    case 'educationLevel': {
+      const level = withSynonyms(p.educationLevel, EDUCATION_LEVELS);
+      // An MBA is a master's to forms that don't list it on its own.
+      if (norm(p.educationLevel) === 'mba') level.push(...withSynonyms("Master's degree", EDUCATION_LEVELS));
+      return level.length ? level : one(p.degree);
+    }
+    // A "Degree" dropdown usually lists levels (Bachelor, Master), which the free-text degree rarely matches.
+    case 'degree':
+      return [...one(p.degree), ...withSynonyms(p.educationLevel, EDUCATION_LEVELS)];
     case 'cv':
     case 'coverLetterFile':
       return p[key] ? [p[key]!.name] : [];

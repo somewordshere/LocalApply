@@ -71,6 +71,12 @@ export const en: Locale = {
     ],
     currentTitle: ['current (?:job )?title', 'job title', 'current position', 'current role'],
     currentEmployer: ['current company', 'current employer', 'company', 'employer', 'organi[sz]ation', 'org'],
+    educationLevel: [
+      'education(?:al)? level',
+      'level of (?:education|schooling|school)',
+      'highest (?:level of )?(?:education|degree|qualification|schooling)',
+      'educational attainment',
+    ],
     school: ['school', 'university', 'college', 'institution'],
     fieldOfStudy: ['field of study', 'major', 'discipline'],
     degree: ['degree', 'qualification', 'diploma'],
