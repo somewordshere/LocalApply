@@ -2,6 +2,10 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.8.1 · October 22, 2026
+
+- The extension's name and description in your browser and on the store pages now say up front that LocalApply is free and needs no account or subscription. Nothing else changes.
+
 ## 0.8.0 · October 22, 2026
 
 - **Work experience** and **Education** are now lists: add every job and school with dates, newest first. Forms that ask for several jobs or schools get one per block, in that order. Add the blocks on the form first, then fill. Your current job and school from before are already in the lists.
