@@ -24,7 +24,9 @@ releases/v0.1.0/
 ## Steps
 
 1. Make sure the work is committed and `npm run check` passes.
-2. In `CHANGELOG.md`, rename `## [Unreleased]` to `## [<version>] - <yyyy-mm-dd>` and add a fresh empty `## [Unreleased]` above it.
+2. In `CHANGELOG.md`, rename `## [Unreleased]` to `## [<version>] - <yyyy-mm-dd>` and add a fresh empty `## [Unreleased]` above it. Then tell users:
+   - `WHATS-NEW.md`: a section `## <version> · <Month d, yyyy>` on top, with the visible changes in plain words (no file names or internals);
+   - `README.md`: the version in **Current version**, the two build badges and the manual-installation links, and a new top row in **Recent releases**.
 3. Bump the version:
    ```bash
    npm version minor --no-git-tag-version

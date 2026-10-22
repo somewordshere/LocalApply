@@ -1,14 +1,26 @@
 # LocalApply
 
-**[Get it for Chrome](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg)** · **[Get it for Firefox](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/)**
-
-Private job application autofill for Firefox and Chromium browsers. You save your details once; on any application form, one click fills name, contact details, address, links, salary expectation, availability, education, CV and your saved answers. You review the form and submit it yourself.
+LocalApply is a Chrome and Firefox extension that fills job application forms from a profile you save once. One click fills name, contact details, address, links, salary expectation, availability, education, CV and your saved answers. You review the form and submit it yourself.
 
 Everything stays in the browser: no account, no server, no AI service, no network requests.
 
+**Current version:** 0.5.0 · **Browsers:** Chrome, Edge, Brave and Firefox · **Languages:** English, German, French, Spanish, Italian, Dutch, Portuguese, Polish
+
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/) [![Chrome build](https://img.shields.io/badge/Chrome-Build-4285F4?logo=googlechrome&logoColor=white)](releases/v0.5.0/localapply-0.5.0-chrome.zip) [![Firefox build](https://img.shields.io/badge/Firefox-Build-FF7139?logo=firefoxbrowser&logoColor=white)](releases/v0.5.0/localapply-0.5.0-firefox.zip)
+
+**[What’s new →](WHATS-NEW.md)**
+
+[Screenshots](#-screenshots) · [Features](#features) · [Install](#installation) · [Use](#-how-to-use-it) · [Privacy](#-privacy) · [Releases](#-recent-releases) · [Development](#-development) · [Docs](#-docs)
+
+## 📸 Screenshots
+
 ![LocalApply filling a job application from the toolbar popup](store/screenshots/1-fill-in-one-click.png)
 
-## What it does
+| Saved answers                                                      | Any language                                                                            | Your profile                                         |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| ![A saved answer filled in](store/screenshots/2-saved-answers.png) | ![A German form filled from the German interface](store/screenshots/3-any-language.png) | ![The profile page](store/screenshots/4-profile.png) |
+
+## Features
 
 - **Fills the repetitive part:** name, email, phone (including country-code pickers), address, date of birth, LinkedIn, GitHub, Xing and portfolio links, salary expectation, notice period, start date, years of experience, work authorisation, visa sponsorship and relocation questions, current job, highest education level and degree, CV and cover letter.
 - **Works in eight languages:** recognises form labels in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish, and the interface itself speaks all eight.
@@ -19,11 +31,16 @@ Everything stays in the browser: no account, no server, no AI service, no networ
 
 It works on ordinary company career pages and on Greenhouse, Ashby, Personio, Recruitee and Teamtailor, with site-specific handling for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply.
 
-| Saved answers                                                      | Any language                                                                            | Your profile                                         |
-| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| ![A saved answer filled in](store/screenshots/2-saved-answers.png) | ![A German form filled from the German interface](store/screenshots/3-any-language.png) | ![The profile page](store/screenshots/4-profile.png) |
+## Installation
 
-## Use it
+- **Store installation:** install LocalApply from the [Chrome Web Store](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) (also for Edge and Brave) or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/).
+- **Manual installation:** download the latest [Chrome build](releases/v0.5.0/localapply-0.5.0-chrome.zip) or [Firefox build](releases/v0.5.0/localapply-0.5.0-firefox.zip).
+  - Chrome, Edge, Brave: unzip it, open `chrome://extensions`, turn on Developer mode, choose **Load unpacked** and pick the unzipped folder.
+  - Firefox: open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on** and pick the zip. It is removed when Firefox restarts; for a permanent install use the store version, or Firefox Developer Edition with `xpinstall.signatures.required` set to `false`.
+
+Each version's folder in [`releases/`](releases/) also has the source zip, release notes and checksums.
+
+## 🧭 How to use it
 
 1. Enter your details once on the profile page: click the LocalApply toolbar button, then **Edit profile**.
 2. Open a job application, click the LocalApply toolbar button and then **Fill this page**, or press **Alt+Shift+F**.
@@ -31,14 +48,25 @@ It works on ordinary company career pages and on Greenhouse, Ashby, Personio, Re
 
 Your profile can be exported to a file and imported again, or deleted with one click.
 
-## Install a release
+## 🔐 Privacy
 
-The latest version is **[v0.5.0](releases/v0.5.0/)** ([release notes](releases/v0.5.0/RELEASE_NOTES.md)). Every version is in [`releases/`](releases/), one folder per version with the packages, release notes and checksums.
+Your profile, documents and saved answers are stored in your browser and never leave it. LocalApply makes no network requests, has no account and no analytics, and reads a page only when you ask it to fill one. It needs access to all websites because job applications are hosted on thousands of employer and recruiting sites, often inside embedded frames. Read the full [privacy policy](PRIVACY.md).
 
-- **Chrome, Edge, Brave:** install from the [Chrome Web Store](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg), or unzip `localapply-<version>-chrome.zip`, open `chrome://extensions`, turn on Developer mode, choose "Load unpacked" and pick the unzipped folder.
-- **Firefox:** open `about:debugging#/runtime/this-firefox`, choose "Load Temporary Add-on" and pick `localapply-<version>-firefox.zip` (removed when Firefox restarts). For a permanent install, use the signed version from [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/), or Firefox Developer Edition with `xpinstall.signatures.required` set to `false`.
+## 📦 Recent releases
 
-## Develop
+| Version | Highlights                                                                                          | Download                                                                                                        |
+| ------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| 0.5.0   | Highest education level, and five colour palettes with dark versions                                | [Chrome](releases/v0.5.0/localapply-0.5.0-chrome.zip) · [Firefox](releases/v0.5.0/localapply-0.5.0-firefox.zip) |
+| 0.4.1   | Security hardening: the interface can no longer write raw HTML into a page                          | [Chrome](releases/v0.4.1/localapply-0.4.1-chrome.zip) · [Firefox](releases/v0.4.1/localapply-0.4.1-firefox.zip) |
+| 0.4.0   | The interface in eight languages, a new paper-and-ink look, and a profile page with a section index | [Chrome](releases/v0.4.0/localapply-0.4.0-chrome.zip) · [Firefox](releases/v0.4.0/localapply-0.4.0-firefox.zip) |
+| 0.3.0   | Enter your phone number as one full number or as code plus number                                   | [Chrome](releases/v0.3.0/localapply-0.3.0-chrome.zip) · [Firefox](releases/v0.3.0/localapply-0.3.0-firefox.zip) |
+| 0.2.1   | Firefox build that matches the addons.mozilla.org listing                                           | [Chrome](releases/v0.2.1/localapply-0.2.1-chrome.zip) · [Firefox](releases/v0.2.1/localapply-0.2.1-firefox.zip) |
+| 0.2.0   | Undo, outlines that don't rely on colour, and a dozen filling fixes                                 | [Chrome](releases/v0.2.0/localapply-0.2.0-chrome.zip) · [Firefox](releases/v0.2.0/localapply-0.2.0-firefox.zip) |
+| 0.1.0   | First release: one-click filling in eight languages, saved answers and CV upload                    | [Chrome](releases/v0.1.0/localapply-0.1.0-chrome.zip) · [Firefox](releases/v0.1.0/localapply-0.1.0-firefox.zip) |
+
+See [What’s new](WHATS-NEW.md) for every release, or the [changelog](CHANGELOG.md) for the technical history.
+
+## 🧪 Development
 
 Node.js 22 or newer.
 
@@ -61,7 +89,7 @@ npm run test:e2e       # loads the built extension in Chromium (first time: npx 
 | `npm run store-assets`  | Renders store screenshots and the Chrome promo tile                     |
 | `npm run release`       | Checks, builds and writes `releases/v<version>/`, then commits and tags |
 
-## Project layout
+### Project layout
 
 ```
 entrypoints/        extension entry points: background, content script, popup, profile (options) page
@@ -82,11 +110,11 @@ releases/           shipped versions, one folder each
 docs/               architecture, extending, releasing
 ```
 
-## Docs
+## 📚 Docs
 
 - [Architecture](docs/architecture.md): how a fill works and where each piece lives
 - [Extending](docs/extending.md): adding a profile field, a language, a job site, a profile migration
 - [Releasing](docs/releasing.md): versioning, changelog, building a release, uploading to the stores
 - [Store listings](store/README.md): what goes into each store form
 - [Privacy policy](PRIVACY.md)
-- [Changelog](CHANGELOG.md)
+- [What’s new](WHATS-NEW.md) and [changelog](CHANGELOG.md)
