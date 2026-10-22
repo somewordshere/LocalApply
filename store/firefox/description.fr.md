@@ -14,6 +14,8 @@
 - Liens LinkedIn, GitHub, Xing et portfolio
 - Prétentions salariales, préavis, date de début au plus tôt et années d’expérience
 - Questions sur l’autorisation de travail, le visa et la mobilité
+- Langues parlées et leur niveau, permis de conduire, déplacements et fourchette de salaire
+- Votre lettre de motivation et vos réponses enregistrées, avec {company} et {position} remplacés par l’employeur et l’intitulé du poste
 - Poste actuel, employeur, formation et plus haut niveau d’études
 - CV et lettre de motivation en fichier, et texte de la lettre de motivation
 
@@ -32,6 +34,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor et les pages carrières ordin
 - Ne clique jamais sur « Envoyer » ou « Suivant » et ne coche jamais de case de consentement.
 - Ne touche pas aux champs que vous avez déjà remplis.
 - Exportez votre profil dans un fichier, ou supprimez tout en un clic.
+- Le journal des candidatures remplies reste lui aussi sur votre ordinateur ; désactivez-le, videz-le ou exportez-le en CSV.
 
 **Pourquoi il a besoin d’accéder à tous les sites**
 

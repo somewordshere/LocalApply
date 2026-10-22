@@ -14,6 +14,8 @@
 - LinkedIn-, GitHub-, Xing- und Portfolio-Links
 - Gehaltsvorstellung, Kündigungsfrist, frühester Eintrittstermin und Berufserfahrung
 - Fragen zu Arbeitserlaubnis, Visum und Umzugsbereitschaft
+- Sprachen mit Niveau, Führerschein, Reisebereitschaft und Gehaltsspanne
+- Anschreiben und gespeicherte Antworten, mit {company} und {position} durch Arbeitgeber und Stellentitel ersetzt
 - Aktuelle Position, Arbeitgeber, Ausbildung und höchster Bildungsabschluss
 - Lebenslauf und Anschreiben als Datei sowie Anschreiben als Text
 
@@ -32,6 +34,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseit
 - Klickt nie auf „Absenden" oder „Weiter" und setzt keine Einwilligungshäkchen.
 - Lässt Felder, die du schon ausgefüllt hast, unverändert.
 - Exportiere dein Profil als Datei oder lösche alles mit einem Klick.
+- Auch das Protokoll deiner ausgefüllten Bewerbungen bleibt auf deinem Rechner; schalte es ab, leere es oder exportiere es als CSV.
 
 **Warum Zugriff auf alle Websites nötig ist**
 

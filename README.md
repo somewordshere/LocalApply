@@ -22,8 +22,10 @@ Everything stays in the browser: no account, no server, no AI service, no networ
 
 ## Features
 
-- **Fills the repetitive part:** name, email, phone (including country-code pickers), address, date of birth, LinkedIn, GitHub, Xing and portfolio links, salary expectation, notice period, start date, years of experience, work authorisation, visa sponsorship and relocation questions, current job, highest education level and degree, CV and cover letter.
+- **Fills the repetitive part:** name, email, phone (including country-code pickers), address, date of birth, LinkedIn, GitHub, Xing and portfolio links, salary expectation, notice period, start date, years of experience, work authorisation, visa sponsorship and relocation questions, current job, highest education level and degree, spoken languages and their level, driving licence, travel and salary-range questions, CV and cover letter.
 - **Works in eight languages:** recognises form labels in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish, and the interface itself speaks all eight.
+- **Writes to the right company:** put `{company}` and `{position}` in your cover letter or saved answers and they are replaced with the employer and job title from the page, even when the form sits in an embedded frame.
+- **Keeps track:** every application it fills is noted in a log in your browser, with date, company, job title and link, ready to export as CSV. You can turn it off.
 - **Answers each question once:** save your reply to a recurring question like "How did you hear about us?" and it is filled in next time.
 - **Shows what it did:** filled fields get a solid green outline, open required questions a dashed amber one. **Undo** puts everything back.
 - **Never submits:** it doesn't press Submit or Next, doesn't tick consent boxes, and leaves fields you already filled alone.

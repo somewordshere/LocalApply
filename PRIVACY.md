@@ -1,20 +1,24 @@
 # LocalApply privacy policy
 
-Last updated: 14 October 2026
+Last updated: 22 October 2026
 
 LocalApply is a browser extension that fills job application forms with information you save in it. This policy explains what information it handles and what happens to it. In short: everything stays in your browser, on your device. Nothing is sent to the developer or anyone else.
 
 ## What information LocalApply handles
 
-Only what you enter on its profile page:
+What you enter on its profile page, and the application log described below:
 
 - **Personal and contact details:** name, salutation, email address, phone number, date of birth, nationality and postal address.
-- **Professional details:** links (LinkedIn, GitHub, Xing, portfolio), current job title and employer, education, salary expectation, notice period, earliest start date, years of experience, work authorisation, visa sponsorship and relocation preferences.
+- **Professional details:** links (LinkedIn, GitHub, Xing, portfolio), current job title and employer, education and highest education level, spoken languages and their level, salary expectation and range, notice period, earliest start date, years of experience, work authorisation, visa sponsorship, relocation and travel preferences, and driving licence.
 - **Documents:** your CV and cover letter files, and cover letter text.
 - **Saved answers** to application questions.
-- **Optional voluntary disclosures**, only if you fill them in: gender, disability status and veteran status.
+- **Optional voluntary disclosures**, only if you fill them in: gender, sexual orientation, disability status and veteran status.
 
-To decide which form field needs which piece of your information, LocalApply reads the labels and structure of the form on the page you ask it to fill. It does not store or send anything it reads from web pages, and it does not record which sites you visit.
+To decide which form field needs which piece of your information, LocalApply reads the labels and structure of the form on the page you ask it to fill. When you ask it to fill a page, it also reads the employer's name and the job title from that page, to put them into your cover letter and saved answers where you wrote {company} or {position}. It never sends anything it reads from web pages anywhere, and it does not record the sites you browse.
+
+## Application log
+
+So you can see where you applied, LocalApply notes each application form it fills: the date, the employer's name and job title as read from the page, and the page's address without anything after it (no "?…" query, which can contain tokens). The log is on unless you turn it off, and is stored only in your browser like your profile. On the profile page, under Applications, you can turn it off, remove single entries, clear it, or export it as a CSV file. Nothing is noted for pages you only visit, and "Delete all data" clears the log too.
 
 ## How the information is used
 
@@ -30,7 +34,7 @@ LocalApply has no server, no analytics and no advertising, and makes no network 
 
 ## Keeping, exporting and deleting your information
 
-Your information stays until you change or delete it. On the profile page you can export everything to a file, or delete it all with "Delete all data". Removing the extension also deletes everything it stored.
+Your information stays until you change or delete it. On the profile page you can export your profile to a file, export the application log as CSV, or delete it all with "Delete all data". Removing the extension also deletes everything it stored.
 
 ## Chrome Web Store User Data Policy
 

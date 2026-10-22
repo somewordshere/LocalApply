@@ -5,6 +5,8 @@ WAT HET INVULT
 • LinkedIn-, GitHub-, Xing- en portfoliolinks
 • Salarisindicatie, opzegtermijn, vroegste startdatum en jaren ervaring
 • Vragen over werkvergunning, visumsponsoring en verhuizen
+• Talen en niveau, rijbewijs, reisbereidheid en salarisrange
+• Je motivatiebrief en bewaarde antwoorden, met {company} en {position} vervangen door werkgever en functietitel
 • Huidige functie, werkgever, opleiding en hoogst genoten opleiding
 • Cv en motivatiebrief als bestand, en de tekst van de motivatiebrief
 • Je eigen antwoorden op terugkerende vragen zoals "Hoe heb je ons gevonden?"
@@ -23,6 +25,7 @@ VEILIG VAN OPZET
 • Klikt nooit op "Versturen" of "Volgende" en vinkt nooit toestemmingsvakjes aan.
 • Laat velden die je al hebt ingevuld met rust.
 • Exporteer je profiel naar een bestand of verwijder alles met één klik.
+• Ook het logboek van ingevulde sollicitaties blijft op je computer; zet het uit, wis het of exporteer het als CSV.
 
 WAAROM HET TOEGANG TOT ALLE WEBSITES VRAAGT
 Sollicitaties staan op duizenden sites van werkgevers en recruiters, vaak in ingesloten frames, dus LocalApply moet formulieren op elke pagina kunnen invullen. Het leest en vult een formulier alleen als jij dat vraagt. Het doet geen netwerkverzoeken.

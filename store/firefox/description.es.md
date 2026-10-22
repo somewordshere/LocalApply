@@ -14,6 +14,8 @@
 - Enlaces de LinkedIn, GitHub, Xing y portfolio
 - Expectativa salarial, preaviso, fecha de incorporación más temprana y años de experiencia
 - Preguntas sobre permiso de trabajo, patrocinio de visado y traslado
+- Idiomas y su nivel, carné de conducir, viajes y rango salarial
+- Tu carta de presentación y tus respuestas guardadas, con {company} y {position} sustituidos por la empresa y el puesto
 - Puesto actual, empresa, formación y nivel de estudios más alto
 - CV y carta de presentación como archivo, y texto de la carta
 
@@ -32,6 +34,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor y las páginas de empleo norm
 - Nunca pulsa «Enviar» ni «Siguiente» y nunca marca casillas de consentimiento.
 - No toca los campos que ya has rellenado.
 - Exporta tu perfil a un archivo o bórralo todo con un clic.
+- El registro de las candidaturas que rellenas también se queda en tu ordenador; desactívalo, vacíalo o expórtalo como CSV.
 
 **Por qué necesita acceso a todos los sitios web**
 

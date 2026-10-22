@@ -14,6 +14,8 @@
 - Linki do LinkedIn, GitHub, Xing i portfolio
 - Oczekiwania finansowe, okres wypowiedzenia, najwcześniejszą datę rozpoczęcia i lata doświadczenia
 - Pytania o pozwolenie na pracę, sponsorowanie wizy i przeprowadzkę
+- Języki i ich poziom, prawo jazdy, gotowość do podróży i widełki wynagrodzenia
+- List motywacyjny i zapisane odpowiedzi, z {company} i {position} zastąpionymi przez pracodawcę i stanowisko
 - Obecne stanowisko, pracodawcę, wykształcenie i najwyższy poziom wykształcenia
 - CV i list motywacyjny jako plik oraz treść listu motywacyjnego
 
@@ -32,6 +34,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor i zwykłe strony kariery firm
 - Nigdy nie klika „Wyślij” ani „Dalej” i nigdy nie zaznacza zgód.
 - Nie zmienia pól, które już wypełniłeś.
 - Wyeksportuj profil do pliku albo usuń wszystko jednym kliknięciem.
+- Dziennik wypełnionych aplikacji też zostaje na Twoim komputerze; wyłącz go, wyczyść albo wyeksportuj jako CSV.
 
 **Dlaczego potrzebuje dostępu do wszystkich stron**
 

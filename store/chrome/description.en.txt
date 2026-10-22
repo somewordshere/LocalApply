@@ -5,6 +5,8 @@ WHAT IT FILLS
 • LinkedIn, GitHub, Xing and portfolio links
 • Salary expectation, notice period, earliest start date and years of experience
 • Work authorisation, visa sponsorship and relocation questions
+• Spoken languages and their level, driving licence, travel and salary-range questions
+• Your cover letter and saved answers, with {company} and {position} replaced by the employer and job title
 • Current job title, employer, education and highest education level
 • Your CV and cover letter files, and cover letter text
 • Your own answers to recurring questions such as "How did you hear about us?"
@@ -23,6 +25,7 @@ PRIVATE BY DESIGN
 • It never presses Submit or Next and never ticks consent boxes.
 • Fields you have already filled in are left alone.
 • Export your profile to a file, or delete everything with one click.
+• A log of the applications you filled stays on your computer too; turn it off, clear it or export it as CSV.
 
 WHY IT ASKS TO READ AND CHANGE DATA ON ALL WEBSITES
 Job applications live on thousands of different domains, often inside embedded frames, so LocalApply needs to be able to fill form fields on any page. It reads and fills a page's form only when you ask it to.

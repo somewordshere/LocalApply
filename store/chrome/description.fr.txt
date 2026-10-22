@@ -5,6 +5,8 @@ CE QU’IL REMPLIT
 • Liens LinkedIn, GitHub, Xing et portfolio
 • Prétentions salariales, préavis, date de début au plus tôt et années d’expérience
 • Questions sur l’autorisation de travail, le visa et la mobilité
+• Langues parlées et leur niveau, permis de conduire, déplacements et fourchette de salaire
+• Votre lettre de motivation et vos réponses enregistrées, avec {company} et {position} remplacés par l’employeur et l’intitulé du poste
 • Poste actuel, employeur, formation et plus haut niveau d’études
 • CV et lettre de motivation en fichier, et texte de la lettre de motivation
 • Vos propres réponses aux questions récurrentes comme « Comment avez-vous entendu parler de nous ? »
@@ -23,6 +25,7 @@ SÛR PAR CONCEPTION
 • Ne clique jamais sur « Envoyer » ou « Suivant » et ne coche jamais de case de consentement.
 • Ne touche pas aux champs que vous avez déjà remplis.
 • Exportez votre profil dans un fichier, ou supprimez tout en un clic.
+• Le journal des candidatures remplies reste lui aussi sur votre ordinateur ; désactivez-le, videz-le ou exportez-le en CSV.
 
 POURQUOI IL A BESOIN D’ACCÉDER À TOUS LES SITES
 Les candidatures sont hébergées sur des milliers de sites d’employeurs et de recrutement, souvent dans des cadres intégrés : LocalApply doit donc pouvoir remplir les formulaires sur n’importe quelle page. Il ne lit et ne remplit un formulaire que lorsque vous le lui demandez. Il n’effectue aucune requête réseau.

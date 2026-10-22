@@ -5,6 +5,8 @@ O QUE PREENCHE
 • Links de LinkedIn, GitHub, Xing e portefólio
 • Expectativa salarial, pré-aviso, data de início mais próxima e anos de experiência
 • Perguntas sobre autorização de trabalho, visto e disponibilidade para mudar de cidade
+• Línguas e nível, carta de condução, disponibilidade para viajar e intervalo salarial
+• A sua carta de apresentação e respostas guardadas, com {company} e {position} substituídos pelo empregador e pelo cargo
 • Cargo atual, empregador, formação e nível de escolaridade mais alto
 • CV e carta de apresentação em ficheiro, e texto da carta
 • As suas respostas a perguntas recorrentes como «Como teve conhecimento de nós?»
@@ -23,6 +25,7 @@ SEGURO DE RAIZ
 • Nunca clica em «Enviar» ou «Seguinte» e nunca marca caixas de consentimento.
 • Não mexe nos campos que já preencheu.
 • Exporte o perfil para um ficheiro ou apague tudo com um clique.
+• O registo das candidaturas que preenche também fica no seu computador; desative-o, limpe-o ou exporte-o como CSV.
 
 PORQUE PRECISA DE ACESSO A TODOS OS SITES
 As candidaturas estão em milhares de sites de empregadores e de recrutamento, muitas vezes dentro de frames incorporados, por isso o LocalApply tem de conseguir preencher formulários em qualquer página. Só lê e preenche um formulário quando lhe pede. Não faz pedidos de rede.

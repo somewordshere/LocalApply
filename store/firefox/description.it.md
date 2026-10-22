@@ -14,6 +14,8 @@
 - Link a LinkedIn, GitHub, Xing e portfolio
 - RAL desiderata, preavviso, data di inizio più vicina e anni di esperienza
 - Domande su permesso di lavoro, visto e disponibilità al trasferimento
+- Lingue e livello, patente, disponibilità a viaggiare e fascia di stipendio
+- Lettera di presentazione e risposte salvate, con {company} e {position} sostituiti da azienda e ruolo
 - Ruolo attuale, datore di lavoro, formazione e titolo di studio più alto
 - CV e lettera di presentazione come file, e testo della lettera
 
@@ -32,6 +34,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor e le normali pagine carriere 
 - Non preme mai «Invia» o «Avanti» e non spunta mai caselle di consenso.
 - Lascia invariati i campi che hai già compilato.
 - Esporta il profilo in un file o elimina tutto con un clic.
+- Anche il registro delle candidature compilate resta sul tuo computer; disattivalo, svuotalo o esportalo in CSV.
 
 **Perché chiede l’accesso a tutti i siti**
 

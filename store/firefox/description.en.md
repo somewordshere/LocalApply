@@ -14,6 +14,8 @@
 - LinkedIn, GitHub, Xing and portfolio links
 - Salary expectation, notice period, earliest start date and years of experience
 - Work authorisation, visa sponsorship and relocation questions
+- Spoken languages and their level, driving licence, travel and salary-range questions
+- Your cover letter and saved answers, with {company} and {position} replaced by the employer and job title
 - Current job title, employer, education and highest education level
 - CV and cover letter uploads, and cover letter text
 
@@ -32,6 +34,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career p
 - Never presses Submit or Next, and never ticks consent boxes.
 - Leaves fields you have already filled in alone.
 - Export your profile to a file, or delete everything with one click.
+- A log of the applications you filled stays on your computer too; turn it off, clear it or export it as CSV.
 
 **Why it needs access to all websites**
 

@@ -40,17 +40,17 @@ Select **No, I am not using remote code.**
 
 ### What user data do you plan to collect from users now or in the future?
 
-| Category                            | Tick? | Why                                                                                                                                   |
-| ----------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Personally identifiable information | Yes   | Name, address, email, phone number, date of birth and nationality are stored in the profile.                                          |
-| Health information                  | Yes   | The optional "Disability" answer (for equal-opportunity questions) is health-related. Declaring it is the safe reading of the policy. |
-| Financial and payment information   | No    | Salary expectation is not financial account or payment data.                                                                          |
-| Authentication information          | No    | No passwords, logins or credentials are stored; password fields are skipped.                                                          |
-| Personal communications             | No    | No emails, texts or chat messages.                                                                                                    |
-| Location                            | No    | The postal address the user types is covered under personally identifiable information; no device location or IP is used.             |
-| Web history                         | No    | Visited sites are not recorded.                                                                                                       |
-| User activity                       | No    | No clicks, keystrokes or browsing behaviour are monitored.                                                                            |
-| Website content                     | No    | Form labels are read in memory to decide where to type, and nothing from the page is stored or sent.                                  |
+| Category                            | Tick? | Why                                                                                                                                                                            |
+| ----------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Personally identifiable information | Yes   | Name, address, email, phone number, date of birth and nationality are stored in the profile; optionally also gender and sexual orientation.                                    |
+| Health information                  | Yes   | The optional "Disability" answer (for equal-opportunity questions) is health-related. Declaring it is the safe reading of the policy.                                          |
+| Financial and payment information   | No    | Salary expectation is not financial account or payment data.                                                                                                                   |
+| Authentication information          | No    | No passwords, logins or credentials are stored; password fields are skipped.                                                                                                   |
+| Personal communications             | No    | No emails, texts or chat messages.                                                                                                                                             |
+| Location                            | No    | The postal address the user types is covered under personally identifiable information; no device location or IP is used.                                                      |
+| Web history                         | Yes   | The application log (on by default, can be turned off) keeps the address of each application page the user fills, with the date, on the device only. Browsing is not recorded. |
+| User activity                       | No    | No clicks, keystrokes or browsing behaviour are monitored.                                                                                                                     |
+| Website content                     | Yes   | The employer name and job title read from a page the user fills are kept in the application log on the device. Form labels are only read in memory. Nothing is sent.           |
 
 If you drop the voluntary "Disability" field from the extension in a future release, you can untick Health information.
 

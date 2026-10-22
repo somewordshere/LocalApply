@@ -11,7 +11,7 @@ Source code is attached (localapply-<version>-sources.zip). To reproduce the sub
 
 The output in .output/firefox-mv2/ is identical to the uploaded file. Tooling: WXT 0.21 (Vite) with React 19 and Tailwind CSS 4.
 
-The add-on makes no network requests and loads no remote code. It stores the user's profile in storage.local (unlimitedStorage because the user's CV file is stored as a data URL).
+The add-on makes no network requests and loads no remote code. It stores the user's profile in storage.local (unlimitedStorage because the user's CV file is stored as a data URL), and an application log of the forms it filled (date, company, job title, page origin and path), which the user can turn off, clear or export as CSV from the profile page.
 
 The content script runs on <all_urls> in all frames because job application forms are hosted on arbitrary employer domains and are often embedded in iframes from applicant-tracking systems. It reads and writes form fields only when the user triggers a fill (toolbar popup or Alt+Shift+F). It never submits forms.
 

@@ -14,6 +14,8 @@
 - LinkedIn-, GitHub-, Xing- en portfoliolinks
 - Salarisindicatie, opzegtermijn, vroegste startdatum en jaren ervaring
 - Vragen over werkvergunning, visumsponsoring en verhuizen
+- Talen en niveau, rijbewijs, reisbereidheid en salarisrange
+- Je motivatiebrief en bewaarde antwoorden, met {company} en {position} vervangen door werkgever en functietitel
 - Huidige functie, werkgever, opleiding en hoogst genoten opleiding
 - Cv en motivatiebrief als bestand, en de tekst van de motivatiebrief
 
@@ -32,6 +34,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor en gewone vacaturepagina’s 
 - Klikt nooit op "Versturen" of "Volgende" en vinkt nooit toestemmingsvakjes aan.
 - Laat velden die je al hebt ingevuld met rust.
 - Exporteer je profiel naar een bestand of verwijder alles met één klik.
+- Ook het logboek van ingevulde sollicitaties blijft op je computer; zet het uit, wis het of exporteer het als CSV.
 
 **Waarom het toegang tot alle websites vraagt**
 
