@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useI18n } from '@/src/ui/I18nProvider';
 import { LANGUAGES, isLang, type MessageKey } from '@/src/ui/i18n';
 import { PALETTES, type Palette } from '@/src/ui/palette';
+import { THEMES, type Theme } from '@/src/ui/theme';
 import type { Profile } from '@/src/profile/schema';
 import { completion, documentsProgress, OPTIONAL_SECTIONS, sectionProgress, type Progress } from './completion';
 import { FIELD_SECTIONS } from './fields';
@@ -10,6 +11,7 @@ import { CustomAnswersSection } from './sections/CustomAnswersSection';
 import { DocumentsSection } from './sections/DocumentsSection';
 import { FieldSection } from './sections/FieldSection';
 import { usePalette } from './usePalette';
+import { useTheme } from './useTheme';
 import { useProfile } from './useProfile';
 
 const EXTRA_SECTIONS: { id: string; title: MessageKey; navTitle?: MessageKey }[] = [
@@ -93,6 +95,34 @@ function PalettePicker() {
               className="block size-6 rounded-full border border-line-strong ring-offset-2 ring-offset-paper transition peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-5 peer-focus-visible:outline-accent hover:scale-110 motion-reduce:hover:scale-100"
               style={{ background: `linear-gradient(135deg, ${PALETTES[id].paper} 50%, ${PALETTES[id].accent} 50%)` }}
             />
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** System, light or dark, as one control in three parts; the chosen part is solid ink. Plain radios underneath. */
+function ThemePicker() {
+  const { t } = useI18n();
+  const [theme, setTheme] = useTheme();
+  return (
+    <div role="radiogroup" aria-labelledby="theme-label" className="flex items-center gap-3 text-sm text-ink-soft">
+      <span id="theme-label">{t('options.theme')}</span>
+      <div className="inline-flex divide-x divide-line-strong overflow-hidden rounded-md border border-line-strong text-xs">
+        {(Object.keys(THEMES) as Theme[]).map((id) => (
+          <label key={id} className="cursor-pointer">
+            <input
+              type="radio"
+              name="theme"
+              value={id}
+              checked={theme === id}
+              onChange={() => setTheme(id)}
+              className="peer sr-only"
+            />
+            <span className="block px-3 py-1.5 font-medium text-ink-soft transition peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:-outline-offset-2 peer-focus-visible:outline-accent hover:bg-paper hover:text-ink peer-checked:hover:bg-ink peer-checked:hover:text-paper">
+              {t(THEMES[id])}
+            </span>
           </label>
         ))}
       </div>
@@ -227,6 +257,7 @@ export default function App() {
               </select>
             </label>
             <PalettePicker />
+            <ThemePicker />
           </div>
         </header>
 

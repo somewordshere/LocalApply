@@ -27,7 +27,7 @@ Everything stays in the browser: no account, no server, no AI service, no networ
 - **Answers each question once:** save your reply to a recurring question like "How did you hear about us?" and it is filled in next time.
 - **Shows what it did:** filled fields get a solid green outline, open required questions a dashed amber one. **Undo** puts everything back.
 - **Never submits:** it doesn't press Submit or Next, doesn't tick consent boxes, and leaves fields you already filled alone.
-- **Looks the way you like:** five colour palettes (Forest, Ocean, Plum, Clay, Graphite), each with a dark version.
+- **Looks the way you like:** five colour palettes (Forest, Ocean, Plum, Clay, Graphite), and a light or dark theme that follows your system or stays the way you set it.
 
 It works on ordinary company career pages and on Greenhouse, Ashby, Personio, Recruitee and Teamtailor, with site-specific handling for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply.
 

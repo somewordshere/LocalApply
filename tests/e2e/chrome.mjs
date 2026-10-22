@@ -238,6 +238,37 @@ try {
     await options.close();
   });
 
+  await step('theme switch forces light or dark, and System follows the system', async () => {
+    const options = await context.newPage();
+    await options.emulateMedia({ colorScheme: 'light' });
+    await options.goto(`chrome-extension://${extensionId}/options.html`);
+    const scheme = (page) => page.evaluate(() => document.documentElement.dataset.scheme);
+    const paper = (page) => page.evaluate(() => globalThis.getComputedStyle(document.body).backgroundColor);
+    assert.equal(await scheme(options), 'light');
+    const light = await paper(options);
+
+    await options.getByText('Dark', { exact: true }).click();
+    assert.equal(await scheme(options), 'dark');
+    assert.notEqual(await paper(options), light);
+    assert.equal(await worker.evaluate(() => chrome.storage.local.get('uiTheme').then((r) => r.uiTheme)), 'dark');
+
+    const popup = await context.newPage();
+    await popup.emulateMedia({ colorScheme: 'light' });
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await popup.getByRole('button', { name: 'Fill this page' }).waitFor();
+    assert.equal(await scheme(popup), 'dark');
+    await popup.close();
+
+    await options.getByText('System', { exact: true }).click();
+    assert.equal(await scheme(options), 'light');
+    await options.emulateMedia({ colorScheme: 'dark' });
+    await options.waitForFunction(() => document.documentElement.dataset.scheme === 'dark');
+    await options.emulateMedia({ colorScheme: 'light' });
+    await options.getByText('Light', { exact: true }).click();
+    assert.equal(await paper(options), light);
+    await options.close();
+  });
+
   await step('no button and no errors on an ordinary page', async () => {
     const page = await context.newPage();
     const errors = [];

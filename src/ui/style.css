@@ -75,27 +75,35 @@
   --color-danger: #b42318;
 }
 
+/* Dark values apply when the theme (src/ui/theme.ts) resolves to dark: chosen, or the system's. */
+:root[data-scheme='dark'] {
+  --color-paper: #131210;
+  --color-sheet: #1b1a17;
+  --color-line: #2d2a25;
+  --color-line-strong: #423e36;
+  --color-ink: #eee9df;
+  --color-ink-soft: #b3ac9f;
+  --color-ink-faint: #868073;
+  --color-accent: #74c79f;
+  --color-accent-hover: #93d6b5;
+  --color-accent-soft: #1e3128;
+  --color-on-accent: #0d1a13;
+  --color-warn: #e3a94f;
+  --color-danger: #f0877d;
+}
+
+/* Until the theme script has run, follow the system so a dark page doesn't flash light. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-scheme]) {
     --color-paper: #131210;
     --color-sheet: #1b1a17;
-    --color-line: #2d2a25;
-    --color-line-strong: #423e36;
     --color-ink: #eee9df;
-    --color-ink-soft: #b3ac9f;
-    --color-ink-faint: #868073;
-    --color-accent: #74c79f;
-    --color-accent-hover: #93d6b5;
-    --color-accent-soft: #1e3128;
-    --color-on-accent: #0d1a13;
-    --color-warn: #e3a94f;
-    --color-danger: #f0877d;
   }
 }
 
 /*
  * The other palettes (see src/ui/palette.ts), chosen on the profile page. Each swaps paper, ink
- * and accent and keeps warn and danger. Dark values come second so they win in dark mode.
+ * and accent and keeps warn and danger. The dark values are more specific, so they win in dark mode.
  */
 :root[data-palette='ocean'] {
   --color-paper: #eef1f5;
@@ -150,64 +158,69 @@
   --color-on-accent: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root[data-palette='ocean'] {
-    --color-paper: #0f1318;
-    --color-sheet: #161b22;
-    --color-line: #252c36;
-    --color-line-strong: #38414e;
-    --color-ink: #e7ecf2;
-    --color-ink-soft: #a9b3c0;
-    --color-ink-faint: #7c8693;
-    --color-accent: #7fb0ec;
-    --color-accent-hover: #a0c5f2;
-    --color-accent-soft: #1a2a3e;
-    --color-on-accent: #0b1522;
-  }
-  :root[data-palette='plum'] {
-    --color-paper: #131014;
-    --color-sheet: #1b171d;
-    --color-line: #2d2630;
-    --color-line-strong: #433a47;
-    --color-ink: #eee8f0;
-    --color-ink-soft: #b5aab9;
-    --color-ink-faint: #877c8b;
-    --color-accent: #c39be0;
-    --color-accent-hover: #d4b5ea;
-    --color-accent-soft: #2c2136;
-    --color-on-accent: #1a0f22;
-  }
-  :root[data-palette='clay'] {
-    --color-paper: #14110f;
-    --color-sheet: #1c1815;
-    --color-line: #2f2823;
-    --color-line-strong: #463c34;
-    --color-ink: #f0e8e1;
-    --color-ink-soft: #b9ab9f;
-    --color-ink-faint: #8a7d72;
-    --color-accent: #ec9a72;
-    --color-accent-hover: #f2b394;
-    --color-accent-soft: #3a2419;
-    --color-on-accent: #22100a;
-  }
-  :root[data-palette='graphite'] {
-    --color-paper: #111112;
-    --color-sheet: #19191b;
-    --color-line: #2a2a2d;
-    --color-line-strong: #404044;
-    --color-ink: #ececee;
-    --color-ink-soft: #ababb0;
-    --color-ink-faint: #7f7f85;
-    --color-accent: #e6e6e8;
-    --color-accent-hover: #ffffff;
-    --color-accent-soft: #2c2c30;
-    --color-on-accent: #111112;
-  }
+:root[data-scheme='dark'][data-palette='ocean'] {
+  --color-paper: #0f1318;
+  --color-sheet: #161b22;
+  --color-line: #252c36;
+  --color-line-strong: #38414e;
+  --color-ink: #e7ecf2;
+  --color-ink-soft: #a9b3c0;
+  --color-ink-faint: #7c8693;
+  --color-accent: #7fb0ec;
+  --color-accent-hover: #a0c5f2;
+  --color-accent-soft: #1a2a3e;
+  --color-on-accent: #0b1522;
+}
+:root[data-scheme='dark'][data-palette='plum'] {
+  --color-paper: #131014;
+  --color-sheet: #1b171d;
+  --color-line: #2d2630;
+  --color-line-strong: #433a47;
+  --color-ink: #eee8f0;
+  --color-ink-soft: #b5aab9;
+  --color-ink-faint: #877c8b;
+  --color-accent: #c39be0;
+  --color-accent-hover: #d4b5ea;
+  --color-accent-soft: #2c2136;
+  --color-on-accent: #1a0f22;
+}
+:root[data-scheme='dark'][data-palette='clay'] {
+  --color-paper: #14110f;
+  --color-sheet: #1c1815;
+  --color-line: #2f2823;
+  --color-line-strong: #463c34;
+  --color-ink: #f0e8e1;
+  --color-ink-soft: #b9ab9f;
+  --color-ink-faint: #8a7d72;
+  --color-accent: #ec9a72;
+  --color-accent-hover: #f2b394;
+  --color-accent-soft: #3a2419;
+  --color-on-accent: #22100a;
+}
+:root[data-scheme='dark'][data-palette='graphite'] {
+  --color-paper: #111112;
+  --color-sheet: #19191b;
+  --color-line: #2a2a2d;
+  --color-line-strong: #404044;
+  --color-ink: #ececee;
+  --color-ink-soft: #ababb0;
+  --color-ink-faint: #7f7f85;
+  --color-accent: #e6e6e8;
+  --color-accent-hover: #ffffff;
+  --color-accent-soft: #2c2c30;
+  --color-on-accent: #111112;
 }
 
 @layer base {
   :root {
     color-scheme: light dark;
+  }
+  /* Native controls (dropdowns, date pickers, scrollbars) follow the chosen theme too. */
+  :root[data-scheme='light'] {
+    color-scheme: light;
+  }
+  :root[data-scheme='dark'] {
+    color-scheme: dark;
   }
   body {
     @apply bg-paper font-sans text-ink antialiased;
