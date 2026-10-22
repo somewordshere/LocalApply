@@ -65,3 +65,47 @@ describe('driving licence, travel and salary range', () => {
     expect(result.missing.map((m) => m.key)).toEqual(['drivingLicenceClass']);
   });
 });
+
+describe('spoken languages', () => {
+  const keysOf = () => scan(document).map((f) => matchField(f));
+  const speaker = {
+    ...profile,
+    languages: [
+      { id: '1', language: 'Deutsch', level: 'C1' as const },
+      { id: '2', language: 'English', level: 'native' as const },
+    ],
+  };
+
+  it('writes the list into a "Languages" box', async () => {
+    document.body.innerHTML = '<label for="l">Languages</label><input id="l" />';
+    expect(keysOf()).toEqual(['languages']);
+    await fillPage(document, speaker, { location: nowhere });
+    expect(value('l')).toBe('Deutsch (C1), English (native)');
+  });
+
+  it("answers a question about one language with that language's level, whatever language the form is in", async () => {
+    document.body.innerHTML = `
+      <label for="de">Deutschkenntnisse</label>
+      <select id="de"><option value="">Bitte wählen</option><option>Grundkenntnisse</option><option>Gut</option><option>Verhandlungssicher</option><option>Muttersprache</option></select>
+      <label for="en">What is your level of proficiency in English?</label>
+      <select id="en"><option value="">Select</option><option>Elementary proficiency</option><option>Professional working proficiency</option><option>Full professional proficiency</option><option>Native or bilingual proficiency</option></select>
+      <label for="fr">Niveau d'allemand</label>
+      <select id="fr"><option value="">Choisir</option><option>A1</option><option>B2</option><option>C1</option><option>C2</option></select>`;
+    expect(keysOf()).toEqual(['languageLevel', 'languageLevel', 'languageLevel']);
+    await fillPage(document, speaker, { location: nowhere });
+    expect(['de', 'en', 'fr'].map(value)).toEqual(['Verhandlungssicher', 'Native or bilingual proficiency', 'C1']);
+  });
+
+  it('gives unnamed language questions the languages in order, and leaves skill questions alone', async () => {
+    document.body.innerHTML = `
+      <label for="a">Language level</label>
+      <select id="a"><option value="">-</option><option>B2</option><option>C1</option><option>Native</option></select>
+      <label for="b">Language level</label>
+      <select id="b"><option value="">-</option><option>B2</option><option>C1</option><option>Native</option></select>
+      <label for="x">Excel proficiency</label>
+      <select id="x"><option value="">-</option><option>Basic</option><option>Advanced</option></select>`;
+    expect(keysOf()).toEqual(['languageLevel', 'languageLevel', null]);
+    await fillPage(document, speaker, { location: nowhere });
+    expect(['a', 'b', 'x'].map(value)).toEqual(['C1', 'Native', '']);
+  });
+});

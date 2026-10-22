@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useI18n } from '@/src/ui/I18nProvider';
 import { LANGUAGES, isLang, type MessageKey } from '@/src/ui/i18n';
 import { iconPath, PALETTES, type Palette } from '@/src/ui/palette';
@@ -17,6 +17,7 @@ import { BackupSection } from './sections/BackupSection';
 import { CustomAnswersSection } from './sections/CustomAnswersSection';
 import { DocumentsSection } from './sections/DocumentsSection';
 import { FieldSection } from './sections/FieldSection';
+import { LanguagesSection } from './sections/LanguagesSection';
 import { usePalette } from './usePalette';
 import { useTheme } from './useTheme';
 import { useProfile } from './useProfile';
@@ -27,7 +28,14 @@ const EXTRA_SECTIONS: { id: string; title: MessageKey; navTitle?: MessageKey }[]
   { id: 'data', title: 'section.backup', navTitle: 'section.backup.nav' },
 ];
 
-const SECTIONS = [...FIELD_SECTIONS, ...EXTRA_SECTIONS];
+/** The languages card follows the background section (education and jobs). */
+const LANGUAGES_AFTER = 'background';
+const LANGUAGES_SECTION: (typeof EXTRA_SECTIONS)[number] = { id: 'languages', title: 'section.languages' };
+
+const SECTIONS = [
+  ...FIELD_SECTIONS.flatMap((s) => (s.id === LANGUAGES_AFTER ? [s, LANGUAGES_SECTION] : [s])),
+  ...EXTRA_SECTIONS,
+];
 
 /** The section being read: the first one whose top is in the upper part of the window. */
 function useSectionInView(ready: boolean): [string, (id: string) => void] {
@@ -278,14 +286,18 @@ export default function App() {
 
         <div className="rounded-xl border border-line bg-sheet">
           {FIELD_SECTIONS.map((section) => (
-            <FieldSection
-              key={section.id}
-              section={section}
-              number={numbered(section.id)}
-              meta={count(section.id)}
-              profile={profile}
-              update={update}
-            />
+            <Fragment key={section.id}>
+              <FieldSection
+                section={section}
+                number={numbered(section.id)}
+                meta={count(section.id)}
+                profile={profile}
+                update={update}
+              />
+              {section.id === LANGUAGES_AFTER && (
+                <LanguagesSection number={numbered('languages')} profile={profile} update={update} />
+              )}
+            </Fragment>
           ))}
           <DocumentsSection
             number={numbered('documents')}

@@ -38,6 +38,11 @@ export const pl: Locale = {
     currentTitle: ['obecne stanowisko', 'stanowisko'],
     currentEmployer: ['pracodawca'],
     educationLevel: ['poziom wyksztalcenia'],
+    languageLevel: [
+      '(?:znajomosc|poziom) (?:jezyka )?(?:angielskiego|niemieckiego|francuskiego|hiszpanskiego|wloskiego|niderlandzkiego|portugalskiego|polskiego)',
+      'poziom jezyka',
+    ],
+    languages: ['jezyki(?: obce)?', 'znajomosc jezykow'],
     school: ['uczelnia', 'szkola'],
     fieldOfStudy: ['kierunek studiow'],
     degree: ['wyksztalcenie'],

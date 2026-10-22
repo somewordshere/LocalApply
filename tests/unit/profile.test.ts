@@ -16,6 +16,21 @@ describe('profile migration', () => {
     expect(p.salaryCurrency).toBe('EUR');
     expect('bogus' in p).toBe(false);
   });
+
+  it('keeps spoken languages, dropping broken entries and unknown levels', () => {
+    const p = migrate({
+      languages: [
+        { id: 'a', language: 'German', level: 'C1' },
+        { language: 'French', level: 'fluent' },
+        { level: 'B2' },
+        null,
+      ],
+    });
+    expect(p.languages).toEqual([
+      { id: 'a', language: 'German', level: 'C1' },
+      { id: 'l1', language: 'French', level: '' },
+    ]);
+  });
 });
 
 describe('profile versions', () => {

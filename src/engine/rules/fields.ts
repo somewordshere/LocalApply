@@ -58,6 +58,10 @@ export const FIELD_RULES: FieldRule[] = [
   { key: 'currentTitle', auto: ['organization-title'] },
   // Never a text area: those hold questions about the company, not its name.
   { key: 'currentEmployer', auto: ['organization'], kinds: ['text', 'select', 'combobox'] },
+  // A proficiency question names a language ("Deutschkenntnisse", "English proficiency"); a "Languages" box
+  // wants the whole list. A bare "Language" dropdown is left alone: on many sites it switches the page's language.
+  { key: 'languageLevel', long: true, kinds: ['text', 'select', 'radio', 'combobox'] },
+  { key: 'languages', kinds: ['text', 'textarea'] },
   // Before school and degree: "Highest degree", "Level of schooling" ask for the level.
   { key: 'educationLevel', long: true, kinds: ['text', 'select', 'radio', 'combobox'] },
   { key: 'school' },

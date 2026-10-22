@@ -42,6 +42,8 @@ export type FieldKey =
   | 'educationLevel'
   | 'degree'
   | 'fieldOfStudy'
+  | 'languages'
+  | 'languageLevel'
   | 'coverLetterText'
   | 'cv'
   | 'coverLetterFile'

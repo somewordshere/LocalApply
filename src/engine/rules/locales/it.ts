@@ -39,6 +39,11 @@ export const it: Locale = {
     currentTitle: ['posizione attuale'],
     currentEmployer: ['azienda', 'datore di lavoro'],
     educationLevel: ['livello di istruzione', 'grado di istruzione', 'titolo di studio piu alto'],
+    languageLevel: [
+      '(?:livello|conoscenza) (?:di |della lingua )?(?:inglese|tedesco|francese|spagnolo|italiano|olandese|portoghese|polacco)',
+      'livello linguistico',
+    ],
+    languages: ['lingue(?: conosciute| straniere)?', 'conoscenze linguistiche'],
     school: ['universita', 'scuola'],
     fieldOfStudy: ['corso di studi'],
     degree: ['titolo di studio', 'laurea'],

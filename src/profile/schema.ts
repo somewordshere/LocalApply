@@ -8,6 +8,17 @@ export interface StoredFile {
 
 export type YesNo = '' | 'yes' | 'no';
 
+/** Common European Framework levels, best first, plus native speaker. */
+export const LANGUAGE_LEVELS = ['native', 'C2', 'C1', 'B2', 'B1', 'A2', 'A1'] as const;
+export type LanguageLevel = (typeof LANGUAGE_LEVELS)[number] | '';
+
+export interface SpokenLanguage {
+  id: string;
+  /** As the person writes it: "German", "Deutsch". */
+  language: string;
+  level: LanguageLevel;
+}
+
 export interface CustomAnswer {
   id: string;
   /** Comma-separated phrases; the answer is used when a field label contains one of them. */
@@ -73,6 +84,7 @@ export interface Profile {
   educationLevel: string;
   degree: string;
   fieldOfStudy: string;
+  languages: SpokenLanguage[];
 
   coverLetterText: string;
   cv: StoredFile | null;
@@ -127,6 +139,7 @@ export const emptyProfile: Profile = {
   educationLevel: '',
   degree: '',
   fieldOfStudy: '',
+  languages: [],
   coverLetterText: '',
   cv: null,
   coverLetterFile: null,
@@ -142,7 +155,7 @@ export const emptyProfile: Profile = {
  * older versions are upgraded, missing fields get defaults, malformed parts are dropped.
  */
 export function migrate(raw: unknown): Profile {
-  const out: Profile = { ...emptyProfile, customAnswers: [] };
+  const out: Profile = { ...emptyProfile, customAnswers: [], languages: [] };
   if (!raw || typeof raw !== 'object') return out;
   const src = upgrade(raw as Record<string, unknown>);
   const target = out as unknown as Record<string, unknown>;
@@ -153,6 +166,16 @@ export function migrate(raw: unknown): Profile {
       const f = value as Partial<StoredFile>;
       if (typeof f.name === 'string' && typeof f.dataUrl === 'string') {
         target[key] = { name: f.name, type: typeof f.type === 'string' ? f.type : '', dataUrl: f.dataUrl };
+      }
+    } else if (key === 'languages') {
+      if (Array.isArray(value)) {
+        out.languages = value
+          .filter((l) => l && typeof l.language === 'string')
+          .map((l, i) => ({
+            id: typeof l.id === 'string' ? l.id : `l${i}`,
+            language: l.language,
+            level: (LANGUAGE_LEVELS as readonly string[]).includes(l.level) ? l.level : '',
+          }));
       }
     } else if (key === 'customAnswers') {
       if (Array.isArray(value)) {

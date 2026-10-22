@@ -51,6 +51,11 @@ export const de: Locale = {
     currentTitle: ['aktuelle position', 'berufsbezeichnung', 'jobtitel'],
     currentEmployer: ['arbeitgeber', 'aktueller arbeitgeber', 'unternehmen', 'firma'],
     educationLevel: ['bildungsabschluss', 'bildungsniveau', 'hochster abschluss', 'schulabschluss', 'bildungsstand'],
+    languageLevel: [
+      '(?:deutsch|englisch|franzosisch|spanisch|italienisch|niederlandisch|portugiesisch|polnisch|russisch|ukrainisch|turkisch|chinesisch|arabisch|japanisch|schwedisch)(?:kenntnisse| ?niveau| ?level)',
+      'sprachniveau',
+    ],
+    languages: ['sprachkenntnisse', 'sprachen', 'fremdsprachen(?:kenntnisse)?'],
     school: ['hochschule', 'universitat'],
     fieldOfStudy: ['studiengang', 'studienfach', 'fachrichtung'],
     degree: ['abschluss'],

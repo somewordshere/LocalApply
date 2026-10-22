@@ -35,6 +35,8 @@ export const pt: Locale = {
     location: ['localizacao'],
     currentEmployer: ['empresa'],
     educationLevel: ['escolaridade', 'nivel de (?:ensino|formacao)', 'habilitacoes literarias'],
+    languageLevel: ['nivel de (?:idioma|ingles|alemao|frances|espanhol|italiano|neerlandes|portugues|polaco)'],
+    languages: ['idiomas', 'linguas'],
     school: ['universidade'],
     degree: ['grau', 'diploma'],
   },

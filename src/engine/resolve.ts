@@ -1,4 +1,5 @@
 import type { Profile, YesNo } from '../profile/schema';
+import { languageFor, languageList, levelNames } from './languages';
 import { norm } from './text';
 import type { FieldKey } from './types';
 
@@ -368,6 +369,10 @@ export interface ResolveContext {
   has: (key: FieldKey) => boolean;
   /** The field only accepts digits. */
   numeric: boolean;
+  /** The field's label, for questions that name what they ask about ("German proficiency"). */
+  label?: string;
+  /** How many fields with the same key came before this one on the page. */
+  index?: number;
 }
 
 /**
@@ -456,6 +461,10 @@ export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[
       // "B, BE" goes into a text box as written; a list of classes is tried one by one.
       return classes ? [classes, ...classes.split(/[\s,;/]+/).filter(Boolean)] : [];
     }
+    case 'languages':
+      return one(languageList(p.languages));
+    case 'languageLevel':
+      return levelNames(languageFor(p.languages, ctx.label ?? '', ctx.index ?? 0)?.level ?? '');
     case 'sexualOrientation':
       return withSynonyms(p.sexualOrientation, ORIENTATIONS);
     case 'cv':

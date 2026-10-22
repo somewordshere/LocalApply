@@ -68,6 +68,8 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     skipped: 0,
   };
   const changes: Change[] = [];
+  // The n-th field of a key gets the n-th entry of a list (languages now, work history later).
+  const seen = new Map<FieldKey, number>();
 
   for (const field of fields) {
     const key = keys.get(field) ?? null;
@@ -104,7 +106,11 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
       key === 'phone' &&
       DIAL_CODE_ONLY.test((field.el as HTMLInputElement).value ?? '') &&
       (field.el as HTMLInputElement).value.includes('+');
+    const index = seen.get(key) ?? 0;
+    seen.set(key, index + 1);
     let candidates = resolve(key, profile, {
+      label,
+      index,
       has: (k) => present.has(k) && !(k === 'phoneCountryCode' && dialCodePrefilled),
       numeric: isNumeric(field) || (key === 'salary' && CURRENCY_HINT.test(field.label)),
     });
