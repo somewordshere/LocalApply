@@ -64,6 +64,18 @@ export const fr: Translation = {
   'section.answers.nav': 'Réponses',
   'section.answers.note':
     "Pour les questions que les champs prévus ne couvrent pas. Une réponse est utilisée quand l'intitulé d'un champ contient l'un de ses mots-clés (séparez-en plusieurs par des virgules).",
+  'section.applications': 'Candidatures',
+  'section.applications.note':
+    'Chaque formulaire rempli par LocalApply est noté ici, dans ce navigateur uniquement, pour savoir où vous avez postulé.',
+  'applications.keep': 'Garder un journal des candidatures remplies',
+  'applications.date': 'Date',
+  'applications.company': 'Entreprise',
+  'applications.position': 'Poste',
+  'applications.page': 'Page',
+  'applications.export': 'Exporter en CSV',
+  'applications.clear': 'Vider le journal',
+  'applications.confirmClear': 'Supprimer toutes les entrées du journal des candidatures ?',
+  'applications.none': 'Rien pour l’instant. Remplissez une candidature et elle apparaîtra ici.',
   'section.backup': 'Sauvegarde',
   'section.backup.nav': 'Sauvegarde',
   'section.backup.note': "L'export contient tout ce qui précède, y compris vos documents.",

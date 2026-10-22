@@ -68,6 +68,18 @@ export const en = {
   'section.answers.nav': 'Answers',
   'section.answers.note':
     "For questions the built-in fields don't cover. An answer is used when a form label contains one of its keywords (separate several with commas).",
+  'section.applications': 'Applications',
+  'section.applications.note':
+    'Each form LocalApply fills is noted here, in this browser only, so you can see where you applied.',
+  'applications.keep': 'Keep a log of the applications I fill',
+  'applications.date': 'Date',
+  'applications.company': 'Company',
+  'applications.position': 'Position',
+  'applications.page': 'Page',
+  'applications.export': 'Export as CSV',
+  'applications.clear': 'Clear log',
+  'applications.confirmClear': 'Remove every entry from the application log?',
+  'applications.none': 'Nothing logged yet. Fill an application and it shows up here.',
   'section.backup': 'Backup',
   'section.backup.nav': 'Backup',
   'section.backup.note': 'The export contains everything above, including your documents.',

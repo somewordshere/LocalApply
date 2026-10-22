@@ -2,6 +2,7 @@ import { defineContentScript } from 'wxt/utils/define-content-script';
 import { browser } from 'wxt/browser';
 import { pickAdapter } from '@/src/adapters';
 import { fillPage, undoLastFill, type FillResult, type UndoResult } from '@/src/engine';
+import { logUrl } from '@/src/core/applications';
 import { readJob, type Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { loadProfile } from '@/src/profile/store';
@@ -112,19 +113,21 @@ async function undo(): Promise<void> {
   toast(undoSummary(result, t));
 }
 
-async function run(overwrite: boolean, job?: Job): Promise<void> {
+/** The posting this page shows, with its address; only the top frame can tell. */
+function thisJob(): Job {
+  return { ...readJob(document), url: logUrl(location.href) };
+}
+
+async function run(overwrite: boolean, given?: Job): Promise<void> {
   if (running) return;
+  // A fill started without the job (an older popup) can still read it here in the top frame.
+  const job = given ?? (window === window.top ? thisJob() : undefined);
   running = true;
   send({ type: 'fill-start' });
   let result: FillResult = { adapter: null, total: 0, filled: [], missing: [], unmatched: [], skipped: 0 };
   try {
     const [profile, t] = await Promise.all([loadProfile(), texts(), paint()]);
-    // A fill started without the job (an older popup) can still read it here in the top frame.
-    result = await fillPage(document, profile, {
-      overwrite,
-      location,
-      job: job ?? (window === window.top ? readJob(document) : undefined),
-    });
+    result = await fillPage(document, profile, { overwrite, location, job });
     if (result.total > 0 && (window === window.top || result.filled.length > 0)) {
       const action = result.filled.length
         ? { label: t('notice.undo'), run: () => send({ type: 'relay-undo' }) }
@@ -135,7 +138,7 @@ async function run(overwrite: boolean, job?: Job): Promise<void> {
     console.error('[LocalApply]', error);
   } finally {
     running = false;
-    send({ type: 'fill-result', result });
+    send({ type: 'fill-result', result, job });
   }
 }
 
@@ -174,7 +177,7 @@ export default defineContentScript({
       if (message?.type === 'fill') void run(Boolean(message.overwrite), message.job);
       if (message?.type === 'undo' && !running) void undo();
       // Only the top frame is asked; its answer is the reply.
-      if (message?.type === 'read-job') return Promise.resolve(readJob(document));
+      if (message?.type === 'read-job') return Promise.resolve(thisJob());
     });
     if (SHOW_PAGE_BUTTON) watchForForm();
   },

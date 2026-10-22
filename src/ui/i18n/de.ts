@@ -63,6 +63,18 @@ export const de: Translation = {
   'section.answers.nav': 'Antworten',
   'section.answers.note':
     'Für Fragen, die die festen Felder nicht abdecken. Eine Antwort wird genutzt, wenn eine Feldbezeichnung eines ihrer Stichwörter enthält (mehrere mit Kommas trennen).',
+  'section.applications': 'Bewerbungen',
+  'section.applications.note':
+    'Jedes Formular, das LocalApply ausfüllt, wird hier vermerkt, nur in diesem Browser. So siehst du, wo du dich beworben hast.',
+  'applications.keep': 'Ausgefüllte Bewerbungen protokollieren',
+  'applications.date': 'Datum',
+  'applications.company': 'Unternehmen',
+  'applications.position': 'Stelle',
+  'applications.page': 'Seite',
+  'applications.export': 'Als CSV exportieren',
+  'applications.clear': 'Protokoll leeren',
+  'applications.confirmClear': 'Alle Einträge aus dem Bewerbungsprotokoll entfernen?',
+  'applications.none': 'Noch nichts protokolliert. Füll eine Bewerbung aus, dann erscheint sie hier.',
   'section.backup': 'Sicherung',
   'section.backup.nav': 'Sicherung',
   'section.backup.note': 'Der Export enthält alles oben, auch deine Dokumente.',

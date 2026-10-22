@@ -12,7 +12,8 @@ export const OPTIONAL_SECTIONS = new Set(['voluntary']);
 const has = (value: unknown) => (typeof value === 'string' ? value.trim() !== '' : Boolean(value));
 
 export function sectionProgress(section: FieldSectionDef, profile: Profile): Progress {
-  return { filled: section.fields.filter((f) => has(profile[f.key])).length, total: section.fields.length };
+  const counted = section.fields.filter((f) => !f.optional);
+  return { filled: counted.filter((f) => has(profile[f.key])).length, total: counted.length };
 }
 
 export function documentsProgress(profile: Profile): Progress {

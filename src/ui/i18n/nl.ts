@@ -63,6 +63,18 @@ export const nl: Translation = {
   'section.answers.nav': 'Antwoorden',
   'section.answers.note':
     'Voor vragen die de vaste velden niet dekken. Een antwoord wordt gebruikt als een veldlabel een van de trefwoorden bevat (scheid er meerdere met komma’s).',
+  'section.applications': 'Sollicitaties',
+  'section.applications.note':
+    'Elk formulier dat LocalApply invult, wordt hier bijgehouden, alleen in deze browser, zodat je ziet waar je hebt gesolliciteerd.',
+  'applications.keep': 'Een logboek bijhouden van de sollicitaties die ik invul',
+  'applications.date': 'Datum',
+  'applications.company': 'Bedrijf',
+  'applications.position': 'Functie',
+  'applications.page': 'Pagina',
+  'applications.export': 'Exporteren als CSV',
+  'applications.clear': 'Logboek wissen',
+  'applications.confirmClear': 'Alle items uit het sollicitatielogboek verwijderen?',
+  'applications.none': 'Nog niets bijgehouden. Vul een sollicitatie in en die verschijnt hier.',
   'section.backup': 'Back-up',
   'section.backup.nav': 'Back-up',
   'section.backup.note': 'De export bevat alles hierboven, ook je documenten.',

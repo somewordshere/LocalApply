@@ -2,6 +2,8 @@
 export interface Job {
   company?: string;
   position?: string;
+  /** The posting page, as kept in the application log (see logUrl). Set by the top frame. */
+  url?: string;
 }
 
 /** Hosts and site names that sit in titles and og:site_name but are not the employer. */

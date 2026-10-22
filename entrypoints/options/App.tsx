@@ -13,6 +13,7 @@ import {
   type Progress,
 } from './completion';
 import { FIELD_SECTIONS } from './fields';
+import { ApplicationsSection } from './sections/ApplicationsSection';
 import { BackupSection } from './sections/BackupSection';
 import { CustomAnswersSection } from './sections/CustomAnswersSection';
 import { DocumentsSection } from './sections/DocumentsSection';
@@ -25,6 +26,7 @@ import { useProfile } from './useProfile';
 const EXTRA_SECTIONS: { id: string; title: MessageKey; navTitle?: MessageKey }[] = [
   { id: 'documents', title: 'section.documents' },
   { id: 'answers', title: 'section.answers', navTitle: 'section.answers.nav' },
+  { id: 'applications', title: 'section.applications' },
   { id: 'data', title: 'section.backup', navTitle: 'section.backup.nav' },
 ];
 
@@ -306,6 +308,7 @@ export default function App() {
             update={update}
           />
           <CustomAnswersSection number={numbered('answers')} profile={profile} update={update} />
+          <ApplicationsSection number={numbered('applications')} />
           <BackupSection number={numbered('data')} profile={profile} update={update} />
         </div>
       </main>

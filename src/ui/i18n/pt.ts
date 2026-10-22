@@ -63,6 +63,18 @@ export const pt: Translation = {
   'section.answers.nav': 'Respostas',
   'section.answers.note':
     'Para perguntas que os campos fixos não cobrem. Uma resposta é usada quando o rótulo de um campo contém uma das suas palavras-chave (separe várias com vírgulas).',
+  'section.applications': 'Candidaturas',
+  'section.applications.note':
+    'Cada formulário que o LocalApply preenche fica registado aqui, apenas neste navegador, para saber onde se candidatou.',
+  'applications.keep': 'Manter um registo das candidaturas que preencho',
+  'applications.date': 'Data',
+  'applications.company': 'Empresa',
+  'applications.position': 'Cargo',
+  'applications.page': 'Página',
+  'applications.export': 'Exportar como CSV',
+  'applications.clear': 'Limpar registo',
+  'applications.confirmClear': 'Remover todas as entradas do registo de candidaturas?',
+  'applications.none': 'Ainda nada registado. Preencha uma candidatura e ela aparece aqui.',
   'section.backup': 'Cópia de segurança',
   'section.backup.nav': 'Cópia',
   'section.backup.note': 'A exportação contém tudo o que está acima, incluindo os seus documentos.',

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { clearLog } from '@/src/core/applications';
 import { Section } from '@/src/ui/components/Section';
 import { useI18n } from '@/src/ui/I18nProvider';
 import type { MessageKey } from '@/src/ui/i18n';
@@ -55,7 +56,9 @@ export function BackupSection({
         <button
           className="cursor-pointer text-sm font-medium text-danger underline-offset-3 hover:underline"
           onClick={() => {
-            if (confirm(t('backup.confirmDelete'))) update({ ...emptyProfile, customAnswers: [] });
+            if (!confirm(t('backup.confirmDelete'))) return;
+            update({ ...emptyProfile, customAnswers: [], languages: [] });
+            void clearLog();
           }}
         >
           {t('backup.deleteAll')}

@@ -23,6 +23,8 @@ export interface FieldDef {
   wide?: boolean;
   /** The phone number: code, number and full number in linked boxes (see PhoneField). */
   phone?: boolean;
+  /** Left empty by most people on purpose; doesn't count towards how complete the profile is. */
+  optional?: boolean;
 }
 
 export interface FieldSectionDef {
@@ -96,8 +98,8 @@ export const FIELD_SECTIONS: FieldSectionDef[] = [
     fields: [
       { key: 'salaryAmount', label: 'field.salaryAmount', example: '65000' },
       { key: 'salaryCurrency', label: 'field.salaryCurrency', example: 'EUR' },
-      { key: 'salaryMin', label: 'field.salaryMin', placeholder: 'field.salaryRange.placeholder' },
-      { key: 'salaryMax', label: 'field.salaryMax', placeholder: 'field.salaryRange.placeholder' },
+      { key: 'salaryMin', label: 'field.salaryMin', placeholder: 'field.salaryRange.placeholder', optional: true },
+      { key: 'salaryMax', label: 'field.salaryMax', placeholder: 'field.salaryRange.placeholder', optional: true },
       { key: 'noticePeriod', label: 'field.noticePeriod', placeholder: 'field.noticePeriod.placeholder' },
       { key: 'startDate', label: 'field.startDate', type: 'date' },
       { key: 'yearsOfExperience', label: 'field.yearsOfExperience', example: '5' },
@@ -106,7 +108,7 @@ export const FIELD_SECTIONS: FieldSectionDef[] = [
       { key: 'willingToRelocate', label: 'field.willingToRelocate', options: YES_NO },
       { key: 'willingToTravel', label: 'field.willingToTravel', options: YES_NO },
       { key: 'drivingLicence', label: 'field.drivingLicence', options: YES_NO },
-      { key: 'drivingLicenceClass', label: 'field.drivingLicenceClass', example: 'B' },
+      { key: 'drivingLicenceClass', label: 'field.drivingLicenceClass', example: 'B', optional: true },
       { key: 'remotePreference', label: 'field.remotePreference', placeholder: 'field.remotePreference.placeholder' },
     ],
   },

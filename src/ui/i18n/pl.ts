@@ -63,6 +63,18 @@ export const pl: Translation = {
   'section.answers.nav': 'Odpowiedzi',
   'section.answers.note':
     'Na pytania, których nie obejmują stałe pola. Odpowiedź jest używana, gdy etykieta pola zawiera jedno z jej słów kluczowych (kilka oddziel przecinkami).',
+  'section.applications': 'Aplikacje',
+  'section.applications.note':
+    'Każdy formularz wypełniony przez LocalApply jest tu zapisywany, tylko w tej przeglądarce, żebyś wiedział, gdzie aplikowałeś.',
+  'applications.keep': 'Prowadź dziennik wypełnionych aplikacji',
+  'applications.date': 'Data',
+  'applications.company': 'Firma',
+  'applications.position': 'Stanowisko',
+  'applications.page': 'Strona',
+  'applications.export': 'Eksportuj jako CSV',
+  'applications.clear': 'Wyczyść dziennik',
+  'applications.confirmClear': 'Usunąć wszystkie wpisy z dziennika aplikacji?',
+  'applications.none': 'Na razie nic. Wypełnij aplikację, a pojawi się tutaj.',
   'section.backup': 'Kopia zapasowa',
   'section.backup.nav': 'Kopia',
   'section.backup.note': 'Eksport zawiera wszystko powyżej, także twoje dokumenty.',

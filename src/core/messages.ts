@@ -12,7 +12,7 @@ export type Message =
   /** Frame -> popup: this frame received the command. */
   | { type: 'fill-start' }
   /** Frame -> popup: this frame is done. */
-  | { type: 'fill-result'; result: FillResult }
+  | { type: 'fill-result'; result: FillResult; job?: Job }
   /** Popup or background -> every frame of a tab: take back the last fill. */
   | { type: 'undo' }
   /** Frame -> background: ask all frames of my tab to undo (Undo in the on-page notice). */

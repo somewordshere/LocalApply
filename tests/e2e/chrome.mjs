@@ -222,6 +222,32 @@ try {
     await page.close();
   });
 
+  await step('the application log notes the fill and shows it on the profile page', async () => {
+    // The background waits for every frame to report before logging; poll for the entry.
+    let entry;
+    for (let tries = 0; !entry && tries < 40; tries++) {
+      const log = await worker.evaluate(() =>
+        chrome.storage.local.get('applicationLog').then((r) => r.applicationLog ?? []),
+      );
+      entry = log.find((a) => a.url === 'https://jobs.example.com/acme/qa');
+      if (!entry) await new Promise((r) => setTimeout(r, 100));
+    }
+    assert.ok(entry, 'the iframe fill was logged');
+    assert.equal(entry.company, 'Acme');
+    assert.equal(entry.position, 'QA Engineer');
+
+    const options = await context.newPage();
+    await options.goto(`chrome-extension://${extensionId}/options.html#applications`);
+    await options.getByRole('cell', { name: 'Acme', exact: true }).waitFor();
+    await options.getByLabel('Keep a log of the applications I fill').uncheck();
+    assert.equal(
+      await worker.evaluate(() => chrome.storage.local.get('logApplications').then((r) => r.logApplications)),
+      false,
+    );
+    await options.getByLabel('Keep a log of the applications I fill').check();
+    await options.close();
+  });
+
   await step('profile page links the phone boxes: a full number fills code and number, and back', async () => {
     const options = await context.newPage();
     await options.goto(`chrome-extension://${extensionId}/options.html`);
