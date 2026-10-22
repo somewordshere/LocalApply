@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { clearLog } from '@/src/core/applications';
+import { resetProfiles } from '@/src/profile/store';
 import { Section } from '@/src/ui/components/Section';
 import { useI18n } from '@/src/ui/I18nProvider';
 import type { MessageKey } from '@/src/ui/i18n';
-import { emptyProfile, migrate, type Profile } from '@/src/profile/schema';
+import { migrate, type Profile } from '@/src/profile/schema';
 
 const EXPORT_FILE_NAME = 'localapply-profile.json';
 
@@ -57,7 +58,7 @@ export function BackupSection({
           className="cursor-pointer text-sm font-medium text-danger underline-offset-3 hover:underline"
           onClick={() => {
             if (!confirm(t('backup.confirmDelete'))) return;
-            update({ ...emptyProfile, customAnswers: [], languages: [] });
+            void resetProfiles();
             void clearLog();
           }}
         >

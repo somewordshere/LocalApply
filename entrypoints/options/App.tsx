@@ -15,6 +15,7 @@ import {
   experienceProgress,
 } from './completion';
 import { FIELD_SECTIONS } from './fields';
+import { ProfileSwitcher } from './ProfileSwitcher';
 import { ApplicationsSection } from './sections/ApplicationsSection';
 import { BackupSection } from './sections/BackupSection';
 import { CustomAnswersSection } from './sections/CustomAnswersSection';
@@ -262,6 +263,7 @@ export default function App() {
           <div className="min-w-0 flex-1 basis-80">
             <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl">{t('options.title')}</h1>
             <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-soft">{t('options.subtitle')}</p>
+            <ProfileSwitcher profile={profile} />
           </div>
           <div className="flex shrink-0 flex-col gap-3 md:items-end">
             <label className="flex items-center gap-2 text-sm text-ink-soft">

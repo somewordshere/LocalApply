@@ -12,6 +12,16 @@ export const es: Translation = {
   'options.title': 'Tu perfil',
   'options.subtitle':
     'Guardado solo en este navegador. Se usa para rellenar formularios de candidatura cuando pulsas Rellenar.',
+  'profiles.label': 'Perfil',
+  'profiles.main': 'Principal',
+  'profiles.new': 'Nuevo perfil',
+  'profiles.rename': 'Renombrar',
+  'profiles.delete': 'Eliminar',
+  'profiles.confirmDelete': '¿Eliminar el perfil «{name}» y todo su contenido?',
+  'profiles.name': 'Nombre del perfil',
+  'profiles.namePlaceholder': 'Por ejemplo «CV en inglés»',
+  'profiles.copy': 'Empezar como copia de este perfil',
+  'profiles.create': 'Crear',
   'options.startHere':
     'Empieza aquí: rellena los datos que quieres que reciban los formularios de candidatura. Todo se guarda mientras escribes y se queda en este navegador. Después abre una candidatura y pulsa Rellenar esta página en el botón de LocalApply de la barra de herramientas.',
   'options.loading': 'Cargando…',

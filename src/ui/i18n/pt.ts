@@ -12,6 +12,16 @@ export const pt: Translation = {
   'options.title': 'O seu perfil',
   'options.subtitle':
     'Guardado apenas neste navegador. Usado para preencher formulários de candidatura quando clica em Preencher.',
+  'profiles.label': 'Perfil',
+  'profiles.main': 'Principal',
+  'profiles.new': 'Novo perfil',
+  'profiles.rename': 'Mudar o nome',
+  'profiles.delete': 'Eliminar',
+  'profiles.confirmDelete': 'Eliminar o perfil «{name}» e tudo o que contém?',
+  'profiles.name': 'Nome do perfil',
+  'profiles.namePlaceholder': 'Por exemplo «CV em inglês»',
+  'profiles.copy': 'Começar como cópia deste perfil',
+  'profiles.create': 'Criar',
   'options.startHere':
     'Comece aqui: preencha os dados que os formulários de candidatura devem receber. Tudo é guardado enquanto escreve e fica neste navegador. Depois abra uma candidatura e clique em Preencher esta página no botão LocalApply da barra de ferramentas.',
   'options.loading': 'A carregar…',

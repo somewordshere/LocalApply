@@ -12,6 +12,16 @@ export const nl: Translation = {
   'options.title': 'Je profiel',
   'options.subtitle':
     'Alleen in deze browser opgeslagen. Wordt gebruikt om sollicitatieformulieren in te vullen als je op Invullen klikt.',
+  'profiles.label': 'Profiel',
+  'profiles.main': 'Hoofdprofiel',
+  'profiles.new': 'Nieuw profiel',
+  'profiles.rename': 'Hernoemen',
+  'profiles.delete': 'Verwijderen',
+  'profiles.confirmDelete': 'Het profiel "{name}" en alles erin verwijderen?',
+  'profiles.name': 'Profielnaam',
+  'profiles.namePlaceholder': 'Bijvoorbeeld "Engels cv"',
+  'profiles.copy': 'Beginnen als kopie van dit profiel',
+  'profiles.create': 'Aanmaken',
   'options.startHere':
     'Begin hier: vul de gegevens in die sollicitatieformulieren moeten krijgen. Alles wordt opgeslagen terwijl je typt en blijft in deze browser. Open daarna een sollicitatie en klik op Deze pagina invullen in de LocalApply-knop in de werkbalk.',
   'options.loading': 'Laden…',

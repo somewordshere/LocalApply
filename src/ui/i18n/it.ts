@@ -12,6 +12,16 @@ export const it: Translation = {
   'options.title': 'Il tuo profilo',
   'options.subtitle':
     'Salvato solo in questo browser. Serve a compilare i moduli di candidatura quando fai clic su Compila.',
+  'profiles.label': 'Profilo',
+  'profiles.main': 'Principale',
+  'profiles.new': 'Nuovo profilo',
+  'profiles.rename': 'Rinomina',
+  'profiles.delete': 'Elimina',
+  'profiles.confirmDelete': 'Eliminare il profilo «{name}» e tutto il suo contenuto?',
+  'profiles.name': 'Nome del profilo',
+  'profiles.namePlaceholder': 'Ad esempio «CV in inglese»',
+  'profiles.copy': 'Parti da una copia di questo profilo',
+  'profiles.create': 'Crea',
   'options.startHere':
     'Inizia da qui: inserisci i dati che vuoi dare ai moduli di candidatura. Tutto viene salvato mentre scrivi e resta in questo browser. Poi apri una candidatura e fai clic su Compila questa pagina nel pulsante LocalApply della barra degli strumenti.',
   'options.loading': 'Caricamento…',

@@ -2,6 +2,7 @@ import { defineBackground } from 'wxt/utils/define-background';
 import { browser } from 'wxt/browser';
 import { logUrl, recordApplication } from '@/src/core/applications';
 import { fillTab } from '@/src/core/fill';
+import { activeProfileName } from '@/src/profile/store';
 import type { Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { iconPath, loadPalette, watchPalette, type Palette } from '@/src/ui/palette';
@@ -56,7 +57,9 @@ export default defineBackground(() => {
         fills.delete(tabId);
         const url = merged.job.url || logUrl(tabUrl ?? '');
         if (merged.filled > 0 && url) {
-          void recordApplication({ company: merged.job.company ?? '', position: merged.job.position ?? '', url });
+          void activeProfileName().then((profile) =>
+            recordApplication({ company: merged.job.company ?? '', position: merged.job.position ?? '', url, profile }),
+          );
         }
       }, LOG_AFTER_MS),
     });

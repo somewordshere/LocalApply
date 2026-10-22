@@ -12,6 +12,16 @@ export const pl: Translation = {
   'options.title': 'Twój profil',
   'options.subtitle':
     'Zapisany tylko w tej przeglądarce. Służy do wypełniania formularzy aplikacyjnych, gdy klikniesz Wypełnij.',
+  'profiles.label': 'Profil',
+  'profiles.main': 'Główny',
+  'profiles.new': 'Nowy profil',
+  'profiles.rename': 'Zmień nazwę',
+  'profiles.delete': 'Usuń',
+  'profiles.confirmDelete': 'Usunąć profil „{name}" i wszystko, co zawiera?',
+  'profiles.name': 'Nazwa profilu',
+  'profiles.namePlaceholder': 'Na przykład „CV po angielsku"',
+  'profiles.copy': 'Zacznij od kopii tego profilu',
+  'profiles.create': 'Utwórz',
   'options.startHere':
     'Zacznij tutaj: wpisz dane, które mają trafiać do formularzy rekrutacyjnych. Wszystko zapisuje się podczas pisania i zostaje w tej przeglądarce. Potem otwórz formularz aplikacyjny i kliknij Wypełnij tę stronę w przycisku LocalApply na pasku narzędzi.',
   'options.loading': 'Wczytywanie…',

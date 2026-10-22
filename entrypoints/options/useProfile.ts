@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Profile } from '@/src/profile/schema';
-import { loadProfile, saveProfile, watchProfile } from '@/src/profile/store';
+import { loadIndex, loadProfileById, saveProfile, watchProfile } from '@/src/profile/store';
 
 export type SaveState = 'saved' | 'saving' | 'error';
 
@@ -9,7 +9,8 @@ const SAVE_DELAY_MS = 300;
 const JUST_SAVED_MS = 1800;
 
 /**
- * Loads the profile and saves every change shortly after the user stops typing.
+ * Loads the active profile and saves every change into it shortly after the user stops typing. When another
+ * profile becomes active, a pending save still goes to the profile it was typed in, then the page shows the other.
  * `justSaved` is true for a moment after a save finishes, never on page load.
  */
 export function useProfile() {
@@ -24,6 +25,8 @@ export function useProfile() {
   const latest = useRef<Profile | null>(null);
   // Edits typed here but not saved yet; they win over a save from elsewhere.
   const unsaved = useRef<Partial<Profile>>({});
+  // The profile shown, and so the one every save goes into.
+  const shownId = useRef<string | null>(null);
 
   const show = (next: Profile) => {
     latest.current = next;
@@ -31,9 +34,28 @@ export function useProfile() {
   };
 
   useEffect(() => {
-    loadProfile().then(show);
-    // The popup saves answers too; take them in so the next save here does not overwrite them.
-    const stop = watchProfile((external) => show({ ...external, ...unsaved.current }));
+    void loadIndex().then(async ({ active }) => {
+      const loaded = await loadProfileById(active);
+      shownId.current ??= active;
+      if (shownId.current === active) show(loaded);
+    });
+    const stop = watchProfile((external, id) => {
+      if (id !== shownId.current) {
+        // Another profile was chosen: finish the save waiting for the old one, then show the new one as stored.
+        if (timer.current !== undefined && latest.current && shownId.current) {
+          clearTimeout(timer.current);
+          timer.current = undefined;
+          void saveProfile(latest.current, shownId.current);
+        }
+        unsaved.current = {};
+        shownId.current = id;
+        show(external);
+        setState('saved');
+        return;
+      }
+      // The popup saves answers too; take them in so the next save here does not overwrite them.
+      show({ ...external, ...unsaved.current });
+    });
     return () => {
       stop();
       clearTimeout(justSavedTimer.current);
@@ -48,10 +70,12 @@ export function useProfile() {
     setJustSaved(false);
     const edit = ++edits.current;
     clearTimeout(timer.current);
+    const id = shownId.current;
     timer.current = setTimeout(() => {
+      timer.current = undefined;
       const next = latest.current!;
       unsaved.current = {};
-      saveProfile(next).then(
+      saveProfile(next, id ?? undefined).then(
         () => {
           if (edit !== edits.current) return;
           setState('saved');

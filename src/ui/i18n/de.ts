@@ -12,6 +12,16 @@ export const de: Translation = {
   'options.title': 'Dein Profil',
   'options.subtitle':
     'Nur in diesem Browser gespeichert. Damit werden Bewerbungsformulare ausgefüllt, wenn du auf Ausfüllen klickst.',
+  'profiles.label': 'Profil',
+  'profiles.main': 'Hauptprofil',
+  'profiles.new': 'Neues Profil',
+  'profiles.rename': 'Umbenennen',
+  'profiles.delete': 'Löschen',
+  'profiles.confirmDelete': 'Das Profil „{name}" und alles darin löschen?',
+  'profiles.name': 'Profilname',
+  'profiles.namePlaceholder': 'Zum Beispiel „Englischer Lebenslauf"',
+  'profiles.copy': 'Als Kopie dieses Profils beginnen',
+  'profiles.create': 'Anlegen',
   'options.startHere':
     'Fang hier an: Trag die Angaben ein, die Bewerbungsformulare bekommen sollen. Alles wird beim Tippen gespeichert und bleibt in diesem Browser. Öffne dann eine Bewerbung und klicke im LocalApply-Symbol auf Diese Seite ausfüllen.',
   'options.loading': 'Wird geladen…',

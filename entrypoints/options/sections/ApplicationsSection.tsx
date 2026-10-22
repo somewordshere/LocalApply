@@ -9,6 +9,7 @@ import {
   watchLog,
   type Application,
 } from '@/src/core/applications';
+import { loadIndex, watchIndex } from '@/src/profile/store';
 import { Section } from '@/src/ui/components/Section';
 import { useI18n } from '@/src/ui/I18nProvider';
 
@@ -19,6 +20,7 @@ export function ApplicationsSection({ number }: { number: number }) {
   const { lang, t } = useI18n();
   const [log, setLog] = useState<Application[]>([]);
   const [on, setOn] = useState(true);
+  const [several, setSeveral] = useState(false);
 
   useEffect(() => {
     const load = () => {
@@ -26,7 +28,13 @@ export function ApplicationsSection({ number }: { number: number }) {
       void loadLogSetting().then(setOn);
     };
     load();
-    return watchLog(load);
+    void loadIndex().then((index) => setSeveral(index.list.length > 1));
+    const stopIndex = watchIndex((index) => setSeveral(index.list.length > 1));
+    const stopLog = watchLog(load);
+    return () => {
+      stopIndex();
+      stopLog();
+    };
   }, []);
 
   const exportCsv = () => {
@@ -73,6 +81,7 @@ export function ApplicationsSection({ number }: { number: number }) {
                 <th className="px-2 pb-2 font-medium">{t('applications.company')}</th>
                 <th className="px-2 pb-2 font-medium">{t('applications.position')}</th>
                 <th className="px-2 pb-2 font-medium">{t('applications.page')}</th>
+                {several && <th className="px-2 pb-2 font-medium">{t('profiles.label')}</th>}
                 <th className="px-2 pb-2" />
               </tr>
             </thead>
@@ -89,6 +98,7 @@ export function ApplicationsSection({ number }: { number: number }) {
                       {host(a.url)}
                     </a>
                   </td>
+                  {several && <td className="px-2 py-2 text-ink-soft">{a.profile || t('profiles.main')}</td>}
                   <td className="px-2 py-2 text-right">
                     <button className="link text-xs" onClick={() => void removeApplication(a.id)}>
                       {t('remove')}

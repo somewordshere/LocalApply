@@ -62,7 +62,13 @@ try {
 
   const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
   const extensionId = new URL(worker.url()).host;
-  const storedProfile = () => worker.evaluate(() => chrome.storage.local.get('profile').then((r) => r.profile));
+  // The active profile, as the extension stores it since 0.8.0 (one key per profile, plus an index).
+  const storedProfile = () =>
+    worker.evaluate(async () => {
+      const { profileIndex } = await chrome.storage.local.get('profileIndex');
+      const key = `profile:${profileIndex.active}`;
+      return (await chrome.storage.local.get(key))[key];
+    });
   // What the keyboard shortcut does: send `fill` to every frame of the active tab.
   const fillActiveTab = () =>
     worker.evaluate(async () => {
@@ -170,6 +176,41 @@ try {
     await job.close();
   });
 
+  await step('a second profile is created on the profile page and chosen in the popup', async () => {
+    const options = await context.newPage();
+    await options.goto(`chrome-extension://${extensionId}/options.html`);
+    await options.getByRole('button', { name: 'New profile' }).click();
+    await options.getByLabel('Profile name').fill('Second');
+    await options.getByLabel('Start as a copy of this profile').uncheck();
+    await options.getByRole('button', { name: 'Create' }).click();
+    // The page now shows the new, empty profile.
+    await options.waitForFunction(() => document.querySelector('input[type=email]')?.value === '');
+    await options.getByLabel('First name', { exact: true }).fill('Erika');
+    await options.getByText('All changes saved').waitFor();
+    assert.equal((await storedProfile()).firstName, 'Erika');
+
+    const job = await context.newPage();
+    await job.goto('https://karriere.example.de/stelle/3');
+    const popup = await context.newPage();
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await job.bringToFront();
+    const choice = popup.getByLabel('Profile', { exact: true });
+    assert.equal(
+      await choice.inputValue(),
+      await worker.evaluate(() => chrome.storage.local.get('profileIndex').then((r) => r.profileIndex.active)),
+    );
+    await popup.getByRole('button', { name: 'Fill this page' }).click();
+    await job.waitForFunction(() => document.querySelector('#a')?.value === 'Erika');
+
+    // Back to the first profile, which the profile page follows.
+    await choice.selectOption({ label: 'Main' });
+    await options.waitForFunction(() => document.querySelector('input[type=email]')?.value === 'max@example.com');
+    assert.equal((await storedProfile()).firstName, 'Max');
+    await popup.close();
+    await job.close();
+    await options.close();
+  });
+
   await step('keyboard-shortcut path fills the page and reuses the saved answer', async () => {
     const page = await context.newPage();
     await page.goto('https://karriere.example.de/stelle/2');
@@ -196,9 +237,11 @@ try {
       }),
     );
     await worker.evaluate(async () => {
-      const { profile } = await chrome.storage.local.get('profile');
+      const { profileIndex } = await chrome.storage.local.get('profileIndex');
+      const key = `profile:${profileIndex.active}`;
+      const { [key]: profile } = await chrome.storage.local.get(key);
       await chrome.storage.local.set({
-        profile: { ...profile, coverLetterText: 'Dear {company} team, about the {position} role.' },
+        [key]: { ...profile, coverLetterText: 'Dear {company} team, about the {position} role.' },
       });
     });
     const page = await context.newPage();

@@ -69,7 +69,7 @@ describe('application log', () => {
       },
     ]);
     expect(csv).toBe(
-      '"Date","Company","Position","URL"\r\n"2026-10-22","Acme, ""Inc""","\'=HYPERLINK(""x"")","https://a.example/"\r\n',
+      '"Date","Company","Position","URL","Profile"\r\n"2026-10-22","Acme, ""Inc""","\'=HYPERLINK(""x"")","https://a.example/",""\r\n',
     );
   });
 });

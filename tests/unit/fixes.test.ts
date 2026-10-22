@@ -166,7 +166,10 @@ describe('review fixes', () => {
     const seen: string[] = [];
     const stop = watchProfile((p) => seen.push(p.firstName));
     await saveProfile({ ...emptyProfile, firstName: 'Own' });
-    await fakeBrowser.storage.local.set({ profile: { ...emptyProfile, firstName: 'Popup' }, profileRevision: 'other' });
+    await fakeBrowser.storage.local.set({
+      'profile:main': { ...emptyProfile, firstName: 'Popup' },
+      profileRevision: 'other',
+    });
     stop();
     expect(seen).toEqual(['Popup']);
   });

@@ -9,6 +9,8 @@ export interface Application {
   position: string;
   /** The posting's address without query or fragment, which can carry tokens. */
   url: string;
+  /** The profile that filled it; '' for the first profile. Missing in entries from before 0.8.0. */
+  profile?: string;
 }
 
 const LOG_KEY = 'applicationLog';
@@ -64,6 +66,7 @@ export async function recordApplication(entry: Omit<Application, 'id' | 'date'>,
     company: entry.company || recent?.company || '',
     position: entry.position || recent?.position || '',
     url: entry.url,
+    profile: entry.profile ?? recent?.profile ?? '',
   };
   await saveLog([updated, ...log.filter((a) => a !== recent)]);
 }
@@ -92,8 +95,8 @@ export function logToCsv(log: Application[]): string {
   const FORMULA = /^[=+\-@\t\r]/;
   const cell = (value: string) => `"${(FORMULA.test(value) ? `'${value}` : value).replace(/"/g, '""')}"`;
   const rows = [
-    ['Date', 'Company', 'Position', 'URL'],
-    ...log.map((a) => [a.date.slice(0, 10), a.company, a.position, a.url]),
+    ['Date', 'Company', 'Position', 'URL', 'Profile'],
+    ...log.map((a) => [a.date.slice(0, 10), a.company, a.position, a.url, a.profile ?? '']),
   ];
   return rows.map((row) => row.map(cell).join(',')).join('\r\n') + '\r\n';
 }

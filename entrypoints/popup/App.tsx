@@ -5,7 +5,7 @@ import type { UndoResult } from '@/src/engine/undo';
 import { fillTab } from '@/src/core/fill';
 import type { Message } from '@/src/core/messages';
 import { questionKeywords } from '@/src/profile/schema';
-import { loadProfile, saveProfile } from '@/src/profile/store';
+import { loadIndex, loadProfile, saveProfile, switchProfile, type ProfileIndex } from '@/src/profile/store';
 import { useI18n } from '@/src/ui/I18nProvider';
 import { currentPalette, iconPath } from '@/src/ui/palette';
 
@@ -97,11 +97,13 @@ export default function App() {
   const [result, setResult] = useState<FillResult>(EMPTY);
   const [undone, setUndone] = useState<UndoResult>(NOTHING_UNDONE);
   const [profileEmpty, setProfileEmpty] = useState(false);
+  const [profiles, setProfiles] = useState<ProfileIndex | null>(null);
   const pending = useRef(0);
   const replied = useRef(false);
 
   useEffect(() => {
     loadProfile().then((p) => setProfileEmpty(!p.firstName && !p.lastName && !p.email));
+    void loadIndex().then(setProfiles);
 
     const onMessage = (message: Message) => {
       if (message?.type === 'fill-start') {
@@ -163,6 +165,30 @@ export default function App() {
         <p className="mb-3 rounded-md border border-warn/30 bg-warn/10 px-3 py-2 text-sm text-warn">
           {t('popup.profileEmpty')}
         </p>
+      )}
+
+      {profiles && profiles.list.length > 1 && (
+        <label className="mb-3 flex items-center gap-2 text-sm text-ink-soft">
+          <span aria-hidden="true">{t('profiles.label')}</span>
+          <select
+            className="field py-1.5"
+            aria-label={t('profiles.label')}
+            value={profiles.active}
+            onChange={(e) => {
+              const active = e.target.value;
+              setProfiles({ ...profiles, active });
+              void switchProfile(active).then(() =>
+                loadProfile().then((p) => setProfileEmpty(!p.firstName && !p.lastName && !p.email)),
+              );
+            }}
+          >
+            {profiles.list.map((ref) => (
+              <option key={ref.id} value={ref.id}>
+                {ref.name || t('profiles.main')}
+              </option>
+            ))}
+          </select>
+        </label>
       )}
 
       <button className="btn w-full py-3 text-[15px]" onClick={fill} disabled={status === 'filling'}>

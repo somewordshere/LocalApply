@@ -12,6 +12,16 @@ export const fr: Translation = {
   'options.title': 'Votre profil',
   'options.subtitle':
     'Enregistré uniquement dans ce navigateur. Sert à remplir les formulaires de candidature quand vous cliquez sur Remplir.',
+  'profiles.label': 'Profil',
+  'profiles.main': 'Principal',
+  'profiles.new': 'Nouveau profil',
+  'profiles.rename': 'Renommer',
+  'profiles.delete': 'Supprimer',
+  'profiles.confirmDelete': 'Supprimer le profil « {name} » et tout son contenu ?',
+  'profiles.name': 'Nom du profil',
+  'profiles.namePlaceholder': 'Par exemple « CV en anglais »',
+  'profiles.copy': 'Commencer par une copie de ce profil',
+  'profiles.create': 'Créer',
   'options.startHere':
     "Commencez ici : saisissez les informations que les formulaires de candidature doivent recevoir. Tout est enregistré au fil de la saisie et reste dans ce navigateur. Ouvrez ensuite une candidature et cliquez sur Remplir cette page dans le bouton LocalApply de la barre d'outils.",
   'options.loading': 'Chargement…',
