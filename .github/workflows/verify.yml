@@ -1,0 +1,25 @@
+# The same checks a release runs (docs/releasing.md), on every push and pull request.
+name: Verify
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Typecheck, ESLint, Prettier, unit tests and Mozilla's add-on linter.
+      - run: npm run check
+      - run: npx playwright install --with-deps chromium
+      # Loads the built extension into Chromium and drives the profile page, popup, fill and undo.
+      - run: npm run test:e2e

@@ -4,13 +4,13 @@ LocalApply is a Chrome and Firefox extension that fills job application forms fr
 
 Everything stays in the browser: no account, no server, no AI service, no network requests.
 
-**Current version:** 0.6.1 · **Browsers:** Chrome, Edge, Brave and Firefox · **Languages:** English, German, French, Spanish, Italian, Dutch, Portuguese, Polish
+**Current version:** 0.6.1 · **Browsers:** Chrome, Edge, Brave and Firefox · **Languages:** English, German, French, Spanish, Italian, Dutch, Portuguese, Polish · **License:** MIT
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/) [![Chrome build](https://img.shields.io/badge/Chrome-Build-4285F4?logo=googlechrome&logoColor=white)](releases/v0.6.1/localapply-0.6.1-chrome.zip) [![Firefox build](https://img.shields.io/badge/Firefox-Build-FF7139?logo=firefoxbrowser&logoColor=white)](releases/v0.6.1/localapply-0.6.1-firefox.zip)
+[![Verify](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml/badge.svg)](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml) [![Chrome Web Store](https://img.shields.io/badge/Chrome-Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/) [![Chrome build](https://img.shields.io/badge/Chrome-Build-4285F4?logo=googlechrome&logoColor=white)](releases/v0.6.1/localapply-0.6.1-chrome.zip) [![Firefox build](https://img.shields.io/badge/Firefox-Build-FF7139?logo=firefoxbrowser&logoColor=white)](releases/v0.6.1/localapply-0.6.1-firefox.zip)
 
 **[What’s new →](WHATS-NEW.md)**
 
-[Screenshots](#-screenshots) · [Features](#features) · [Install](#installation) · [Use](#-how-to-use-it) · [Privacy](#-privacy) · [Releases](#-recent-releases) · [Development](#-development) · [Docs](#-docs)
+[Screenshots](#-screenshots) · [Features](#features) · [Install](#installation) · [Use](#-how-to-use-it) · [Privacy](#-privacy) · [Releases](#-recent-releases) · [Development](#-development) · [Docs](#-docs) · [License](#-license)
 
 ## 📸 Screenshots
 
@@ -42,7 +42,7 @@ Each version's folder in [`releases/`](releases/) also has the source zip, relea
 
 ## 🧭 How to use it
 
-1. Enter your details once on the profile page: click the LocalApply toolbar button, then **Edit profile**.
+1. Enter your details once on the profile page. It opens by itself when you install LocalApply; later, click the LocalApply toolbar button, then **Edit profile**.
 2. Open a job application, click the LocalApply toolbar button and then **Fill this page**, or press **Alt+Shift+F**.
 3. Check the result, finish the outlined questions, and submit the form yourself.
 
@@ -120,3 +120,7 @@ docs/               architecture, extending, releasing
 - [Store listings](store/README.md): what goes into each store form
 - [Privacy policy](PRIVACY.md)
 - [What’s new](WHATS-NEW.md) and [changelog](CHANGELOG.md)
+
+## 📄 License
+
+LocalApply is released under the [MIT License](LICENSE).
