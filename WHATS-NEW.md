@@ -2,6 +2,13 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.7.0 · October 22, 2026
+
+- New **Languages** card: add the languages you speak and how well. Forms that ask for your languages, or how good your German or English is, get the right answer in their own wording.
+- New in **Job preferences**: driving licence and classes, willingness to travel, and a minimum and maximum salary for forms that ask for a range.
+- Write **{company}** and **{position}** in your cover letter or saved answers, and LocalApply puts in the employer and job title from the posting. If the page doesn't say, that text is left for you instead of being filled with a gap.
+- New **Applications** section: every form you fill is noted with date, company, job title and link, so you know where you applied. It stays in your browser; turn it off, clear it or export it as a spreadsheet file.
+
 ## 0.6.2 · October 22, 2026
 
 - After you install LocalApply, the profile page opens by itself, with a short note on where to start.
