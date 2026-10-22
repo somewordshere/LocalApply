@@ -2,6 +2,12 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.6.2 · October 22, 2026
+
+- After you install LocalApply, the profile page opens by itself, with a short note on where to start.
+- The LocalApply button in the toolbar takes the colour of the palette you chose, and so does the logo in the popup and on the profile page.
+- The store pages and the extension's name in your browser are now in all eight languages.
+
 ## 0.6.1 · October 22, 2026
 
 - New **Theme** switch at the top of the profile page: **System**, **Light** or **Dark**. System follows your computer's setting, as before; Light and Dark keep LocalApply that way whatever the computer uses. The popup, dropdowns and date pickers follow your choice.
