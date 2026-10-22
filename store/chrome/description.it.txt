@@ -1,0 +1,28 @@
+Candidarsi vuol dire scrivere gli stessi dati in ogni modulo. LocalApply li tiene in un profilo e compila la candidatura aperta con un solo clic. Tu controlli il modulo e premi Invia.
+
+COSA COMPILA
+• Nome, e-mail, telefono (anche con selettore del prefisso), indirizzo e data di nascita
+• Link a LinkedIn, GitHub, Xing e portfolio
+• RAL desiderata, preavviso, data di inizio più vicina e anni di esperienza
+• Domande su permesso di lavoro, visto e disponibilità al trasferimento
+• Ruolo attuale, datore di lavoro, formazione e titolo di studio più alto
+• CV e lettera di presentazione come file, e testo della lettera
+• Le tue risposte alle domande ricorrenti come «Come ci hai conosciuto?»
+
+DOVE FUNZIONA
+Funziona sui moduli della maggior parte dei sistemi di selezione e sulle normali pagine carriere delle aziende, anche dentro frame incorporati. Alcuni dei siti di lavoro più usati hanno una gestione dedicata. Le etichette dei moduli sono riconosciute in italiano, inglese, tedesco, francese, spagnolo, olandese, portoghese e polacco.
+
+COME SI USA
+1. Inserisci i tuoi dati una volta nella pagina del profilo. Si apre da sola dopo l’installazione.
+2. Apri una candidatura, fai clic sul pulsante LocalApply nella barra degli strumenti e poi su "Compila questa pagina", oppure premi "Alt+Maiusc+F".
+3. Controlla il risultato. I campi compilati hanno un bordo verde continuo; le domande obbligatorie rimaste senza risposta hanno un bordo arancione tratteggiato e sono elencate perché tu possa completarle. "Annulla" rimette i campi com’erano.
+
+SICURO PER COSTRUZIONE
+• Il tuo profilo e i tuoi documenti sono salvati solo nel browser, sul tuo computer.
+• Nessun account, nessun server, nessuna IA, nessuna statistica. L’estensione non effettua richieste di rete.
+• Non preme mai «Invia» o «Avanti» e non spunta mai caselle di consenso.
+• Lascia invariati i campi che hai già compilato.
+• Esporta il profilo in un file o elimina tutto con un clic.
+
+PERCHÉ CHIEDE L’ACCESSO A TUTTI I SITI
+Le candidature si trovano su migliaia di siti di aziende e di selezione, spesso dentro frame incorporati, quindi LocalApply deve poter compilare moduli su qualsiasi pagina. Legge e compila un modulo solo quando glielo chiedi. Non effettua richieste di rete.

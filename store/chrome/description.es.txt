@@ -1,0 +1,28 @@
+Buscar trabajo significa escribir los mismos datos en cada formulario. LocalApply los guarda en un perfil y rellena la candidatura que tienes abierta con un solo clic. Tú revisas el formulario y pulsas Enviar.
+
+QUÉ RELLENA
+• Nombre, correo, teléfono (incluidos los selectores de prefijo), dirección y fecha de nacimiento
+• Enlaces de LinkedIn, GitHub, Xing y portfolio
+• Expectativa salarial, preaviso, fecha de incorporación más temprana y años de experiencia
+• Preguntas sobre permiso de trabajo, patrocinio de visado y traslado
+• Puesto actual, empresa, formación y nivel de estudios más alto
+• CV y carta de presentación como archivo, y texto de la carta
+• Tus propias respuestas a preguntas habituales como «¿Cómo nos conociste?»
+
+DÓNDE FUNCIONA
+Funciona en los formularios de la mayoría de los sistemas de selección y en las páginas de empleo normales de las empresas, también dentro de marcos incrustados. Algunos de los portales de empleo más usados reciben un tratamiento específico. Reconoce las etiquetas de los formularios en español, inglés, alemán, francés, italiano, neerlandés, portugués y polaco.
+
+CÓMO SE USA
+1. Introduce tus datos una vez en la página de perfil. Se abre sola al instalar la extensión.
+2. Abre una candidatura, haz clic en el botón de LocalApply de la barra de herramientas y luego en "Rellenar esta página", o pulsa "Alt+Mayús+F".
+3. Revisa el resultado. Los campos rellenados llevan un contorno verde continuo; las preguntas obligatorias sin responder llevan un contorno naranja discontinuo y aparecen en una lista para que las completes. "Deshacer" devuelve los campos a como estaban.
+
+SEGURO DESDE EL DISEÑO
+• Tu perfil y tus documentos se guardan solo en tu navegador, en tu ordenador.
+• Sin cuenta, sin servidor, sin IA, sin estadísticas. La extensión no hace ninguna petición de red.
+• Nunca pulsa «Enviar» ni «Siguiente» y nunca marca casillas de consentimiento.
+• No toca los campos que ya has rellenado.
+• Exporta tu perfil a un archivo o bórralo todo con un clic.
+
+POR QUÉ NECESITA ACCESO A TODOS LOS SITIOS WEB
+Las candidaturas están en miles de sitios de empresas y de selección, a menudo dentro de marcos incrustados, así que LocalApply tiene que poder rellenar formularios en cualquier página. Solo lee y rellena un formulario cuando se lo pides. No hace ninguna petición de red.

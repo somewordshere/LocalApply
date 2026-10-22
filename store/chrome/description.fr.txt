@@ -1,0 +1,28 @@
+Postuler, c’est saisir les mêmes informations dans chaque formulaire. LocalApply les garde dans un profil et remplit la candidature ouverte en un seul clic. Vous vérifiez le formulaire et cliquez vous-même sur Envoyer.
+
+CE QU’IL REMPLIT
+• Nom, e-mail, téléphone (y compris les sélecteurs d’indicatif), adresse et date de naissance
+• Liens LinkedIn, GitHub, Xing et portfolio
+• Prétentions salariales, préavis, date de début au plus tôt et années d’expérience
+• Questions sur l’autorisation de travail, le visa et la mobilité
+• Poste actuel, employeur, formation et plus haut niveau d’études
+• CV et lettre de motivation en fichier, et texte de la lettre de motivation
+• Vos propres réponses aux questions récurrentes comme « Comment avez-vous entendu parler de nous ? »
+
+OÙ IL FONCTIONNE
+Fonctionne sur les formulaires de la plupart des logiciels de recrutement et sur les pages carrières ordinaires des entreprises, y compris dans les cadres intégrés. Certains des sites d’emploi les plus utilisés bénéficient d’un traitement spécifique. Les intitulés des formulaires sont reconnus en français, anglais, allemand, espagnol, italien, néerlandais, portugais et polonais.
+
+COMMENT L’UTILISER
+1. Saisissez vos informations une fois sur la page de profil. Elle s’ouvre d’elle-même après l’installation.
+2. Ouvrez une candidature, cliquez sur le bouton LocalApply de la barre d’outils puis sur "Remplir cette page", ou appuyez sur "Alt+Maj+F".
+3. Vérifiez le résultat. Les champs remplis ont un contour vert continu ; les questions obligatoires restées sans réponse ont un contour orange en pointillés et sont listées pour que vous les complétiez. "Annuler" remet les champs comme avant.
+
+SÛR PAR CONCEPTION
+• Votre profil et vos documents sont enregistrés uniquement dans votre navigateur, sur votre ordinateur.
+• Pas de compte, pas de serveur, pas d’IA, pas de statistiques. L’extension n’effectue aucune requête réseau.
+• Ne clique jamais sur « Envoyer » ou « Suivant » et ne coche jamais de case de consentement.
+• Ne touche pas aux champs que vous avez déjà remplis.
+• Exportez votre profil dans un fichier, ou supprimez tout en un clic.
+
+POURQUOI IL A BESOIN D’ACCÉDER À TOUS LES SITES
+Les candidatures sont hébergées sur des milliers de sites d’employeurs et de recrutement, souvent dans des cadres intégrés : LocalApply doit donc pouvoir remplir les formulaires sur n’importe quelle page. Il ne lit et ne remplit un formulaire que lorsque vous le lui demandez. Il n’effectue aucune requête réseau.

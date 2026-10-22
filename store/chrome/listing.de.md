@@ -1,6 +1,6 @@
 # Chrome Web Store listing (Deutsch)
 
-The Chrome Web Store offers per-language listings only for extensions that ship translations (`_locales/` in the package). LocalApply does not yet, so this text is ready for when the extension's interface is localised. Until then, publish the English listing only.
+The package ships its name and summary in this language (`public/_locales/de/messages.json`), so the Chrome Web Store offers a Deutsch listing: Store listing → language menu → Deutsch. The title and summary come from the package; only the description is pasted.
 
 ## Description
 

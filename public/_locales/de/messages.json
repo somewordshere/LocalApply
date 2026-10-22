@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "LocalApply – Bewerbungen privat ausfüllen",
+    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extDescription": {
+    "message": "Füllt Bewerbungsformulare mit einem Klick aus deinem gespeicherten Profil. Funktioniert offline; deine Daten bleiben im Browser.",
+    "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
+  },
+  "fillCommand": {
+    "message": "Das Bewerbungsformular auf dieser Seite ausfüllen",
+    "description": "Name of the keyboard shortcut that fills the form."
+  }
+}

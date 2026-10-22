@@ -26,15 +26,17 @@ function noRawHtml(): Plugin {
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: {
-    name: 'LocalApply – Private Job Application Autofill',
+    // Name, summary and the shortcut's name come from public/_locales/<language>/messages.json, so both stores
+    // and the browser show them in the user's language.
+    default_locale: 'en',
+    name: '__MSG_extName__',
     short_name: 'LocalApply',
-    description:
-      'Fills job application forms from your saved profile in one click. Works offline; your data never leaves the browser.',
+    description: '__MSG_extDescription__',
     permissions: ['storage', 'unlimitedStorage'],
     commands: {
       'fill-form': {
         suggested_key: { default: 'Alt+Shift+F' },
-        description: 'Fill the application form on this page',
+        description: '__MSG_fillCommand__',
       },
     },
     browser_specific_settings: {

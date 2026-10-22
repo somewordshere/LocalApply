@@ -1,0 +1,28 @@
+Solliciteren betekent in elk formulier dezelfde gegevens typen. LocalApply bewaart ze in één profiel en vult de geopende sollicitatie in met één klik. Jij controleert het formulier en drukt zelf op Versturen.
+
+WAT HET INVULT
+• Naam, e-mail, telefoon (ook met landcodekiezer), adres en geboortedatum
+• LinkedIn-, GitHub-, Xing- en portfoliolinks
+• Salarisindicatie, opzegtermijn, vroegste startdatum en jaren ervaring
+• Vragen over werkvergunning, visumsponsoring en verhuizen
+• Huidige functie, werkgever, opleiding en hoogst genoten opleiding
+• Cv en motivatiebrief als bestand, en de tekst van de motivatiebrief
+• Je eigen antwoorden op terugkerende vragen zoals "Hoe heb je ons gevonden?"
+
+WAAR HET WERKT
+Werkt op de formulieren van de meeste sollicitatiesystemen en op gewone vacaturepagina’s van bedrijven, ook in ingesloten frames. Sommige van de meest gebruikte vacaturesites krijgen een eigen aanpak. Formulierlabels worden herkend in het Nederlands, Engels, Duits, Frans, Spaans, Italiaans, Portugees en Pools.
+
+ZO GEBRUIK JE HET
+1. Vul je gegevens één keer in op de profielpagina. Die opent vanzelf na de installatie.
+2. Open een sollicitatie, klik op de LocalApply-knop in de werkbalk en dan op "Deze pagina invullen", of druk op "Alt+Shift+F".
+3. Controleer het resultaat. Ingevulde velden krijgen een doorgetrokken groene rand; verplichte vragen die open blijven krijgen een gestippelde oranje rand en staan in een lijst, zodat je ze kunt aanvullen. "Ongedaan maken" zet de velden terug.
+
+VEILIG VAN OPZET
+• Je profiel en documenten worden alleen in je browser op je computer bewaard.
+• Geen account, geen server, geen AI, geen statistieken. De extensie doet geen netwerkverzoeken.
+• Klikt nooit op "Versturen" of "Volgende" en vinkt nooit toestemmingsvakjes aan.
+• Laat velden die je al hebt ingevuld met rust.
+• Exporteer je profiel naar een bestand of verwijder alles met één klik.
+
+WAAROM HET TOEGANG TOT ALLE WEBSITES VRAAGT
+Sollicitaties staan op duizenden sites van werkgevers en recruiters, vaak in ingesloten frames, dus LocalApply moet formulieren op elke pagina kunnen invullen. Het leest en vult een formulier alleen als jij dat vraagt. Het doet geen netwerkverzoeken.

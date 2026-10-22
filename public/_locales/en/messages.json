@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "LocalApply – Private Job Application Autofill",
+    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extDescription": {
+    "message": "Fills job application forms from your saved profile in one click. Works offline; your data never leaves the browser.",
+    "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
+  },
+  "fillCommand": {
+    "message": "Fill the application form on this page",
+    "description": "Name of the keyboard shortcut that fills the form."
+  }
+}

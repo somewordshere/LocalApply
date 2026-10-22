@@ -5,7 +5,7 @@ WHAT IT FILLS
 • LinkedIn, GitHub, Xing and portfolio links
 • Salary expectation, notice period, earliest start date and years of experience
 • Work authorisation, visa sponsorship and relocation questions
-• Current job title, employer and education
+• Current job title, employer, education and highest education level
 • Your CV and cover letter files, and cover letter text
 • Your own answers to recurring questions such as "How did you hear about us?"
 
@@ -13,7 +13,7 @@ WORKS WHERE YOU APPLY
 Works on the application forms of most applicant tracking systems and on ordinary company career pages, including forms inside embedded frames. Some of the most widely used job sites get extra, site-specific handling. Form labels are recognised in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish.
 
 HOW IT WORKS
-1. Enter your details once on the profile page.
+1. Enter your details once on the profile page. It opens by itself after you install LocalApply.
 2. On an application, click the toolbar button and then "Fill this page", or press Alt+Shift+F.
 3. Filled fields get a solid green outline. Required fields it could not answer get a dashed amber outline and are listed in the popup, where you can save an answer for next time. Changed your mind? Undo puts the fields back.
 

@@ -1,0 +1,28 @@
+Szukanie pracy to wpisywanie tych samych danych w każdy formularz. LocalApply trzyma je w jednym profilu i wypełnia otwartą aplikację jednym kliknięciem. Ty sprawdzasz formularz i sam klikasz Wyślij.
+
+CO WYPEŁNIA
+• Imię i nazwisko, e-mail, telefon (także z wyborem numeru kierunkowego), adres i datę urodzenia
+• Linki do LinkedIn, GitHub, Xing i portfolio
+• Oczekiwania finansowe, okres wypowiedzenia, najwcześniejszą datę rozpoczęcia i lata doświadczenia
+• Pytania o pozwolenie na pracę, sponsorowanie wizy i przeprowadzkę
+• Obecne stanowisko, pracodawcę, wykształcenie i najwyższy poziom wykształcenia
+• CV i list motywacyjny jako plik oraz treść listu motywacyjnego
+• Twoje własne odpowiedzi na powtarzające się pytania, np. „Skąd dowiedziałeś się o nas?”
+
+GDZIE DZIAŁA
+Działa na formularzach większości systemów rekrutacyjnych i na zwykłych stronach kariery firm, także w osadzonych ramkach. Niektóre z najpopularniejszych serwisów z ofertami pracy mają osobną obsługę. Etykiety formularzy są rozpoznawane po polsku, angielsku, niemiecku, francusku, hiszpańsku, włosku, niderlandzku i portugalsku.
+
+JAK Z NIEGO KORZYSTAĆ
+1. Wpisz swoje dane raz na stronie profilu. Otwiera się sama po instalacji.
+2. Otwórz formularz aplikacyjny, kliknij przycisk LocalApply na pasku narzędzi, a potem "Wypełnij tę stronę", albo naciśnij "Alt+Shift+F".
+3. Sprawdź wynik. Wypełnione pola dostają ciągłą zieloną ramkę; obowiązkowe pytania bez odpowiedzi dostają przerywaną pomarańczową ramkę i trafiają na listę, żebyś mógł je uzupełnić. "Cofnij" przywraca pola do poprzedniego stanu.
+
+BEZPIECZNY Z ZAŁOŻENIA
+• Twój profil i dokumenty są zapisane tylko w przeglądarce na Twoim komputerze.
+• Bez konta, bez serwera, bez AI, bez statystyk. Rozszerzenie nie wysyła żadnych zapytań sieciowych.
+• Nigdy nie klika „Wyślij” ani „Dalej” i nigdy nie zaznacza zgód.
+• Nie zmienia pól, które już wypełniłeś.
+• Wyeksportuj profil do pliku albo usuń wszystko jednym kliknięciem.
+
+DLACZEGO POTRZEBUJE DOSTĘPU DO WSZYSTKICH STRON
+Formularze rekrutacyjne są na tysiącach stron pracodawców i serwisów rekrutacyjnych, często w osadzonych ramkach, więc LocalApply musi umieć wypełnić formularz na każdej stronie. Czyta i wypełnia formularz tylko wtedy, gdy go o to poprosisz. Nie wysyła żadnych zapytań sieciowych.

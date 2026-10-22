@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "LocalApply – Compila candidature in privato",
+    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extDescription": {
+    "message": "Compila i moduli di candidatura con un clic dal tuo profilo salvato. Funziona offline; i tuoi dati restano nel browser.",
+    "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
+  },
+  "fillCommand": {
+    "message": "Compila il modulo di candidatura di questa pagina",
+    "description": "Name of the keyboard shortcut that fills the form."
+  }
+}

@@ -1,0 +1,1 @@
+Preencha candidaturas num clique a partir de um perfil guardado no navegador: contactos, morada, links, expectativa salarial, data de início e CV. Reconhece formulários em 8 línguas. Sem conta, sem IA, nada sai do seu dispositivo.

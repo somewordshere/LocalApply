@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "LocalApply – Prywatne wypełnianie aplikacji",
+    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extDescription": {
+    "message": "Wypełnia formularze rekrutacyjne jednym kliknięciem z zapisanego profilu. Działa offline; dane nie opuszczają przeglądarki.",
+    "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
+  },
+  "fillCommand": {
+    "message": "Wypełnij formularz rekrutacyjny na tej stronie",
+    "description": "Name of the keyboard shortcut that fills the form."
+  }
+}

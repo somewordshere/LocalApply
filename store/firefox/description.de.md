@@ -5,6 +5,7 @@
 - **Schneller bewerben.** Der immer gleiche Teil einer Bewerbung ist mit einem Klick erledigt, und deine Zeit gehört den Fragen, auf die es ankommt.
 - **Deine Daten bleiben privat.** Dein Profil liegt in Firefox auf deinem Rechner. Kein Konto, kein Server, keine KI, kein Tracking.
 - **In jeder Sprache bewerben.** Erkennt Feldbezeichnungen auf Deutsch, Englisch, Französisch, Spanisch, Italienisch, Niederländisch, Portugiesisch und Polnisch.
+- **So, wie es dir gefällt.** Die Oberfläche spricht acht Sprachen, mit fünf Farbpaletten und hellem oder dunklem Design.
 - **Jede Frage nur einmal beantworten.** Speichere deine Antwort auf wiederkehrende Fragen wie „Wie sind Sie auf uns aufmerksam geworden?", und sie wird beim nächsten Mal eingetragen.
 
 **Was ausgefüllt wird**
@@ -13,7 +14,7 @@
 - LinkedIn-, GitHub-, Xing- und Portfolio-Links
 - Gehaltsvorstellung, Kündigungsfrist, frühester Eintrittstermin und Berufserfahrung
 - Fragen zu Arbeitserlaubnis, Visum und Umzugsbereitschaft
-- Aktuelle Position, Arbeitgeber und Ausbildung
+- Aktuelle Position, Arbeitgeber, Ausbildung und höchster Bildungsabschluss
 - Lebenslauf und Anschreiben als Datei sowie Anschreiben als Text
 
 **Wo es funktioniert**
@@ -22,9 +23,9 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseit
 
 **So nutzt du es**
 
-1. Gib deine Daten einmal auf der Profilseite ein.
-2. Öffne eine Bewerbung, klicke auf das LocalApply-Symbol in der Symbolleiste und dann auf **Fill this page**, oder drücke **Alt+Umschalt+F**.
-3. Prüfe das Ergebnis. Ausgefüllte Felder bekommen einen durchgehenden grünen Rahmen; Pflichtfragen, die offen bleiben, bekommen einen gestrichelten gelben Rahmen und werden aufgelistet, damit du sie ergänzen kannst. **Undo** setzt die Felder zurück.
+1. Gib deine Daten einmal auf der Profilseite ein. Sie öffnet sich nach der Installation von selbst.
+2. Öffne eine Bewerbung, klicke auf das LocalApply-Symbol in der Symbolleiste und dann auf **Diese Seite ausfüllen**, oder drücke **Alt+Umschalt+F**.
+3. Prüfe das Ergebnis. Ausgefüllte Felder bekommen einen durchgehenden grünen Rahmen; Pflichtfragen, die offen bleiben, bekommen einen gestrichelten gelben Rahmen und werden aufgelistet, damit du sie ergänzen kannst. **Rückgängig** setzt die Felder zurück.
 
 **Sicher von Grund auf**
 

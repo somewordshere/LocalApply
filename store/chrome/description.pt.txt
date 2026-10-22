@@ -1,0 +1,28 @@
+Candidatar-se é escrever os mesmos dados em cada formulário. O LocalApply guarda-os num perfil e preenche a candidatura aberta com um só clique. O utilizador revê o formulário e clica em Enviar.
+
+O QUE PREENCHE
+• Nome, e-mail, telefone (incluindo seletores de indicativo), morada e data de nascimento
+• Links de LinkedIn, GitHub, Xing e portefólio
+• Expectativa salarial, pré-aviso, data de início mais próxima e anos de experiência
+• Perguntas sobre autorização de trabalho, visto e disponibilidade para mudar de cidade
+• Cargo atual, empregador, formação e nível de escolaridade mais alto
+• CV e carta de apresentação em ficheiro, e texto da carta
+• As suas respostas a perguntas recorrentes como «Como teve conhecimento de nós?»
+
+ONDE FUNCIONA
+Funciona nos formulários da maioria dos sistemas de recrutamento e nas páginas de carreiras normais das empresas, incluindo dentro de frames incorporados. Alguns dos sites de emprego mais usados têm tratamento específico. As etiquetas dos formulários são reconhecidas em português, inglês, alemão, francês, espanhol, italiano, neerlandês e polaco.
+
+COMO USAR
+1. Introduza os seus dados uma vez na página de perfil. Ela abre-se sozinha depois da instalação.
+2. Abra uma candidatura, clique no botão LocalApply da barra de ferramentas e depois em "Preencher esta página", ou prima "Alt+Shift+F".
+3. Verifique o resultado. Os campos preenchidos ficam com um contorno verde contínuo; as perguntas obrigatórias por responder ficam com um contorno laranja tracejado e aparecem numa lista para as completar. "Anular" repõe os campos como estavam.
+
+SEGURO DE RAIZ
+• O seu perfil e os seus documentos ficam guardados apenas no navegador, no seu computador.
+• Sem conta, sem servidor, sem IA, sem estatísticas. A extensão não faz pedidos de rede.
+• Nunca clica em «Enviar» ou «Seguinte» e nunca marca caixas de consentimento.
+• Não mexe nos campos que já preencheu.
+• Exporte o perfil para um ficheiro ou apague tudo com um clique.
+
+PORQUE PRECISA DE ACESSO A TODOS OS SITES
+As candidaturas estão em milhares de sites de empregadores e de recrutamento, muitas vezes dentro de frames incorporados, por isso o LocalApply tem de conseguir preencher formulários em qualquer página. Só lê e preenche um formulário quando lhe pede. Não faz pedidos de rede.

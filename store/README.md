@@ -2,22 +2,21 @@
 
 Everything the Firefox Add-ons site and the Chrome Web Store ask for, kept next to the code so it changes together with it.
 
+Every text exists in the eight interface languages: `<l>` is `en`, `de`, `fr`, `es`, `it`, `nl`, `pt` or `pl`. The extension's name, summary and shortcut name come from `public/_locales/<l>/messages.json` in the package, so both stores and the browser show them in the user's language.
+
 ```
 store/
   screenshots/               1280×800 PNGs, used by both stores (generated)
   firefox/
-    description.en.md        description, ready to paste (Firefox supports a limited Markdown)
-    description.de.md        German description
-    summary.en.txt           summary, ready to paste (≤ 250 characters)
-    summary.de.txt           German summary
+    description.<l>.md       description, ready to paste (Firefox supports a limited Markdown)
+    summary.<l>.txt          summary, ready to paste (≤ 250 characters)
     listing.en.md            name, captions, categories and other form fields
-    listing.de.md            German name and captions
+    listing.<l>.md           name and captions in each other language
     reviewer-notes.md        "Notes to reviewer" field: how to rebuild from source, why each permission
   chrome/
-    description.en.txt       description, ready to paste (plain text)
-    description.de.txt       German description, for when the extension is localised
+    description.<l>.txt      description, ready to paste (plain text)
     listing.en.md            category, images and other form fields
-    listing.de.md            notes on the German listing
+    listing.<l>.md           notes on each other language's listing
     privacy-practices.md     answers for the Privacy practices tab: single purpose, permissions, data use
     icon-128.png             store icon, 96 px artwork with 16 px padding (generated)
     promo-tile-440x280.png   small promo tile, required by Chrome (generated)
@@ -36,30 +35,30 @@ The screenshots show the real extension at its real size, in a plain browser fra
 
 ### Firefox: addons.mozilla.org → Developer Hub
 
-| Form field                        | Source                                                            |
-| --------------------------------- | ----------------------------------------------------------------- |
-| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`            |
-| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`            |
-| Name                              | `firefox/listing.en.md` (German under Manage translations)        |
-| Summary                           | `firefox/summary.en.txt` (German: `firefox/summary.de.txt`)       |
-| Description                       | `firefox/description.en.md` (German: `firefox/description.de.md`) |
-| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`               |
-| Notes to reviewer                 | `firefox/reviewer-notes.md`                                       |
-| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                            |
-| Privacy policy                    | Optional; paste the text of `PRIVACY.md` (repository root)        |
+| Form field                        | Source                                                                                        |
+| --------------------------------- | --------------------------------------------------------------------------------------------- |
+| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`                                        |
+| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`                                        |
+| Name                              | `firefox/listing.en.md` (other languages under Manage translations: `firefox/listing.<l>.md`) |
+| Summary                           | `firefox/summary.<l>.txt`                                                                     |
+| Description                       | `firefox/description.<l>.md`                                                                  |
+| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`                                           |
+| Notes to reviewer                 | `firefox/reviewer-notes.md`                                                                   |
+| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                                                        |
+| Privacy policy                    | Optional; paste the text of `PRIVACY.md` (repository root)                                    |
 
 ### Chrome Web Store → Developer Dashboard
 
-| Tab / field                           | Source                                                                       |
-| ------------------------------------- | ---------------------------------------------------------------------------- |
-| Package                               | `releases/v<version>/localapply-<version>-chrome.zip`                        |
-| Title and summary                     | Taken from the manifest (`wxt.config.ts`: `name`, `description` ≤ 132 chars) |
-| Description                           | `chrome/description.en.txt`                                                  |
-| Category                              | `chrome/listing.en.md`                                                       |
-| Store icon                            | `chrome/icon-128.png`                                                        |
-| Screenshots                           | `screenshots/` (up to 5)                                                     |
-| Small promo tile                      | `chrome/promo-tile-440x280.png`                                              |
-| Privacy practices, privacy policy URL | `chrome/privacy-practices.md` (policy: `PRIVACY.md` in the repository root)  |
+| Tab / field                           | Source                                                                                                          |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Package                               | `releases/v<version>/localapply-<version>-chrome.zip`                                                           |
+| Title and summary                     | Taken from the package: `public/_locales/<l>/messages.json` (`extName` ≤ 75, `extDescription` ≤ 132 characters) |
+| Description                           | `chrome/description.<l>.txt` (one per language in the language menu)                                            |
+| Category                              | `chrome/listing.en.md`                                                                                          |
+| Store icon                            | `chrome/icon-128.png`                                                                                           |
+| Screenshots                           | `screenshots/` (up to 5)                                                                                        |
+| Small promo tile                      | `chrome/promo-tile-440x280.png`                                                                                 |
+| Privacy practices, privacy policy URL | `chrome/privacy-practices.md` (policy: `PRIVACY.md` in the repository root)                                     |
 
 A Chrome Web Store developer account costs a one-time US$5 registration fee.
 

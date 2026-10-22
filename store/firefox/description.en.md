@@ -5,6 +5,7 @@
 - **Apply faster.** The repetitive part of an application is done in one click, so your time goes into the questions that matter.
 - **Keep your data private.** Your profile stays in Firefox on your computer. No account, no server, no AI service, no tracking.
 - **Apply in any language.** Recognises form labels in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish.
+- **Make it yours.** The interface speaks eight languages, with five colour palettes and a light or dark theme.
 - **Answer each question once.** Save your answer to a recurring question like "How did you hear about us?" and it is filled in next time.
 
 **What it fills**
@@ -13,7 +14,7 @@
 - LinkedIn, GitHub, Xing and portfolio links
 - Salary expectation, notice period, earliest start date and years of experience
 - Work authorisation, visa sponsorship and relocation questions
-- Current job title, employer and education
+- Current job title, employer, education and highest education level
 - CV and cover letter uploads, and cover letter text
 
 **Where it works**
@@ -22,7 +23,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career p
 
 **How to use it**
 
-1. Enter your details once on the profile page.
+1. Enter your details once on the profile page. It opens by itself after you install LocalApply.
 2. Open a job application, click the LocalApply toolbar button and then **Fill this page**, or press **Alt+Shift+F**.
 3. Check the result. Filled fields get a solid green outline; required questions it could not answer get a dashed amber outline and are listed so you can finish them. **Undo** puts the fields back.
 
