@@ -141,6 +141,8 @@ export const de: Translation = {
   'documents.cv': 'Lebenslauf',
   'documents.coverLetterFile': 'Anschreiben als Datei',
   'documents.coverLetterText': 'Anschreiben als Text',
+  'documents.placeholders':
+    'Schreib {company} oder {position}, und LocalApply setzt Arbeitgeber und Stellentitel von der Bewerbungsseite ein.',
   'file.choose': 'Datei auswählen',
   'file.replace': 'Ersetzen',
   'file.none': 'Keine Datei gespeichert',

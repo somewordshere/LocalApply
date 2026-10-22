@@ -180,6 +180,48 @@ try {
     await page.close();
   });
 
+  await step('a form in an iframe gets {company} and {position} from the posting around it', async () => {
+    await context.route('https://jobs.example.com/**', (route) =>
+      route.fulfill({
+        contentType: 'text/html; charset=utf-8',
+        body: `<!doctype html><html><head><title>Careers</title>
+          <script type="application/ld+json">{"@type":"JobPosting","title":"QA Engineer","hiringOrganization":{"name":"Acme"}}</script>
+          </head><body><h1>QA Engineer</h1><iframe src="https://forms.example.org/apply" width="600" height="300"></iframe></body></html>`,
+      }),
+    );
+    await context.route('https://forms.example.org/**', (route) =>
+      route.fulfill({
+        contentType: 'text/html; charset=utf-8',
+        body: '<!doctype html><html><body><form><label for="cl">Cover letter</label><textarea id="cl"></textarea></form></body></html>',
+      }),
+    );
+    await worker.evaluate(async () => {
+      const { profile } = await chrome.storage.local.get('profile');
+      await chrome.storage.local.set({
+        profile: { ...profile, coverLetterText: 'Dear {company} team, about the {position} role.' },
+      });
+    });
+    const page = await context.newPage();
+    await page.goto('https://jobs.example.com/acme/qa');
+    await page.bringToFront();
+    // What the popup and the shortcut do (src/core/fill.ts): ask the top frame for the job, then fill every frame.
+    await worker.evaluate(async () => {
+      const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+      const job = await chrome.tabs.sendMessage(tab.id, { type: 'read-job' }, { frameId: 0 });
+      await chrome.tabs.sendMessage(tab.id, { type: 'fill', job });
+    });
+    const form = page.frameLocator('iframe').locator('#cl');
+    await form.evaluate(
+      (el) =>
+        new Promise((resolve) => {
+          const check = () => (el.value ? resolve() : setTimeout(check, 50));
+          check();
+        }),
+    );
+    assert.equal(await form.inputValue(), 'Dear Acme team, about the QA Engineer role.');
+    await page.close();
+  });
+
   await step('profile page links the phone boxes: a full number fills code and number, and back', async () => {
     const options = await context.newPage();
     await options.goto(`chrome-extension://${extensionId}/options.html`);

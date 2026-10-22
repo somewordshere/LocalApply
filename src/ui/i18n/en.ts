@@ -146,6 +146,8 @@ export const en = {
   'documents.cv': 'CV / résumé',
   'documents.coverLetterFile': 'Cover letter file',
   'documents.coverLetterText': 'Cover letter text',
+  'documents.placeholders':
+    'Write {company} or {position} and LocalApply puts in the employer and job title from the application page.',
   'file.choose': 'Choose file',
   'file.replace': 'Replace',
   'file.none': 'No file stored',

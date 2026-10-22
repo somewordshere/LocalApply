@@ -1,5 +1,6 @@
 import { pickAdapter } from '../adapters';
 import type { Profile } from '../profile/schema';
+import { fillPlaceholders, type Job } from './job';
 import { attachFile, DIAL_CODE_ONLY, fillField, formatDate, hasValue } from './fill';
 import { matchCustom, matchField } from './match';
 import { clearHighlights, highlight } from './report';
@@ -13,6 +14,8 @@ export interface FillOptions {
   /** Replace values that are already present. */
   overwrite?: boolean;
   location?: { hostname: string; pathname: string };
+  /** The posting, for {company} and {position} in the cover letter and saved answers. */
+  job?: Job;
 }
 
 const DIGITS_ONLY_HINT =
@@ -88,8 +91,9 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     };
 
     if (!key) {
-      const answer =
+      const saved =
         field.kind === 'file' || field.kind === 'checkbox' ? null : matchCustom(field, profile.customAnswers);
+      const answer = saved && fillPlaceholders(saved, options.job);
       const restore = remember(field);
       if (answer && (await fillField(field, [answer]))) {
         changes.push({ field, restore });
@@ -118,6 +122,16 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
       result.missing.push({ label: label || key, key });
       if (field.required) highlight(field, 'attention');
       continue;
+    }
+    if (key === 'coverLetterText') {
+      const letter = fillPlaceholders(candidates[0], options.job);
+      // The page didn't say which company or job this is; a letter with a gap is worse than none.
+      if (letter === null) {
+        result.missing.push({ label: label || key, key });
+        if (field.required) highlight(field, 'attention');
+        continue;
+      }
+      candidates = [letter];
     }
     if (DATE_KEYS.has(key) && (field.kind === 'text' || field.kind === 'date')) {
       candidates = [formatDate(candidates[0], field)];

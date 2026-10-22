@@ -41,6 +41,7 @@ export function CustomAnswersSection({
         ))}
       </ul>
       {answers.length === 0 && <p className="text-sm text-ink-faint">{t('answers.none')}</p>}
+      <p className="mt-3 text-xs text-ink-faint">{t('documents.placeholders')}</p>
       <button
         className="btn-quiet mt-4"
         onClick={() => setAnswers([...answers, { id: crypto.randomUUID(), keywords: '', answer: '' }])}

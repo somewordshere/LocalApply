@@ -142,6 +142,8 @@ export const fr: Translation = {
   'documents.cv': 'CV',
   'documents.coverLetterFile': 'Lettre de motivation (fichier)',
   'documents.coverLetterText': 'Lettre de motivation (texte)',
+  'documents.placeholders':
+    "Écrivez {company} ou {position} et LocalApply y met l'employeur et l'intitulé du poste de la page de candidature.",
   'file.choose': 'Choisir un fichier',
   'file.replace': 'Remplacer',
   'file.none': 'Aucun fichier enregistré',

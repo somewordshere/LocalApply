@@ -141,6 +141,8 @@ export const pl: Translation = {
   'documents.cv': 'CV',
   'documents.coverLetterFile': 'List motywacyjny (plik)',
   'documents.coverLetterText': 'List motywacyjny (tekst)',
+  'documents.placeholders':
+    'Wpisz {company} lub {position}, a LocalApply wstawi pracodawcę i stanowisko ze strony aplikacji.',
   'file.choose': 'Wybierz plik',
   'file.replace': 'Zastąp',
   'file.none': 'Brak zapisanego pliku',

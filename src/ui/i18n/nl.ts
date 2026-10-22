@@ -141,6 +141,8 @@ export const nl: Translation = {
   'documents.cv': 'Cv',
   'documents.coverLetterFile': 'Motivatiebrief (bestand)',
   'documents.coverLetterText': 'Motivatiebrief (tekst)',
+  'documents.placeholders':
+    'Schrijf {company} of {position} en LocalApply vult de werkgever en functietitel van de sollicitatiepagina in.',
   'file.choose': 'Bestand kiezen',
   'file.replace': 'Vervangen',
   'file.none': 'Geen bestand opgeslagen',

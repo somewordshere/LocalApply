@@ -141,6 +141,8 @@ export const pt: Translation = {
   'documents.cv': 'CV / currículo',
   'documents.coverLetterFile': 'Carta de apresentação (ficheiro)',
   'documents.coverLetterText': 'Carta de apresentação (texto)',
+  'documents.placeholders':
+    'Escreva {company} ou {position} e o LocalApply coloca o empregador e o cargo da página de candidatura.',
   'file.choose': 'Escolher ficheiro',
   'file.replace': 'Substituir',
   'file.none': 'Nenhum ficheiro guardado',

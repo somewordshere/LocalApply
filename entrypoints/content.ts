@@ -2,6 +2,7 @@ import { defineContentScript } from 'wxt/utils/define-content-script';
 import { browser } from 'wxt/browser';
 import { pickAdapter } from '@/src/adapters';
 import { fillPage, undoLastFill, type FillResult, type UndoResult } from '@/src/engine';
+import { readJob, type Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { loadProfile } from '@/src/profile/store';
 import { translator, type Translate } from '@/src/ui/i18n';
@@ -111,14 +112,19 @@ async function undo(): Promise<void> {
   toast(undoSummary(result, t));
 }
 
-async function run(overwrite: boolean): Promise<void> {
+async function run(overwrite: boolean, job?: Job): Promise<void> {
   if (running) return;
   running = true;
   send({ type: 'fill-start' });
   let result: FillResult = { adapter: null, total: 0, filled: [], missing: [], unmatched: [], skipped: 0 };
   try {
     const [profile, t] = await Promise.all([loadProfile(), texts(), paint()]);
-    result = await fillPage(document, profile, { overwrite, location });
+    // A fill started without the job (an older popup) can still read it here in the top frame.
+    result = await fillPage(document, profile, {
+      overwrite,
+      location,
+      job: job ?? (window === window.top ? readJob(document) : undefined),
+    });
     if (result.total > 0 && (window === window.top || result.filled.length > 0)) {
       const action = result.filled.length
         ? { label: t('notice.undo'), run: () => send({ type: 'relay-undo' }) }
@@ -165,8 +171,10 @@ export default defineContentScript({
   runAt: 'document_idle',
   main() {
     browser.runtime.onMessage.addListener((message: Message) => {
-      if (message?.type === 'fill') void run(Boolean(message.overwrite));
+      if (message?.type === 'fill') void run(Boolean(message.overwrite), message.job);
       if (message?.type === 'undo' && !running) void undo();
+      // Only the top frame is asked; its answer is the reply.
+      if (message?.type === 'read-job') return Promise.resolve(readJob(document));
     });
     if (SHOW_PAGE_BUTTON) watchForForm();
   },

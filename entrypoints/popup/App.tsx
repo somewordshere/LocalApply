@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { browser } from 'wxt/browser';
 import type { FillResult } from '@/src/engine/types';
 import type { UndoResult } from '@/src/engine/undo';
+import { fillTab } from '@/src/core/fill';
 import type { Message } from '@/src/core/messages';
 import { questionKeywords } from '@/src/profile/schema';
 import { loadProfile, saveProfile } from '@/src/profile/store';
@@ -128,8 +129,7 @@ export default function App() {
     replied.current = false;
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
     if (tab?.id === undefined) return setStatus('unavailable');
-    const message: Message = { type: 'fill', overwrite };
-    browser.tabs.sendMessage(tab.id, message).catch(() => {});
+    await fillTab(tab.id, overwrite);
     setTimeout(() => {
       if (!replied.current) setStatus('unavailable');
     }, NO_REPLY_MS);
