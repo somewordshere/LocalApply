@@ -1,6 +1,6 @@
 # LocalApply
 
-**[Get LocalApply for Firefox](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/)**
+**[Get it for Chrome](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg)** · **[Get it for Firefox](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/)**
 
 Private job application autofill for Firefox and Chromium browsers. You save your details once; on any application form, one click fills name, contact details, address, links, salary expectation, availability, education, CV and your saved answers. You review the form and submit it yourself.
 
@@ -35,7 +35,7 @@ Your profile can be exported to a file and imported again, or deleted with one c
 
 The latest version is **[v0.5.0](releases/v0.5.0/)** ([release notes](releases/v0.5.0/RELEASE_NOTES.md)). Every version is in [`releases/`](releases/), one folder per version with the packages, release notes and checksums.
 
-- **Chrome, Edge, Brave:** unzip `localapply-<version>-chrome.zip`, open `chrome://extensions`, turn on Developer mode, choose "Load unpacked" and pick the unzipped folder.
+- **Chrome, Edge, Brave:** install from the [Chrome Web Store](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg), or unzip `localapply-<version>-chrome.zip`, open `chrome://extensions`, turn on Developer mode, choose "Load unpacked" and pick the unzipped folder.
 - **Firefox:** open `about:debugging#/runtime/this-firefox`, choose "Load Temporary Add-on" and pick `localapply-<version>-firefox.zip` (removed when Firefox restarts). For a permanent install, use the signed version from [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/), or Firefox Developer Edition with `xpinstall.signatures.required` set to `false`.
 
 ## Develop
