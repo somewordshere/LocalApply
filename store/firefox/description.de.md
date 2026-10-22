@@ -16,7 +16,8 @@
 - Fragen zu Arbeitserlaubnis, Visum und Umzugsbereitschaft
 - Sprachen mit Niveau, Führerschein, Reisebereitschaft und Gehaltsspanne
 - Anschreiben und gespeicherte Antworten, mit {company} und {position} durch Arbeitgeber und Stellentitel ersetzt
-- Aktuelle Position, Arbeitgeber, Ausbildung und höchster Bildungsabschluss
+- Berufserfahrung und Ausbildung, ein Eintrag pro Block in Formularen mit mehreren Stationen, und dein höchster Bildungsabschluss
+- Mehrere Profile, etwa eines pro Sprache oder Art von Stelle, im Pop-up auswählbar
 - Lebenslauf und Anschreiben als Datei sowie Anschreiben als Text
 
 **Wo es funktioniert**

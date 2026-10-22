@@ -16,7 +16,8 @@
 - Preguntas sobre permiso de trabajo, patrocinio de visado y traslado
 - Idiomas y su nivel, carné de conducir, viajes y rango salarial
 - Tu carta de presentación y tus respuestas guardadas, con {company} y {position} sustituidos por la empresa y el puesto
-- Puesto actual, empresa, formación y nivel de estudios más alto
+- Experiencia y formación, una entrada por bloque en formularios con varios empleos o centros, y tu nivel de estudios más alto
+- Varios perfiles, por ejemplo uno por idioma o tipo de puesto, que eliges en la ventana de la extensión
 - CV y carta de presentación como archivo, y texto de la carta
 
 **Dónde funciona**

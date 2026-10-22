@@ -16,7 +16,8 @@
 - Pytania o pozwolenie na pracę, sponsorowanie wizy i przeprowadzkę
 - Języki i ich poziom, prawo jazdy, gotowość do podróży i widełki wynagrodzenia
 - List motywacyjny i zapisane odpowiedzi, z {company} i {position} zastąpionymi przez pracodawcę i stanowisko
-- Obecne stanowisko, pracodawcę, wykształcenie i najwyższy poziom wykształcenia
+- Doświadczenie i wykształcenie, jeden wpis na blok w formularzach z kilkoma miejscami pracy lub szkołami, oraz najwyższy poziom wykształcenia
+- Kilka profili, np. jeden na język lub rodzaj pracy, wybierany w oknie rozszerzenia
 - CV i list motywacyjny jako plik oraz treść listu motywacyjnego
 
 **Gdzie działa**

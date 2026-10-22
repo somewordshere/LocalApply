@@ -16,7 +16,8 @@
 - Work authorisation, visa sponsorship and relocation questions
 - Spoken languages and their level, driving licence, travel and salary-range questions
 - Your cover letter and saved answers, with {company} and {position} replaced by the employer and job title
-- Current job title, employer, education and highest education level
+- Work history and education, one entry per block on forms that list several jobs or schools, and your highest education level
+- Several profiles, for example one per language or kind of job, chosen in the popup
 - CV and cover letter uploads, and cover letter text
 
 **Where it works**

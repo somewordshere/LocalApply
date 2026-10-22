@@ -16,7 +16,8 @@
 - Domande su permesso di lavoro, visto e disponibilità al trasferimento
 - Lingue e livello, patente, disponibilità a viaggiare e fascia di stipendio
 - Lettera di presentazione e risposte salvate, con {company} e {position} sostituiti da azienda e ruolo
-- Ruolo attuale, datore di lavoro, formazione e titolo di studio più alto
+- Esperienze e istruzione, una voce per blocco nei moduli con più lavori o scuole, e il titolo di studio più alto
+- Più profili, ad esempio uno per lingua o tipo di lavoro, da scegliere nella finestra dell’estensione
 - CV e lettera di presentazione come file, e testo della lettera
 
 **Dove funziona**

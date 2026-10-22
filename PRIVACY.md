@@ -9,8 +9,9 @@ LocalApply is a browser extension that fills job application forms with informat
 What you enter on its profile page, and the application log described below:
 
 - **Personal and contact details:** name, salutation, email address, phone number, date of birth, nationality and postal address.
-- **Professional details:** links (LinkedIn, GitHub, Xing, portfolio), current job title and employer, education and highest education level, spoken languages and their level, salary expectation and range, notice period, earliest start date, years of experience, work authorisation, visa sponsorship, relocation and travel preferences, and driving licence.
+- **Professional details:** links (LinkedIn, GitHub, Xing, portfolio), work history (job titles, employers, locations, dates and what you did), education (schools, degrees, fields of study and dates) and highest education level, spoken languages and their level, salary expectation and range, notice period, earliest start date, years of experience, work authorisation, visa sponsorship, relocation and travel preferences, and driving licence.
 - **Documents:** your CV and cover letter files, and cover letter text.
+- **Several profiles**, if you make more than one (for example one per language): each holds its own copy of the above, under a name you choose.
 - **Saved answers** to application questions.
 - **Optional voluntary disclosures**, only if you fill them in: gender, sexual orientation, disability status and veteran status.
 
@@ -18,7 +19,7 @@ To decide which form field needs which piece of your information, LocalApply rea
 
 ## Application log
 
-So you can see where you applied, LocalApply notes each application form it fills: the date, the employer's name and job title as read from the page, and the page's address without anything after it (no "?…" query, which can contain tokens). The log is on unless you turn it off, and is stored only in your browser like your profile. On the profile page, under Applications, you can turn it off, remove single entries, clear it, or export it as a CSV file. Nothing is noted for pages you only visit, and "Delete all data" clears the log too.
+So you can see where you applied, LocalApply notes each application form it fills: the date, the employer's name and job title as read from the page, the name of the profile that filled it, and the page's address without anything after it (no "?…" query, which can contain tokens). The log is on unless you turn it off, and is stored only in your browser like your profile. On the profile page, under Applications, you can turn it off, remove single entries, clear it, or export it as a CSV file. Nothing is noted for pages you only visit, and "Delete all data" clears the log too.
 
 ## How the information is used
 

@@ -16,7 +16,8 @@
 - Vragen over werkvergunning, visumsponsoring en verhuizen
 - Talen en niveau, rijbewijs, reisbereidheid en salarisrange
 - Je motivatiebrief en bewaarde antwoorden, met {company} en {position} vervangen door werkgever en functietitel
-- Huidige functie, werkgever, opleiding en hoogst genoten opleiding
+- Werkervaring en opleiding, één item per blok in formulieren met meerdere banen of scholen, en je hoogst genoten opleiding
+- Meerdere profielen, bijvoorbeeld één per taal of soort functie, te kiezen in het venster van de extensie
 - Cv en motivatiebrief als bestand, en de tekst van de motivatiebrief
 
 **Waar het werkt**

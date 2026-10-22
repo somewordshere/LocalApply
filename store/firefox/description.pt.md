@@ -16,7 +16,8 @@
 - Perguntas sobre autorização de trabalho, visto e disponibilidade para mudar de cidade
 - Línguas e nível, carta de condução, disponibilidade para viajar e intervalo salarial
 - A sua carta de apresentação e respostas guardadas, com {company} e {position} substituídos pelo empregador e pelo cargo
-- Cargo atual, empregador, formação e nível de escolaridade mais alto
+- Experiência e formação, uma entrada por bloco em formulários com vários empregos ou escolas, e o seu nível de escolaridade mais alto
+- Vários perfis, por exemplo um por língua ou tipo de cargo, escolhidos na janela da extensão
 - CV e carta de apresentação em ficheiro, e texto da carta
 
 **Onde funciona**

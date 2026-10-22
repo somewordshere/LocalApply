@@ -28,7 +28,11 @@ popup  ◄──────────── fill-start / fill-result messages
 
 ## Data
 
-The profile (`src/profile/schema.ts`) is one object in `storage.local`, including documents as data URLs. `migrate()` turns anything read from storage or an imported file into a complete, current profile, running the version upgrades in `src/profile/migrations.ts` first.
+Each profile (`src/profile/schema.ts`) is one object in `storage.local` under `profile:<id>`, including documents as data URLs; `profileIndex` lists the profiles by name and says which one is active (`src/profile/store.ts`). Before 0.8.0 there was a single `profile` key; the first load moves it into the first profile. `migrate()` turns anything read from storage or an imported file into a complete, current profile, running the version upgrades in `src/profile/migrations.ts` first.
+
+Work history, education and languages are lists, most recent first. A form's n-th field of a key takes the n-th entry: `fillPage` counts fields per key and passes the count to `resolve()` as `ctx.index`, so a form with three job blocks gets three jobs. LocalApply never clicks "Add another"; the person adds the blocks, then fills.
+
+Settings that aren't profile data live next to it: interface language, palette and theme (`src/ui/`), and the application log with its on/off switch (`src/core/applications.ts`).
 
 Nothing leaves the browser. The extension has no network code; keep it that way, since both store listings and the Firefox data-collection declaration (`wxt.config.ts`) promise it.
 

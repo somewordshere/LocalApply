@@ -7,7 +7,8 @@ CE QU’IL REMPLIT
 • Questions sur l’autorisation de travail, le visa et la mobilité
 • Langues parlées et leur niveau, permis de conduire, déplacements et fourchette de salaire
 • Votre lettre de motivation et vos réponses enregistrées, avec {company} et {position} remplacés par l’employeur et l’intitulé du poste
-• Poste actuel, employeur, formation et plus haut niveau d’études
+• Expérience et formation, une entrée par bloc dans les formulaires qui listent plusieurs postes ou écoles, et votre plus haut niveau d’études
+• Plusieurs profils, par exemple un par langue ou type de poste, à choisir dans la fenêtre de l’extension
 • CV et lettre de motivation en fichier, et texte de la lettre de motivation
 • Vos propres réponses aux questions récurrentes comme « Comment avez-vous entendu parler de nous ? »
 
