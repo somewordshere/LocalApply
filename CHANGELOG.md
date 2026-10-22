@@ -6,6 +6,8 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-10-22
+
 ### Added
 
 - Sexual orientation in the voluntary disclosures. Like the other disclosures it stays blank unless you set it, and is only used when a form asks; LocalApply picks the matching option in any of its eight languages.

@@ -2,6 +2,12 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.6.0 · October 22, 2026
+
+- The phone number has three boxes that fill each other in: **Country code**, **Number** and **Full number**. Type +48791532218 into Full number and the code and number appear on their own; change either part and the full number follows.
+- New **Sexual orientation** in the voluntary disclosures. Like the others, it stays blank unless you set it and is only used when a form asks.
+- On wide screens the profile sits in the middle of the window, with the list of sections to its left.
+
 ## 0.5.0 · October 22, 2026
 
 - New **Highest education level** on the profile page, from high school to PhD. LocalApply picks the matching option when a form asks, in any of its eight languages, and also uses it for **Degree** dropdowns that list levels such as Bachelor and Master. An MBA counts as a master's on forms that don't list it.
