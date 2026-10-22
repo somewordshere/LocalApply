@@ -2,10 +2,10 @@
 
 Add under "Manage translations" → Français. The extension's own interface is available in this language too (switchable on the profile page).
 
-## Name (43 / 50 characters)
+## Name (49 / 50 characters)
 
 ```
-LocalApply – Candidatures remplies en privé
+LocalApply – Candidatures en un clic, sans compte
 ```
 
 ## Summary (up to 250 characters)

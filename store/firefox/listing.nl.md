@@ -2,10 +2,10 @@
 
 Add under "Manage translations" → Nederlands. The extension's own interface is available in this language too (switchable on the profile page).
 
-## Name (41 / 50 characters)
+## Name (49 / 50 characters)
 
 ```
-LocalApply – Sollicitaties privé invullen
+LocalApply – Sollicitaties invullen, geen account
 ```
 
 ## Summary (up to 250 characters)

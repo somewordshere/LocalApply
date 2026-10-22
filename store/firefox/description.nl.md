@@ -1,4 +1,6 @@
-**Stop met je cv overtypen in elke sollicitatie.** LocalApply bewaart je gegevens één keer en vult sollicitatieformulieren in één klik in: naam, contactgegevens, adres, links, salarisindicatie, beschikbaarheid en cv. Jij houdt de regie: controleer het formulier en verstuur het zelf.
+**Gratis. Geen account. Geen abonnement. Je gegevens blijven op je eigen computer.**
+
+Stop met je cv overtypen in elke sollicitatie. LocalApply bewaart je gegevens één keer, alleen in je browser, en vult sollicitatieformulieren in één klik in: naam, contactgegevens, adres, links, salarisindicatie, beschikbaarheid en cv. Geen registratie, niets te betalen. Jij houdt de regie: controleer het formulier en verstuur het zelf.
 
 **Waarom sollicitanten het gebruiken**
 

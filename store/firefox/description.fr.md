@@ -1,4 +1,6 @@
-**Arrêtez de recopier votre CV dans chaque candidature.** LocalApply enregistre vos informations une fois et remplit les formulaires de candidature en un clic : nom, coordonnées, adresse, liens, prétentions salariales, disponibilité et CV. Vous gardez la main : vérifiez le formulaire et envoyez-le vous-même.
+**Gratuit. Sans compte. Sans abonnement. Vos données restent sur votre ordinateur.**
+
+Arrêtez de recopier votre CV dans chaque candidature. LocalApply enregistre vos informations une fois, uniquement dans votre navigateur, et remplit les formulaires de candidature en un clic : nom, coordonnées, adresse, liens, prétentions salariales, disponibilité et CV. Pas d’inscription, rien à payer. Vous gardez la main : vérifiez le formulaire et envoyez-le vous-même.
 
 **Pourquoi les candidats l’utilisent**
 

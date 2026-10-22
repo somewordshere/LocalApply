@@ -25,11 +25,12 @@ function noRawHtml(): Plugin {
 
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
-  manifest: {
+  manifest: ({ browser }) => ({
     // Name, summary and the shortcut's name come from public/_locales/<language>/messages.json, so both stores
-    // and the browser show them in the user's language.
+    // and the browser show them in the user's language. addons.mozilla.org allows 50 characters for the name
+    // and the Chrome Web Store 75, so Firefox gets its own, shorter one.
     default_locale: 'en',
-    name: '__MSG_extName__',
+    name: browser === 'firefox' ? '__MSG_extNameFirefox__' : '__MSG_extName__',
     short_name: 'LocalApply',
     description: '__MSG_extDescription__',
     permissions: ['storage', 'unlimitedStorage'],
@@ -47,7 +48,7 @@ export default defineConfig({
         data_collection_permissions: { required: ['none'] },
       },
     },
-  },
+  }),
   // The source zip is what addons.mozilla.org reviewers rebuild from; releases, store material and docs are not part of the build.
   zip: {
     excludeSources: ['releases/**', 'store/**', 'docs/**', 'scripts/store-assets.mjs', 'tests/e2e/**'],

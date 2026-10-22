@@ -1,10 +1,14 @@
 {
   "extName": {
-    "message": "LocalApply – Prywatne wypełnianie aplikacji",
-    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+    "message": "LocalApply – Wypełnianie aplikacji o pracę, bez konta i subskrypcji",
+    "description": "Extension name in Chrome and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extNameFirefox": {
+    "message": "LocalApply – Wypełnianie aplikacji, bez konta",
+    "description": "Extension name in Firefox and on addons.mozilla.org (≤ 50 characters)."
   },
   "extDescription": {
-    "message": "Wypełnia formularze rekrutacyjne jednym kliknięciem z zapisanego profilu. Działa offline; dane nie opuszczają przeglądarki.",
+    "message": "Wypełnia aplikacje o pracę jednym kliknięciem. Za darmo, bez konta, bez subskrypcji. Działa offline; dane zostają w przeglądarce.",
     "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
   },
   "fillCommand": {

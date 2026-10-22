@@ -1,4 +1,6 @@
-Applying for jobs means typing the same details into every form. LocalApply keeps them in one profile and fills the application you have open with a single click. You check the form and press Submit yourself.
+Free. No account. No subscription. Your data stays on your computer.
+
+Applying for jobs means typing the same details into every form. LocalApply keeps them in one profile, stored only in your browser, and fills the application you have open with a single click. Nothing to sign up for, nothing to pay, and no server your CV gets uploaded to. You check the form and press Submit yourself.
 
 WHAT IT FILLS
 • Name, email, phone (including country-code pickers), address and date of birth

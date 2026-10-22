@@ -1,4 +1,6 @@
-Szukanie pracy to wpisywanie tych samych danych w każdy formularz. LocalApply trzyma je w jednym profilu i wypełnia otwartą aplikację jednym kliknięciem. Ty sprawdzasz formularz i sam klikasz Wyślij.
+Za darmo. Bez konta. Bez subskrypcji. Twoje dane zostają na Twoim komputerze.
+
+Szukanie pracy to wpisywanie tych samych danych w każdy formularz. LocalApply trzyma je w jednym profilu, wyłącznie w Twojej przeglądarce, i wypełnia otwartą aplikację jednym kliknięciem. Bez rejestracji, bez opłat i bez serwera, na który trafiałoby Twoje CV. Ty sprawdzasz formularz i sam klikasz Wyślij.
 
 CO WYPEŁNIA
 • Imię i nazwisko, e-mail, telefon (także z wyborem numeru kierunkowego), adres i datę urodzenia

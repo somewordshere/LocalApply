@@ -2,10 +2,10 @@
 
 Add under "Manage translations" → Polski. The extension's own interface is available in this language too (switchable on the profile page).
 
-## Name (43 / 50 characters)
+## Name (45 / 50 characters)
 
 ```
-LocalApply – Prywatne wypełnianie aplikacji
+LocalApply – Wypełnianie aplikacji, bez konta
 ```
 
 ## Summary (up to 250 characters)

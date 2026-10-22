@@ -7,7 +7,7 @@ Copy each block into the matching field at addons.mozilla.org → Developer Hub 
 ## Name (45 / 50 characters)
 
 ```
-LocalApply – Private Job Application Autofill
+LocalApply – Private Job Autofill, No Account
 ```
 
 ## Add-on URL

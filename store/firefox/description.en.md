@@ -1,4 +1,6 @@
-**Stop retyping your CV into every job application.** LocalApply saves your details once and fills application forms in one click: name, contact details, address, links, salary expectation, availability and your CV. You stay in control: review the form and press Submit yourself.
+**Free. No account. No subscription. Your data stays on your computer.**
+
+Stop retyping your CV into every job application. LocalApply saves your details once, only in Firefox on your computer, and fills application forms in one click: name, contact details, address, links, salary expectation, availability and your CV. Nothing to sign up for, nothing to pay. You stay in control: review the form and press Submit yourself.
 
 **Why job seekers use it**
 

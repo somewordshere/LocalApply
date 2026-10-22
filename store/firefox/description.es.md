@@ -1,4 +1,6 @@
-**Deja de copiar tu CV en cada candidatura.** LocalApply guarda tus datos una vez y rellena los formularios de empleo en un clic: nombre, datos de contacto, dirección, enlaces, expectativa salarial, disponibilidad y CV. Tú mantienes el control: revisa el formulario y envíalo tú.
+**Gratis. Sin cuenta. Sin suscripción. Tus datos se quedan en tu ordenador.**
+
+Deja de copiar tu CV en cada candidatura. LocalApply guarda tus datos una vez, solo en tu navegador, y rellena los formularios de empleo en un clic: nombre, datos de contacto, dirección, enlaces, expectativa salarial, disponibilidad y CV. Sin registro y sin pagos. Tú mantienes el control: revisa el formulario y envíalo tú.
 
 **Por qué lo usan quienes buscan empleo**
 

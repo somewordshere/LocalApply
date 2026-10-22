@@ -1,10 +1,14 @@
 {
   "extName": {
-    "message": "LocalApply – Sollicitaties privé invullen",
-    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+    "message": "LocalApply – Sollicitaties in één klik, geen account, geen abonnement",
+    "description": "Extension name in Chrome and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extNameFirefox": {
+    "message": "LocalApply – Sollicitaties invullen, geen account",
+    "description": "Extension name in Firefox and on addons.mozilla.org (≤ 50 characters)."
   },
   "extDescription": {
-    "message": "Vult sollicitatieformulieren in één klik in vanuit je opgeslagen profiel. Werkt offline; je gegevens blijven in de browser.",
+    "message": "Vult sollicitaties in één klik in. Gratis, geen account, geen abonnement. Werkt offline; je gegevens blijven in de browser.",
     "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
   },
   "fillCommand": {

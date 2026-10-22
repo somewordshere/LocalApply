@@ -1,10 +1,14 @@
 {
   "extName": {
-    "message": "LocalApply – Candidaturas rellenadas en privado",
-    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+    "message": "LocalApply – Autocompletar candidaturas, sin cuenta ni suscripción",
+    "description": "Extension name in Chrome and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extNameFirefox": {
+    "message": "LocalApply – Candidaturas en un clic, sin cuenta",
+    "description": "Extension name in Firefox and on addons.mozilla.org (≤ 50 characters)."
   },
   "extDescription": {
-    "message": "Rellena formularios de empleo en un clic desde tu perfil guardado. Funciona sin conexión; tus datos no salen del navegador.",
+    "message": "Rellena candidaturas en un clic. Gratis, sin cuenta, sin suscripción. Funciona sin conexión; tus datos no salen del navegador.",
     "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
   },
   "fillCommand": {

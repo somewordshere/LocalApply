@@ -6,6 +6,10 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+### Changed
+
+- The name and summary shown in the browser and both stores now lead with what LocalApply doesn't ask for: free, no account, no subscription, works offline. Firefox gets its own, shorter name, as addons.mozilla.org allows 50 characters.
+
 ## [0.8.0] - 2026-10-22
 
 ### Added

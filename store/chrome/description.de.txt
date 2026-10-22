@@ -1,4 +1,6 @@
-Bei jeder Bewerbung tippst du dieselben Angaben neu ein. LocalApply speichert sie in einem Profil und füllt das geöffnete Bewerbungsformular mit einem Klick aus. Du prüfst das Formular und schickst es selbst ab.
+Kostenlos. Kein Konto. Kein Abo. Deine Daten bleiben auf deinem Rechner.
+
+Bei jeder Bewerbung tippst du dieselben Angaben neu ein. LocalApply speichert sie in einem Profil, nur in deinem Browser, und füllt das geöffnete Bewerbungsformular mit einem Klick aus. Keine Registrierung, nichts zu bezahlen und kein Server, auf den dein Lebenslauf hochgeladen wird. Du prüfst das Formular und schickst es selbst ab.
 
 WAS AUSGEFÜLLT WIRD
 • Name, E-Mail, Telefon (auch mit Ländervorwahl-Auswahl), Adresse und Geburtsdatum

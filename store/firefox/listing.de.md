@@ -2,10 +2,10 @@
 
 Add under "Manage translations" → Deutsch. The extension's own interface is available in German too (switchable on the profile page).
 
-## Name (41 / 50 characters)
+## Name (46 / 50 characters)
 
 ```
-LocalApply – Bewerbungen privat ausfüllen
+LocalApply – Bewerbungen ausfüllen, ohne Konto
 ```
 
 ## Summary (up to 250 characters)

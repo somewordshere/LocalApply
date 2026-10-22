@@ -1,4 +1,6 @@
-Postuler, c’est saisir les mêmes informations dans chaque formulaire. LocalApply les garde dans un profil et remplit la candidature ouverte en un seul clic. Vous vérifiez le formulaire et cliquez vous-même sur Envoyer.
+Gratuit. Sans compte. Sans abonnement. Vos données restent sur votre ordinateur.
+
+Postuler, c’est saisir les mêmes informations dans chaque formulaire. LocalApply les garde dans un profil, uniquement dans votre navigateur, et remplit la candidature ouverte en un seul clic. Pas d’inscription, rien à payer et aucun serveur où votre CV serait envoyé. Vous vérifiez le formulaire et cliquez vous-même sur Envoyer.
 
 CE QU’IL REMPLIT
 • Nom, e-mail, téléphone (y compris les sélecteurs d’indicatif), adresse et date de naissance

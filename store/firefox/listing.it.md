@@ -2,10 +2,10 @@
 
 Add under "Manage translations" → Italiano. The extension's own interface is available in this language too (switchable on the profile page).
 
-## Name (43 / 50 characters)
+## Name (47 / 50 characters)
 
 ```
-LocalApply – Compila candidature in privato
+LocalApply – Compila candidature, senza account
 ```
 
 ## Summary (up to 250 characters)

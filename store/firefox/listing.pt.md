@@ -2,10 +2,10 @@
 
 Add under "Manage translations" → Português. The extension's own interface is available in this language too (switchable on the profile page).
 
-## Name (48 / 50 characters)
+## Name (47 / 50 characters)
 
 ```
-LocalApply – Candidaturas preenchidas em privado
+LocalApply – Candidaturas num clique, sem conta
 ```
 
 ## Summary (up to 250 characters)

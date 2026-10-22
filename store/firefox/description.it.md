@@ -1,4 +1,6 @@
-**Basta ricopiare il CV in ogni candidatura.** LocalApply salva i tuoi dati una volta e compila i moduli di candidatura con un clic: nome, contatti, indirizzo, link, RAL desiderata, disponibilità e CV. Il controllo resta a te: controlla il modulo e invialo tu.
+**Gratis. Nessun account. Nessun abbonamento. I tuoi dati restano sul tuo computer.**
+
+Basta ricopiare il CV in ogni candidatura. LocalApply salva i tuoi dati una volta, solo nel tuo browser, e compila i moduli di candidatura con un clic: nome, contatti, indirizzo, link, RAL desiderata, disponibilità e CV. Nessuna registrazione, niente da pagare. Il controllo resta a te: controlla il modulo e invialo tu.
 
 **Perché chi cerca lavoro lo usa**
 

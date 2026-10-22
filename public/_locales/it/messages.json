@@ -1,10 +1,14 @@
 {
   "extName": {
-    "message": "LocalApply – Compila candidature in privato",
-    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+    "message": "LocalApply – Candidature in un clic, senza account né abbonamento",
+    "description": "Extension name in Chrome and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extNameFirefox": {
+    "message": "LocalApply – Compila candidature, senza account",
+    "description": "Extension name in Firefox and on addons.mozilla.org (≤ 50 characters)."
   },
   "extDescription": {
-    "message": "Compila i moduli di candidatura con un clic dal tuo profilo salvato. Funziona offline; i tuoi dati restano nel browser.",
+    "message": "Compila le candidature con un clic. Gratis, senza account, senza abbonamento. Funziona offline; i tuoi dati restano nel browser.",
     "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
   },
   "fillCommand": {

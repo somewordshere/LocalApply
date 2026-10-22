@@ -1,4 +1,6 @@
-**Koniec z przepisywaniem CV do każdej aplikacji.** LocalApply zapisuje Twoje dane raz i wypełnia formularze rekrutacyjne jednym kliknięciem: imię i nazwisko, dane kontaktowe, adres, linki, oczekiwania finansowe, dostępność i CV. Ty decydujesz: sprawdź formularz i wyślij go sam.
+**Za darmo. Bez konta. Bez subskrypcji. Twoje dane zostają na Twoim komputerze.**
+
+Koniec z przepisywaniem CV do każdej aplikacji. LocalApply zapisuje Twoje dane raz, wyłącznie w przeglądarce, i wypełnia formularze rekrutacyjne jednym kliknięciem: imię i nazwisko, dane kontaktowe, adres, linki, oczekiwania finansowe, dostępność i CV. Bez rejestracji, bez opłat. Ty decydujesz: sprawdź formularz i wyślij go sam.
 
 **Dlaczego kandydaci z niego korzystają**
 

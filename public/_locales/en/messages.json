@@ -1,10 +1,14 @@
 {
   "extName": {
-    "message": "LocalApply – Private Job Application Autofill",
-    "description": "Extension name in the browser and the Chrome Web Store (≤ 75 characters)."
+    "message": "LocalApply – Job Application Autofill, No Account, No Subscription",
+    "description": "Extension name in Chrome and the Chrome Web Store (≤ 75 characters)."
+  },
+  "extNameFirefox": {
+    "message": "LocalApply – Private Job Autofill, No Account",
+    "description": "Extension name in Firefox and on addons.mozilla.org (≤ 50 characters)."
   },
   "extDescription": {
-    "message": "Fills job application forms from your saved profile in one click. Works offline; your data never leaves the browser.",
+    "message": "Autofill job applications in one click. Free, no account, no subscription. Works offline; your data never leaves your browser.",
     "description": "Short summary in the browser and the Chrome Web Store (≤ 132 characters)."
   },
   "fillCommand": {

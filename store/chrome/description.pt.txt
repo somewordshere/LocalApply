@@ -1,4 +1,6 @@
-Candidatar-se é escrever os mesmos dados em cada formulário. O LocalApply guarda-os num perfil e preenche a candidatura aberta com um só clique. O utilizador revê o formulário e clica em Enviar.
+Grátis. Sem conta. Sem subscrição. Os seus dados ficam no seu computador.
+
+Candidatar-se é escrever os mesmos dados em cada formulário. O LocalApply guarda-os num perfil, apenas no seu navegador, e preenche a candidatura aberta com um só clique. Sem registo, sem pagamentos e sem nenhum servidor para onde o seu CV seja enviado. O utilizador revê o formulário e clica em Enviar.
 
 O QUE PREENCHE
 • Nome, e-mail, telefone (incluindo seletores de indicativo), morada e data de nascimento

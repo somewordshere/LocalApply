@@ -1,4 +1,6 @@
-**Schluss damit, den Lebenslauf in jede Bewerbung abzutippen.** LocalApply speichert deine Angaben einmal und füllt Bewerbungsformulare mit einem Klick aus: Name, Kontaktdaten, Adresse, Links, Gehaltsvorstellung, Verfügbarkeit und Lebenslauf. Du behältst die Kontrolle: Prüfe das Formular und schicke es selbst ab.
+**Kostenlos. Kein Konto. Kein Abo. Deine Daten bleiben auf deinem Rechner.**
+
+Schluss damit, den Lebenslauf in jede Bewerbung abzutippen. LocalApply speichert deine Angaben einmal, nur in Firefox auf deinem Rechner, und füllt Bewerbungsformulare mit einem Klick aus: Name, Kontaktdaten, Adresse, Links, Gehaltsvorstellung, Verfügbarkeit und Lebenslauf. Keine Registrierung, nichts zu bezahlen. Du behältst die Kontrolle: Prüfe das Formular und schicke es selbst ab.
 
 **Warum Bewerber es nutzen**
 

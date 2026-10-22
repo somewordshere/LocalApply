@@ -6,10 +6,10 @@ Fill in at the Chrome Web Store Developer Dashboard → your item → Store list
 
 Chrome takes both from the manifest (`wxt.config.ts`), so they change only with a new upload:
 
-| Field   | Value                                                                                                                | Limit |
-| ------- | -------------------------------------------------------------------------------------------------------------------- | ----- |
-| Title   | LocalApply – Private Job Application Autofill                                                                        | 75    |
-| Summary | Fills job application forms from your saved profile in one click. Works offline; your data never leaves the browser. | 132   |
+| Field   | Value                                                                                                                          | Limit |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------ | ----- |
+| Title   | LocalApply – Job Application Autofill, No Account, No Subscription                                                             | 75    |
+| Summary | Autofill job applications in one click. Free, no account, no subscription. Works offline; your data never leaves your browser. | 132   |
 
 ## Description
 

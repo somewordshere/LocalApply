@@ -1,4 +1,6 @@
-**Chega de copiar o CV para cada candidatura.** O LocalApply guarda os seus dados uma vez e preenche formulários de candidatura num clique: nome, contactos, morada, links, expectativa salarial, disponibilidade e CV. O controlo é seu: reveja o formulário e envie-o.
+**Grátis. Sem conta. Sem subscrição. Os seus dados ficam no seu computador.**
+
+Chega de copiar o CV para cada candidatura. O LocalApply guarda os seus dados uma vez, apenas no seu navegador, e preenche formulários de candidatura num clique: nome, contactos, morada, links, expectativa salarial, disponibilidade e CV. Sem registo, sem pagamentos. O controlo é seu: reveja o formulário e envie-o.
 
 **Porque é que os candidatos o usam**
 

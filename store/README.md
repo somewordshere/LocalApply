@@ -2,7 +2,7 @@
 
 Everything the Firefox Add-ons site and the Chrome Web Store ask for, kept next to the code so it changes together with it.
 
-Every text exists in the eight interface languages: `<l>` is `en`, `de`, `fr`, `es`, `it`, `nl`, `pt` or `pl`. The extension's name, summary and shortcut name come from `public/_locales/<l>/messages.json` in the package, so both stores and the browser show them in the user's language.
+Every text exists in the eight interface languages: `<l>` is `en`, `de`, `fr`, `es`, `it`, `nl`, `pt` or `pl`. The extension's name, summary and shortcut name come from `public/_locales/<l>/messages.json` in the package, so both stores and the browser show them in the user's language. Firefox gets its own, shorter name (`extNameFirefox`, ≤ 50 characters) because addons.mozilla.org allows 50 where the Chrome Web Store allows 75 (`extName`).
 
 ```
 store/
@@ -35,17 +35,17 @@ The screenshots show the real extension at its real size, in a plain browser fra
 
 ### Firefox: addons.mozilla.org → Developer Hub
 
-| Form field                        | Source                                                                                        |
-| --------------------------------- | --------------------------------------------------------------------------------------------- |
-| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`                                        |
-| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`                                        |
-| Name                              | `firefox/listing.en.md` (other languages under Manage translations: `firefox/listing.<l>.md`) |
-| Summary                           | `firefox/summary.<l>.txt`                                                                     |
-| Description                       | `firefox/description.<l>.md`                                                                  |
-| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`                                           |
-| Notes to reviewer                 | `firefox/reviewer-notes.md`                                                                   |
-| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                                                        |
-| Privacy policy                    | Optional; paste the text of `PRIVACY.md` (repository root)                                    |
+| Form field                        | Source                                                                                                                                 |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Add-on file                       | `releases/v<version>/localapply-<version>-firefox.zip`                                                                                 |
+| Source code                       | `releases/v<version>/localapply-<version>-sources.zip`                                                                                 |
+| Name                              | `extNameFirefox` in the package; copy in `firefox/listing.en.md` (other languages under Manage translations: `firefox/listing.<l>.md`) |
+| Summary                           | `firefox/summary.<l>.txt`                                                                                                              |
+| Description                       | `firefox/description.<l>.md`                                                                                                           |
+| Screenshots and captions          | `screenshots/`, captions in `firefox/listing.en.md`                                                                                    |
+| Notes to reviewer                 | `firefox/reviewer-notes.md`                                                                                                            |
+| Release notes (on version update) | `releases/v<version>/RELEASE_NOTES.md`                                                                                                 |
+| Privacy policy                    | Optional; paste the text of `PRIVACY.md` (repository root)                                                                             |
 
 ### Chrome Web Store → Developer Dashboard
 
