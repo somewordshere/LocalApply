@@ -22,6 +22,26 @@ export const en: Locale = {
       'visa (?:required|needed|support)',
     ],
     willingToRelocate: ['relocat\\p{L}*'],
+    willingToTravel: [
+      '(?:willing\\p{L}*|able|ready|open|prepared) to travel',
+      'business travel',
+      'travel\\p{L}* (?:required|requirement)',
+    ],
+    drivingLicence: ['driv(?:er|ing)(?: s)? licen[cs]es?', 'driving permit'],
+    drivingLicenceClass: [
+      'licen[cs]e (?:class\\p{L}*|categor\\p{L}*|type)',
+      '(?:class|category) of (?:driving )?licen[cs]e',
+      'driv(?:er|ing)(?: s)? licen[cs]es?',
+    ],
+    salaryMin: [
+      'min(?:imum)? (?:salary|compensation|pay)',
+      '(?:salary|compensation|pay) (?:range )?(?:from|min\\p{L}*|lower)',
+      'lowest acceptable (?:salary|pay)',
+    ],
+    salaryMax: [
+      'max(?:imum)? (?:salary|compensation|pay)',
+      '(?:salary|compensation|pay) (?:range )?(?:to|max\\p{L}*|upper)',
+    ],
     salaryCurrency: ['currency'],
     salary: ['salary', 'compensation', 'remuneration', 'desired pay', 'expected pay', 'pay expectations?'],
     noticePeriod: ['notice period'],
@@ -86,6 +106,7 @@ export const en: Locale = {
     fullName: ['name'],
   },
   exclude: {
+    drivingLicence: ['class\\p{L}*', 'categor\\p{L}*', 'klass\\p{L}*', 'kategori\\p{L}*', 'tipos?', 'types?', 'clases?'],
     workAuthorized: ['sponsor\\p{L}*'],
     fullName: ORGANISATION,
     firstName: ORGANISATION,

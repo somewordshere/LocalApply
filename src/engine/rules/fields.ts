@@ -12,7 +12,14 @@ export const FIELD_RULES: FieldRule[] = [
   { key: 'workAuthorized', long: true },
   { key: 'needsSponsorship', long: true },
   { key: 'willingToRelocate', long: true },
+  { key: 'willingToTravel', long: true },
+  // Yes/no first; a class question, or a plain text box, gets the classes.
+  { key: 'drivingLicence', long: true },
+  { key: 'drivingLicenceClass', long: true },
   { key: 'salaryCurrency' },
+  // Before salary: "Minimum salary" names both.
+  { key: 'salaryMin', long: true },
+  { key: 'salaryMax', long: true },
   { key: 'salary', long: true },
   { key: 'noticePeriod', long: true },
   { key: 'startDate', long: true },
@@ -63,6 +70,8 @@ export const YES_NO_KEYS = new Set<FieldKey>([
   'workAuthorized',
   'needsSponsorship',
   'willingToRelocate',
+  'willingToTravel',
+  'drivingLicence',
   'disability',
   'veteran',
 ]);

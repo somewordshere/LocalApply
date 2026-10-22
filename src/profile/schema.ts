@@ -49,6 +49,9 @@ export interface Profile {
   xing: string;
 
   salaryAmount: string;
+  /** Ends of a salary range; empty means the same as salaryAmount. */
+  salaryMin: string;
+  salaryMax: string;
   salaryCurrency: string;
   salaryPeriod: 'year' | 'month';
   noticePeriod: string;
@@ -56,6 +59,10 @@ export interface Profile {
   workAuthorized: YesNo;
   needsSponsorship: YesNo;
   willingToRelocate: YesNo;
+  willingToTravel: YesNo;
+  drivingLicence: YesNo;
+  /** Licence classes as written on the licence, such as "B" or "B, BE". */
+  drivingLicenceClass: string;
   remotePreference: string;
   yearsOfExperience: string;
 
@@ -100,6 +107,8 @@ export const emptyProfile: Profile = {
   website: '',
   xing: '',
   salaryAmount: '',
+  salaryMin: '',
+  salaryMax: '',
   salaryCurrency: 'EUR',
   salaryPeriod: 'year',
   noticePeriod: '',
@@ -107,6 +116,9 @@ export const emptyProfile: Profile = {
   workAuthorized: '',
   needsSponsorship: '',
   willingToRelocate: '',
+  willingToTravel: '',
+  drivingLicence: '',
+  drivingLicenceClass: '',
   remotePreference: '',
   yearsOfExperience: '',
   currentTitle: '',

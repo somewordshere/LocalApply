@@ -406,6 +406,15 @@ export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[
       return one(p.nationality);
     case 'location':
       return one([p.city.trim(), p.country.trim()].filter(Boolean).join(', '));
+    case 'salaryMin':
+    case 'salaryMax': {
+      const amount = (key === 'salaryMin' ? p.salaryMin : p.salaryMax).trim() || p.salaryAmount.trim();
+      if (!amount) return [];
+      const digits = amount.replace(/[^\d]/g, '');
+      if (ctx.numeric) return one(digits);
+      if (ctx.has('salaryCurrency')) return one(amount);
+      return [join(amount, p.salaryCurrency), amount, digits];
+    }
     case 'salary': {
       const amount = p.salaryAmount.trim();
       if (!amount) return [];
@@ -423,6 +432,8 @@ export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[
     case 'workAuthorized':
     case 'needsSponsorship':
     case 'willingToRelocate':
+    case 'willingToTravel':
+    case 'drivingLicence':
     case 'disability':
     case 'veteran':
       return yesNo(p[key]);
@@ -440,6 +451,11 @@ export function resolve(key: FieldKey, p: Profile, ctx: ResolveContext): string[
     // A "Degree" dropdown usually lists levels (Bachelor, Master), which the free-text degree rarely matches.
     case 'degree':
       return [...one(p.degree), ...withSynonyms(p.educationLevel, EDUCATION_LEVELS)];
+    case 'drivingLicenceClass': {
+      const classes = p.drivingLicenceClass.trim();
+      // "B, BE" goes into a text box as written; a list of classes is tried one by one.
+      return classes ? [classes, ...classes.split(/[\s,;/]+/).filter(Boolean)] : [];
+    }
     case 'sexualOrientation':
       return withSynonyms(p.sexualOrientation, ORIENTATIONS);
     case 'cv':
