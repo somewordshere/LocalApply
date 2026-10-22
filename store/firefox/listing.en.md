@@ -40,10 +40,10 @@ In [`description.en.md`](description.en.md), ready to paste as-is.
 
 Upload in this order from `../screenshots/`. The images carry no text, as Mozilla recommends (one set is shown in every language), so the captions tell the story.
 
-| File                       | Caption                                                                                                                                                    |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `1-fill-in-one-click.png`  | One click fills the application from your profile: contact details, links, salary, work authorisation and your CV. Green outlines show what was filled.    |
-| `2-saved-answers.png`      | A saved answer fills "Why do you want to join?". Questions LocalApply can't answer are outlined in amber; save your reply once and it is reused next time. |
-| `3-any-language.png`       | Works in eight languages. Here a German application, with salutation, address, date of birth and start date in the format the form expects.                |
-| `4-profile.png`            | Enter your details once on the profile page. Everything is stored in your browser only.                                                                    |
-| `5-answers-and-backup.png` | Keep answers to recurring questions, and export or delete all your data at any time.                                                                       |
+| File                       | Caption                                                                                                                                                                                                         |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `1-fill-in-one-click.png`  | One click fills the application from your profile: contact details, links, salary, work authorisation and your CV. Green outlines show what was filled.                                                         |
+| `2-saved-answers.png`      | A saved answer fills "Why do you want to join?", and your education level is picked from the choices. Questions LocalApply can't answer are outlined in amber; save your reply once and it is reused next time. |
+| `3-any-language.png`       | Works in eight languages, and so does LocalApply itself. Here a German application, with salutation, address, date of birth and start date in the format the form expects.                                      |
+| `4-profile.png`            | Enter your details once on the profile page and pick the colours you like. Everything is stored in your browser only.                                                                                           |
+| `5-answers-and-backup.png` | Keep answers to recurring questions, and export or delete all your data at any time.                                                                                                                            |

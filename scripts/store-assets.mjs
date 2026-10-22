@@ -58,6 +58,7 @@ const PROFILE = {
   currentTitle: 'QA Engineer',
   currentEmployer: 'Brightline Software',
   school: 'TU Berlin',
+  educationLevel: "Master's degree",
   degree: 'M.Sc.',
   fieldOfStudy: 'Computer Science',
   coverLetterText:
@@ -155,6 +156,8 @@ const PAGES = {
         <div><label for="sd">Earliest start date</label><input id="sd" type="date"></div>
         <fieldset><legend>Will you require visa sponsorship? <span class="req">*</span></legend>
           <div class="choices"><label><input type="radio" name="visa"> Yes</label><label><input type="radio" name="visa"> No</label></div></fieldset>
+        <fieldset class="wide"><legend>Highest education level <span class="req">*</span></legend>
+          <div class="choices"><label><input type="radio" name="edu"> High school</label><label><input type="radio" name="edu"> Bachelor’s degree</label><label><input type="radio" name="edu"> Master’s degree</label><label><input type="radio" name="edu"> PhD</label></div></fieldset>
         <div class="wide"><label for="why">Why do you want to join Brightwave? <span class="req">*</span></label><textarea id="why" required></textarea></div>
         <div class="wide"><label for="hear">How did you hear about us? <span class="req">*</span></label>
           <select id="hear" required><option value="">Select…</option><option>LinkedIn</option><option>Job board</option><option>Referral</option><option>Other</option></select></div>`,
@@ -207,17 +210,21 @@ try {
   const id = new URL(worker.url()).host;
   await worker.evaluate((profile) => chrome.storage.local.set({ profile }), PROFILE);
 
-  /** Opens a job page and fills it through the real popup. */
-  const fill = async (url) => {
+  /** Opens a job page and fills it through the real popup, in English unless told otherwise. */
+  const fill = async (
+    url,
+    { lang = 'en', button = 'Fill this page', filled = /\d+ filled/, notice = 'Filled' } = {},
+  ) => {
+    await worker.evaluate((uiLanguage) => chrome.storage.local.set({ uiLanguage }), lang);
     const job = await context.newPage();
     await job.goto(url);
     const popup = await context.newPage();
     await popup.setViewportSize({ width: POPUP_WIDTH, height: 700 });
     await popup.goto(`chrome-extension://${id}/popup.html`);
     await job.bringToFront();
-    await popup.getByRole('button', { name: 'Fill this page' }).click();
-    await popup.getByText(/\d+ filled/).waitFor();
-    await job.getByRole('status').filter({ hasText: 'Filled' }).waitFor();
+    await popup.getByRole('button', { name: button }).click();
+    await popup.getByText(filled).waitFor();
+    await job.getByRole('status').filter({ hasText: notice }).waitFor();
     await job.mouse.move(0, 0);
     return { job, popup };
   };
@@ -243,16 +250,23 @@ try {
     await job.close();
   }
 
-  // 3: a German form, with the on-page summary the extension shows after filling.
+  // 3: a German form, filled from the German interface.
   {
-    const { job, popup } = await fill(PAGES.weber.url);
+    const { job, popup } = await fill(PAGES.weber.url, {
+      lang: 'de',
+      button: 'Diese Seite ausfüllen',
+      filled: /\d+ ausgefüllt/,
+      notice: 'ausgefüllt',
+    });
+    await hideToast(job);
+    captures.weber = { page: await job.screenshot(), popup: await popup.locator('main').screenshot() };
     await popup.close();
-    captures.weber = { page: await job.screenshot() };
     await job.close();
   }
 
   // 4 and 5: the profile page, top (personal details) and bottom (saved answers, export and delete).
   {
+    await worker.evaluate(() => chrome.storage.local.set({ uiLanguage: 'en' }));
     const options = await context.newPage();
     await options.goto(`chrome-extension://${id}/options.html`);
     await options.getByText('All changes saved').waitFor();

@@ -6,6 +6,7 @@ import type { Message } from '@/src/core/messages';
 import { loadProfile } from '@/src/profile/store';
 import { translator, type Translate } from '@/src/ui/i18n';
 import { loadLanguage } from '@/src/ui/language';
+import { DEFAULT_PALETTE, loadPalette, PALETTES } from '@/src/ui/palette';
 
 const HOST_ID = 'localapply-ui';
 /** The floating "Fill application" button on known job sites. Off for now: fills start from the toolbar popup or the shortcut. */
@@ -32,17 +33,17 @@ function ui(): ShadowRoot {
     const style = document.createElement('style');
     style.textContent = `
       /* The host is reset with "all: initial", which beats :host rules, so the font is set here.
-         Colours follow the extension's paper-and-ink palette; the page's own fonts are not touched. */
+         Colours follow the palette chosen on the profile page (see paint()); the page's own fonts are not touched. */
       .stack { font: 13px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-      button { all: unset; cursor: pointer; background: #1f6b4f; color: #fff; padding: 9px 14px; border-radius: 8px;
+      button { all: unset; cursor: pointer; background: var(--accent, #1f6b4f); color: #fff; padding: 9px 14px; border-radius: 8px;
         font-weight: 600; box-shadow: 0 6px 18px rgba(28,26,22,.22); }
-      button:hover { background: #175a41; }
-      button:focus-visible { outline: 2px solid #74c79f; outline-offset: 2px; }
+      button:hover { background: var(--accent-hover, #175a41); }
+      button:focus-visible { outline: 2px solid var(--light, #74c79f); outline-offset: 2px; }
       .toast { background: #1c1a16; color: #eee9df; padding: 11px 14px; border-radius: 8px; max-width: 320px;
-        border-left: 3px solid #74c79f; box-shadow: 0 6px 18px rgba(28,26,22,.28); }
+        border-left: 3px solid var(--light, #74c79f); box-shadow: 0 6px 18px rgba(28,26,22,.28); }
       .toast button { background: none; box-shadow: none; padding: 0; border-radius: 0; margin-left: 10px;
-        color: #93d6b5; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-      .toast button:hover { background: none; color: #b8e6cd; }
+        color: var(--lighter, #93d6b5); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+      .toast button:hover { background: none; color: #fff; }
     `;
     const stack = document.createElement('div');
     stack.className = 'stack';
@@ -50,6 +51,16 @@ function ui(): ShadowRoot {
     document.documentElement.append(host);
   }
   return host.shadowRoot!;
+}
+
+/** Gives the notice the palette chosen on the profile page. Custom properties pass into the shadow root. */
+async function paint(): Promise<void> {
+  const colours = PALETTES[await loadPalette().catch(() => DEFAULT_PALETTE)];
+  const host = ui().host as HTMLElement;
+  host.style.setProperty('--accent', colours.accent);
+  host.style.setProperty('--accent-hover', colours.hover);
+  host.style.setProperty('--light', colours.light);
+  host.style.setProperty('--lighter', colours.lighter);
 }
 
 /** Shows a notice, optionally with one action button (Undo). */
@@ -95,7 +106,9 @@ function undoSummary(result: UndoResult, t: Translate): string {
 async function undo(): Promise<void> {
   const result = undoLastFill(document);
   send({ type: 'undo-result', result });
-  if (result.restored || result.manual.length) toast(undoSummary(result, await texts()));
+  if (!result.restored && !result.manual.length) return;
+  const [t] = await Promise.all([texts(), paint()]);
+  toast(undoSummary(result, t));
 }
 
 async function run(overwrite: boolean): Promise<void> {
@@ -104,7 +117,7 @@ async function run(overwrite: boolean): Promise<void> {
   send({ type: 'fill-start' });
   let result: FillResult = { adapter: null, total: 0, filled: [], missing: [], unmatched: [], skipped: 0 };
   try {
-    const [profile, t] = await Promise.all([loadProfile(), texts()]);
+    const [profile, t] = await Promise.all([loadProfile(), texts(), paint()]);
     result = await fillPage(document, profile, { overwrite, location });
     if (result.total > 0 && (window === window.top || result.filled.length > 0)) {
       const action = result.filled.length
@@ -135,6 +148,7 @@ function watchForForm(): void {
       button.className = 'fill';
       button.textContent = 'Fill application';
       void texts().then((t) => (button.textContent = t('notice.fillButton')));
+      void paint();
       button.addEventListener('click', () => send({ type: 'relay-fill' }));
       ui().querySelector('.stack')!.append(button);
     } else if (!show && existing) {

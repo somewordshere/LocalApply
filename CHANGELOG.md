@@ -9,6 +9,7 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 ### Added
 
 - Highest education level (high school to PhD) on the profile page. LocalApply picks it from the radio buttons or dropdown a form offers, in any of its eight languages, and uses it for "Degree" dropdowns that list levels such as Bachelor and Master.
+- Five colour palettes (Forest, Ocean, Plum, Clay and Graphite), each with a dark version. Pick one with the swatches at the top of the profile page; the popup and the on-page notice follow it.
 
 ## [0.4.1] - 2026-10-21
 

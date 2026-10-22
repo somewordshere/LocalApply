@@ -207,6 +207,31 @@ try {
     await options.close();
   });
 
+  await step('colour palette applies to the profile page and the popup', async () => {
+    const options = await context.newPage();
+    await options.goto(`chrome-extension://${extensionId}/options.html`);
+    const accent = (page) =>
+      page.evaluate(() =>
+        globalThis.getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim(),
+      );
+    const forest = await accent(options);
+    // The radio itself is visually hidden; people click its swatch.
+    await options.getByTitle('Ocean').click();
+    assert.equal(await options.getByRole('radio', { name: 'Ocean' }).isChecked(), true);
+    assert.notEqual(await accent(options), forest);
+    assert.equal(await worker.evaluate(() => chrome.storage.local.get('uiPalette').then((r) => r.uiPalette)), 'ocean');
+
+    const popup = await context.newPage();
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await popup.getByRole('button', { name: 'Fill this page' }).waitFor();
+    assert.equal(await popup.evaluate(() => document.documentElement.dataset.palette), 'ocean');
+    await popup.close();
+
+    await options.getByTitle('Forest').click();
+    assert.equal(await accent(options), forest);
+    await options.close();
+  });
+
   await step('no button and no errors on an ordinary page', async () => {
     const page = await context.newPage();
     const errors = [];

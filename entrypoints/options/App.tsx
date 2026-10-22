@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useI18n } from '@/src/ui/I18nProvider';
 import { LANGUAGES, isLang, type MessageKey } from '@/src/ui/i18n';
+import { PALETTES, type Palette } from '@/src/ui/palette';
 import type { Profile } from '@/src/profile/schema';
 import { completion, documentsProgress, OPTIONAL_SECTIONS, sectionProgress, type Progress } from './completion';
 import { FIELD_SECTIONS } from './fields';
@@ -8,6 +9,7 @@ import { BackupSection } from './sections/BackupSection';
 import { CustomAnswersSection } from './sections/CustomAnswersSection';
 import { DocumentsSection } from './sections/DocumentsSection';
 import { FieldSection } from './sections/FieldSection';
+import { usePalette } from './usePalette';
 import { useProfile } from './useProfile';
 
 const EXTRA_SECTIONS: { id: string; title: MessageKey; navTitle?: MessageKey }[] = [
@@ -64,6 +66,37 @@ function GlobeIcon() {
       <circle cx="10" cy="10" r="7.5" />
       <path d="M2.5 10h15M10 2.5c2 2.2 3 4.7 3 7.5s-1 5.3-3 7.5M10 2.5C8 4.7 7 7.2 7 10s1 5.3 3 7.5" />
     </svg>
+  );
+}
+
+/** A row of swatches, each the palette's paper cut diagonally with its accent. Plain radios underneath. */
+function PalettePicker() {
+  const { t } = useI18n();
+  const [palette, setPalette] = usePalette();
+  return (
+    <div role="radiogroup" aria-labelledby="palette-label" className="flex items-center gap-3 text-sm text-ink-soft">
+      <span id="palette-label">{t('options.palette')}</span>
+      <div className="flex gap-2">
+        {(Object.keys(PALETTES) as Palette[]).map((id) => (
+          <label key={id} title={t(PALETTES[id].name)} className="cursor-pointer">
+            <input
+              type="radio"
+              name="palette"
+              value={id}
+              checked={palette === id}
+              onChange={() => setPalette(id)}
+              aria-label={t(PALETTES[id].name)}
+              className="peer sr-only"
+            />
+            <span
+              aria-hidden="true"
+              className="block size-6 rounded-full border border-line-strong ring-offset-2 ring-offset-paper transition peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-5 peer-focus-visible:outline-accent hover:scale-110 motion-reduce:hover:scale-100"
+              style={{ background: `linear-gradient(135deg, ${PALETTES[id].paper} 50%, ${PALETTES[id].accent} 50%)` }}
+            />
+          </label>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -173,23 +206,26 @@ export default function App() {
             <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl">{t('options.title')}</h1>
             <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-soft">{t('options.subtitle')}</p>
           </div>
-          <label className="flex shrink-0 items-center gap-2 text-sm text-ink-soft">
-            <GlobeIcon />
-            <span>{t('options.language')}</span>
-            <select
-              className="field w-auto py-1.5"
-              value={lang}
-              onChange={(e) => {
-                if (isLang(e.target.value)) setLang(e.target.value);
-              }}
-            >
-              {LANGUAGES.map(([code, name]) => (
-                <option key={code} value={code}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="flex shrink-0 flex-col gap-3 md:items-end">
+            <label className="flex items-center gap-2 text-sm text-ink-soft">
+              <GlobeIcon />
+              <span>{t('options.language')}</span>
+              <select
+                className="field w-auto py-1.5"
+                value={lang}
+                onChange={(e) => {
+                  if (isLang(e.target.value)) setLang(e.target.value);
+                }}
+              >
+                {LANGUAGES.map(([code, name]) => (
+                  <option key={code} value={code}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <PalettePicker />
+          </div>
         </header>
 
         <div className="rounded-xl border border-line bg-sheet">
