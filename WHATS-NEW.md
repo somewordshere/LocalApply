@@ -2,6 +2,10 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.6.1 · October 22, 2026
+
+- New **Theme** switch at the top of the profile page: **System**, **Light** or **Dark**. System follows your computer's setting, as before; Light and Dark keep LocalApply that way whatever the computer uses. The popup, dropdowns and date pickers follow your choice.
+
 ## 0.6.0 · October 22, 2026
 
 - The phone number has three boxes that fill each other in: **Country code**, **Number** and **Full number**. Type +48791532218 into Full number and the code and number appear on their own; change either part and the full number follows.
