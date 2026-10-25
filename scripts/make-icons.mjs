@@ -1,4 +1,5 @@
-// Draws the icon (white check on a rounded square in the interface accent) as PNGs: the Forest green in
+// Draws the icon (a filled-in form: three white bars, long to short, and a check, on a rounded square in the
+// interface accent) as PNGs: the Forest green in
 // public/icon/ and the store folder, and one set per other colour palette in public/icon/<palette>/, which the
 // toolbar button and page logos switch to.
 // Run with `node scripts/make-icons.mjs`; no image libraries needed.
@@ -65,14 +66,32 @@ function distanceToSegment(px, py, [ax, ay], [bx, by]) {
   return Math.hypot(px - (ax + t * (bx - ax)), py - (ay + t * (by - ay)));
 }
 
+// The bars sit on a 16-step grid (every icon size is a multiple of 16), so their edges land on whole pixels and
+// stay sharp in the toolbar. Each bar is a capsule: the segment between its end centres, widened by BAR.
+const BAR = 1 / 16;
+const BARS = [
+  [
+    [0.25, 0.25],
+    [0.75, 0.25],
+  ],
+  [
+    [0.25, 0.5],
+    [0.5, 0.5],
+  ],
+  [
+    [0.25, 0.75],
+    [0.375, 0.75],
+  ],
+];
 const CHECK = [
-  [0.27, 0.52],
-  [0.43, 0.68],
-  [0.74, 0.34],
+  [0.52, 0.69],
+  [0.62, 0.79],
+  [0.81, 0.56],
 ];
 
-function onCheck(x, y, size) {
-  const half = Math.max(0.065, 1.2 / size);
+function onMark(x, y, size) {
+  if (BARS.some(([a, b]) => distanceToSegment(x, y, a, b) <= BAR)) return true;
+  const half = Math.max(BAR, 1.2 / size);
   return distanceToSegment(x, y, CHECK[0], CHECK[1]) <= half || distanceToSegment(x, y, CHECK[1], CHECK[2]) <= half;
 }
 
@@ -90,7 +109,7 @@ function render(size, background, padding = 0) {
           const y = (py - padding + (sy + 0.5) / SAMPLES) / art;
           if (x < 0 || y < 0 || x > 1 || y > 1 || !insideRoundedRect(x, y)) continue;
           cover++;
-          if (onCheck(x, y, art)) white++;
+          if (onMark(x, y, art)) white++;
         }
       }
       const i = (py * size + px) * 4;
