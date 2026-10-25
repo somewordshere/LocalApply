@@ -411,27 +411,54 @@ try {
   // Chrome Web Store small promo tile: shown in search results and category pages. Chrome allows text here.
   const icon = dataUrl(readFileSync(join(root, 'public/icon/128.png')));
   const tile = await browser.newPage({ viewport: { width: 440, height: 280 }, deviceScaleFactor: 1 });
-  // Same paper, ink and green as the extension, with its heading typeface embedded (the tile is rendered offline).
-  const fraunces = `data:font/woff2;base64,${readFileSync(
-    join(root, 'node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2'),
-  ).toString('base64')}`;
+  // The Forest accent, its dark-mode mint and the paper, with gold for the ticks and both typefaces embedded
+  // (the tile is rendered offline). It sits on a light grey card in search results at about half size, so the
+  // tile is green edge to edge, text stays large and the copy stays short.
+  const font = (file) =>
+    `data:font/woff2;base64,${readFileSync(join(root, 'node_modules/@fontsource-variable', file)).toString('base64')}`;
+  const fraunces = font('fraunces/files/fraunces-latin-opsz-normal.woff2');
+  const instrument = font('instrument-sans/files/instrument-sans-latin-wght-normal.woff2');
+  const tick =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  const field = (value) => `<div class="bar"></div><div class="field">${value}<i>${tick}</i></div>`;
+  const perk = (text) => `<li><i>${tick}</i>${text}</li>`;
   await tile.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>
     @font-face { font-family: Fraunces; src: url(${fraunces}) format('woff2'); font-weight: 100 900; }
-    body { margin: 0; width: 440px; height: 280px; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif;
-      color: #1c1a16; background: #f3f0e8; display: flex; flex-direction: column; justify-content: center;
-      padding: 0 38px; box-sizing: border-box; border-left: 6px solid #1f6b4f; }
-    .row { display: flex; align-items: center; gap: 12px; }
-    img { width: 44px; height: 44px; border-radius: 10px; }
-    .name { font-family: Fraunces, Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: -.3px; }
-    h1 { margin: 22px 0 0; font-family: Fraunces, Georgia, serif; font-size: 33px; line-height: 1.1; font-weight: 500;
-      letter-spacing: -.6px; }
-    small { display: block; margin-top: 14px; font-size: 14px; color: #5d574c; }
+    @font-face { font-family: 'Instrument Sans'; src: url(${instrument}) format('woff2'); font-weight: 400 700; }
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 440px; height: 280px; overflow: hidden; position: relative;
+      font-family: 'Instrument Sans', sans-serif; color: #faf8f3; background: #1f6b4f; }
+    .copy { position: absolute; left: 26px; top: 26px; width: 210px; }
+    .brand { display: flex; align-items: center; gap: 8px; }
+    .brand img { width: 28px; height: 28px; border-radius: 7px; box-shadow: 0 0 0 1.5px rgba(250,248,243,.5); }
+    .brand span { font-family: Fraunces, serif; font-size: 18px; font-weight: 600; }
+    h1 { margin: 16px 0 0; font-family: Fraunces, serif; font-size: 30px; line-height: 1.02; font-weight: 600;
+      letter-spacing: -.8px; }
+    /* The listing leads with these three; the tile is what search results show, so it says them too. */
+    ul { list-style: none; margin: 16px 0 0; padding: 0; }
+    li { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    li i { width: 20px; height: 20px; border-radius: 50%; background: #f2c46d; color: #174f3b; display: grid; place-items: center; }
+    li i svg { width: 12px; height: 12px; }
+    /* A form that has just been filled, on a mint panel: the product in one glance. */
+    .panel { position: absolute; right: 0; top: 0; bottom: 0; width: 170px; background: linear-gradient(165deg, #74c79f, #3f9b73); }
+    .card { position: absolute; left: 252px; top: 50px; width: 168px; padding: 12px; border-radius: 12px; background: #fffdf8;
+      color: #1c1a16; transform: rotate(-3deg); box-shadow: 0 16px 36px rgba(5,25,18,.4); }
+    .bar { height: 5px; width: 50px; border-radius: 3px; background: #ded8ca; margin-bottom: 4px; }
+    .field { display: flex; align-items: center; justify-content: space-between; height: 24px; padding: 0 7px;
+      border: 1.5px solid #1f6b4f; border-radius: 7px; background: #eef5f0; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+    .field:last-child { margin: 0; }
+    .field i { width: 14px; height: 14px; border-radius: 50%; background: #1f6b4f; color: #fff; display: grid; place-items: center; }
+    .field i svg { width: 9px; height: 9px; }
   </style></head><body>
-    <div class="row"><img src="${icon}"><span class="name">LocalApply</span></div>
-    <h1>Fill job applications<br>in one click</h1>
-    <small>Private: your data stays in your browser</small>
+    <div class="panel"></div>
+    <div class="copy">
+      <div class="brand"><img src="${icon}"><span>LocalApply</span></div>
+      <h1>Fill job applications in one click</h1>
+      <ul>${perk('Free')}${perk('No account')}${perk('No subscription')}</ul>
+    </div>
+    <div class="card">${field('Alex Morgan')}${field('alex@mail.com')}${field('Berlin')}${field('CV.pdf')}</div>
   </body></html>`);
-  await tile.evaluate(() => Promise.all([...document.images].map((i) => i.decode())));
+  await tile.evaluate(() => Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode())]));
   writeFileSync(join(chromeDir, 'promo-tile-440x280.png'), await tile.screenshot());
 } finally {
   await browser.close();
