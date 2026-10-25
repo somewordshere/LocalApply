@@ -6,7 +6,7 @@ Every text exists in the eight interface languages: `<l>` is `en`, `de`, `fr`, `
 
 ```
 store/
-  screenshots/               1280×800 PNGs, used by both stores (generated)
+  screenshots/               1280×800 PNGs without text, for Firefox (generated)
   firefox/
     description.<l>.md       description, ready to paste (Firefox supports a limited Markdown)
     summary.<l>.txt          summary, ready to paste (≤ 250 characters)
@@ -18,18 +18,24 @@ store/
     listing.en.md            category, images and other form fields
     listing.<l>.md           notes on each other language's listing
     privacy-practices.md     answers for the Privacy practices tab: single purpose, permissions, data use
+    screenshots/             1280×800 slides with headlines, for Chrome (generated)
     icon-128.png             store icon, 96 px artwork with 16 px padding (generated)
     promo-tile-440x280.png   small promo tile, required by Chrome (generated)
 ```
 
 ## Regenerating the images
 
-| Command                | Produces                                                                     |
-| ---------------------- | ---------------------------------------------------------------------------- |
-| `npm run store-assets` | `screenshots/*.png` and `chrome/promo-tile-440x280.png` from the built UI    |
-| `npm run icons`        | `public/icon/*.png` (in the extension) and `chrome/icon-128.png` (the store) |
+| Command                | Produces                                                                                              |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| `npm run store-assets` | `screenshots/*.png`, `chrome/screenshots/*.png` and `chrome/promo-tile-440x280.png` from the built UI |
+| `npm run icons`        | `public/icon/*.png` (in the extension) and `chrome/icon-128.png` (the store)                          |
 
-The screenshots show the real extension at its real size, in a plain browser frame with the popup under its toolbar button, filling fictional job pages for a made-up person (Alex Morgan). They contain no marketing text, as Mozilla recommends; the captions in `firefox/listing.*.md` carry the story. Regenerate them whenever the popup, the profile page or the in-page highlights change. The first run needs `npx playwright install chromium`.
+All images show the real extension filling fictional job pages for a made-up person (Alex Morgan). The two stores get different screenshots:
+
+- **Firefox** (`screenshots/`): the extension at its real size, in a plain browser frame with the popup under its toolbar button. No marketing text, as Mozilla recommends because one set is shown in every language; the captions in `firefox/listing.*.md` carry the story.
+- **Chrome** (`chrome/screenshots/`): Chrome shows no captions, so each screenshot is a slide on the brand green with one headline and the real UI cropped and enlarged: filling in one click, free and private, saved answers, eight languages, the profile and the application log. The headlines are English and their claims match `chrome/description.en.txt`; change both together.
+
+Regenerate them whenever the popup, the profile page or the in-page highlights change. The first run needs `npx playwright install chromium`.
 
 ## Where each piece goes
 
@@ -56,7 +62,7 @@ The screenshots show the real extension at its real size, in a plain browser fra
 | Description                           | `chrome/description.<l>.txt` (one per language in the language menu)                                            |
 | Category                              | `chrome/listing.en.md`                                                                                          |
 | Store icon                            | `chrome/icon-128.png`                                                                                           |
-| Screenshots                           | `screenshots/` (up to 5)                                                                                        |
+| Screenshots                           | `chrome/screenshots/` (up to 5)                                                                                 |
 | Small promo tile                      | `chrome/promo-tile-440x280.png`                                                                                 |
 | Privacy practices, privacy policy URL | `chrome/privacy-practices.md` (policy: `PRIVACY.md` in the repository root)                                     |
 

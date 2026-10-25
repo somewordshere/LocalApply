@@ -17,14 +17,14 @@ In [`description.en.txt`](description.en.txt), ready to paste as-is.
 
 ## Other fields
 
-| Field                                | Value                                                   |
-| ------------------------------------ | ------------------------------------------------------- |
-| Category                             | Productivity → Workflow & Planning                      |
-| Language                             | English                                                 |
-| Store icon                           | `icon-128.png`                                          |
-| Screenshots                          | `../screenshots/` 1 to 5 (1280×800), in file-name order |
-| Small promo tile                     | `promo-tile-440x280.png`                                |
-| Marquee promo tile                   | Optional (1400×560); not provided                       |
-| Official / homepage URL, support URL | Optional; your project page if you have one             |
+| Field                                | Value                                                |
+| ------------------------------------ | ---------------------------------------------------- |
+| Category                             | Productivity → Workflow & Planning                   |
+| Language                             | English                                              |
+| Store icon                           | `icon-128.png`                                       |
+| Screenshots                          | `screenshots/` 1 to 5 (1280×800), in file-name order |
+| Small promo tile                     | `promo-tile-440x280.png`                             |
+| Marquee promo tile                   | Optional (1400×560); not provided                    |
+| Official / homepage URL, support URL | Optional; your project page if you have one          |
 
-Chrome shows no per-screenshot captions, and the screenshots carry no text, so the description does the explaining.
+Chrome shows no per-screenshot captions, so each screenshot is a slide with its own headline; the description explains the rest.
