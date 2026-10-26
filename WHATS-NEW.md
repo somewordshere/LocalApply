@@ -2,6 +2,10 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.8.2 · October 26, 2026
+
+- A new icon: a small filled-in form with a check, in your toolbar, the popup, the profile page and the store pages. It still follows the colours you choose on the profile page. Nothing else changes.
+
 ## 0.8.1 · October 22, 2026
 
 - The extension's name and description in your browser and on the store pages now say up front that LocalApply is free and needs no account or subscription. Nothing else changes.
