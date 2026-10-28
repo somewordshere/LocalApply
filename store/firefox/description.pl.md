@@ -9,6 +9,7 @@ Koniec z przepisywaniem CV do każdej aplikacji. LocalApply zapisuje Twoje dane 
 - **Aplikuj w każdym języku.** Rozpoznaje etykiety formularzy po polsku, angielsku, niemiecku, francusku, hiszpańsku, włosku, niderlandzku i portugalsku.
 - **Odpowiadaj na pytanie tylko raz.** Zapisz odpowiedź na powtarzające się pytanie, np. „Skąd dowiedziałeś się o nas?”, a następnym razem zostanie wpisana.
 - **Po Twojemu.** Interfejs w ośmiu językach, pięć palet kolorów, motyw jasny lub ciemny.
+- **Każde pytanie tylko raz.** Wpisz odpowiedź na nowe pytanie, np. „Dlaczego chcesz do nas dołączyć?”, a LocalApply zaproponuje jej zapisanie; następnym razem zostanie wpisana za Ciebie.
 
 **Co wypełnia**
 
@@ -28,16 +29,16 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor i zwykłe strony kariery firm
 
 **Jak z niego korzystać**
 
-1. Wpisz swoje dane raz na stronie profilu. Otwiera się sama po instalacji.
+1. Wpisz swoje dane raz na stronie profilu. Po instalacji krótka strona powitalna zaprowadzi Cię tam.
 2. Otwórz formularz aplikacyjny, kliknij przycisk LocalApply na pasku narzędzi, a potem **Wypełnij tę stronę**, albo naciśnij **Alt+Shift+F**.
-3. Sprawdź wynik. Wypełnione pola dostają ciągłą zieloną ramkę; obowiązkowe pytania bez odpowiedzi dostają przerywaną pomarańczową ramkę i trafiają na listę, żebyś mógł je uzupełnić. **Cofnij** przywraca pola do poprzedniego stanu.
+3. Sprawdź wynik. Wypełnione pola dostają ciągłą zieloną ramkę; obowiązkowe pytania bez odpowiedzi dostają przerywaną pomarańczową ramkę i trafiają na listę, żebyś mógł je uzupełnić. **Cofnij** przywraca pola do poprzedniego stanu. Odpowiedzi wpisane samodzielnie są proponowane do zapisania, a prawy przycisk wypełnia dowolne pole.
 
 **Bezpieczny z założenia**
 
 - Nigdy nie klika „Wyślij” ani „Dalej” i nigdy nie zaznacza zgód.
 - Nie zmienia pól, które już wypełniłeś.
 - Wyeksportuj profil do pliku albo usuń wszystko jednym kliknięciem.
-- Dziennik wypełnionych aplikacji też zostaje na Twoim komputerze; wyłącz go, wyczyść albo wyeksportuj jako CSV.
+- Dziennik wypełnionych aplikacji też zostaje na Twoim komputerze, a okienko rozszerzenia przypomina, gdy firma jest już w dzienniku; wyłącz go, wyczyść albo wyeksportuj jako CSV.
 
 **Dlaczego potrzebuje dostępu do wszystkich stron**
 

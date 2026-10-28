@@ -9,6 +9,7 @@ Deja de copiar tu CV en cada candidatura. LocalApply guarda tus datos una vez, s
 - **Postula en cualquier idioma.** Reconoce las etiquetas de los formularios en español, inglés, alemán, francés, italiano, neerlandés, portugués y polaco.
 - **Responde cada pregunta una vez.** Guarda tu respuesta a una pregunta habitual como «¿Cómo nos conociste?» y se rellenará la próxima vez.
 - **A tu gusto.** Interfaz en ocho idiomas, cinco paletas de colores y tema claro u oscuro.
+- **Responde cada pregunta una sola vez.** Escribe tu respuesta a una pregunta nueva como «¿Por qué quieres trabajar con nosotros?» y LocalApply te ofrece guardarla; la próxima vez se rellena sola.
 
 **Qué rellena**
 
@@ -28,16 +29,16 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor y las páginas de empleo norm
 
 **Cómo se usa**
 
-1. Introduce tus datos una vez en la página de perfil. Se abre sola al instalar la extensión.
+1. Introduce tus datos una vez en la página de perfil. Al instalar la extensión, una breve página de bienvenida te lleva allí.
 2. Abre una candidatura, haz clic en el botón de LocalApply de la barra de herramientas y luego en **Rellenar esta página**, o pulsa **Alt+Mayús+F**.
-3. Revisa el resultado. Los campos rellenados llevan un contorno verde continuo; las preguntas obligatorias sin responder llevan un contorno naranja discontinuo y aparecen en una lista para que las completes. **Deshacer** devuelve los campos a como estaban.
+3. Revisa el resultado. Los campos rellenados llevan un contorno verde continuo; las preguntas obligatorias sin responder llevan un contorno naranja discontinuo y aparecen en una lista para que las completes. **Deshacer** devuelve los campos a como estaban. Las respuestas que escribes tú se ofrecen para guardarlas, y un clic derecho rellena cualquier campo.
 
 **Seguro desde el diseño**
 
 - Nunca pulsa «Enviar» ni «Siguiente» y nunca marca casillas de consentimiento.
 - No toca los campos que ya has rellenado.
 - Exporta tu perfil a un archivo o bórralo todo con un clic.
-- El registro de las candidaturas que rellenas también se queda en tu ordenador; desactívalo, vacíalo o expórtalo como CSV.
+- El registro de las candidaturas que rellenas también se queda en tu ordenador, y la ventana de la extensión te avisa si ya te postulaste en una empresa; desactívalo, vacíalo o expórtalo como CSV.
 
 **Por qué necesita acceso a todos los sitios web**
 

@@ -12,15 +12,16 @@ CE QU’IL REMPLIT
 • Expérience et formation, une entrée par bloc dans les formulaires qui listent plusieurs postes ou écoles, et votre plus haut niveau d’études
 • Plusieurs profils, par exemple un par langue ou type de poste, à choisir dans la fenêtre de l’extension
 • CV et lettre de motivation en fichier, et texte de la lettre de motivation
-• Vos propres réponses aux questions récurrentes comme « Comment avez-vous entendu parler de nous ? »
+• Les réponses que vous tapez à de nouvelles questions : LocalApply propose de les enregistrer pour le prochain formulaire
+• N’importe quel champ, par clic droit, avec l’une de vos informations ou réponses enregistrées
 
 OÙ IL FONCTIONNE
 Fonctionne sur les formulaires de la plupart des logiciels de recrutement et sur les pages carrières ordinaires des entreprises, y compris dans les cadres intégrés. Certains des sites d’emploi les plus utilisés bénéficient d’un traitement spécifique. Les intitulés des formulaires sont reconnus en français, anglais, allemand, espagnol, italien, néerlandais, portugais et polonais.
 
 COMMENT L’UTILISER
-1. Saisissez vos informations une fois sur la page de profil. Elle s’ouvre d’elle-même après l’installation.
+1. Saisissez vos informations une fois sur la page de profil. Après l’installation, une courte page d’accueil vous y mène.
 2. Ouvrez une candidature, cliquez sur le bouton LocalApply de la barre d’outils puis sur "Remplir cette page", ou appuyez sur "Alt+Maj+F".
-3. Vérifiez le résultat. Les champs remplis ont un contour vert continu ; les questions obligatoires restées sans réponse ont un contour orange en pointillés et sont listées pour que vous les complétiez. "Annuler" remet les champs comme avant.
+3. Vérifiez le résultat. Les champs remplis ont un contour vert continu ; les questions obligatoires restées sans réponse ont un contour orange en pointillés et sont listées pour que vous les complétiez. "Annuler" remet les champs comme avant. Les réponses que vous tapez vous-même sont proposées à l’enregistrement, et un clic droit remplit n’importe quel champ.
 
 SÛR PAR CONCEPTION
 • Votre profil et vos documents sont enregistrés uniquement dans votre navigateur, sur votre ordinateur.
@@ -28,7 +29,7 @@ SÛR PAR CONCEPTION
 • Ne clique jamais sur « Envoyer » ou « Suivant » et ne coche jamais de case de consentement.
 • Ne touche pas aux champs que vous avez déjà remplis.
 • Exportez votre profil dans un fichier, ou supprimez tout en un clic.
-• Le journal des candidatures remplies reste lui aussi sur votre ordinateur ; désactivez-le, videz-le ou exportez-le en CSV.
+• Le journal des candidatures remplies reste lui aussi sur votre ordinateur, et la fenêtre de l’extension vous signale une entreprise où vous avez déjà postulé ; désactivez-le, videz-le ou exportez-le en CSV.
 
 POURQUOI IL A BESOIN D’ACCÉDER À TOUS LES SITES
 Les candidatures sont hébergées sur des milliers de sites d’employeurs et de recrutement, souvent dans des cadres intégrés : LocalApply doit donc pouvoir remplir les formulaires sur n’importe quelle page. Il ne lit et ne remplit un formulaire que lorsque vous le lui demandez. Il n’effectue aucune requête réseau.

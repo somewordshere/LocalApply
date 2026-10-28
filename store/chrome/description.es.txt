@@ -12,15 +12,16 @@ QUÉ RELLENA
 • Experiencia y formación, una entrada por bloque en formularios con varios empleos o centros, y tu nivel de estudios más alto
 • Varios perfiles, por ejemplo uno por idioma o tipo de puesto, que eliges en la ventana de la extensión
 • CV y carta de presentación como archivo, y texto de la carta
-• Tus propias respuestas a preguntas habituales como «¿Cómo nos conociste?»
+• Las respuestas que escribes a preguntas nuevas: LocalApply te ofrece guardarlas para el próximo formulario
+• Cualquier campo suelto, con clic derecho, con uno de tus datos o respuestas guardadas
 
 DÓNDE FUNCIONA
 Funciona en los formularios de la mayoría de los sistemas de selección y en las páginas de empleo normales de las empresas, también dentro de marcos incrustados. Algunos de los portales de empleo más usados reciben un tratamiento específico. Reconoce las etiquetas de los formularios en español, inglés, alemán, francés, italiano, neerlandés, portugués y polaco.
 
 CÓMO SE USA
-1. Introduce tus datos una vez en la página de perfil. Se abre sola al instalar la extensión.
+1. Introduce tus datos una vez en la página de perfil. Al instalar la extensión, una breve página de bienvenida te lleva allí.
 2. Abre una candidatura, haz clic en el botón de LocalApply de la barra de herramientas y luego en "Rellenar esta página", o pulsa "Alt+Mayús+F".
-3. Revisa el resultado. Los campos rellenados llevan un contorno verde continuo; las preguntas obligatorias sin responder llevan un contorno naranja discontinuo y aparecen en una lista para que las completes. "Deshacer" devuelve los campos a como estaban.
+3. Revisa el resultado. Los campos rellenados llevan un contorno verde continuo; las preguntas obligatorias sin responder llevan un contorno naranja discontinuo y aparecen en una lista para que las completes. "Deshacer" devuelve los campos a como estaban. Las respuestas que escribes tú se ofrecen para guardarlas, y un clic derecho rellena cualquier campo.
 
 SEGURO DESDE EL DISEÑO
 • Tu perfil y tus documentos se guardan solo en tu navegador, en tu ordenador.
@@ -28,7 +29,7 @@ SEGURO DESDE EL DISEÑO
 • Nunca pulsa «Enviar» ni «Siguiente» y nunca marca casillas de consentimiento.
 • No toca los campos que ya has rellenado.
 • Exporta tu perfil a un archivo o bórralo todo con un clic.
-• El registro de las candidaturas que rellenas también se queda en tu ordenador; desactívalo, vacíalo o expórtalo como CSV.
+• El registro de las candidaturas que rellenas también se queda en tu ordenador, y la ventana de la extensión te avisa si ya te postulaste en una empresa; desactívalo, vacíalo o expórtalo como CSV.
 
 POR QUÉ NECESITA ACCESO A TODOS LOS SITIOS WEB
 Las candidaturas están en miles de sitios de empresas y de selección, a menudo dentro de marcos incrustados, así que LocalApply tiene que poder rellenar formularios en cualquier página. Solo lee y rellena un formulario cuando se lo pides. No hace ninguna petición de red.

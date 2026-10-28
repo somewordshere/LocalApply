@@ -12,15 +12,16 @@ O QUE PREENCHE
 • Experiência e formação, uma entrada por bloco em formulários com vários empregos ou escolas, e o seu nível de escolaridade mais alto
 • Vários perfis, por exemplo um por língua ou tipo de cargo, escolhidos na janela da extensão
 • CV e carta de apresentação em ficheiro, e texto da carta
-• As suas respostas a perguntas recorrentes como «Como teve conhecimento de nós?»
+• As respostas que escreve a perguntas novas: o LocalApply propõe guardá-las para o próximo formulário
+• Qualquer campo isolado, com o botão direito, com um dos seus dados ou respostas guardadas
 
 ONDE FUNCIONA
 Funciona nos formulários da maioria dos sistemas de recrutamento e nas páginas de carreiras normais das empresas, incluindo dentro de frames incorporados. Alguns dos sites de emprego mais usados têm tratamento específico. As etiquetas dos formulários são reconhecidas em português, inglês, alemão, francês, espanhol, italiano, neerlandês e polaco.
 
 COMO USAR
-1. Introduza os seus dados uma vez na página de perfil. Ela abre-se sozinha depois da instalação.
+1. Introduza os seus dados uma vez na página de perfil. Depois da instalação, uma breve página de boas-vindas indica o caminho.
 2. Abra uma candidatura, clique no botão LocalApply da barra de ferramentas e depois em "Preencher esta página", ou prima "Alt+Shift+F".
-3. Verifique o resultado. Os campos preenchidos ficam com um contorno verde contínuo; as perguntas obrigatórias por responder ficam com um contorno laranja tracejado e aparecem numa lista para as completar. "Anular" repõe os campos como estavam.
+3. Verifique o resultado. Os campos preenchidos ficam com um contorno verde contínuo; as perguntas obrigatórias por responder ficam com um contorno laranja tracejado e aparecem numa lista para as completar. "Anular" repõe os campos como estavam. As respostas que escreve são propostas para guardar, e o botão direito preenche qualquer campo.
 
 SEGURO DE RAIZ
 • O seu perfil e os seus documentos ficam guardados apenas no navegador, no seu computador.
@@ -28,7 +29,7 @@ SEGURO DE RAIZ
 • Nunca clica em «Enviar» ou «Seguinte» e nunca marca caixas de consentimento.
 • Não mexe nos campos que já preencheu.
 • Exporte o perfil para um ficheiro ou apague tudo com um clique.
-• O registo das candidaturas que preenche também fica no seu computador; desative-o, limpe-o ou exporte-o como CSV.
+• O registo das candidaturas que preenche também fica no seu computador, e a janela da extensão avisa quando já se candidatou a uma empresa; desative-o, limpe-o ou exporte-o como CSV.
 
 PORQUE PRECISA DE ACESSO A TODOS OS SITES
 As candidaturas estão em milhares de sites de empregadores e de recrutamento, muitas vezes dentro de frames incorporados, por isso o LocalApply tem de conseguir preencher formulários em qualquer página. Só lê e preenche um formulário quando lhe pede. Não faz pedidos de rede.

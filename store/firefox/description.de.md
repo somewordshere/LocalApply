@@ -8,7 +8,7 @@ Schluss damit, den Lebenslauf in jede Bewerbung abzutippen. LocalApply speichert
 - **Deine Daten bleiben privat.** Dein Profil liegt in Firefox auf deinem Rechner. Kein Konto, kein Server, keine KI, kein Tracking.
 - **In jeder Sprache bewerben.** Erkennt Feldbezeichnungen auf Deutsch, Englisch, Französisch, Spanisch, Italienisch, Niederländisch, Portugiesisch und Polnisch.
 - **So, wie es dir gefällt.** Die Oberfläche spricht acht Sprachen, mit fünf Farbpaletten und hellem oder dunklem Design.
-- **Jede Frage nur einmal beantworten.** Speichere deine Antwort auf wiederkehrende Fragen wie „Wie sind Sie auf uns aufmerksam geworden?", und sie wird beim nächsten Mal eingetragen.
+- **Jede Frage nur einmal beantworten.** Tippe deine Antwort auf eine neue Frage wie „Warum möchten Sie zu uns?" ein, und LocalApply bietet an, sie zu speichern; beim nächsten Mal wird sie eingetragen.
 
 **Was ausgefüllt wird**
 
@@ -28,16 +28,16 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseit
 
 **So nutzt du es**
 
-1. Gib deine Daten einmal auf der Profilseite ein. Sie öffnet sich nach der Installation von selbst.
+1. Gib deine Daten einmal auf der Profilseite ein. Nach der Installation führt dich eine kurze Willkommensseite dorthin.
 2. Öffne eine Bewerbung, klicke auf das LocalApply-Symbol in der Symbolleiste und dann auf **Diese Seite ausfüllen**, oder drücke **Alt+Umschalt+F**.
-3. Prüfe das Ergebnis. Ausgefüllte Felder bekommen einen durchgehenden grünen Rahmen; Pflichtfragen, die offen bleiben, bekommen einen gestrichelten gelben Rahmen und werden aufgelistet, damit du sie ergänzen kannst. **Rückgängig** setzt die Felder zurück.
+3. Prüfe das Ergebnis. Ausgefüllte Felder bekommen einen durchgehenden grünen Rahmen; Pflichtfragen, die offen bleiben, bekommen einen gestrichelten gelben Rahmen und werden aufgelistet, damit du sie ergänzen kannst. **Rückgängig** setzt die Felder zurück. Antworten, die du selbst eintippst, werden zum Speichern angeboten, und ein Rechtsklick füllt jedes einzelne Feld.
 
 **Sicher von Grund auf**
 
 - Klickt nie auf „Absenden" oder „Weiter" und setzt keine Einwilligungshäkchen.
 - Lässt Felder, die du schon ausgefüllt hast, unverändert.
 - Exportiere dein Profil als Datei oder lösche alles mit einem Klick.
-- Auch das Protokoll deiner ausgefüllten Bewerbungen bleibt auf deinem Rechner; schalte es ab, leere es oder exportiere es als CSV.
+- Auch das Protokoll deiner ausgefüllten Bewerbungen bleibt auf deinem Rechner, und das Pop-up sagt dir, wenn du dich schon einmal bei einer Firma beworben hast; schalte es ab, leere es oder exportiere es als CSV.
 
 **Warum Zugriff auf alle Websites nötig ist**
 

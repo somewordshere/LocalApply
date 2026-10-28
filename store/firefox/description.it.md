@@ -9,6 +9,7 @@ Basta ricopiare il CV in ogni candidatura. LocalApply salva i tuoi dati una volt
 - **Candidati in qualsiasi lingua.** Riconosce le etichette dei moduli in italiano, inglese, tedesco, francese, spagnolo, olandese, portoghese e polacco.
 - **Rispondi una volta sola.** Salva la risposta a una domanda ricorrente come «Come ci hai conosciuto?» e verrà inserita la volta successiva.
 - **Come piace a te.** Interfaccia in otto lingue, cinque palette di colori, tema chiaro o scuro.
+- **Ogni domanda una volta sola.** Scrivi la risposta a una domanda nuova come «Perché vuoi lavorare con noi?» e LocalApply propone di salvarla; la prossima volta viene compilata per te.
 
 **Cosa compila**
 
@@ -28,16 +29,16 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor e le normali pagine carriere 
 
 **Come si usa**
 
-1. Inserisci i tuoi dati una volta nella pagina del profilo. Si apre da sola dopo l’installazione.
+1. Inserisci i tuoi dati una volta nella pagina del profilo. Dopo l’installazione, una breve pagina di benvenuto ti ci porta.
 2. Apri una candidatura, fai clic sul pulsante LocalApply nella barra degli strumenti e poi su **Compila questa pagina**, oppure premi **Alt+Maiusc+F**.
-3. Controlla il risultato. I campi compilati hanno un bordo verde continuo; le domande obbligatorie rimaste senza risposta hanno un bordo arancione tratteggiato e sono elencate perché tu possa completarle. **Annulla** rimette i campi com’erano.
+3. Controlla il risultato. I campi compilati hanno un bordo verde continuo; le domande obbligatorie rimaste senza risposta hanno un bordo arancione tratteggiato e sono elencate perché tu possa completarle. **Annulla** rimette i campi com’erano. Le risposte che scrivi tu vengono proposte per il salvataggio, e un clic destro compila qualsiasi campo.
 
 **Sicuro per costruzione**
 
 - Non preme mai «Invia» o «Avanti» e non spunta mai caselle di consenso.
 - Lascia invariati i campi che hai già compilato.
 - Esporta il profilo in un file o elimina tutto con un clic.
-- Anche il registro delle candidature compilate resta sul tuo computer; disattivalo, svuotalo o esportalo in CSV.
+- Anche il registro delle candidature compilate resta sul tuo computer, e la finestra dell’estensione ti avvisa se hai già inviato una candidatura a un’azienda; disattivalo, svuotalo o esportalo in CSV.
 
 **Perché chiede l’accesso a tutti i siti**
 

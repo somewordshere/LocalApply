@@ -9,6 +9,7 @@ Chega de copiar o CV para cada candidatura. O LocalApply guarda os seus dados um
 - **Candidate-se em qualquer língua.** Reconhece as etiquetas dos formulários em português, inglês, alemão, francês, espanhol, italiano, neerlandês e polaco.
 - **Responda uma só vez.** Guarde a resposta a uma pergunta recorrente como «Como teve conhecimento de nós?» e ela será preenchida da próxima vez.
 - **À sua maneira.** Interface em oito línguas, cinco paletas de cores, tema claro ou escuro.
+- **Cada pergunta só uma vez.** Escreva a resposta a uma pergunta nova como «Porque quer trabalhar connosco?» e o LocalApply propõe guardá-la; da próxima vez é preenchida por si.
 
 **O que preenche**
 
@@ -28,16 +29,16 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor e as páginas de carreiras no
 
 **Como usar**
 
-1. Introduza os seus dados uma vez na página de perfil. Ela abre-se sozinha depois da instalação.
+1. Introduza os seus dados uma vez na página de perfil. Depois da instalação, uma breve página de boas-vindas indica o caminho.
 2. Abra uma candidatura, clique no botão LocalApply da barra de ferramentas e depois em **Preencher esta página**, ou prima **Alt+Shift+F**.
-3. Verifique o resultado. Os campos preenchidos ficam com um contorno verde contínuo; as perguntas obrigatórias por responder ficam com um contorno laranja tracejado e aparecem numa lista para as completar. **Anular** repõe os campos como estavam.
+3. Verifique o resultado. Os campos preenchidos ficam com um contorno verde contínuo; as perguntas obrigatórias por responder ficam com um contorno laranja tracejado e aparecem numa lista para as completar. **Anular** repõe os campos como estavam. As respostas que escreve são propostas para guardar, e o botão direito preenche qualquer campo.
 
 **Seguro de raiz**
 
 - Nunca clica em «Enviar» ou «Seguinte» e nunca marca caixas de consentimento.
 - Não mexe nos campos que já preencheu.
 - Exporte o perfil para um ficheiro ou apague tudo com um clique.
-- O registo das candidaturas que preenche também fica no seu computador; desative-o, limpe-o ou exporte-o como CSV.
+- O registo das candidaturas que preenche também fica no seu computador, e a janela da extensão avisa quando já se candidatou a uma empresa; desative-o, limpe-o ou exporte-o como CSV.
 
 **Porque precisa de acesso a todos os sites**
 

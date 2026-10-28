@@ -9,6 +9,7 @@ Stop met je cv overtypen in elke sollicitatie. LocalApply bewaart je gegevens é
 - **Solliciteer in elke taal.** Herkent formulierlabels in het Nederlands, Engels, Duits, Frans, Spaans, Italiaans, Portugees en Pools.
 - **Beantwoord elke vraag één keer.** Bewaar je antwoord op een terugkerende vraag zoals "Hoe heb je ons gevonden?" en het wordt de volgende keer ingevuld.
 - **Zoals jij het wilt.** Interface in acht talen, vijf kleurenpaletten, licht of donker thema.
+- **Elke vraag maar één keer beantwoorden.** Typ je antwoord op een nieuwe vraag zoals "Waarom wil je bij ons werken?" en LocalApply biedt aan het te bewaren; de volgende keer wordt het voor je ingevuld.
 
 **Wat het invult**
 
@@ -28,16 +29,16 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor en gewone vacaturepagina’s 
 
 **Zo gebruik je het**
 
-1. Vul je gegevens één keer in op de profielpagina. Die opent vanzelf na de installatie.
+1. Vul je gegevens één keer in op de profielpagina. Na de installatie brengt een korte welkomstpagina je erheen.
 2. Open een sollicitatie, klik op de LocalApply-knop in de werkbalk en dan op **Deze pagina invullen**, of druk op **Alt+Shift+F**.
-3. Controleer het resultaat. Ingevulde velden krijgen een doorgetrokken groene rand; verplichte vragen die open blijven krijgen een gestippelde oranje rand en staan in een lijst, zodat je ze kunt aanvullen. **Ongedaan maken** zet de velden terug.
+3. Controleer het resultaat. Ingevulde velden krijgen een doorgetrokken groene rand; verplichte vragen die open blijven krijgen een gestippelde oranje rand en staan in een lijst, zodat je ze kunt aanvullen. **Ongedaan maken** zet de velden terug. Antwoorden die je zelf typt worden aangeboden om te bewaren, en met de rechtermuisknop vul je elk los veld.
 
 **Veilig van opzet**
 
 - Klikt nooit op "Versturen" of "Volgende" en vinkt nooit toestemmingsvakjes aan.
 - Laat velden die je al hebt ingevuld met rust.
 - Exporteer je profiel naar een bestand of verwijder alles met één klik.
-- Ook het logboek van ingevulde sollicitaties blijft op je computer; zet het uit, wis het of exporteer het als CSV.
+- Ook het logboek van ingevulde sollicitaties blijft op je computer, en het venster van de extensie meldt het als je al eerder bij een bedrijf solliciteerde; zet het uit, wis het of exporteer het als CSV.
 
 **Waarom het toegang tot alle websites vraagt**
 

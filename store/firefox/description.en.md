@@ -8,7 +8,7 @@ Stop retyping your CV into every job application. LocalApply saves your details 
 - **Keep your data private.** Your profile stays in Firefox on your computer. No account, no server, no AI service, no tracking.
 - **Apply in any language.** Recognises form labels in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish.
 - **Make it yours.** The interface speaks eight languages, with five colour palettes and a light or dark theme.
-- **Answer each question once.** Save your answer to a recurring question like "How did you hear about us?" and it is filled in next time.
+- **Answer each question once.** Type your answer to a new question like "Why do you want to join us?" and LocalApply offers to save it; next time it is filled in for you.
 
 **What it fills**
 
@@ -28,16 +28,16 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career p
 
 **How to use it**
 
-1. Enter your details once on the profile page. It opens by itself after you install LocalApply.
+1. Enter your details once on the profile page. Installing LocalApply opens a short welcome page that takes you there.
 2. Open a job application, click the LocalApply toolbar button and then **Fill this page**, or press **Alt+Shift+F**.
-3. Check the result. Filled fields get a solid green outline; required questions it could not answer get a dashed amber outline and are listed so you can finish them. **Undo** puts the fields back.
+3. Check the result. Filled fields get a solid green outline; required questions it could not answer get a dashed amber outline and are listed so you can finish them. **Undo** puts the fields back. Answers you type in yourself are offered for saving, and a right-click fills any single field.
 
 **Safe by design**
 
 - Never presses Submit or Next, and never ticks consent boxes.
 - Leaves fields you have already filled in alone.
 - Export your profile to a file, or delete everything with one click.
-- A log of the applications you filled stays on your computer too; turn it off, clear it or export it as CSV.
+- A log of the applications you filled stays on your computer too, and the popup tells you when you applied to a company before; turn it off, clear it or export it as CSV.
 
 **Why it needs access to all websites**
 

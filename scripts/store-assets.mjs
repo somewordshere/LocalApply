@@ -243,7 +243,16 @@ try {
   }
   const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
   const id = new URL(worker.url()).host;
-  await worker.evaluate((profile) => chrome.storage.local.set({ profile }), PROFILE);
+  // Stored as the extension keeps profiles since 0.8.0. The background reads the profile index as soon as it
+  // starts (for the right-click menu), so a profile under the old single key would never be moved in.
+  await worker.evaluate(
+    (profile) =>
+      chrome.storage.local.set({
+        'profile:main': profile,
+        profileIndex: { active: 'main', list: [{ id: 'main', name: '' }] },
+      }),
+    PROFILE,
+  );
 
   /** Opens a job page and fills it through the real popup, in English unless told otherwise. */
   const fill = async (
