@@ -116,7 +116,7 @@ export default function App() {
 
       <main>
         <section className="pt-6 pb-10 md:pt-12">
-          <h1 className="font-display text-4xl font-medium tracking-tight md:text-6xl">{t('welcome.title')}</h1>
+          <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl">{t('welcome.title')}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">{t('welcome.subtitle')}</p>
           <button className="btn mt-8 px-6 py-3 text-[15px]" onClick={openProfile}>
             {t('welcome.start')}

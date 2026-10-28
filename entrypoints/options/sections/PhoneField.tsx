@@ -38,26 +38,29 @@ export function PhoneField({ profile, update }: { profile: Profile; update: (pat
       <span id="phone-label" className="mb-1.5 block text-sm font-medium text-ink">
         {t('phone.label')}
       </span>
-      <div className="grid grid-cols-[7rem_1fr] gap-3 sm:grid-cols-[7rem_1fr_1.25fr]">
-        {box(
-          t('phone.codeLabel'),
-          <input
-            className="field"
-            placeholder="+44"
-            value={profile.phoneCountryCode}
-            onChange={(e) => update({ phoneCountryCode: e.target.value })}
-          />,
-        )}
-        {box(
-          t('phone.numberLabel'),
-          <input
-            className="field"
-            type="tel"
-            placeholder="20 7946 0123"
-            value={profile.phoneNumber}
-            onChange={(e) => update({ phoneNumber: e.target.value })}
-          />,
-        )}
+      {/* The same two columns as the fields around it (FieldSection): code and number on the left, the full number on the right. */}
+      <div className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+        <div className="grid grid-cols-[6rem_minmax(0,1fr)] gap-3">
+          {box(
+            t('phone.codeLabel'),
+            <input
+              className="field"
+              placeholder="+44"
+              value={profile.phoneCountryCode}
+              onChange={(e) => update({ phoneCountryCode: e.target.value })}
+            />,
+          )}
+          {box(
+            t('phone.numberLabel'),
+            <input
+              className="field"
+              type="tel"
+              placeholder="20 7946 0123"
+              value={profile.phoneNumber}
+              onChange={(e) => update({ phoneNumber: e.target.value })}
+            />,
+          )}
+        </div>
         {box(
           t('phone.full'),
           <input
@@ -67,7 +70,6 @@ export function PhoneField({ profile, update }: { profile: Profile; update: (pat
             value={text}
             onChange={(e) => typeFull(e.target.value)}
           />,
-          'col-span-2 sm:col-span-1',
         )}
       </div>
       {text.trim() && !parts.phoneCountryCode && <p className="mt-1.5 text-xs text-warn">{t('phone.noCode')}</p>}

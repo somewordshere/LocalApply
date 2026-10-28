@@ -222,6 +222,13 @@
   :root[data-scheme='dark'] {
     color-scheme: dark;
   }
+  /* The arrow on dropdowns (select.field), in ink-soft for each scheme. */
+  :root {
+    --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%235d574c' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  }
+  :root[data-scheme='dark'] {
+    --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23b3ac9f' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  }
   body {
     @apply bg-paper font-sans text-ink antialiased;
     font-feature-settings: 'ss01';
@@ -235,6 +242,19 @@
   .field {
     @apply w-full rounded-md border border-line-strong bg-sheet px-3 py-2 text-[15px] text-ink outline-none transition
       placeholder:text-ink-faint focus:border-accent focus:ring-3 focus:ring-accent/20;
+  }
+  /*
+   * Dropdowns draw their own arrow instead of the system's, so they line up with the other boxes and follow
+   * the theme; the open list takes the sheet and ink colours where the browser allows it.
+   */
+  select.field {
+    @apply cursor-pointer appearance-none bg-no-repeat pr-9;
+    background-image: var(--chevron);
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+  }
+  select.field option {
+    @apply bg-sheet text-ink;
   }
   .btn {
     @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm
