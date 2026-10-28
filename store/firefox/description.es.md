@@ -22,10 +22,11 @@ Deja de copiar tu CV en cada candidatura. LocalApply guarda tus datos una vez, s
 - Experiencia y formación, una entrada por bloque en formularios con varios empleos o centros, y tu nivel de estudios más alto
 - Varios perfiles, por ejemplo uno por idioma o tipo de puesto, que eliges en la ventana de la extensión
 - CV y carta de presentación como archivo, y texto de la carta
+- Candidaturas de varias páginas, paso a paso, y bloques de empleo o estudios adicionales cuando el formulario tiene un botón Añadir
 
 **Dónde funciona**
 
-Greenhouse, Ashby, Personio, Recruitee, Teamtailor y las páginas de empleo normales de las empresas, con un tratamiento específico para Workday, Lever, SmartRecruiters, SAP SuccessFactors y LinkedIn Easy Apply.
+Greenhouse, Ashby, Personio, Recruitee, Teamtailor y las páginas de empleo normales de las empresas, con un tratamiento específico para Workday, Lever, SmartRecruiters, SAP SuccessFactors y LinkedIn Easy Apply. También reconoce Workable, iCIMS, Taleo, softgarden, d.vinci, rexx, Umantis y JOIN.
 
 **Cómo se usa**
 
@@ -38,7 +39,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor y las páginas de empleo norm
 - Nunca pulsa «Enviar» ni «Siguiente» y nunca marca casillas de consentimiento.
 - No toca los campos que ya has rellenado.
 - Exporta tu perfil a un archivo o bórralo todo con un clic.
-- El registro de las candidaturas que rellenas también se queda en tu ordenador, y la ventana de la extensión te avisa si ya te postulaste en una empresa; desactívalo, vacíalo o expórtalo como CSV.
+- El registro de las candidaturas que rellenas, con estado, notas y descripción del puesto, también se queda en tu ordenador, y la ventana de la extensión te avisa si ya te postulaste en una empresa; desactívalo, vacíalo o expórtalo como CSV.
 
 **Por qué necesita acceso a todos los sitios web**
 

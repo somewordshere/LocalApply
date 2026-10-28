@@ -14,6 +14,7 @@ QUÉ RELLENA
 • CV y carta de presentación como archivo, y texto de la carta
 • Las respuestas que escribes a preguntas nuevas: LocalApply te ofrece guardarlas para el próximo formulario
 • Cualquier campo suelto, con clic derecho, con uno de tus datos o respuestas guardadas
+• Candidaturas de varias páginas, paso a paso, y bloques de empleo o estudios adicionales cuando el formulario tiene un botón Añadir
 
 DÓNDE FUNCIONA
 Funciona en los formularios de la mayoría de los sistemas de selección y en las páginas de empleo normales de las empresas, también dentro de marcos incrustados. Algunos de los portales de empleo más usados reciben un tratamiento específico. Reconoce las etiquetas de los formularios en español, inglés, alemán, francés, italiano, neerlandés, portugués y polaco.
@@ -29,7 +30,7 @@ SEGURO DESDE EL DISEÑO
 • Nunca pulsa «Enviar» ni «Siguiente» y nunca marca casillas de consentimiento.
 • No toca los campos que ya has rellenado.
 • Exporta tu perfil a un archivo o bórralo todo con un clic.
-• El registro de las candidaturas que rellenas también se queda en tu ordenador, y la ventana de la extensión te avisa si ya te postulaste en una empresa; desactívalo, vacíalo o expórtalo como CSV.
+• El registro de las candidaturas que rellenas, con estado, notas y descripción del puesto, también se queda en tu ordenador, y la ventana de la extensión te avisa si ya te postulaste en una empresa; desactívalo, vacíalo o expórtalo como CSV.
 
 POR QUÉ NECESITA ACCESO A TODOS LOS SITIOS WEB
 Las candidaturas están en miles de sitios de empresas y de selección, a menudo dentro de marcos incrustados, así que LocalApply tiene que poder rellenar formularios en cualquier página. Solo lee y rellena un formulario cuando se lo pides. No hace ninguna petición de red.

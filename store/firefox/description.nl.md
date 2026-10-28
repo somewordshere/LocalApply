@@ -22,10 +22,11 @@ Stop met je cv overtypen in elke sollicitatie. LocalApply bewaart je gegevens é
 - Werkervaring en opleiding, één item per blok in formulieren met meerdere banen of scholen, en je hoogst genoten opleiding
 - Meerdere profielen, bijvoorbeeld één per taal of soort functie, te kiezen in het venster van de extensie
 - Cv en motivatiebrief als bestand, en de tekst van de motivatiebrief
+- Sollicitaties over meerdere pagina’s, stap voor stap, en extra baan- of opleidingsblokken als het formulier een knop Toevoegen heeft
 
 **Waar het werkt**
 
-Greenhouse, Ashby, Personio, Recruitee, Teamtailor en gewone vacaturepagina’s van bedrijven, met een eigen aanpak voor Workday, Lever, SmartRecruiters, SAP SuccessFactors en LinkedIn Easy Apply.
+Greenhouse, Ashby, Personio, Recruitee, Teamtailor en gewone vacaturepagina’s van bedrijven, met een eigen aanpak voor Workday, Lever, SmartRecruiters, SAP SuccessFactors en LinkedIn Easy Apply. Workable, iCIMS, Taleo, softgarden, d.vinci, rexx, Umantis en JOIN worden ook herkend.
 
 **Zo gebruik je het**
 
@@ -38,7 +39,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor en gewone vacaturepagina’s 
 - Klikt nooit op "Versturen" of "Volgende" en vinkt nooit toestemmingsvakjes aan.
 - Laat velden die je al hebt ingevuld met rust.
 - Exporteer je profiel naar een bestand of verwijder alles met één klik.
-- Ook het logboek van ingevulde sollicitaties blijft op je computer, en het venster van de extensie meldt het als je al eerder bij een bedrijf solliciteerde; zet het uit, wis het of exporteer het als CSV.
+- Ook het logboek van ingevulde sollicitaties, met status, notities en functieomschrijving, blijft op je computer, en het venster van de extensie meldt het als je al eerder bij een bedrijf solliciteerde; zet het uit, wis het of exporteer het als CSV.
 
 **Waarom het toegang tot alle websites vraagt**
 

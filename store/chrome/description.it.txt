@@ -14,6 +14,7 @@ COSA COMPILA
 • CV e lettera di presentazione come file, e testo della lettera
 • Le risposte che scrivi a domande nuove: LocalApply propone di salvarle per il prossimo modulo
 • Qualsiasi singolo campo, con il clic destro, con uno dei tuoi dati o delle risposte salvate
+• Candidature su più pagine, passo dopo passo, e blocchi di lavoro o di studio in più quando il modulo ha un pulsante Aggiungi
 
 DOVE FUNZIONA
 Funziona sui moduli della maggior parte dei sistemi di selezione e sulle normali pagine carriere delle aziende, anche dentro frame incorporati. Alcuni dei siti di lavoro più usati hanno una gestione dedicata. Le etichette dei moduli sono riconosciute in italiano, inglese, tedesco, francese, spagnolo, olandese, portoghese e polacco.
@@ -29,7 +30,7 @@ SICURO PER COSTRUZIONE
 • Non preme mai «Invia» o «Avanti» e non spunta mai caselle di consenso.
 • Lascia invariati i campi che hai già compilato.
 • Esporta il profilo in un file o elimina tutto con un clic.
-• Anche il registro delle candidature compilate resta sul tuo computer, e la finestra dell’estensione ti avvisa se hai già inviato una candidatura a un’azienda; disattivalo, svuotalo o esportalo in CSV.
+• Anche il registro delle candidature compilate, con stato, note e descrizione del lavoro, resta sul tuo computer, e la finestra dell’estensione ti avvisa se hai già inviato una candidatura a un’azienda; disattivalo, svuotalo o esportalo in CSV.
 
 PERCHÉ CHIEDE L’ACCESSO A TUTTI I SITI
 Le candidature si trovano su migliaia di siti di aziende e di selezione, spesso dentro frame incorporati, quindi LocalApply deve poter compilare moduli su qualsiasi pagina. Legge e compila un modulo solo quando glielo chiedi. Non effettua richieste di rete.

@@ -14,6 +14,7 @@ WAS AUSGEFÜLLT WIRD
 • Lebenslauf und Anschreiben als Datei sowie Anschreiben als Text
 • Antworten, die du selbst in neue Fragen tippst: LocalApply bietet an, sie zu speichern, damit das nächste Formular sie bekommt
 • Jedes einzelne Feld per Rechtsklick, mit einer deiner Angaben oder gespeicherten Antworten
+• Bewerbungen über mehrere Seiten, Schritt für Schritt, und weitere Stellen- oder Ausbildungsblöcke, wenn das Formular einen Hinzufügen-Knopf hat
 
 FUNKTIONIERT DORT, WO DU DICH BEWIRBST
 Funktioniert mit den Bewerbungsformularen der meisten Bewerbermanagementsysteme und auf gewöhnlichen Karriereseiten von Unternehmen, auch in eingebetteten Frames. Einige der meistgenutzten Jobportale werden zusätzlich gezielt unterstützt. Feldbezeichnungen werden auf Deutsch, Englisch, Französisch, Spanisch, Italienisch, Niederländisch, Portugiesisch und Polnisch erkannt.
@@ -29,7 +30,7 @@ PRIVAT VON GRUND AUF
 • Sie klickt nie auf „Absenden" oder „Weiter" und setzt keine Einwilligungshäkchen.
 • Felder, die du schon ausgefüllt hast, bleiben unverändert.
 • Exportiere dein Profil als Datei oder lösche alles mit einem Klick.
-• Auch das Protokoll deiner ausgefüllten Bewerbungen bleibt auf deinem Rechner, und das Pop-up sagt dir, wenn du dich schon einmal bei einer Firma beworben hast; schalte es ab, leere es oder exportiere es als CSV.
+• Auch das Protokoll deiner ausgefüllten Bewerbungen, mit Stand, Notizen und Stellenbeschreibung, bleibt auf deinem Rechner, und das Pop-up sagt dir, wenn du dich schon einmal bei einer Firma beworben hast; schalte es ab, leere es oder exportiere es als CSV.
 
 WARUM ZUGRIFF AUF ALLE WEBSITES NÖTIG IST
 Bewerbungsformulare liegen auf Tausenden verschiedener Domains, oft in eingebetteten Frames. Deshalb muss LocalApply Formularfelder auf jeder Seite ausfüllen können. Es liest und füllt ein Formular nur, wenn du es darum bittest.

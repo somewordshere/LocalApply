@@ -14,6 +14,7 @@ CE QU’IL REMPLIT
 • CV et lettre de motivation en fichier, et texte de la lettre de motivation
 • Les réponses que vous tapez à de nouvelles questions : LocalApply propose de les enregistrer pour le prochain formulaire
 • N’importe quel champ, par clic droit, avec l’une de vos informations ou réponses enregistrées
+• Les candidatures sur plusieurs pages, étape par étape, et des blocs de postes ou de formations en plus quand le formulaire a un bouton Ajouter
 
 OÙ IL FONCTIONNE
 Fonctionne sur les formulaires de la plupart des logiciels de recrutement et sur les pages carrières ordinaires des entreprises, y compris dans les cadres intégrés. Certains des sites d’emploi les plus utilisés bénéficient d’un traitement spécifique. Les intitulés des formulaires sont reconnus en français, anglais, allemand, espagnol, italien, néerlandais, portugais et polonais.
@@ -29,7 +30,7 @@ SÛR PAR CONCEPTION
 • Ne clique jamais sur « Envoyer » ou « Suivant » et ne coche jamais de case de consentement.
 • Ne touche pas aux champs que vous avez déjà remplis.
 • Exportez votre profil dans un fichier, ou supprimez tout en un clic.
-• Le journal des candidatures remplies reste lui aussi sur votre ordinateur, et la fenêtre de l’extension vous signale une entreprise où vous avez déjà postulé ; désactivez-le, videz-le ou exportez-le en CSV.
+• Le journal des candidatures remplies, avec statut, notes et description du poste, reste lui aussi sur votre ordinateur, et la fenêtre de l’extension vous signale une entreprise où vous avez déjà postulé ; désactivez-le, videz-le ou exportez-le en CSV.
 
 POURQUOI IL A BESOIN D’ACCÉDER À TOUS LES SITES
 Les candidatures sont hébergées sur des milliers de sites d’employeurs et de recrutement, souvent dans des cadres intégrés : LocalApply doit donc pouvoir remplir les formulaires sur n’importe quelle page. Il ne lit et ne remplit un formulaire que lorsque vous le lui demandez. Il n’effectue aucune requête réseau.

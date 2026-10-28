@@ -14,6 +14,7 @@ WAT HET INVULT
 • Cv en motivatiebrief als bestand, en de tekst van de motivatiebrief
 • Antwoorden die je zelf op nieuwe vragen typt: LocalApply biedt aan ze te bewaren voor het volgende formulier
 • Elk los veld via de rechtermuisknop, met een van je gegevens of bewaarde antwoorden
+• Sollicitaties over meerdere pagina’s, stap voor stap, en extra baan- of opleidingsblokken als het formulier een knop Toevoegen heeft
 
 WAAR HET WERKT
 Werkt op de formulieren van de meeste sollicitatiesystemen en op gewone vacaturepagina’s van bedrijven, ook in ingesloten frames. Sommige van de meest gebruikte vacaturesites krijgen een eigen aanpak. Formulierlabels worden herkend in het Nederlands, Engels, Duits, Frans, Spaans, Italiaans, Portugees en Pools.
@@ -29,7 +30,7 @@ VEILIG VAN OPZET
 • Klikt nooit op "Versturen" of "Volgende" en vinkt nooit toestemmingsvakjes aan.
 • Laat velden die je al hebt ingevuld met rust.
 • Exporteer je profiel naar een bestand of verwijder alles met één klik.
-• Ook het logboek van ingevulde sollicitaties blijft op je computer, en het venster van de extensie meldt het als je al eerder bij een bedrijf solliciteerde; zet het uit, wis het of exporteer het als CSV.
+• Ook het logboek van ingevulde sollicitaties, met status, notities en functieomschrijving, blijft op je computer, en het venster van de extensie meldt het als je al eerder bij een bedrijf solliciteerde; zet het uit, wis het of exporteer het als CSV.
 
 WAAROM HET TOEGANG TOT ALLE WEBSITES VRAAGT
 Sollicitaties staan op duizenden sites van werkgevers en recruiters, vaak in ingesloten frames, dus LocalApply moet formulieren op elke pagina kunnen invullen. Het leest en vult een formulier alleen als jij dat vraagt. Het doet geen netwerkverzoeken.

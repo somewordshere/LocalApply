@@ -21,10 +21,11 @@ Stop retyping your CV into every job application. LocalApply saves your details 
 - Work history and education, one entry per block on forms that list several jobs or schools, and your highest education level
 - Several profiles, for example one per language or kind of job, chosen in the popup
 - CV and cover letter uploads, and cover letter text
+- Applications over several pages, step by step, and extra job or school blocks when the form has an Add button
 
 **Where it works**
 
-Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career pages, with site-specific handling for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply.
+Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career pages, with site-specific handling for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply. Workable, iCIMS, Taleo, softgarden, d.vinci, rexx, Umantis and JOIN are recognised too.
 
 **How to use it**
 
@@ -37,7 +38,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor and ordinary company career p
 - Never presses Submit or Next, and never ticks consent boxes.
 - Leaves fields you have already filled in alone.
 - Export your profile to a file, or delete everything with one click.
-- A log of the applications you filled stays on your computer too, and the popup tells you when you applied to a company before; turn it off, clear it or export it as CSV.
+- A log of the applications you filled, with status, notes and the job description, stays on your computer too, and the popup tells you when you applied to a company before; turn it off, clear it or export it as CSV.
 
 **Why it needs access to all websites**
 

@@ -21,10 +21,11 @@ Schluss damit, den Lebenslauf in jede Bewerbung abzutippen. LocalApply speichert
 - Berufserfahrung und Ausbildung, ein Eintrag pro Block in Formularen mit mehreren Stationen, und dein höchster Bildungsabschluss
 - Mehrere Profile, etwa eines pro Sprache oder Art von Stelle, im Pop-up auswählbar
 - Lebenslauf und Anschreiben als Datei sowie Anschreiben als Text
+- Bewerbungen über mehrere Seiten, Schritt für Schritt, und weitere Stellen- oder Ausbildungsblöcke, wenn das Formular einen Hinzufügen-Knopf hat
 
 **Wo es funktioniert**
 
-Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseiten von Unternehmen, dazu eigene Anpassungen für Workday, Lever, SmartRecruiters, SAP SuccessFactors und LinkedIn Easy Apply.
+Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseiten von Unternehmen, dazu eigene Anpassungen für Workday, Lever, SmartRecruiters, SAP SuccessFactors und LinkedIn Easy Apply. Workable, iCIMS, Taleo, softgarden, d.vinci, rexx, Umantis und JOIN werden ebenfalls erkannt.
 
 **So nutzt du es**
 
@@ -37,7 +38,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor und gewöhnliche Karriereseit
 - Klickt nie auf „Absenden" oder „Weiter" und setzt keine Einwilligungshäkchen.
 - Lässt Felder, die du schon ausgefüllt hast, unverändert.
 - Exportiere dein Profil als Datei oder lösche alles mit einem Klick.
-- Auch das Protokoll deiner ausgefüllten Bewerbungen bleibt auf deinem Rechner, und das Pop-up sagt dir, wenn du dich schon einmal bei einer Firma beworben hast; schalte es ab, leere es oder exportiere es als CSV.
+- Auch das Protokoll deiner ausgefüllten Bewerbungen, mit Stand, Notizen und Stellenbeschreibung, bleibt auf deinem Rechner, und das Pop-up sagt dir, wenn du dich schon einmal bei einer Firma beworben hast; schalte es ab, leere es oder exportiere es als CSV.
 
 **Warum Zugriff auf alle Websites nötig ist**
 

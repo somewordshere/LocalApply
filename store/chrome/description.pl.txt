@@ -14,6 +14,7 @@ CO WYPEŁNIA
 • CV i list motywacyjny jako plik oraz treść listu motywacyjnego
 • Odpowiedzi wpisane w nowe pytania: LocalApply proponuje ich zapisanie, żeby trafiły do kolejnego formularza
 • Dowolne pojedyncze pole, prawym przyciskiem, jedną z Twoich danych lub zapisanych odpowiedzi
+• Aplikacje na wielu stronach, krok po kroku, oraz dodatkowe bloki stanowisk lub szkół, gdy formularz ma przycisk Dodaj
 
 GDZIE DZIAŁA
 Działa na formularzach większości systemów rekrutacyjnych i na zwykłych stronach kariery firm, także w osadzonych ramkach. Niektóre z najpopularniejszych serwisów z ofertami pracy mają osobną obsługę. Etykiety formularzy są rozpoznawane po polsku, angielsku, niemiecku, francusku, hiszpańsku, włosku, niderlandzku i portugalsku.
@@ -29,7 +30,7 @@ BEZPIECZNY Z ZAŁOŻENIA
 • Nigdy nie klika „Wyślij” ani „Dalej” i nigdy nie zaznacza zgód.
 • Nie zmienia pól, które już wypełniłeś.
 • Wyeksportuj profil do pliku albo usuń wszystko jednym kliknięciem.
-• Dziennik wypełnionych aplikacji też zostaje na Twoim komputerze, a okienko rozszerzenia przypomina, gdy firma jest już w dzienniku; wyłącz go, wyczyść albo wyeksportuj jako CSV.
+• Dziennik wypełnionych aplikacji, ze statusem, notatkami i opisem stanowiska, też zostaje na Twoim komputerze, a okienko rozszerzenia przypomina, gdy firma jest już w dzienniku; wyłącz go, wyczyść albo wyeksportuj jako CSV.
 
 DLACZEGO POTRZEBUJE DOSTĘPU DO WSZYSTKICH STRON
 Formularze rekrutacyjne są na tysiącach stron pracodawców i serwisów rekrutacyjnych, często w osadzonych ramkach, więc LocalApply musi umieć wypełnić formularz na każdej stronie. Czyta i wypełnia formularz tylko wtedy, gdy go o to poprosisz. Nie wysyła żadnych zapytań sieciowych.

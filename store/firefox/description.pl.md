@@ -22,10 +22,11 @@ Koniec z przepisywaniem CV do każdej aplikacji. LocalApply zapisuje Twoje dane 
 - Doświadczenie i wykształcenie, jeden wpis na blok w formularzach z kilkoma miejscami pracy lub szkołami, oraz najwyższy poziom wykształcenia
 - Kilka profili, np. jeden na język lub rodzaj pracy, wybierany w oknie rozszerzenia
 - CV i list motywacyjny jako plik oraz treść listu motywacyjnego
+- Aplikacje na wielu stronach, krok po kroku, oraz dodatkowe bloki stanowisk lub szkół, gdy formularz ma przycisk Dodaj
 
 **Gdzie działa**
 
-Greenhouse, Ashby, Personio, Recruitee, Teamtailor i zwykłe strony kariery firm, a do tego osobna obsługa Workday, Lever, SmartRecruiters, SAP SuccessFactors i LinkedIn Easy Apply.
+Greenhouse, Ashby, Personio, Recruitee, Teamtailor i zwykłe strony kariery firm, a do tego osobna obsługa Workday, Lever, SmartRecruiters, SAP SuccessFactors i LinkedIn Easy Apply. Rozpoznaje też Workable, iCIMS, Taleo, softgarden, d.vinci, rexx, Umantis i JOIN.
 
 **Jak z niego korzystać**
 
@@ -38,7 +39,7 @@ Greenhouse, Ashby, Personio, Recruitee, Teamtailor i zwykłe strony kariery firm
 - Nigdy nie klika „Wyślij” ani „Dalej” i nigdy nie zaznacza zgód.
 - Nie zmienia pól, które już wypełniłeś.
 - Wyeksportuj profil do pliku albo usuń wszystko jednym kliknięciem.
-- Dziennik wypełnionych aplikacji też zostaje na Twoim komputerze, a okienko rozszerzenia przypomina, gdy firma jest już w dzienniku; wyłącz go, wyczyść albo wyeksportuj jako CSV.
+- Dziennik wypełnionych aplikacji, ze statusem, notatkami i opisem stanowiska, też zostaje na Twoim komputerze, a okienko rozszerzenia przypomina, gdy firma jest już w dzienniku; wyłącz go, wyczyść albo wyeksportuj jako CSV.
 
 **Dlaczego potrzebuje dostępu do wszystkich stron**
 
