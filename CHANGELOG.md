@@ -6,6 +6,8 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-10-28
+
 ### Added
 
 - Learns your answers: after a fill, an answer you type into a question LocalApply couldn't answer is offered for saving in a small card on the page. Review it, edit or untick it, and Save; next time the question is filled for you. The employer and job title in the answer become {company} and {position}. A changed answer to a saved question replaces the old one. Nothing is kept unless you press Save, and password, payment and identity questions are never offered.

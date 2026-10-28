@@ -2,6 +2,13 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.9.0 · October 28, 2026
+
+- **LocalApply learns your answers.** After a fill, type your answer to a question it couldn't answer, such as "Why do you want to join us?", and a small card in the corner offers to save it. Check it, change it or leave it out, then press Save; the next form that asks gets it. The company name and job title in your answer are swapped for {company} and {position}, so it fits the next employer. Nothing is kept unless you press Save.
+- **Fill any single field:** right-click a form field and choose **Fill this field with** to pick one of your details or saved answers.
+- **Applied there before?** When you open LocalApply on a job page, it tells you if your application log already has that company, with the dates and job titles.
+- **A welcome page** opens when you install LocalApply and explains how it works in three steps. Find it again on the profile page under **How LocalApply works**.
+
 ## 0.8.2 · October 26, 2026
 
 - A new icon: a small filled-in form with a check, in your toolbar, the popup, the profile page and the store pages. It still follows the colours you choose on the profile page. Nothing else changes.
