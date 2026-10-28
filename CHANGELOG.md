@@ -6,6 +6,12 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+## [0.10.2] - 2026-10-28
+
+### Changed
+
+- No changes to the extension itself; the version is raised for a new store upload. The Chrome Web Store justification for the `contextMenus` permission now also covers "Save what's in this field as an answer".
+
 ## [0.10.1] - 2026-10-28
 
 ### Changed

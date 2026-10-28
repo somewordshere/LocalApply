@@ -29,7 +29,7 @@ The user's CV and cover letter files are stored locally as data URLs and can exc
 **contextMenus**
 
 ```
-Adds "Fill this field with" to the right-click menu of form fields, listing the user's saved profile details and answers so one field can be filled by hand when automatic matching missed it. The menu is built from data stored on the device; nothing is sent anywhere.
+Adds "Fill this field with" to the right-click menu of form fields, listing the user's saved profile details and answers so the user can fill one field by hand when automatic filling missed it, and "Save what's in this field as an answer" to keep the user's reply for the next form. The menu is built from data stored on the device and acts only on the field the user right-clicked; nothing is sent anywhere.
 ```
 
 **Host permission** (from the content script that runs on all sites)

@@ -2,6 +2,10 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.10.2 · October 28, 2026
+
+- No changes you can see: this version has the same features as 0.10.1.
+
 ## 0.10.1 · October 28, 2026
 
 - The practice form on the welcome page now shows a fill with a made-up applicant, typed in box by box, so you can watch what LocalApply does before you have set up your profile. Your own details are never used there.
