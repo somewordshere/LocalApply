@@ -4,9 +4,9 @@ LocalApply is a Chrome and Firefox extension that fills job application forms fr
 
 Everything stays in the browser: no account, no server, no AI service, no network requests.
 
-**Current version:** 0.9.1 · **Browsers:** Chrome, Edge, Brave and Firefox · **Languages:** English, German, French, Spanish, Italian, Dutch, Portuguese, Polish · **License:** MIT
+**Current version:** 0.10.0 · **Browsers:** Chrome, Edge, Brave and Firefox · **Languages:** English, German, French, Spanish, Italian, Dutch, Portuguese, Polish · **License:** MIT
 
-[![Verify](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml/badge.svg)](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml) [![Chrome Web Store](https://img.shields.io/badge/Chrome-Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/) [![Chrome build](https://img.shields.io/badge/Chrome-Build-4285F4?logo=googlechrome&logoColor=white)](releases/v0.9.1/localapply-0.9.1-chrome.zip) [![Firefox build](https://img.shields.io/badge/Firefox-Build-FF7139?logo=firefoxbrowser&logoColor=white)](releases/v0.9.1/localapply-0.9.1-firefox.zip)
+[![Verify](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml/badge.svg)](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml) [![Chrome Web Store](https://img.shields.io/badge/Chrome-Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/) [![Chrome build](https://img.shields.io/badge/Chrome-Build-4285F4?logo=googlechrome&logoColor=white)](releases/v0.10.0/localapply-0.10.0-chrome.zip) [![Firefox build](https://img.shields.io/badge/Firefox-Build-FF7139?logo=firefoxbrowser&logoColor=white)](releases/v0.10.0/localapply-0.10.0-firefox.zip)
 
 **[What’s new →](WHATS-NEW.md)**
 
@@ -39,7 +39,7 @@ It works on ordinary company career pages and on Greenhouse, Ashby, Personio, Re
 ## Installation
 
 - **Store installation:** install LocalApply from the [Chrome Web Store](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) (also for Edge and Brave) or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/).
-- **Manual installation:** download the latest [Chrome build](releases/v0.9.1/localapply-0.9.1-chrome.zip) or [Firefox build](releases/v0.9.1/localapply-0.9.1-firefox.zip).
+- **Manual installation:** download the latest [Chrome build](releases/v0.10.0/localapply-0.10.0-chrome.zip) or [Firefox build](releases/v0.10.0/localapply-0.10.0-firefox.zip).
   - Chrome, Edge, Brave: unzip it, open `chrome://extensions`, turn on Developer mode, choose **Load unpacked** and pick the unzipped folder.
   - Firefox: open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on** and pick the zip. It is removed when Firefox restarts; for a permanent install use the store version, or Firefox Developer Edition with `xpinstall.signatures.required` set to `false`.
 
@@ -59,24 +59,25 @@ Your profile, documents and saved answers are stored in your browser and never l
 
 ## 📦 Recent releases
 
-| Version | Highlights                                                                                                     | Download                                                                                                        |
-| ------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| 0.9.1   | Neater dropdowns and phone boxes, a crisper welcome title                                                      | [Chrome](releases/v0.9.1/localapply-0.9.1-chrome.zip) · [Firefox](releases/v0.9.1/localapply-0.9.1-firefox.zip) |
-| 0.9.0   | Learns answers you type, right-click to fill a field, a note when you applied before, a welcome page           | [Chrome](releases/v0.9.0/localapply-0.9.0-chrome.zip) · [Firefox](releases/v0.9.0/localapply-0.9.0-firefox.zip) |
-| 0.8.2   | New icon: a filled-in form                                                                                     | [Chrome](releases/v0.8.2/localapply-0.8.2-chrome.zip) · [Firefox](releases/v0.8.2/localapply-0.8.2-firefox.zip) |
-| 0.8.1   | Store name and summary lead with free, no account, no subscription                                             | [Chrome](releases/v0.8.1/localapply-0.8.1-chrome.zip) · [Firefox](releases/v0.8.1/localapply-0.8.1-firefox.zip) |
-| 0.8.0   | Work history and education lists, several profiles                                                             | [Chrome](releases/v0.8.0/localapply-0.8.0-chrome.zip) · [Firefox](releases/v0.8.0/localapply-0.8.0-firefox.zip) |
-| 0.7.0   | Spoken languages, driving licence, travel and salary range, {company}/{position} placeholders, application log | [Chrome](releases/v0.7.0/localapply-0.7.0-chrome.zip) · [Firefox](releases/v0.7.0/localapply-0.7.0-firefox.zip) |
-| 0.6.2   | Profile page opens on install, palette-coloured icon, store pages in eight languages                           | [Chrome](releases/v0.6.2/localapply-0.6.2-chrome.zip) · [Firefox](releases/v0.6.2/localapply-0.6.2-firefox.zip) |
-| 0.6.1   | Theme switch: System, Light or Dark                                                                            | [Chrome](releases/v0.6.1/localapply-0.6.1-chrome.zip) · [Firefox](releases/v0.6.1/localapply-0.6.1-firefox.zip) |
-| 0.6.0   | Phone in three linked boxes, sexual orientation, and a centered profile page                                   | [Chrome](releases/v0.6.0/localapply-0.6.0-chrome.zip) · [Firefox](releases/v0.6.0/localapply-0.6.0-firefox.zip) |
-| 0.5.0   | Highest education level, and five colour palettes with dark versions                                           | [Chrome](releases/v0.5.0/localapply-0.5.0-chrome.zip) · [Firefox](releases/v0.5.0/localapply-0.5.0-firefox.zip) |
-| 0.4.1   | Security hardening: the interface can no longer write raw HTML into a page                                     | [Chrome](releases/v0.4.1/localapply-0.4.1-chrome.zip) · [Firefox](releases/v0.4.1/localapply-0.4.1-firefox.zip) |
-| 0.4.0   | The interface in eight languages, a new paper-and-ink look, and a profile page with a section index            | [Chrome](releases/v0.4.0/localapply-0.4.0-chrome.zip) · [Firefox](releases/v0.4.0/localapply-0.4.0-firefox.zip) |
-| 0.3.0   | Enter your phone number as one full number or as code plus number                                              | [Chrome](releases/v0.3.0/localapply-0.3.0-chrome.zip) · [Firefox](releases/v0.3.0/localapply-0.3.0-firefox.zip) |
-| 0.2.1   | Firefox build that matches the addons.mozilla.org listing                                                      | [Chrome](releases/v0.2.1/localapply-0.2.1-chrome.zip) · [Firefox](releases/v0.2.1/localapply-0.2.1-firefox.zip) |
-| 0.2.0   | Undo, outlines that don't rely on colour, and a dozen filling fixes                                            | [Chrome](releases/v0.2.0/localapply-0.2.0-chrome.zip) · [Firefox](releases/v0.2.0/localapply-0.2.0-firefox.zip) |
-| 0.1.0   | First release: one-click filling in eight languages, saved answers and CV upload                               | [Chrome](releases/v0.1.0/localapply-0.1.0-chrome.zip) · [Firefox](releases/v0.1.0/localapply-0.1.0-firefox.zip) |
+| Version | Highlights                                                                                                     | Download                                                                                                            |
+| ------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| 0.10.0  | Fills multi-page applications step by step, status and notes in the log, adds job blocks, more job sites       | [Chrome](releases/v0.10.0/localapply-0.10.0-chrome.zip) · [Firefox](releases/v0.10.0/localapply-0.10.0-firefox.zip) |
+| 0.9.1   | Neater dropdowns and phone boxes, a crisper welcome title                                                      | [Chrome](releases/v0.9.1/localapply-0.9.1-chrome.zip) · [Firefox](releases/v0.9.1/localapply-0.9.1-firefox.zip)     |
+| 0.9.0   | Learns answers you type, right-click to fill a field, a note when you applied before, a welcome page           | [Chrome](releases/v0.9.0/localapply-0.9.0-chrome.zip) · [Firefox](releases/v0.9.0/localapply-0.9.0-firefox.zip)     |
+| 0.8.2   | New icon: a filled-in form                                                                                     | [Chrome](releases/v0.8.2/localapply-0.8.2-chrome.zip) · [Firefox](releases/v0.8.2/localapply-0.8.2-firefox.zip)     |
+| 0.8.1   | Store name and summary lead with free, no account, no subscription                                             | [Chrome](releases/v0.8.1/localapply-0.8.1-chrome.zip) · [Firefox](releases/v0.8.1/localapply-0.8.1-firefox.zip)     |
+| 0.8.0   | Work history and education lists, several profiles                                                             | [Chrome](releases/v0.8.0/localapply-0.8.0-chrome.zip) · [Firefox](releases/v0.8.0/localapply-0.8.0-firefox.zip)     |
+| 0.7.0   | Spoken languages, driving licence, travel and salary range, {company}/{position} placeholders, application log | [Chrome](releases/v0.7.0/localapply-0.7.0-chrome.zip) · [Firefox](releases/v0.7.0/localapply-0.7.0-firefox.zip)     |
+| 0.6.2   | Profile page opens on install, palette-coloured icon, store pages in eight languages                           | [Chrome](releases/v0.6.2/localapply-0.6.2-chrome.zip) · [Firefox](releases/v0.6.2/localapply-0.6.2-firefox.zip)     |
+| 0.6.1   | Theme switch: System, Light or Dark                                                                            | [Chrome](releases/v0.6.1/localapply-0.6.1-chrome.zip) · [Firefox](releases/v0.6.1/localapply-0.6.1-firefox.zip)     |
+| 0.6.0   | Phone in three linked boxes, sexual orientation, and a centered profile page                                   | [Chrome](releases/v0.6.0/localapply-0.6.0-chrome.zip) · [Firefox](releases/v0.6.0/localapply-0.6.0-firefox.zip)     |
+| 0.5.0   | Highest education level, and five colour palettes with dark versions                                           | [Chrome](releases/v0.5.0/localapply-0.5.0-chrome.zip) · [Firefox](releases/v0.5.0/localapply-0.5.0-firefox.zip)     |
+| 0.4.1   | Security hardening: the interface can no longer write raw HTML into a page                                     | [Chrome](releases/v0.4.1/localapply-0.4.1-chrome.zip) · [Firefox](releases/v0.4.1/localapply-0.4.1-firefox.zip)     |
+| 0.4.0   | The interface in eight languages, a new paper-and-ink look, and a profile page with a section index            | [Chrome](releases/v0.4.0/localapply-0.4.0-chrome.zip) · [Firefox](releases/v0.4.0/localapply-0.4.0-firefox.zip)     |
+| 0.3.0   | Enter your phone number as one full number or as code plus number                                              | [Chrome](releases/v0.3.0/localapply-0.3.0-chrome.zip) · [Firefox](releases/v0.3.0/localapply-0.3.0-firefox.zip)     |
+| 0.2.1   | Firefox build that matches the addons.mozilla.org listing                                                      | [Chrome](releases/v0.2.1/localapply-0.2.1-chrome.zip) · [Firefox](releases/v0.2.1/localapply-0.2.1-firefox.zip)     |
+| 0.2.0   | Undo, outlines that don't rely on colour, and a dozen filling fixes                                            | [Chrome](releases/v0.2.0/localapply-0.2.0-chrome.zip) · [Firefox](releases/v0.2.0/localapply-0.2.0-firefox.zip)     |
+| 0.1.0   | First release: one-click filling in eight languages, saved answers and CV upload                               | [Chrome](releases/v0.1.0/localapply-0.1.0-chrome.zip) · [Firefox](releases/v0.1.0/localapply-0.1.0-firefox.zip)     |
 
 See [What’s new](WHATS-NEW.md) for every release, or the [changelog](CHANGELOG.md) for the technical history.
 

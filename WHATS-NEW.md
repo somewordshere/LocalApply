@@ -2,6 +2,16 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.10.0 · October 28, 2026
+
+- **Applications over several pages:** after you fill the first step, LocalApply fills the next steps of the same application as they appear, on that site. Turn it off in the popup under "Keep filling the next steps". It still never presses Next or Submit.
+- **Your log is a small tracker:** give each application a status (applied, interview, offer, rejected) and your own notes, and read the job description again later, kept from the posting. The popup shows the status when you open a company you applied to before.
+- **More job blocks:** when a form has fewer job or school blocks than your profile, the popup offers to add them with the form's own Add button and fill them.
+- **Why wasn't something filled?** The popup can now show every field and what happened to it, and save a copy of the form, without what you typed, to attach to a bug report.
+- **Answers from dropdowns and choices** are learned too, and you can right-click a field and choose **Save what's in this field as an answer**. Your saved answers can be searched and show how often they were used.
+- **Try it on the welcome page:** a practice form shows what a fill does before you use a real application.
+- Workable, iCIMS, Taleo, softgarden, d.vinci, rexx, Umantis and JOIN are now recognised.
+
 ## 0.9.1 · October 28, 2026
 
 - Dropdowns on the profile page, the popup and the welcome page have a new arrow that matches the other boxes and your colour theme.

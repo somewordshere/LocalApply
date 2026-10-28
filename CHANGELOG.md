@@ -6,6 +6,8 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-10-28
+
 ### Added
 
 - Multi-step applications are filled step by step: after a fill, the following steps of the same application on the same site are filled as they appear, whether the site swaps the form in place (Workday, SuccessFactors) or loads a new page. Turn it off in the popup ("Keep filling the next steps"). It still never presses Next or Submit, and later steps don't add entries to the application log.
