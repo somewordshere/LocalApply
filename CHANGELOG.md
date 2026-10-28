@@ -6,6 +6,8 @@ Add entries under **Unreleased** as you work. `npm run release` requires a secti
 
 ## [Unreleased]
 
+## [0.9.1] - 2026-10-28
+
 ### Fixed
 
 - Dropdowns draw their own arrow, in the theme's colours, instead of the system one; the open list follows the theme where the browser allows.

@@ -4,9 +4,9 @@ LocalApply is a Chrome and Firefox extension that fills job application forms fr
 
 Everything stays in the browser: no account, no server, no AI service, no network requests.
 
-**Current version:** 0.9.0 · **Browsers:** Chrome, Edge, Brave and Firefox · **Languages:** English, German, French, Spanish, Italian, Dutch, Portuguese, Polish · **License:** MIT
+**Current version:** 0.9.1 · **Browsers:** Chrome, Edge, Brave and Firefox · **Languages:** English, German, French, Spanish, Italian, Dutch, Portuguese, Polish · **License:** MIT
 
-[![Verify](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml/badge.svg)](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml) [![Chrome Web Store](https://img.shields.io/badge/Chrome-Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/) [![Chrome build](https://img.shields.io/badge/Chrome-Build-4285F4?logo=googlechrome&logoColor=white)](releases/v0.9.0/localapply-0.9.0-chrome.zip) [![Firefox build](https://img.shields.io/badge/Firefox-Build-FF7139?logo=firefoxbrowser&logoColor=white)](releases/v0.9.0/localapply-0.9.0-firefox.zip)
+[![Verify](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml/badge.svg)](https://github.com/somewordshere/LocalApply/actions/workflows/verify.yml) [![Chrome Web Store](https://img.shields.io/badge/Chrome-Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/) [![Chrome build](https://img.shields.io/badge/Chrome-Build-4285F4?logo=googlechrome&logoColor=white)](releases/v0.9.1/localapply-0.9.1-chrome.zip) [![Firefox build](https://img.shields.io/badge/Firefox-Build-FF7139?logo=firefoxbrowser&logoColor=white)](releases/v0.9.1/localapply-0.9.1-firefox.zip)
 
 **[What’s new →](WHATS-NEW.md)**
 
@@ -38,7 +38,7 @@ It works on ordinary company career pages and on Greenhouse, Ashby, Personio, Re
 ## Installation
 
 - **Store installation:** install LocalApply from the [Chrome Web Store](https://chromewebstore.google.com/detail/localapply-%E2%80%93-private-job/codbdjbapnhnfglckfejehkpegjilfpg) (also for Edge and Brave) or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/localapply-job-autofill/).
-- **Manual installation:** download the latest [Chrome build](releases/v0.9.0/localapply-0.9.0-chrome.zip) or [Firefox build](releases/v0.9.0/localapply-0.9.0-firefox.zip).
+- **Manual installation:** download the latest [Chrome build](releases/v0.9.1/localapply-0.9.1-chrome.zip) or [Firefox build](releases/v0.9.1/localapply-0.9.1-firefox.zip).
   - Chrome, Edge, Brave: unzip it, open `chrome://extensions`, turn on Developer mode, choose **Load unpacked** and pick the unzipped folder.
   - Firefox: open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on** and pick the zip. It is removed when Firefox restarts; for a permanent install use the store version, or Firefox Developer Edition with `xpinstall.signatures.required` set to `false`.
 
@@ -60,6 +60,7 @@ Your profile, documents and saved answers are stored in your browser and never l
 
 | Version | Highlights                                                                                                     | Download                                                                                                        |
 | ------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| 0.9.1   | Neater dropdowns and phone boxes, a crisper welcome title                                                      | [Chrome](releases/v0.9.1/localapply-0.9.1-chrome.zip) · [Firefox](releases/v0.9.1/localapply-0.9.1-firefox.zip) |
 | 0.9.0   | Learns answers you type, right-click to fill a field, a note when you applied before, a welcome page           | [Chrome](releases/v0.9.0/localapply-0.9.0-chrome.zip) · [Firefox](releases/v0.9.0/localapply-0.9.0-firefox.zip) |
 | 0.8.2   | New icon: a filled-in form                                                                                     | [Chrome](releases/v0.8.2/localapply-0.8.2-chrome.zip) · [Firefox](releases/v0.8.2/localapply-0.8.2-firefox.zip) |
 | 0.8.1   | Store name and summary lead with free, no account, no subscription                                             | [Chrome](releases/v0.8.1/localapply-0.8.1-chrome.zip) · [Firefox](releases/v0.8.1/localapply-0.8.1-firefox.zip) |

@@ -2,6 +2,12 @@
 
 Changes you can see, newest first. The technical history for developers is in [CHANGELOG.md](CHANGELOG.md).
 
+## 0.9.1 · October 28, 2026
+
+- Dropdowns on the profile page, the popup and the welcome page have a new arrow that matches the other boxes and your colour theme.
+- The phone boxes on the profile page line up with the fields above and below them.
+- The welcome page title looks crisp again in dark mode.
+
 ## 0.9.0 · October 28, 2026
 
 - **LocalApply learns your answers.** After a fill, type your answer to a question it couldn't answer, such as "Why do you want to join us?", and a small card in the corner offers to save it. Check it, change it or leave it out, then press Save; the next form that asks gets it. The company name and job title in your answer are swapped for {company} and {position}, so it fits the next employer. Nothing is kept unless you press Save.
