@@ -330,15 +330,17 @@ export const en = {
   'answers.unused': 'Not used yet',
   'answers.noMatch': 'No answer matches.',
   'practice.title': 'Try it here',
-  'practice.text': 'A practice form, filled from your profile. Nothing is sent anywhere.',
+  'practice.text':
+    'Watch LocalApply fill a practice form for a made-up applicant. Nothing is sent anywhere, and your own profile isn’t used.',
   'practice.posting': 'Practice posting: {position} at {company}',
   'practice.hear': 'How did you hear about us?',
   'practice.choose': 'Please choose',
   'practice.friend': 'A friend',
   'practice.board': 'A job board',
   'practice.why': 'Why do you want to join {company}?',
+  'practice.sampleWhy':
+    'I enjoy finding problems before customers do, and I would like to bring that to the {position} role at {company}.',
   'practice.fill': 'Fill this practice form',
   'practice.reset': 'Clear',
-  'practice.empty': 'Your profile is empty. Set it up first, then come back.',
   'welcome.steps': 'Follows applications over several pages: each next step is filled as it opens.',
 } satisfies Record<string, Message>;

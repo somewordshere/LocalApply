@@ -377,15 +377,17 @@ export const pl: Translation = {
   'answers.unused': 'Jeszcze nieużyta',
   'answers.noMatch': 'Żadna odpowiedź nie pasuje.',
   'practice.title': 'Wypróbuj tutaj',
-  'practice.text': 'Formularz ćwiczeniowy, wypełniany z Twojego profilu. Nic nie jest nigdzie wysyłane.',
+  'practice.text':
+    'Zobacz, jak LocalApply wypełnia formularz ćwiczeniowy za zmyśloną osobę. Nic nie jest wysyłane, a Twój profil nie jest używany.',
   'practice.posting': 'Ogłoszenie ćwiczeniowe: {position} w {company}',
   'practice.hear': 'Skąd wiesz o naszej ofercie?',
   'practice.choose': 'Wybierz',
   'practice.friend': 'Od znajomych',
   'practice.board': 'Z portalu z ogłoszeniami',
   'practice.why': 'Dlaczego chcesz pracować w {company}?',
+  'practice.sampleWhy':
+    'Lubię znajdować problemy, zanim zrobią to klienci, i chcę wnieść to na stanowisko {position} w {company}.',
   'practice.fill': 'Wypełnij formularz ćwiczeniowy',
   'practice.reset': 'Wyczyść',
-  'practice.empty': 'Twój profil jest pusty. Najpierw go uzupełnij, a potem wróć.',
   'welcome.steps': 'Prowadzi przez aplikacje na wielu stronach: każdy kolejny krok jest wypełniany, gdy się otworzy.',
 };

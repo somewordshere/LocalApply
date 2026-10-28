@@ -327,15 +327,17 @@ export const pt: Translation = {
   'answers.unused': 'Ainda não usada',
   'answers.noMatch': 'Nenhuma resposta corresponde.',
   'practice.title': 'Experimente aqui',
-  'practice.text': 'Um formulário de treino, preenchido a partir do seu perfil. Nada é enviado para lado nenhum.',
+  'practice.text':
+    'Veja o LocalApply preencher um formulário de treino para uma pessoa inventada. Nada é enviado e o seu próprio perfil não é usado.',
   'practice.posting': 'Vaga de treino: {position} na {company}',
   'practice.hear': 'Como teve conhecimento de nós?',
   'practice.choose': 'Escolha uma opção',
   'practice.friend': 'Por um conhecido',
   'practice.board': 'Por um site de emprego',
   'practice.why': 'Porque quer trabalhar na {company}?',
+  'practice.sampleWhy':
+    'Gosto de encontrar problemas antes dos clientes e gostaria de levar isso para a vaga de {position} na {company}.',
   'practice.fill': 'Preencher este formulário de treino',
   'practice.reset': 'Limpar',
-  'practice.empty': 'O seu perfil está vazio. Crie-o primeiro e depois volte.',
   'welcome.steps': 'Acompanha candidaturas de várias páginas: cada passo seguinte é preenchido quando abre.',
 };

@@ -589,16 +589,22 @@ try {
     await page.close();
   });
 
-  await step('the welcome page has a practice form that fills from the profile', async () => {
+  await step('the welcome page types a made-up applicant into its practice form', async () => {
     const welcome = await context.newPage();
     await welcome.goto(`chrome-extension://${extensionId}/welcome.html`);
-    await welcome.getByRole('button', { name: 'Fill this practice form' }).click();
     const form = welcome.getByRole('form', { name: 'Try it here' });
-    await welcome.waitForFunction(() => document.querySelector('[name="first_name"]')?.value === 'Max');
-    assert.equal(await form.locator('[name="email"]').inputValue(), 'max@example.com');
+    await welcome.getByRole('button', { name: 'Fill this practice form' }).click();
+    // Typed in field by field: part way through, the first name is there and the last box is still empty.
+    await welcome.waitForFunction(() => document.querySelector('[name="firstName"]')?.value === 'Sam');
+    assert.equal(await form.locator('[name="motivation"]').inputValue(), '');
+    await welcome.getByRole('status').filter({ hasText: 'Filled 8 fields' }).waitFor();
+    assert.equal(await form.locator('[name="email"]').inputValue(), 'sam.taylor@example.com');
+    assert.equal(await form.locator('[name="source"]').inputValue(), 'LinkedIn');
+    assert.match(await form.locator('[name="motivation"]').inputValue(), /QA Engineer role at Northwind Labs/);
+    // The demonstration never touches the saved profile.
+    assert.equal((await storedProfile()).firstName, 'Max');
     await welcome.getByRole('button', { name: 'Clear' }).click();
-    assert.equal(await form.locator('[name="first_name"]').inputValue(), '');
-    // The language box above the form is left alone.
+    assert.equal(await form.locator('[name="firstName"]').inputValue(), '');
     assert.equal(await welcome.getByRole('combobox', { name: 'Language' }).inputValue(), 'en');
     await welcome.close();
   });

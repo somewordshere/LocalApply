@@ -326,15 +326,17 @@ export const nl: Translation = {
   'answers.unused': 'Nog niet gebruikt',
   'answers.noMatch': 'Geen antwoord komt overeen.',
   'practice.title': 'Probeer het hier',
-  'practice.text': 'Een oefenformulier, ingevuld vanuit je profiel. Er wordt niets verstuurd.',
+  'practice.text':
+    'Kijk hoe LocalApply een oefenformulier invult voor een verzonnen sollicitant. Er wordt niets verstuurd en je eigen profiel wordt niet gebruikt.',
   'practice.posting': 'Oefenvacature: {position} bij {company}',
   'practice.hear': 'Hoe heb je ons gevonden?',
   'practice.choose': 'Maak een keuze',
   'practice.friend': 'Via een kennis',
   'practice.board': 'Via een vacaturesite',
   'practice.why': 'Waarom wil je bij {company} werken?',
+  'practice.sampleWhy':
+    'Ik vind problemen graag voordat klanten ze vinden, en dat wil ik inbrengen in de functie van {position} bij {company}.',
   'practice.fill': 'Oefenformulier invullen',
   'practice.reset': 'Leegmaken',
-  'practice.empty': 'Je profiel is leeg. Vul het eerst in en kom dan terug.',
   'welcome.steps': 'Volgt sollicitaties over meerdere pagina’s: elke volgende stap wordt ingevuld zodra die opent.',
 };

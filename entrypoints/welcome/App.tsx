@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { browser } from 'wxt/browser';
-import { fillPage, undoLastFill } from '@/src/engine';
-import { loadProfile } from '@/src/profile/store';
 import { useI18n } from '@/src/ui/I18nProvider';
 import { LANGUAGES, isLang, type MessageKey } from '@/src/ui/i18n';
 import { currentPalette, iconPath } from '@/src/ui/palette';
@@ -78,45 +76,128 @@ function OutlineSample() {
   );
 }
 
-/** The made-up posting the practice form belongs to, so {company} and {position} have something to become. */
+/** The made-up posting the practice form belongs to. */
 const PRACTICE_JOB = { company: 'Northwind Labs', position: 'QA Engineer' };
 
-function PracticeField({ label, children, wide }: { label: string; children: ReactNode; wide?: boolean }) {
+type PracticeKey = 'firstName' | 'lastName' | 'email' | 'phone' | 'city' | 'linkedin' | 'source' | 'motivation';
+
+/** A made-up applicant, so the demonstration never shows anyone's real details. */
+const SAMPLE: Record<Exclude<PracticeKey, 'motivation' | 'source'>, string> = {
+  firstName: 'Sam',
+  lastName: 'Taylor',
+  email: 'sam.taylor@example.com',
+  phone: '+44 20 7946 0123',
+  city: 'Manchester',
+  linkedin: 'https://www.linkedin.com/in/sam-taylor-example',
+};
+/** The order the demonstration fills in, top to bottom. */
+const ORDER: PracticeKey[] = ['firstName', 'lastName', 'email', 'phone', 'city', 'linkedin', 'source', 'motivation'];
+const EMPTY_PRACTICE = Object.fromEntries(ORDER.map((key) => [key, ''])) as Record<PracticeKey, string>;
+
+/** Typing speed: quick enough to watch, and no field takes longer than about a second. */
+const KEY_MS = 28;
+const FIELD_MAX_MS = 1100;
+const BETWEEN_FIELDS_MS = 160;
+const SOURCE_OPTION = 'LinkedIn';
+
+const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
+function PracticeField({
+  label,
+  done,
+  wide,
+  children,
+}: {
+  label: string;
+  done: boolean;
+  wide?: boolean;
+  children: ReactNode;
+}) {
   return (
-    <label className={wide ? 'sm:col-span-2' : ''}>
+    // The same solid green outline a real fill gives filled fields (src/engine/report.ts).
+    <label className={`block ${wide ? 'sm:col-span-2' : ''}`}>
       <span className="mb-1.5 block text-sm font-medium text-ink">{label}</span>
-      {children}
+      <span
+        className={`block rounded-md transition-[outline-color] duration-300 motion-reduce:transition-none ${
+          done ? 'outline-2 outline-offset-1 outline-[#16a34a]' : 'outline-2 outline-offset-1 outline-transparent'
+        }`}
+      >
+        {children}
+      </span>
     </label>
   );
 }
 
 /**
- * A small application form on the welcome page, filled by the real engine from the saved profile: a safe place
- * to see what a fill does before trying it on a real application.
+ * A small application form on the welcome page that fills itself with a made-up applicant, typed in field by
+ * field, to show what a fill looks like before trying a real application. Nothing is read from or saved to the
+ * profile, and nothing leaves the page.
  */
 function PracticeForm() {
   const { t } = useI18n();
-  const form = useRef<HTMLFormElement>(null);
+  const [values, setValues] = useState(EMPTY_PRACTICE);
+  const [done, setDone] = useState<Set<PracticeKey>>(new Set());
+  const [running, setRunning] = useState(false);
   const [note, setNote] = useState('');
-  const [filled, setFilled] = useState(false);
+  const form = useRef<HTMLFormElement>(null);
+  // Each run has a number; Clear or a new run makes the old one stop where it is.
+  const run = useRef(0);
+
+  useEffect(() => () => void run.current++, []);
+
+  const sample = (key: PracticeKey) =>
+    key === 'source' ? SOURCE_OPTION : key === 'motivation' ? t('practice.sampleWhy', PRACTICE_JOB) : SAMPLE[key];
 
   const fill = async () => {
-    const profile = await loadProfile();
-    if (!profile.firstName && !profile.lastName && !profile.email) return setNote(t('practice.empty'));
-    const result = await fillPage(document, profile, {
-      root: form.current!,
-      job: PRACTICE_JOB,
-      location: { hostname: 'localapply.practice', pathname: '/' },
-    });
-    setNote(t('notice.filled', { n: result.filled.length }));
-    setFilled(true);
+    const id = ++run.current;
+    const stopped = () => run.current !== id;
+    setValues(EMPTY_PRACTICE);
+    setDone(new Set());
+    setNote('');
+    setRunning(true);
+    const instant = reducedMotion();
+    for (const key of ORDER) {
+      const text = sample(key);
+      const el = form.current?.elements.namedItem(key) as HTMLElement | null;
+      el?.focus({ preventScroll: true });
+      el?.scrollIntoView({ block: 'nearest', behavior: instant ? 'auto' : 'smooth' });
+      if (instant || key === 'source') {
+        // A dropdown is picked, not typed.
+        if (!instant) await pause(BETWEEN_FIELDS_MS * 2);
+        setValues((v) => ({ ...v, [key]: text }));
+      } else {
+        const step = Math.max(1, Math.ceil(text.length / (FIELD_MAX_MS / KEY_MS)));
+        for (let end = step; end < text.length + step; end += step) {
+          if (stopped()) return;
+          const shown = text.slice(0, end);
+          setValues((v) => ({ ...v, [key]: shown }));
+          await pause(KEY_MS);
+        }
+      }
+      if (stopped()) return;
+      setDone((d) => new Set(d).add(key));
+      if (!instant) await pause(BETWEEN_FIELDS_MS);
+    }
+    (document.activeElement as HTMLElement | null)?.blur();
+    setRunning(false);
+    setNote(t('notice.filled', { n: ORDER.length }));
   };
 
   const reset = () => {
-    undoLastFill(document);
-    setFilled(false);
+    run.current++;
+    setValues(EMPTY_PRACTICE);
+    setDone(new Set());
+    setRunning(false);
     setNote('');
   };
+
+  const bind = (key: PracticeKey) => ({
+    name: key,
+    value: values[key],
+    // The applicant can still type into it; the demonstration only fills it.
+    onChange: (e: { target: { value: string } }) => setValues((v) => ({ ...v, [key]: e.target.value })),
+  });
 
   return (
     <section aria-labelledby="practice" className="mt-12">
@@ -130,44 +211,42 @@ function PracticeForm() {
         onSubmit={(e) => e.preventDefault()}
         className="mt-4 grid gap-4 rounded-xl border border-line bg-sheet p-5 sm:grid-cols-2 md:p-8"
       >
-        <p className="text-sm text-ink-faint sm:col-span-2">
-          {t('practice.posting', { position: PRACTICE_JOB.position, company: PRACTICE_JOB.company })}
-        </p>
-        <PracticeField label={t('field.firstName')}>
-          <input className="field" name="first_name" />
+        <p className="text-sm text-ink-faint sm:col-span-2">{t('practice.posting', PRACTICE_JOB)}</p>
+        <PracticeField label={t('field.firstName')} done={done.has('firstName')}>
+          <input className="field" {...bind('firstName')} />
         </PracticeField>
-        <PracticeField label={t('field.lastName')}>
-          <input className="field" name="last_name" />
+        <PracticeField label={t('field.lastName')} done={done.has('lastName')}>
+          <input className="field" {...bind('lastName')} />
         </PracticeField>
-        <PracticeField label={t('field.email')}>
-          <input className="field" type="email" name="email" />
+        <PracticeField label={t('field.email')} done={done.has('email')}>
+          <input className="field" type="email" {...bind('email')} />
         </PracticeField>
-        <PracticeField label={t('phone.label')}>
-          <input className="field" type="tel" name="phone" />
+        <PracticeField label={t('phone.label')} done={done.has('phone')}>
+          <input className="field" type="tel" {...bind('phone')} />
         </PracticeField>
-        <PracticeField label={t('field.city')}>
-          <input className="field" name="city" />
+        <PracticeField label={t('field.city')} done={done.has('city')}>
+          <input className="field" {...bind('city')} />
         </PracticeField>
-        <PracticeField label="LinkedIn">
-          <input className="field" type="url" name="linkedin" />
+        <PracticeField label="LinkedIn" done={done.has('linkedin')}>
+          <input className="field" type="url" {...bind('linkedin')} />
         </PracticeField>
-        <PracticeField label={t('practice.hear')} wide>
-          <select className="field" name="source" defaultValue="">
+        <PracticeField label={t('practice.hear')} done={done.has('source')} wide>
+          <select className="field" {...bind('source')}>
             <option value="">{t('practice.choose')}</option>
-            <option>LinkedIn</option>
-            <option>{t('practice.friend')}</option>
-            <option>{t('practice.board')}</option>
+            <option value={SOURCE_OPTION}>LinkedIn</option>
+            <option value="friend">{t('practice.friend')}</option>
+            <option value="board">{t('practice.board')}</option>
           </select>
         </PracticeField>
-        <PracticeField label={t('practice.why', { company: PRACTICE_JOB.company })} wide>
-          <textarea className="field" rows={3} name="motivation" />
+        <PracticeField label={t('practice.why', PRACTICE_JOB)} done={done.has('motivation')} wide>
+          <textarea className="field" rows={3} {...bind('motivation')} />
         </PracticeField>
       </form>
       <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-        <button className="btn" onClick={() => void fill()}>
-          {t('practice.fill')}
+        <button className="btn" onClick={() => void fill()} disabled={running}>
+          {running ? t('popup.filling') : t('practice.fill')}
         </button>
-        {filled && (
+        {(running || done.size > 0) && (
           <button className="btn-quiet" onClick={reset}>
             {t('practice.reset')}
           </button>

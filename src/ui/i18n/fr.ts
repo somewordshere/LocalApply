@@ -334,15 +334,17 @@ export const fr: Translation = {
   'answers.unused': 'Pas encore utilisée',
   'answers.noMatch': 'Aucune réponse ne correspond.',
   'practice.title': 'Essayez ici',
-  'practice.text': 'Un formulaire d’entraînement, rempli à partir de votre profil. Rien n’est envoyé nulle part.',
+  'practice.text':
+    'Regardez LocalApply remplir un formulaire d’entraînement pour une personne fictive. Rien n’est envoyé, et votre propre profil n’est pas utilisé.',
   'practice.posting': 'Offre d’entraînement : {position} chez {company}',
   'practice.hear': 'Comment avez-vous entendu parler de nous ?',
   'practice.choose': 'Veuillez choisir',
   'practice.friend': 'Par une connaissance',
   'practice.board': 'Par un site d’emploi',
   'practice.why': 'Pourquoi voulez-vous rejoindre {company} ?',
+  'practice.sampleWhy':
+    'J’aime trouver les problèmes avant les clients, et j’aimerais apporter cela au poste de {position} chez {company}.',
   'practice.fill': 'Remplir ce formulaire d’entraînement',
   'practice.reset': 'Vider',
-  'practice.empty': 'Votre profil est vide. Créez-le d’abord, puis revenez.',
   'welcome.steps': 'Suit les candidatures sur plusieurs pages : chaque étape suivante est remplie à son ouverture.',
 };

@@ -327,15 +327,17 @@ export const es: Translation = {
   'answers.unused': 'Aún sin usar',
   'answers.noMatch': 'Ninguna respuesta coincide.',
   'practice.title': 'Pruébalo aquí',
-  'practice.text': 'Un formulario de práctica, rellenado con tu perfil. No se envía nada a ninguna parte.',
+  'practice.text':
+    'Mira cómo LocalApply rellena un formulario de práctica para una persona inventada. No se envía nada y no se usa tu propio perfil.',
   'practice.posting': 'Oferta de práctica: {position} en {company}',
   'practice.hear': '¿Cómo nos conociste?',
   'practice.choose': 'Elige una opción',
   'practice.friend': 'Por un conocido',
   'practice.board': 'Por un portal de empleo',
   'practice.why': '¿Por qué quieres trabajar en {company}?',
+  'practice.sampleWhy':
+    'Me gusta encontrar los problemas antes que los clientes, y me gustaría aportarlo al puesto de {position} en {company}.',
   'practice.fill': 'Rellenar este formulario de práctica',
   'practice.reset': 'Vaciar',
-  'practice.empty': 'Tu perfil está vacío. Créalo primero y vuelve después.',
   'welcome.steps': 'Sigue las candidaturas de varias páginas: cada paso siguiente se rellena al abrirse.',
 };

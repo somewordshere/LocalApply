@@ -328,15 +328,17 @@ export const it: Translation = {
   'answers.unused': 'Non ancora usata',
   'answers.noMatch': 'Nessuna risposta corrisponde.',
   'practice.title': 'Provalo qui',
-  'practice.text': 'Un modulo di prova, compilato dal tuo profilo. Non viene inviato niente da nessuna parte.',
+  'practice.text':
+    'Guarda LocalApply compilare un modulo di prova per una persona inventata. Non viene inviato niente e il tuo profilo non viene usato.',
   'practice.posting': 'Annuncio di prova: {position} presso {company}',
   'practice.hear': 'Come ci hai conosciuto?',
   'practice.choose': 'Scegli un’opzione',
   'practice.friend': 'Tramite conoscenti',
   'practice.board': 'Tramite un sito di annunci',
   'practice.why': 'Perché vuoi lavorare in {company}?',
+  'practice.sampleWhy':
+    'Mi piace trovare i problemi prima dei clienti e vorrei portare questa passione nel ruolo di {position} presso {company}.',
   'practice.fill': 'Compila questo modulo di prova',
   'practice.reset': 'Svuota',
-  'practice.empty': 'Il tuo profilo è vuoto. Crealo prima e poi torna qui.',
   'welcome.steps': 'Segue le candidature su più pagine: ogni passo successivo viene compilato quando si apre.',
 };
