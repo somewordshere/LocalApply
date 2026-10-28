@@ -1,5 +1,7 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { browser } from 'wxt/browser';
+import { fillPage, undoLastFill } from '@/src/engine';
+import { loadProfile } from '@/src/profile/store';
 import { useI18n } from '@/src/ui/I18nProvider';
 import { LANGUAGES, isLang, type MessageKey } from '@/src/ui/i18n';
 import { currentPalette, iconPath } from '@/src/ui/palette';
@@ -76,7 +78,116 @@ function OutlineSample() {
   );
 }
 
-const ALSO: MessageKey[] = ['welcome.learn', 'welcome.menu', 'welcome.log', 'welcome.profiles', 'welcome.placeholders'];
+/** The made-up posting the practice form belongs to, so {company} and {position} have something to become. */
+const PRACTICE_JOB = { company: 'Northwind Labs', position: 'QA Engineer' };
+
+function PracticeField({ label, children, wide }: { label: string; children: ReactNode; wide?: boolean }) {
+  return (
+    <label className={wide ? 'sm:col-span-2' : ''}>
+      <span className="mb-1.5 block text-sm font-medium text-ink">{label}</span>
+      {children}
+    </label>
+  );
+}
+
+/**
+ * A small application form on the welcome page, filled by the real engine from the saved profile: a safe place
+ * to see what a fill does before trying it on a real application.
+ */
+function PracticeForm() {
+  const { t } = useI18n();
+  const form = useRef<HTMLFormElement>(null);
+  const [note, setNote] = useState('');
+  const [filled, setFilled] = useState(false);
+
+  const fill = async () => {
+    const profile = await loadProfile();
+    if (!profile.firstName && !profile.lastName && !profile.email) return setNote(t('practice.empty'));
+    const result = await fillPage(document, profile, {
+      root: form.current!,
+      job: PRACTICE_JOB,
+      location: { hostname: 'localapply.practice', pathname: '/' },
+    });
+    setNote(t('notice.filled', { n: result.filled.length }));
+    setFilled(true);
+  };
+
+  const reset = () => {
+    undoLastFill(document);
+    setFilled(false);
+    setNote('');
+  };
+
+  return (
+    <section aria-labelledby="practice" className="mt-12">
+      <h2 id="practice" className="font-display text-2xl font-medium tracking-tight">
+        {t('practice.title')}
+      </h2>
+      <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{t('practice.text')}</p>
+      <form
+        ref={form}
+        aria-label={t('practice.title')}
+        onSubmit={(e) => e.preventDefault()}
+        className="mt-4 grid gap-4 rounded-xl border border-line bg-sheet p-5 sm:grid-cols-2 md:p-8"
+      >
+        <p className="text-sm text-ink-faint sm:col-span-2">
+          {t('practice.posting', { position: PRACTICE_JOB.position, company: PRACTICE_JOB.company })}
+        </p>
+        <PracticeField label={t('field.firstName')}>
+          <input className="field" name="first_name" />
+        </PracticeField>
+        <PracticeField label={t('field.lastName')}>
+          <input className="field" name="last_name" />
+        </PracticeField>
+        <PracticeField label={t('field.email')}>
+          <input className="field" type="email" name="email" />
+        </PracticeField>
+        <PracticeField label={t('phone.label')}>
+          <input className="field" type="tel" name="phone" />
+        </PracticeField>
+        <PracticeField label={t('field.city')}>
+          <input className="field" name="city" />
+        </PracticeField>
+        <PracticeField label="LinkedIn">
+          <input className="field" type="url" name="linkedin" />
+        </PracticeField>
+        <PracticeField label={t('practice.hear')} wide>
+          <select className="field" name="source" defaultValue="">
+            <option value="">{t('practice.choose')}</option>
+            <option>LinkedIn</option>
+            <option>{t('practice.friend')}</option>
+            <option>{t('practice.board')}</option>
+          </select>
+        </PracticeField>
+        <PracticeField label={t('practice.why', { company: PRACTICE_JOB.company })} wide>
+          <textarea className="field" rows={3} name="motivation" />
+        </PracticeField>
+      </form>
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <button className="btn" onClick={() => void fill()}>
+          {t('practice.fill')}
+        </button>
+        {filled && (
+          <button className="btn-quiet" onClick={reset}>
+            {t('practice.reset')}
+          </button>
+        )}
+        <p role="status" className="text-sm text-ink-soft">
+          {note}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+const ALSO: MessageKey[] = [
+  'welcome.learn',
+  'welcome.steps',
+  'welcome.menu',
+  'welcome.log',
+  'welcome.profiles',
+  'welcome.placeholders',
+];
 
 export default function App() {
   const { lang, t, setLang } = useI18n();
@@ -147,6 +258,8 @@ export default function App() {
             </Step>
           </ol>
         </section>
+
+        <PracticeForm />
 
         <section aria-labelledby="also" className="mt-12">
           <h2 id="also" className="mb-4 font-display text-2xl font-medium tracking-tight">

@@ -1,13 +1,14 @@
 import { pickAdapter } from '../adapters';
 import type { Profile } from '../profile/schema';
 import { fillPlaceholders, type Job } from './job';
+import { countBlocks } from './blocks';
 import { attachFile, DIAL_CODE_ONLY, fillField, formatDate, hasValue, monthCandidates } from './fill';
-import { matchCustom, matchField } from './match';
+import { findCustom, matchField } from './match';
 import { clearHighlights, highlight } from './report';
 import { resolve } from './resolve';
 import { DATE_KEYS, MONTH_KEYS } from './rules';
 import { scan } from './scan';
-import type { Field, FieldKey, FillResult } from './types';
+import type { Field, FieldKey, FieldOutcome, FillResult } from './types';
 import { remember, rememberFill, type Change } from './undo';
 
 export interface FillOptions {
@@ -16,6 +17,8 @@ export interface FillOptions {
   location?: { hostname: string; pathname: string };
   /** The posting, for {company} and {position} in the cover letter and saved answers. */
   job?: Job;
+  /** Fill only inside this element (the welcome page's practice form) instead of the whole page. */
+  root?: ParentNode;
 }
 
 const DIGITS_ONLY_HINT =
@@ -34,7 +37,7 @@ function isNumeric(field: Field): boolean {
 export async function fillPage(doc: Document, profile: Profile, options: FillOptions = {}): Promise<FillResult> {
   const location = options.location ?? doc.location ?? { hostname: '', pathname: '' };
   const adapter = pickAdapter(location, doc);
-  const root = adapter?.scope?.(doc) ?? doc;
+  const root = options.root ?? adapter?.scope?.(doc) ?? doc;
 
   clearHighlights(doc);
   let fields = scan(root);
@@ -69,7 +72,11 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     missing: [],
     unmatched: [],
     skipped: 0,
+    fields: [],
+    usedAnswers: [],
   };
+  const note = (field: Field, key: string | null, outcome: FieldOutcome) =>
+    result.fields!.push({ label: field.label || field.placeholder || key || '', key, outcome });
   const changes: Change[] = [];
   // The n-th field of a key gets the n-th entry of a list (languages now, work history later).
   const seen = new Map<FieldKey, number>();
@@ -78,13 +85,18 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     const key = keys.get(field) ?? null;
     // Phone country pickers show a preselected country; like a prefilled dial code, that is not an answer yet.
     const presetPicker = key === 'phoneCountryCode' && field.kind === 'combobox';
+    // The n-th field of a key is the n-th block, also when an earlier block was already filled and is skipped.
+    const index = key ? (seen.get(key) ?? 0) : 0;
+    if (key) seen.set(key, index + 1);
     if (!options.overwrite && !presetPicker && hasValue(field)) {
       result.skipped++;
+      note(field, key, 'skipped');
       continue;
     }
     const label = field.label || field.placeholder;
     const flagUnmatched = () => {
       // Optional consent boxes and controls nobody labelled are not worth the applicant's attention.
+      note(field, key, 'unmatched');
       if (!label || (field.kind === 'checkbox' && !field.required)) return;
       result.unmatched.push({ label, required: field.required });
       if (field.required) highlight(field, 'attention');
@@ -92,12 +104,14 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
 
     if (!key) {
       const saved =
-        field.kind === 'file' || field.kind === 'checkbox' ? null : matchCustom(field, profile.customAnswers);
-      const answer = saved && fillPlaceholders(saved, options.job);
+        field.kind === 'file' || field.kind === 'checkbox' ? null : findCustom(field, profile.customAnswers);
+      const answer = saved && fillPlaceholders(saved.answer, options.job);
       const restore = remember(field);
       if (answer && (await fillField(field, [answer]))) {
         changes.push({ field, restore });
         result.filled.push({ label, key: 'custom answer' });
+        result.usedAnswers!.push(saved.id);
+        note(field, 'custom answer', 'filled');
         highlight(field, 'filled');
       } else {
         flagUnmatched();
@@ -110,8 +124,6 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
       key === 'phone' &&
       DIAL_CODE_ONLY.test((field.el as HTMLInputElement).value ?? '') &&
       (field.el as HTMLInputElement).value.includes('+');
-    const index = seen.get(key) ?? 0;
-    seen.set(key, index + 1);
     let candidates = resolve(key, profile, {
       label,
       index,
@@ -120,6 +132,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     });
     if (!candidates.length) {
       result.missing.push({ label: label || key, key });
+      note(field, key, 'missing');
       if (field.required) highlight(field, 'attention');
       continue;
     }
@@ -128,6 +141,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
       // The page didn't say which company or job this is; a letter with a gap is worse than none.
       if (letter === null) {
         result.missing.push({ label: label || key, key });
+        note(field, key, 'missing');
         if (field.required) highlight(field, 'attention');
         continue;
       }
@@ -150,6 +164,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
     if (done) {
       changes.push({ field, restore });
       result.filled.push({ label: label || key, key });
+      note(field, key, 'filled');
       highlight(field, 'filled');
     } else {
       flagUnmatched();
@@ -157,6 +172,7 @@ export async function fillPage(doc: Document, profile: Profile, options: FillOpt
   }
 
   rememberFill(changes);
+  result.blocks = countBlocks(seen, root);
   return result;
 }
 

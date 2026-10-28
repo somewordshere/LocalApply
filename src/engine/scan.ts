@@ -27,10 +27,13 @@ const LANGUAGE_SWITCH = /^((select|choose|change) language|sprache (aus)?w[aä]h
 
 const MAX_LABEL = 200;
 
+/** LocalApply's own notice and answer card (entrypoints/content.ts): never part of the form. */
+const OWN_UI_ID = 'localapply-ui';
+
 function collect(root: ParentNode, out: HTMLElement[]): void {
   for (const el of root.querySelectorAll<HTMLElement>(FIELD_SELECTOR)) out.push(el);
   for (const el of root.querySelectorAll<HTMLElement>('*')) {
-    if (el.shadowRoot) collect(el.shadowRoot, out);
+    if (el.shadowRoot && el.id !== OWN_UI_ID) collect(el.shadowRoot, out);
   }
 }
 

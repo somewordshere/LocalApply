@@ -482,6 +482,127 @@ try {
     await page.close();
   });
 
+  // A two-page application: page 1 swaps in a second step without loading (like Workday), then links to page 2.
+  await context.route('https://steps.example.com/**', (route) => {
+    const second = route.request().url().endsWith('/2');
+    route.fulfill({
+      contentType: 'text/html; charset=utf-8',
+      body: second
+        ? '<!doctype html><html><body><form><label for="city">City</label><input id="city"></form></body></html>'
+        : `<!doctype html><html><body><form id="f"><label for="fn">First name</label><input id="fn">
+           <button type="button" id="next">Continue</button></form>
+           <script>document.getElementById('next').onclick = () => {
+             document.getElementById('f').innerHTML = '<label for="em">Email</label><input id="em"><a id="page2" href="/apply/2">Next page</a>';
+           };</script></body></html>`,
+    });
+  });
+
+  await step('after a fill, the next steps of the same application are filled as they appear', async () => {
+    const page = await context.newPage();
+    await page.goto('https://steps.example.com/apply/1');
+    await page.bringToFront();
+    await fillActiveTab();
+    await page.waitForFunction(() => document.querySelector('#fn')?.value === 'Max');
+    // A step that replaces the form on the same page.
+    await page.click('#next');
+    await page.waitForFunction(() => document.querySelector('#em')?.value === 'max@example.com');
+    await page.getByRole('status').filter({ hasText: 'Next step: filled 1 field' }).waitFor();
+    // A step on a new page of the same site.
+    await page.click('#page2');
+    await page.waitForFunction(() => document.querySelector('#city')?.value === 'Berlin');
+    // Only the first fill is an application in the log.
+    const log = await worker.evaluate(() => chrome.storage.local.get('applicationLog').then((r) => r.applicationLog));
+    assert.equal(log.filter((a) => a.url.startsWith('https://steps.example.com/')).length, 1);
+    await page.close();
+  });
+
+  await step('the popup adds the job blocks a form is missing and fills them', async () => {
+    await context.route('https://blocks.example.com/**', (route) =>
+      route.fulfill({
+        contentType: 'text/html; charset=utf-8',
+        body: `<!doctype html><html><body><form><h2>Work experience</h2><div id="jobs">
+          <label for="e0">Employer</label><input id="e0"></div>
+          <button type="button" id="add">+ Add another job</button></form>
+          <script>let n = 1; document.getElementById('add').onclick = () => document.getElementById('jobs')
+            .insertAdjacentHTML('beforeend', '<label for="e' + n + '">Employer</label><input id="e' + n++ + '">');</script>
+          </body></html>`,
+      }),
+    );
+    const job = await context.newPage();
+    await job.goto('https://blocks.example.com/apply');
+    const popup = await context.newPage();
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await job.bringToFront();
+    await popup.getByRole('button', { name: 'Fill this page' }).click();
+    await popup.getByText('This form has room for 1 of your 2 jobs.').waitFor();
+    await popup.getByRole('button', { name: 'Add 1 more and fill' }).click();
+    await job.waitForFunction(() => document.querySelector('#e1')?.value === 'Acme');
+    assert.equal(await job.inputValue('#e0'), 'Brightline');
+    await popup.getByText("Why wasn't something filled?").click();
+    await popup.getByText('currentEmployer').first().waitFor();
+    await popup.close();
+    await job.close();
+  });
+
+  await step('the log keeps a status and notes for each application', async () => {
+    const options = await context.newPage();
+    await options.goto(`chrome-extension://${extensionId}/options.html#applications`);
+    await options
+      .getByRole('combobox', { name: 'Status of the application to Acme' })
+      .first()
+      .selectOption('interview');
+    await options.getByRole('row').filter({ hasText: 'Acme' }).first().getByRole('button', { name: 'Details' }).click();
+    await options.getByLabel('Notes').fill('Call Kim on Monday');
+    await options.getByRole('button', { name: 'Hide' }).click();
+    let entry;
+    for (let tries = 0; !entry?.notes && tries < 30; tries++) {
+      const log = await worker.evaluate(() => chrome.storage.local.get('applicationLog').then((r) => r.applicationLog));
+      entry = log.find((a) => a.company === 'Acme');
+      if (!entry?.notes) await new Promise((r) => setTimeout(r, 100));
+    }
+    assert.equal(entry.status, 'interview');
+    assert.equal(entry.notes, 'Call Kim on Monday');
+    await options.close();
+  });
+
+  await step('"Save what\'s in this field as an answer" saves without a fill', async () => {
+    await context.route('https://save.example.com/**', (route) =>
+      route.fulfill({
+        contentType: 'text/html; charset=utf-8',
+        body: '<!doctype html><html><body><form><label for="q">What motivates you?</label><textarea id="q"></textarea></form></body></html>',
+      }),
+    );
+    const page = await context.newPage();
+    await page.goto('https://save.example.com/form');
+    await page.bringToFront();
+    await page.fill('#q', 'Shipping things people use.');
+    await page.click('#q', { button: 'right' }).catch(() => {});
+    await page.keyboard.press('Escape');
+    // What the background does when the menu item is chosen.
+    await worker.evaluate(async () => {
+      const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+      await chrome.tabs.sendMessage(tab.id, { type: 'save-field' });
+    });
+    await page.getByRole('status').filter({ hasText: 'Saved 1 answer' }).waitFor();
+    const answers = (await storedProfile()).customAnswers;
+    assert.ok(answers.some((a) => a.keywords === 'What motivates you?' && a.answer === 'Shipping things people use.'));
+    await page.close();
+  });
+
+  await step('the welcome page has a practice form that fills from the profile', async () => {
+    const welcome = await context.newPage();
+    await welcome.goto(`chrome-extension://${extensionId}/welcome.html`);
+    await welcome.getByRole('button', { name: 'Fill this practice form' }).click();
+    const form = welcome.getByRole('form', { name: 'Try it here' });
+    await welcome.waitForFunction(() => document.querySelector('[name="first_name"]')?.value === 'Max');
+    assert.equal(await form.locator('[name="email"]').inputValue(), 'max@example.com');
+    await welcome.getByRole('button', { name: 'Clear' }).click();
+    assert.equal(await form.locator('[name="first_name"]').inputValue(), '');
+    // The language box above the form is left alone.
+    assert.equal(await welcome.getByRole('combobox', { name: 'Language' }).inputValue(), 'en');
+    await welcome.close();
+  });
+
   await step('no button and no errors on an ordinary page', async () => {
     const page = await context.newPage();
     const errors = [];

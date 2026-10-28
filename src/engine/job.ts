@@ -4,6 +4,23 @@ export interface Job {
   position?: string;
   /** The posting page, as kept in the application log (see logUrl). Set by the top frame. */
   url?: string;
+  /** The job description as plain text, from the posting's schema.org data; kept with the application. */
+  description?: string;
+}
+
+/** Longest job description kept with an application. */
+const MAX_DESCRIPTION = 20000;
+
+/** Text of a description that job boards write as HTML, with paragraph and list breaks kept as line breaks. */
+function plainText(html: string): string {
+  const breaks = html.replace(/<(br|\/p|\/li|\/h\d|\/div)\b[^>]*>/gi, (tag) => `${tag}\n`);
+  const doc = new DOMParser().parseFromString(breaks, 'text/html');
+  return (doc.body.textContent ?? '')
+    .replace(/[ \t\u00a0]+/g, ' ')
+    .replace(/ *\n */g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .slice(0, MAX_DESCRIPTION);
 }
 
 /** Hosts and site names that sit in titles and og:site_name but are not the employer. */
@@ -25,6 +42,7 @@ function fromStructuredData(doc: Document): Job {
       const org = item.hiringOrganization;
       found.position ||= clean(item.title);
       found.company ||= clean(typeof org === 'string' ? org : (org as Record<string, unknown> | undefined)?.name);
+      if (typeof item.description === 'string') found.description ||= plainText(item.description);
     }
     visit(item['@graph']);
   };
@@ -69,6 +87,7 @@ export function readJob(doc: Document): Job {
   return {
     position: structured.position || titled.position || heading || undefined,
     company: structured.company || titled.company || (isEmployer(site) ? site : undefined),
+    ...(structured.description ? { description: structured.description } : {}),
   };
 }
 

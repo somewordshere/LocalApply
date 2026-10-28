@@ -31,13 +31,15 @@ Other paths into a page:
 
 - **Right-click menu.** `src/core/menu.ts` builds "Fill this field with" in the background from the active profile and rebuilds it when the profile or the interface language changes. Every frame remembers where its last right-click landed; choosing an item sends `fill-field` to that frame, which fills that one control.
 - **Earlier applications.** When the popup opens, it asks the top frame for the posting and checks the application log with `earlierApplications()` (same employer by `companyKey()`, or the same address on an earlier day).
-- **Welcome page.** `entrypoints/welcome/` opens on install and leads to the profile page.
+- **Welcome page.** `entrypoints/welcome/` opens on install and leads to the profile page. Its practice form is filled by `fillPage` with `root` set to the form.
+- **Next steps.** After a fill, the background remembers the tab's site in `storage.session` (`src/core/fill.ts`). Each page's top frame reports its site as it loads (`page-loaded`); on the same site the background fills it with `auto` set, which skips the application log. Steps that swap the form in place are caught by a `MutationObserver` in the content script that fills fields it hasn't seen before. The popup's "Keep filling" switch turns both off.
+- **Field details and form copies.** `fillPage` returns every field with its key and outcome (`result.fields`) for the popup's "Why wasn't something filled?". `engine/snapshot.ts` makes the bug-report copy of a frame's form.
 
 ## Data
 
 Each profile (`src/profile/schema.ts`) is one object in `storage.local` under `profile:<id>`, including documents as data URLs; `profileIndex` lists the profiles by name and says which one is active (`src/profile/store.ts`). Before 0.8.0 there was a single `profile` key; the first load moves it into the first profile. `migrate()` turns anything read from storage or an imported file into a complete, current profile, running the version upgrades in `src/profile/migrations.ts` first.
 
-Work history, education and languages are lists, most recent first. A form's n-th field of a key takes the n-th entry: `fillPage` counts fields per key and passes the count to `resolve()` as `ctx.index`, so a form with three job blocks gets three jobs. LocalApply never clicks "Add another"; the person adds the blocks, then fills.
+Work history, education and languages are lists, most recent first. A form's n-th field of a key takes the n-th entry: `fillPage` counts fields per key and passes the count to `resolve()` as `ctx.index`, so a form with three job blocks gets three jobs. A block that is already filled still counts, so a refill after adding blocks gives the new ones the next entries. `engine/blocks.ts` counts the blocks a fill met and finds the form's "Add" button for each kind; the popup offers to press it (`add-blocks`) when the profile has more entries than the form has blocks. That and Undo are the only buttons LocalApply presses.
 
 Settings that aren't profile data live next to it: interface language, palette and theme (`src/ui/`), and the application log with its on/off switch (`src/core/applications.ts`).
 

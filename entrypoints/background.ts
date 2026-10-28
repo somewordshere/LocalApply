@@ -1,9 +1,9 @@
 import { defineBackground } from 'wxt/utils/define-background';
 import { browser } from 'wxt/browser';
 import { logUrl, recordApplication } from '@/src/core/applications';
-import { fillTab, readTabJob } from '@/src/core/fill';
-import { isEditItem, menuValue, refreshMenu, watchMenu } from '@/src/core/menu';
-import { saveLearned, type Learned } from '@/src/engine/learn';
+import { fillTab, loadKeepFilling, readTabJob, startSteps, stepsHost, stopSteps } from '@/src/core/fill';
+import { isEditItem, isSaveItem, menuValue, refreshMenu, watchMenu } from '@/src/core/menu';
+import { noteAnswersUsed, saveLearned, type Learned } from '@/src/engine/learn';
 import { activeProfileName, loadIndex, loadProfile, loadProfileById, saveProfile } from '@/src/profile/store';
 import type { Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
@@ -11,6 +11,16 @@ import { iconPath, loadPalette, watchPalette, type Palette } from '@/src/ui/pale
 
 /** How long to wait for the other frames of a tab to report before logging a fill. */
 const LOG_AFTER_MS = 1500;
+/** After the next step of an application has loaded, how long to let its form appear before filling it. */
+const STEP_DELAY_MS = 1000;
+
+const hostOf = (url: string | undefined) => {
+  try {
+    return new URL(url ?? '').hostname;
+  } catch {
+    return '';
+  }
+};
 
 export default defineBackground(() => {
   const sendToTab = (tabId: number, message: Message) => {
@@ -41,6 +51,10 @@ export default defineBackground(() => {
     const id = String(info.menuItemId);
     if (isEditItem(id)) return void browser.runtime.openOptionsPage();
     if (tab?.id === undefined) return;
+    if (isSaveItem(id)) {
+      const save: Message = { type: 'save-field', job: await readTabJob(tab.id) };
+      return void browser.tabs.sendMessage(tab.id, save, { frameId: info.frameId ?? 0 }).catch(() => {});
+    }
     const value = menuValue(id, await loadProfile());
     if (value === null) return;
     const job = await readTabJob(tab.id);
@@ -53,6 +67,23 @@ export default defineBackground(() => {
     const { active } = await loadIndex();
     await saveProfile(saveLearned(await loadProfileById(active), answers), active);
   };
+  /** Counts each use of a saved answer, for the list on the profile page. */
+  const answersUsed = async (ids: string[]) => {
+    const { active } = await loadIndex();
+    await saveProfile(noteAnswersUsed(await loadProfileById(active), ids), active);
+  };
+
+  // Multi-step applications: once a tab has been filled, each following step on the same site is filled when it
+  // loads, until the tab leaves the site or closes. Each page's top frame says which site it is on as it loads
+  // (the background can't read tab addresses without the "tabs" permission). Steps that swap the form without
+  // loading a page are noticed by the content script itself.
+  const stepLoaded = async (tabId: number, host: string) => {
+    const filling = await stepsHost(tabId);
+    if (!filling) return;
+    if (host !== filling) return void stopSteps(tabId);
+    if (await loadKeepFilling()) setTimeout(() => void fillTab(tabId, false, true), STEP_DELAY_MS);
+  };
+  browser.tabs.onRemoved.addListener((tabId) => void stopSteps(tabId));
 
   browser.commands.onCommand.addListener(async (command) => {
     if (command !== 'fill-form') return;
@@ -71,6 +102,7 @@ export default defineBackground(() => {
         company: entry?.job.company || job.company,
         position: entry?.job.position || job.position,
         url: entry?.job.url || job.url,
+        description: entry?.job.description || job.description,
       },
     };
     fills.set(tabId, {
@@ -80,7 +112,13 @@ export default defineBackground(() => {
         const url = merged.job.url || logUrl(tabUrl ?? '');
         if (merged.filled > 0 && url) {
           void activeProfileName().then((profile) =>
-            recordApplication({ company: merged.job.company ?? '', position: merged.job.position ?? '', url, profile }),
+            recordApplication({
+              company: merged.job.company ?? '',
+              position: merged.job.position ?? '',
+              url,
+              profile,
+              ...(merged.job.description ? { posting: merged.job.description } : {}),
+            }),
           );
         }
       }, LOG_AFTER_MS),
@@ -89,9 +127,21 @@ export default defineBackground(() => {
 
   browser.runtime.onMessage.addListener((message: Message, sender) => {
     if (sender.tab?.id === undefined) return;
-    if (message?.type === 'fill-result')
-      noteFill(sender.tab.id, sender.tab.url, message.result.filled.length, message.job);
+    if (message?.type === 'fill-result') {
+      const { result } = message;
+      // Later steps of an application are part of the one already logged.
+      if (!message.auto) noteFill(sender.tab.id, sender.tab.url, result.filled.length, message.job);
+      if (!message.auto && result.total > 0) {
+        const tabId = sender.tab.id;
+        const host = hostOf(message.job?.url) || hostOf(sender.tab.url);
+        void loadKeepFilling().then((on) => {
+          if (on && host) void startSteps(tabId, host);
+        });
+      }
+      if (result.usedAnswers?.length) void answersUsed(result.usedAnswers);
+    }
     if (message?.type === 'relay-fill') void fillTab(sender.tab.id);
+    if (message?.type === 'page-loaded') void stepLoaded(sender.tab.id, message.host);
     if (message?.type === 'relay-undo') sendToTab(sender.tab.id, { type: 'undo' });
     // The reply tells the page the answers are saved.
     if (message?.type === 'save-answers') return saveAnswers(message.answers).then(() => true);

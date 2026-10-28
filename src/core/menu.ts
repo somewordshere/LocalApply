@@ -10,6 +10,7 @@ const ROOT = 'fill-with';
 const KEY_PREFIX = 'key:';
 const ANSWER_PREFIX = 'answer:';
 const EDIT = 'edit-profile';
+const SAVE = 'save-field';
 const MAX_PREVIEW = 40;
 
 /** What the menu offers from the profile, in the order of the profile page. Brand names stay as they are. */
@@ -86,6 +87,7 @@ export function menuValue(id: string, profile: Profile): string | null {
 }
 
 export const isEditItem = (id: string) => id === EDIT;
+export const isSaveItem = (id: string) => id === SAVE;
 
 const menus = () => browser.contextMenus;
 
@@ -108,6 +110,7 @@ async function build(): Promise<void> {
     add({ id: 'empty', title: t('menu.empty'), enabled: false, parentId: ROOT, contexts: ['editable'] });
   }
   add({ id: 'sep-edit', type: 'separator', parentId: ROOT, contexts: ['editable'] });
+  add({ id: SAVE, title: t('menu.saveField'), parentId: ROOT, contexts: ['editable'] });
   add({ id: EDIT, title: t('popup.editProfile'), parentId: ROOT, contexts: ['editable'] });
 }
 

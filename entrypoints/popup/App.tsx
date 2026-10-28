@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { browser } from 'wxt/browser';
-import type { FillResult } from '@/src/engine/types';
+import type { BlockKind } from '@/src/engine/blocks';
+import type { Blocks, FieldOutcome, FillResult } from '@/src/engine/types';
 import type { UndoResult } from '@/src/engine/undo';
 import { earlierApplications, loadLog, type Application } from '@/src/core/applications';
-import { fillTab, readTabJob } from '@/src/core/fill';
+import { fillTab, loadKeepFilling, readTabJob, saveKeepFilling } from '@/src/core/fill';
 import type { Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { questionKeywords } from '@/src/profile/schema';
 import { loadIndex, loadProfile, saveProfile, switchProfile, type ProfileIndex } from '@/src/profile/store';
 import { useI18n } from '@/src/ui/I18nProvider';
+import type { MessageKey } from '@/src/ui/i18n';
 import { currentPalette, iconPath } from '@/src/ui/palette';
 
 type Status = 'idle' | 'filling' | 'done' | 'undone' | 'unavailable';
@@ -16,6 +18,19 @@ type Status = 'idle' | 'filling' | 'done' | 'undone' | 'unavailable';
 const EMPTY: FillResult = { adapter: null, total: 0, filled: [], missing: [], unmatched: [], skipped: 0 };
 const NOTHING_UNDONE: UndoResult = { restored: 0, manual: [] };
 const NO_REPLY_MS = 1500;
+
+/** How long frames get to send their form copies. */
+const SNAPSHOT_WAIT_MS = 1200;
+
+function mergeBlocks(a: Blocks | undefined, b: Blocks | undefined): Blocks | undefined {
+  if (!a || !b) return a ?? b;
+  return {
+    experience: Math.max(a.experience, b.experience),
+    education: Math.max(a.education, b.education),
+    addExperience: a.addExperience || b.addExperience,
+    addEducation: a.addEducation || b.addEducation,
+  };
+}
 
 function merge(a: FillResult, b: FillResult): FillResult {
   return {
@@ -25,7 +40,90 @@ function merge(a: FillResult, b: FillResult): FillResult {
     missing: [...a.missing, ...b.missing],
     unmatched: [...a.unmatched, ...b.unmatched],
     skipped: a.skipped + b.skipped,
+    fields: [...(a.fields ?? []), ...(b.fields ?? [])],
+    blocks: mergeBlocks(a.blocks, b.blocks),
   };
+}
+
+const OUTCOME: Record<FieldOutcome, MessageKey> = {
+  filled: 'details.filled',
+  missing: 'details.missing',
+  unmatched: 'details.unmatched',
+  skipped: 'details.skipped',
+};
+
+/** "Why wasn't this filled?": every field the fill met, what it was taken for, and what happened to it. */
+function Details({
+  result,
+  onSnapshot,
+  snapshotNote,
+}: {
+  result: FillResult;
+  onSnapshot: () => void;
+  snapshotNote: string;
+}) {
+  const { t } = useI18n();
+  if (!result.fields?.length) return null;
+  return (
+    <details>
+      <summary className="cursor-pointer font-semibold text-ink-soft select-none hover:text-ink">
+        {t('details.title')}
+      </summary>
+      <ul className="mt-2 max-h-56 divide-y divide-line overflow-y-auto text-xs">
+        {result.fields.map((f, i) => (
+          <li key={i} className="flex items-baseline justify-between gap-3 py-1.5">
+            <span className="min-w-0 break-words text-ink">{f.label || t('details.noLabel')}</span>
+            <span className={`shrink-0 text-right ${f.outcome === 'filled' ? 'text-accent' : 'text-ink-faint'}`}>
+              {t(OUTCOME[f.outcome])}
+              {f.key && f.key !== 'custom answer' && <span className="block font-mono text-[10px]">{f.key}</span>}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs text-ink-faint">{t('details.snapshotHint')}</p>
+      <button className="btn-quiet mt-2 py-1 text-xs" onClick={onSnapshot}>
+        {t('details.snapshot')}
+      </button>
+      {snapshotNote && <p className="mt-1.5 text-xs text-ink-soft">{snapshotNote}</p>}
+    </details>
+  );
+}
+
+/** Offers to press the form's "add" button when the profile has more jobs or schools than the form has blocks. */
+function AddBlocks({
+  blocks,
+  lists,
+  onAdd,
+}: {
+  blocks: Blocks | undefined;
+  lists: Record<BlockKind, number>;
+  onAdd: (kind: BlockKind, count: number) => void;
+}) {
+  const { t } = useI18n();
+  if (!blocks) return null;
+  const offers = (['experience', 'education'] as const).flatMap((kind) => {
+    const canAdd = kind === 'experience' ? blocks.addExperience : blocks.addEducation;
+    const missing = lists[kind] - blocks[kind];
+    return canAdd && missing > 0 ? [{ kind, missing }] : [];
+  });
+  if (!offers.length) return null;
+  return (
+    <div className="space-y-2">
+      {offers.map(({ kind, missing }) => (
+        <div key={kind} className="rounded-md border border-accent/30 bg-accent-soft px-3 py-2">
+          <p className="text-ink">
+            {t(kind === 'experience' ? 'blocks.experience' : 'blocks.education', {
+              have: blocks[kind],
+              total: lists[kind],
+            })}
+          </p>
+          <button className="btn mt-2 py-1.5 text-xs" onClick={() => onAdd(kind, missing)}>
+            {t('blocks.add', { n: missing })}
+          </button>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 function SaveAnswer({ label }: { label: string }) {
@@ -91,6 +189,7 @@ function AppliedBefore({ earlier, job }: { earlier: Application[]; job: Job }) {
           <li key={a.id}>
             {date(a.date)}
             {a.position && ` · ${a.position}`}
+            {a.status && a.status !== 'applied' && ` · ${t(`status.${a.status}`)}`}
           </li>
         ))}
       </ul>
@@ -133,12 +232,20 @@ export default function App() {
   const [profileEmpty, setProfileEmpty] = useState(false);
   const [profiles, setProfiles] = useState<ProfileIndex | null>(null);
   const [earlier, setEarlier] = useState<{ job: Job; list: Application[] } | null>(null);
+  const [keepFilling, setKeepFilling] = useState(true);
+  const [lists, setLists] = useState<Record<BlockKind, number>>({ experience: 0, education: 0 });
+  const [snapshotNote, setSnapshotNote] = useState('');
+  const snapshotParts = useRef<{ html: string; url: string }[] | null>(null);
   const pending = useRef(0);
   const replied = useRef(false);
 
   useEffect(() => {
-    loadProfile().then((p) => setProfileEmpty(!p.firstName && !p.lastName && !p.email));
+    loadProfile().then((p) => {
+      setProfileEmpty(!p.firstName && !p.lastName && !p.email);
+      setLists({ experience: p.experience.length, education: p.education.length });
+    });
     void loadIndex().then(setProfiles);
+    void loadKeepFilling().then(setKeepFilling);
     void (async () => {
       const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
       const job = tab?.id === undefined ? undefined : await readTabJob(tab.id);
@@ -152,9 +259,13 @@ export default function App() {
         replied.current = true;
         pending.current++;
       } else if (message?.type === 'fill-result') {
+        // Later steps filled on their own belong to the page, not to this popup's fill.
+        if (message.auto) return;
         pending.current = Math.max(0, pending.current - 1);
         setResult((current) => merge(current, message.result));
         if (pending.current === 0) setStatus('done');
+      } else if (message?.type === 'snapshot-part') {
+        snapshotParts.current?.push({ html: message.html, url: message.url });
       } else if (message?.type === 'undo-result') {
         setUndone((current) => ({
           restored: current.restored + message.result.restored,
@@ -177,6 +288,46 @@ export default function App() {
     setTimeout(() => {
       if (!replied.current) setStatus('unavailable');
     }, NO_REPLY_MS);
+  };
+
+  /** Presses the form's add button `count` times in whichever frame has it, then fills again. */
+  const addMore = async (kind: BlockKind, count: number) => {
+    setResult(EMPTY);
+    setStatus('filling');
+    pending.current = 0;
+    replied.current = false;
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tab?.id === undefined) return setStatus('unavailable');
+    const message: Message = { type: 'add-blocks', kind, count, job: await readTabJob(tab.id) };
+    browser.tabs.sendMessage(tab.id, message).catch(() => {});
+    setTimeout(
+      () => {
+        if (!replied.current) setStatus('unavailable');
+      },
+      NO_REPLY_MS + count * 600,
+    );
+  };
+
+  /** Collects a copy of the form from every frame that has one and saves them as one HTML file. */
+  const saveSnapshot = async () => {
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tab?.id === undefined) return;
+    snapshotParts.current = [];
+    const message: Message = { type: 'snapshot' };
+    browser.tabs.sendMessage(tab.id, message).catch(() => {});
+    setTimeout(() => {
+      const parts = snapshotParts.current ?? [];
+      snapshotParts.current = null;
+      if (!parts.length) return setSnapshotNote(t('details.snapshotNone'));
+      const html = parts.map((part) => `<!-- LocalApply form copy of ${part.url} -->\n${part.html}`).join('\n');
+      const url = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' }));
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'localapply-form.html';
+      link.click();
+      URL.revokeObjectURL(url);
+      setSnapshotNote(t('details.snapshotSaved'));
+    }, SNAPSHOT_WAIT_MS);
   };
 
   const undo = async () => {
@@ -249,6 +400,19 @@ export default function App() {
         {t('popup.overwrite')}
       </label>
 
+      <label className="mt-2 flex cursor-pointer items-center gap-2 text-sm text-ink-soft">
+        <input
+          type="checkbox"
+          className="size-4 accent-accent"
+          checked={keepFilling}
+          onChange={(e) => {
+            setKeepFilling(e.target.checked);
+            void saveKeepFilling(e.target.checked);
+          }}
+        />
+        {t('popup.keepFilling')}
+      </label>
+
       <p className="mt-1.5 text-xs text-ink-faint">{t('popup.nothingSubmitted')}</p>
 
       <div aria-live="polite">
@@ -279,6 +443,8 @@ export default function App() {
 
             {result.filled.length + result.missing.length + result.unmatched.length > 0 && <Legend />}
 
+            <AddBlocks blocks={result.blocks} lists={lists} onAdd={(kind, count) => void addMore(kind, count)} />
+
             {missing.length > 0 && (
               <div>
                 <h2 className="font-semibold">{t('popup.missing')}</h2>
@@ -301,6 +467,8 @@ export default function App() {
                 </ul>
               </div>
             )}
+
+            <Details result={result} onSnapshot={() => void saveSnapshot()} snapshotNote={snapshotNote} />
           </section>
         )}
 

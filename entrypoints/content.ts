@@ -2,11 +2,14 @@ import { defineContentScript } from 'wxt/utils/define-content-script';
 import { browser } from 'wxt/browser';
 import { pickAdapter } from '@/src/adapters';
 import { fillPage, undoLastFill, type FillResult, type UndoResult } from '@/src/engine';
+import { addBlocks, findAddButton, type BlockKind } from '@/src/engine/blocks';
 import { fillField } from '@/src/engine/fill';
 import { learnFrom, type Learned } from '@/src/engine/learn';
 import { highlight } from '@/src/engine/report';
-import { fieldOf } from '@/src/engine/scan';
+import { fieldOf, scan } from '@/src/engine/scan';
+import { snapshot } from '@/src/engine/snapshot';
 import { logUrl } from '@/src/core/applications';
+import { loadKeepFilling } from '@/src/core/fill';
 import { fillPlaceholders, readJob, type Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { loadProfile } from '@/src/profile/store';
@@ -222,6 +225,67 @@ function startLearning(job: Job | undefined): void {
   if (learning) return;
   learning = true;
   document.addEventListener('focusout', (event) => void noticeAnswer(event), true);
+  // Dropdowns and radio buttons answer on change, sometimes without taking focus.
+  document.addEventListener('change', (event) => void noticeAnswer(event), true);
+}
+
+/** "Save what's in this field as an answer" from the right-click menu: no fill needed first. */
+async function saveMenuTarget(job: Job | undefined): Promise<void> {
+  const [t] = await Promise.all([texts(), paint()]);
+  const answer =
+    menuTarget &&
+    learnFrom(menuTarget, await loadProfile(), { hints: pickAdapter(location, document)?.hints, job: job ?? fillJob });
+  if (!answer) return toast(t('notice.nothingToSave'));
+  offered.set(answer.label, answer.answer);
+  if (learned.delete(answer.label)) void showCard();
+  const message: Message = { type: 'save-answers', answers: [answer] };
+  browser.runtime
+    .sendMessage(message)
+    .then(() => toast(t('learn.saved', { n: 1 })))
+    .catch(() => toast(t('options.saveError')));
+}
+
+/*
+ * Steps of a multi-page application that swap the form without loading a page (Workday, SuccessFactors):
+ * after a fill, form fields that appear later in this frame are filled too, while "keep filling" is on.
+ * Steps that load a new page are filled by the background script.
+ */
+const STEP_SETTLE_MS = 800;
+let watchingSteps = false;
+let stepJob: Job | undefined;
+const knownFields = new WeakSet<Element>();
+
+/** Notes every field now on the page; returns those not seen before, leaving out open dropdown lists. */
+function newFields(): Element[] {
+  const fresh: Element[] = [];
+  for (const { el } of scan(document)) {
+    if (knownFields.has(el)) continue;
+    knownFields.add(el);
+    if (!el.closest('[role="listbox"], [role="menu"]')) fresh.push(el);
+  }
+  return fresh;
+}
+
+function watchSteps(job: Job | undefined): void {
+  stepJob = job;
+  newFields();
+  if (watchingSteps) return;
+  watchingSteps = true;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  new MutationObserver(() => {
+    clearTimeout(timer);
+    timer = setTimeout(async () => {
+      if (running || !(await loadKeepFilling())) return;
+      if (newFields().length) void run(false, stepJob, true);
+    }, STEP_SETTLE_MS);
+  }).observe(document.documentElement, { childList: true, subtree: true });
+}
+
+/** Presses the form's "add" button for jobs or schools as often as asked in the popup, then fills. */
+async function addAndFill(kind: BlockKind, count: number, job: Job | undefined): Promise<void> {
+  if (running || !findAddButton(document, kind)) return;
+  await addBlocks(document, kind, count);
+  await run(false, job);
 }
 
 /*
@@ -242,7 +306,7 @@ async function fillMenuTarget(value: string, job: Job | undefined): Promise<void
   }
 }
 
-async function run(overwrite: boolean, given?: Job): Promise<void> {
+async function run(overwrite: boolean, given?: Job, auto = false): Promise<void> {
   if (running) return;
   // A fill started without the job (an older popup) can still read it here in the top frame.
   const job = given ?? (window === window.top ? thisJob() : undefined);
@@ -252,8 +316,19 @@ async function run(overwrite: boolean, given?: Job): Promise<void> {
   try {
     const [profile, t] = await Promise.all([loadProfile(), texts(), paint()]);
     result = await fillPage(document, profile, { overwrite, location, job });
-    if (result.total > 0) startLearning(job);
-    if (result.total > 0 && (window === window.top || result.filled.length > 0)) {
+    if (result.total > 0) {
+      startLearning(job);
+      watchSteps(job);
+    }
+    if (auto) {
+      // The next step of an application: say something only when something was filled.
+      if (result.filled.length) {
+        toast(t('notice.nextStep', { n: result.filled.length }), {
+          label: t('notice.undo'),
+          run: () => send({ type: 'relay-undo' }),
+        });
+      }
+    } else if (result.total > 0 && (window === window.top || result.filled.length > 0)) {
       const action = result.filled.length
         ? { label: t('notice.undo'), run: () => send({ type: 'relay-undo' }) }
         : undefined;
@@ -263,7 +338,9 @@ async function run(overwrite: boolean, given?: Job): Promise<void> {
     console.error('[LocalApply]', error);
   } finally {
     running = false;
-    send({ type: 'fill-result', result, job });
+    // What this fill changed is not a new step.
+    if (watchingSteps) newFields();
+    send({ type: 'fill-result', result, job, ...(auto ? { auto } : {}) });
   }
 }
 
@@ -299,7 +376,12 @@ export default defineContentScript({
   runAt: 'document_idle',
   main() {
     browser.runtime.onMessage.addListener((message: Message) => {
-      if (message?.type === 'fill') void run(Boolean(message.overwrite), message.job);
+      if (message?.type === 'fill') void run(Boolean(message.overwrite), message.job, Boolean(message.auto));
+      if (message?.type === 'add-blocks') void addAndFill(message.kind, message.count, message.job);
+      if (message?.type === 'save-field') void saveMenuTarget(message.job);
+      if (message?.type === 'snapshot' && scan(document).length) {
+        send({ type: 'snapshot-part', html: snapshot(document), url: logUrl(location.href) });
+      }
       if (message?.type === 'undo' && !running) void undo();
       if (message?.type === 'fill-field') void fillMenuTarget(message.value, message.job);
       // Only the top frame is asked; its answer is the reply.
@@ -307,6 +389,8 @@ export default defineContentScript({
     });
     // Only remembers where the menu opened; nothing on the page is read until an item is chosen.
     document.addEventListener('contextmenu', (event) => (menuTarget = eventTarget(event)), true);
+    // The next page of an application being filled is filled too; the background knows whether this is one.
+    if (window === window.top) send({ type: 'page-loaded', host: location.hostname });
     if (SHOW_PAGE_BUTTON) watchForForm();
   },
 });

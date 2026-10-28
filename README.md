@@ -25,15 +25,16 @@ Everything stays in the browser: no account, no server, no AI service, no networ
 - **Fills the repetitive part:** name, email, phone (including country-code pickers), address, date of birth, LinkedIn, GitHub, Xing and portfolio links, salary expectation, notice period, start date, years of experience, work authorisation, visa sponsorship and relocation questions, work history and education (one entry per block, even on forms that list several jobs or schools), highest education level, spoken languages and their level, driving licence, travel and salary-range questions, CV and cover letter.
 - **Works in eight languages:** recognises form labels in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish, and the interface itself speaks all eight.
 - **Writes to the right company:** put `{company}` and `{position}` in your cover letter or saved answers and they are replaced with the employer and job title from the page, even when the form sits in an embedded frame.
-- **Keeps track:** every application it fills is noted in a log in your browser, with date, company, job title and link, ready to export as CSV. The popup tells you when you applied to the same employer before. You can turn it off.
-- **Answers each question once:** type your reply to a question like "Why do you want to join us?" into the form and LocalApply offers to save it; next time it is filled in for you.
+- **Keeps track:** every application it fills is noted in a log in your browser, with date, company, job title, link and the job description, plus a status and your notes; export it as CSV. The popup tells you when you applied to the same employer before. You can turn it off.
+- **Follows multi-page applications:** after you fill the first step, the next steps of the same application are filled as they appear. When the form has fewer job or school blocks than your profile, it offers to add them.
+- **Answers each question once:** type or pick your reply to a question like "Why do you want to join us?" and LocalApply offers to save it; next time it is filled in for you. The list on the profile page shows how often each answer was used.
 - **Fills single fields:** right-click any form field and choose **Fill this field with** to pick one of your details or saved answers.
 - **Shows what it did:** filled fields get a solid green outline, open required questions a dashed amber one. **Undo** puts everything back.
 - **Never submits:** it doesn't press Submit or Next, doesn't tick consent boxes, and leaves fields you already filled alone.
 - **Several profiles:** keep one per language or kind of job (a German CV, a QA one) and pick it in the popup before you fill.
 - **Looks the way you like:** five colour palettes (Forest, Ocean, Plum, Clay, Graphite), and a light or dark theme that follows your system or stays the way you set it.
 
-It works on ordinary company career pages and on Greenhouse, Ashby, Personio, Recruitee and Teamtailor, with site-specific handling for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply.
+It works on ordinary company career pages and on Greenhouse, Ashby, Personio, Recruitee and Teamtailor, with site-specific handling for Workday, Lever, SmartRecruiters, SAP SuccessFactors and LinkedIn Easy Apply. Workable, iCIMS, Taleo, softgarden, d.vinci, rexx, Umantis and JOIN are recognised too; their handling hasn't been tried on live postings yet, so reports are welcome: **Why wasn't something filled?** in the popup can save a copy of a form for an issue.
 
 ## Installation
 

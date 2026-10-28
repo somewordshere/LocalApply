@@ -1,11 +1,19 @@
 import { ashby } from './ashby';
+import { dvinci } from './dvinci';
 import { greenhouse } from './greenhouse';
+import { icims } from './icims';
+import { join } from './join';
 import { lever } from './lever';
 import { linkedin } from './linkedin';
 import { personio } from './personio';
+import { rexx } from './rexx';
 import { smartrecruiters } from './smartrecruiters';
+import { softgarden } from './softgarden';
 import { successfactors } from './successfactors';
+import { taleo } from './taleo';
 import type { Adapter, PageLocation } from './types';
+import { umantis } from './umantis';
+import { workable } from './workable';
 import { workday } from './workday';
 
 export type { Adapter, PageLocation } from './types';
@@ -24,6 +32,14 @@ export const ADAPTERS: Adapter[] = [
   smartrecruiters,
   successfactors,
   linkedin,
+  workable,
+  icims,
+  taleo,
+  softgarden,
+  dvinci,
+  rexx,
+  umantis,
+  join,
 ];
 
 export function pickAdapter(location: PageLocation, doc: Document): Adapter | null {

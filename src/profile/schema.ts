@@ -67,6 +67,9 @@ export interface CustomAnswer {
   /** Comma-separated phrases; the answer is used when a field label contains one of them. */
   keywords: string;
   answer: string;
+  /** How often LocalApply filled this answer, and when last (ISO 8601). Missing until first used. */
+  uses?: number;
+  lastUsed?: string;
 }
 
 /**
@@ -235,7 +238,13 @@ export function migrate(raw: unknown): Profile {
       if (Array.isArray(value)) {
         out.customAnswers = value
           .filter((a) => a && typeof a.keywords === 'string' && typeof a.answer === 'string')
-          .map((a, i) => ({ id: typeof a.id === 'string' ? a.id : `a${i}`, keywords: a.keywords, answer: a.answer }));
+          .map((a, i) => ({
+            id: typeof a.id === 'string' ? a.id : `a${i}`,
+            keywords: a.keywords,
+            answer: a.answer,
+            ...(typeof a.uses === 'number' && a.uses > 0 ? { uses: a.uses } : {}),
+            ...(typeof a.lastUsed === 'string' ? { lastUsed: a.lastUsed } : {}),
+          }));
       }
     } else if (typeof value === 'string') {
       target[key] = value;

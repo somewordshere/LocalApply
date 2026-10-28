@@ -12,7 +12,16 @@ export interface Application {
   url: string;
   /** The profile that filled it; '' for the first profile. Missing in entries from before 0.8.0. */
   profile?: string;
+  /** Where the application stands, set by the applicant; missing means applied. */
+  status?: ApplicationStatus;
+  /** The applicant's own notes. */
+  notes?: string;
+  /** The job description as the posting gave it, kept because postings disappear. */
+  posting?: string;
 }
+
+export const STATUSES = ['applied', 'interview', 'offer', 'rejected'] as const;
+export type ApplicationStatus = (typeof STATUSES)[number];
 
 const LOG_KEY = 'applicationLog';
 const SETTING_KEY = 'logApplications';
@@ -57,7 +66,10 @@ export function watchLog(onChange: () => void): () => void {
 }
 
 /** Notes a filled application, newest first; the same page within a day refreshes its entry. Off means nothing is kept. */
-export async function recordApplication(entry: Omit<Application, 'id' | 'date'>, now = new Date()): Promise<void> {
+export async function recordApplication(
+  entry: Omit<Application, 'id' | 'date' | 'status' | 'notes'>,
+  now = new Date(),
+): Promise<void> {
   if (!(await loadLogSetting())) return;
   const log = await loadLog();
   const recent = log.find((a) => a.url === entry.url && now.getTime() - Date.parse(a.date) < SAME_APPLICATION_MS);
@@ -68,6 +80,10 @@ export async function recordApplication(entry: Omit<Application, 'id' | 'date'>,
     position: entry.position || recent?.position || '',
     url: entry.url,
     profile: entry.profile ?? recent?.profile ?? '',
+    // What the applicant set stays when the same page is filled again.
+    ...(recent?.status ? { status: recent.status } : {}),
+    ...(recent?.notes ? { notes: recent.notes } : {}),
+    ...(entry.posting || recent?.posting ? { posting: entry.posting || recent?.posting } : {}),
   };
   await saveLog([updated, ...log.filter((a) => a !== recent)]);
 }
@@ -82,6 +98,11 @@ export function earlierApplications(log: Application[], job: Job, now = new Date
     if (job.url && a.url === job.url) return now.getTime() - Date.parse(a.date) >= SAME_APPLICATION_MS;
     return Boolean(company) && companyKey(a.company) === company;
   });
+}
+
+/** Changes the applicant's own fields of one entry: its status and notes. */
+export async function updateApplication(id: string, patch: Pick<Application, 'status' | 'notes'>): Promise<void> {
+  await saveLog((await loadLog()).map((a) => (a.id === id ? { ...a, ...patch } : a)));
 }
 
 export async function removeApplication(id: string): Promise<void> {
@@ -108,8 +129,16 @@ export function logToCsv(log: Application[]): string {
   const FORMULA = /^[=+\-@\t\r]/;
   const cell = (value: string) => `"${(FORMULA.test(value) ? `'${value}` : value).replace(/"/g, '""')}"`;
   const rows = [
-    ['Date', 'Company', 'Position', 'URL', 'Profile'],
-    ...log.map((a) => [a.date.slice(0, 10), a.company, a.position, a.url, a.profile ?? '']),
+    ['Date', 'Company', 'Position', 'URL', 'Profile', 'Status', 'Notes'],
+    ...log.map((a) => [
+      a.date.slice(0, 10),
+      a.company,
+      a.position,
+      a.url,
+      a.profile ?? '',
+      a.status ?? 'applied',
+      a.notes ?? '',
+    ]),
   ];
   return rows.map((row) => row.map(cell).join(',')).join('\r\n') + '\r\n';
 }

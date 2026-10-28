@@ -95,4 +95,19 @@ export interface FillResult {
   unmatched: { label: string; required: boolean }[];
   /** Fields left alone because they already had a value. */
   skipped: number;
+  /** Every field found, with the profile key it matched and what happened to it: "Why wasn't this filled?". */
+  fields?: { label: string; key: string | null; outcome: FieldOutcome }[];
+  /** Saved answers this fill used, by id. */
+  usedAnswers?: string[];
+  /** Job and education blocks on the form, and whether it has a button to add another. */
+  blocks?: Blocks;
+}
+
+export type FieldOutcome = 'filled' | 'missing' | 'unmatched' | 'skipped';
+
+export interface Blocks {
+  experience: number;
+  education: number;
+  addExperience: boolean;
+  addEducation: boolean;
 }

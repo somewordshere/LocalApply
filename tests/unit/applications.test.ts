@@ -25,6 +25,7 @@ const {
   recordApplication,
   removeApplication,
   saveLogSetting,
+  updateApplication,
 } = await import('../../src/core/applications');
 
 const HOUR = 60 * 60 * 1000;
@@ -74,11 +75,25 @@ describe('application log', () => {
         company: 'Acme, "Inc"',
         position: '=HYPERLINK("x")',
         url: 'https://a.example/',
+        status: 'interview',
+        notes: '@call back',
       },
     ]);
     expect(csv).toBe(
-      '"Date","Company","Position","URL","Profile"\r\n"2026-10-22","Acme, ""Inc""","\'=HYPERLINK(""x"")","https://a.example/",""\r\n',
+      '"Date","Company","Position","URL","Profile","Status","Notes"\r\n' +
+        '"2026-10-22","Acme, ""Inc""","\'=HYPERLINK(""x"")","https://a.example/","","interview","\'@call back"\r\n',
     );
+  });
+
+  it('keeps status, notes and the job description when the same page is filled again', async () => {
+    const url = 'https://acme.example/jobs/1';
+    await recordApplication({ company: 'Acme', position: 'QA', url, posting: 'Test things.' }, at(0));
+    const [first] = await loadLog();
+    await updateApplication(first.id, { status: 'interview', notes: 'Call Kim' });
+    await recordApplication({ company: 'Acme', position: 'QA', url }, at(1));
+    const log = await loadLog();
+    expect(log).toHaveLength(1);
+    expect(log[0]).toMatchObject({ status: 'interview', notes: 'Call Kim', posting: 'Test things.' });
   });
 });
 

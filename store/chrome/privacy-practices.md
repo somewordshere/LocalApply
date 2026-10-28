@@ -35,7 +35,7 @@ Adds "Fill this field with" to the right-click menu of form fields, listing the 
 **Host permission** (from the content script that runs on all sites)
 
 ```
-Job application forms are hosted on thousands of employer and applicant-tracking domains and are often embedded in iframes, so the form filler has to be able to run on any page. It reads and fills form fields only when the user clicks "Fill this page", presses the keyboard shortcut or picks an entry from its right-click menu. After a fill it notices answers the user types into questions it could not answer and offers to save them; nothing is kept unless the user presses Save. It never submits forms, and it sends no data anywhere.
+Job application forms are hosted on thousands of employer and applicant-tracking domains and are often embedded in iframes, so the form filler has to be able to run on any page. It reads and fills form fields only when the user clicks "Fill this page", presses the keyboard shortcut or picks an entry from its right-click menu. After a fill it notices answers the user types into questions it could not answer and offers to save them; nothing is kept unless the user presses Save. It also fills the following steps of the same application on the same site (multi-page forms), which the user can turn off. It never submits forms, and it sends no data anywhere.
 ```
 
 ## Remote code
