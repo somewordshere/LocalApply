@@ -266,4 +266,66 @@ export const pl: Translation = {
     many: 'przywróć ręcznie {n} list rozwijanych (przerywana ramka)',
     other: 'przywróć ręcznie {n} listy rozwijanej (przerywana ramka)',
   },
+
+  'learn.title': 'Zapisać te odpowiedzi na następny raz?',
+  'learn.summary': {
+    one: '{n} nowa odpowiedź na pytanie. Zapisać ją na następny raz?',
+    few: '{n} nowe odpowiedzi na pytania. Zapisać je na następny raz?',
+    many: '{n} nowych odpowiedzi na pytania. Zapisać je na następny raz?',
+    other: '{n} nowej odpowiedzi na pytania. Zapisać je na następny raz?',
+  },
+  'learn.review': 'Przejrzyj',
+  'learn.notNow': 'Nie teraz',
+  'learn.hint':
+    'Odznacz to, czego nie chcesz zachować, albo najpierw to zmień. Zapisana odpowiedź zostanie wpisana, gdy pytanie pojawi się ponownie.',
+  'learn.replaces': 'Zastępuje odpowiedź zapisaną wcześniej.',
+  'learn.placeholders':
+    '{company} i {position} oznaczają pracodawcę i stanowisko, więc odpowiedź pasuje do kolejnej aplikacji.',
+  'learn.saved': {
+    one: 'Zapisano {n} odpowiedź',
+    few: 'Zapisano {n} odpowiedzi',
+    many: 'Zapisano {n} odpowiedzi',
+    other: 'Zapisano {n} odpowiedzi',
+  },
+  'notice.placeholdersLeft':
+    'Ta strona nie podaje pracodawcy ani stanowiska: zamień {company} lub {position} samodzielnie.',
+  'menu.fillWith': 'Wypełnij to pole',
+  'menu.fullName': 'Imię i nazwisko',
+  'menu.empty': 'Profil jest jeszcze pusty',
+  'popup.appliedBefore': 'W dzienniku jest już aplikacja do {company}',
+  'popup.filledBefore': 'Ten formularz był już wypełniony',
+  'popup.appliedMore': { one: 'i {n} więcej', few: 'i {n} więcej', many: 'i {n} więcej', other: 'i {n} więcej' },
+  'popup.seeLog': 'Otwórz dziennik aplikacji',
+  'options.howItWorks': 'Jak działa LocalApply',
+  'welcome.pageTitle': 'Witaj · LocalApply',
+  'welcome.title': 'Witaj w LocalApply',
+  'welcome.subtitle':
+    'LocalApply wypełnia formularze rekrutacyjne na podstawie profilu, który zapisujesz raz. Za darmo, bez konta i subskrypcji, działa też offline.',
+  'welcome.start': 'Uzupełnij profil',
+  'welcome.how': 'Jak to działa',
+  'welcome.step1.title': 'Zapisz swoje dane raz',
+  'welcome.step1.text':
+    'Na stronie profilu wpisz imię i nazwisko, dane kontaktowe, doświadczenie, wykształcenie, CV i list motywacyjny. Wszystko zapisuje się podczas pisania.',
+  'welcome.step2.title': 'Otwórz formularz i kliknij Wypełnij',
+  'welcome.step2.text':
+    'Na formularzu rekrutacyjnym kliknij przycisk LocalApply na pasku narzędzi, a potem Wypełnij tę stronę.',
+  'welcome.step2.shortcut': 'Albo naciśnij',
+  'welcome.step2.pin': 'Nie widzisz przycisku? Otwórz menu rozszerzeń (ikona puzzla) i przypnij LocalApply.',
+  'welcome.step3.title': 'Sprawdź formularz i wyślij go samodzielnie',
+  'welcome.step3.text':
+    'Ciągła zielona ramka oznacza to, co zostało wypełnione, przerywana pomarańczowa to, co jeszcze czeka na ciebie. LocalApply nigdy nie klika Wyślij, a Cofnij przywraca wszystko.',
+  'welcome.sampleQuestion': 'Dlaczego chcesz do nas dołączyć?',
+  'welcome.also': 'Poza tym',
+  'welcome.learn':
+    'Zapamiętuje odpowiedzi: odpowiedz na nowe pytanie, a LocalApply zaproponuje zapisanie odpowiedzi na następny raz.',
+  'welcome.menu': 'Wypełnia pojedyncze pola: kliknij pole prawym przyciskiem i wybierz Wypełnij to pole.',
+  'welcome.log':
+    'Prowadzi dziennik: lista miejsc, do których aplikujesz, i przypomnienie, gdy aplikujesz ponownie do tej samej firmy.',
+  'welcome.profiles': 'Kilka profili, na przykład jeden na język albo rodzaj pracy.',
+  'welcome.placeholders':
+    'Pisze do właściwej firmy: {company} i {position} w liście zamieniają się w pracodawcę i stanowisko.',
+  'welcome.privacy.title': 'Twoje dane zostają w tej przeglądarce',
+  'welcome.privacy.text':
+    'LocalApply nie ma serwera, konta ani analityki i nie wysyła żadnych zapytań sieciowych. Twój profil i dokumenty nigdy nie opuszczają twojego urządzenia.',
+  'welcome.later': 'Tę stronę możesz ponownie otworzyć ze strony profilu.',
 };

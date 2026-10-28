@@ -243,4 +243,57 @@ export const en = {
     one: 'change {n} dropdown back by hand (dashed outline)',
     other: 'change {n} dropdowns back by hand (dashed outline)',
   },
+
+  'learn.title': 'Save these answers for next time?',
+  'learn.summary': {
+    one: 'You answered {n} new question. Save it for next time?',
+    other: 'You answered {n} new questions. Save them for next time?',
+  },
+  'learn.review': 'Review',
+  'learn.notNow': 'Not now',
+  'learn.hint':
+    "Untick what you don't want to keep, or change it first. A saved answer is filled in when the question comes up again.",
+  'learn.replaces': 'Replaces the answer you saved before.',
+  'learn.placeholders':
+    '{company} and {position} stand for the employer and job title, so the answer fits the next application.',
+  'learn.saved': { one: 'Saved {n} answer', other: 'Saved {n} answers' },
+  'notice.placeholdersLeft':
+    "This page doesn't name the employer or the job: replace {company} or {position} yourself.",
+  'menu.fillWith': 'Fill this field with',
+  'menu.fullName': 'Full name',
+  'menu.empty': 'Nothing in your profile yet',
+  'popup.appliedBefore': 'You applied to {company} before',
+  'popup.filledBefore': 'You filled this application before',
+  'popup.appliedMore': { one: 'and {n} more', other: 'and {n} more' },
+  'popup.seeLog': 'Open the application log',
+  'options.howItWorks': 'How LocalApply works',
+  'welcome.pageTitle': 'Welcome · LocalApply',
+  'welcome.title': 'Welcome to LocalApply',
+  'welcome.subtitle':
+    'LocalApply fills job application forms from a profile you save once. It is free, needs no account or subscription, and works offline.',
+  'welcome.start': 'Set up your profile',
+  'welcome.how': 'How it works',
+  'welcome.step1.title': 'Save your details once',
+  'welcome.step1.text':
+    'Enter your name, contact details, work history, education, CV and cover letter on your profile page. Everything is saved as you type.',
+  'welcome.step2.title': 'Open an application and click Fill',
+  'welcome.step2.text': 'On a job application form, click the LocalApply button in the toolbar, then Fill this page.',
+  'welcome.step2.shortcut': 'Or press',
+  'welcome.step2.pin': "Can't see the button? Open the extensions menu (the puzzle piece) and pin LocalApply.",
+  'welcome.step3.title': 'Check the form and send it yourself',
+  'welcome.step3.text':
+    'A solid green outline marks what was filled, a dashed amber one what still needs you. LocalApply never presses Submit, and Undo puts everything back.',
+  'welcome.sampleQuestion': 'Why do you want to join us?',
+  'welcome.also': 'It also',
+  'welcome.learn':
+    'Remembers your answers: type an answer to a new question and LocalApply offers to save it for next time.',
+  'welcome.menu': 'Fills single boxes: right-click a field and choose Fill this field with.',
+  'welcome.log': 'Keeps track: a log of where you applied, and a note when you apply to a company again.',
+  'welcome.profiles': 'Keeps several profiles, for example one per language or kind of job.',
+  'welcome.placeholders':
+    'Writes to the right company: {company} and {position} in your cover letter become the employer and job title.',
+  'welcome.privacy.title': 'Your data stays in this browser',
+  'welcome.privacy.text':
+    'LocalApply has no server, no account and no analytics, and makes no network requests. Your profile and documents never leave your device.',
+  'welcome.later': 'You can open this page again from your profile page.',
 } satisfies Record<string, Message>;

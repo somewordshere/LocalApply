@@ -239,4 +239,57 @@ export const nl: Translation = {
     one: 'zet {n} keuzelijst zelf terug (gestippelde rand)',
     other: 'zet {n} keuzelijsten zelf terug (gestippelde rand)',
   },
+
+  'learn.title': 'Deze antwoorden bewaren voor de volgende keer?',
+  'learn.summary': {
+    one: 'Je hebt {n} nieuwe vraag beantwoord. Bewaren voor de volgende keer?',
+    other: 'Je hebt {n} nieuwe vragen beantwoord. Bewaren voor de volgende keer?',
+  },
+  'learn.review': 'Bekijken',
+  'learn.notNow': 'Niet nu',
+  'learn.hint':
+    'Vink uit wat je niet wilt bewaren, of pas het eerst aan. Een bewaard antwoord wordt ingevuld als de vraag terugkomt.',
+  'learn.replaces': 'Vervangt het antwoord dat je eerder hebt bewaard.',
+  'learn.placeholders':
+    '{company} en {position} staan voor werkgever en functie, zodat het antwoord past bij de volgende sollicitatie.',
+  'learn.saved': { one: '{n} antwoord bewaard', other: '{n} antwoorden bewaard' },
+  'notice.placeholdersLeft': 'Deze pagina noemt de werkgever of functie niet: vervang {company} of {position} zelf.',
+  'menu.fillWith': 'Dit veld invullen met',
+  'menu.fullName': 'Volledige naam',
+  'menu.empty': 'Nog niets in je profiel',
+  'popup.appliedBefore': 'Je hebt al eerder bij {company} gesolliciteerd',
+  'popup.filledBefore': 'Je hebt deze sollicitatie al eerder ingevuld',
+  'popup.appliedMore': { one: 'en nog {n}', other: 'en nog {n}' },
+  'popup.seeLog': 'Sollicitatielogboek openen',
+  'options.howItWorks': 'Zo werkt LocalApply',
+  'welcome.pageTitle': 'Welkom · LocalApply',
+  'welcome.title': 'Welkom bij LocalApply',
+  'welcome.subtitle':
+    'LocalApply vult sollicitatieformulieren in vanuit een profiel dat je één keer bewaart. Gratis, zonder account of abonnement, en het werkt offline.',
+  'welcome.start': 'Profiel instellen',
+  'welcome.how': 'Zo werkt het',
+  'welcome.step1.title': 'Bewaar je gegevens één keer',
+  'welcome.step1.text':
+    'Vul op de profielpagina je naam, contactgegevens, werkervaring, opleiding, cv en motivatiebrief in. Alles wordt opgeslagen terwijl je typt.',
+  'welcome.step2.title': 'Open een sollicitatie en klik op Invullen',
+  'welcome.step2.text':
+    'Klik op een sollicitatieformulier op de LocalApply-knop in de werkbalk en daarna op Deze pagina invullen.',
+  'welcome.step2.shortcut': 'Of druk op',
+  'welcome.step2.pin': 'Zie je de knop niet? Open het extensiemenu (het puzzelstukje) en zet LocalApply vast.',
+  'welcome.step3.title': 'Controleer het formulier en verstuur het zelf',
+  'welcome.step3.text':
+    'Een doorgetrokken groene rand toont wat is ingevuld, een gestippelde oranje rand wat nog op jou wacht. LocalApply drukt nooit op Versturen, en Ongedaan maken zet alles terug.',
+  'welcome.sampleQuestion': 'Waarom wil je bij ons werken?',
+  'welcome.also': 'Verder',
+  'welcome.learn':
+    'Onthoudt je antwoorden: beantwoord een nieuwe vraag en LocalApply biedt aan het antwoord te bewaren voor de volgende keer.',
+  'welcome.menu': 'Vult losse velden: klik met rechts in een veld en kies Dit veld invullen met.',
+  'welcome.log': 'Houdt bij waar je solliciteert, met een melding als je opnieuw bij een bedrijf solliciteert.',
+  'welcome.profiles': 'Meerdere profielen, bijvoorbeeld één per taal of soort functie.',
+  'welcome.placeholders':
+    'Schrijft aan het juiste bedrijf: {company} en {position} in je brief worden de werkgever en de functie.',
+  'welcome.privacy.title': 'Je gegevens blijven in deze browser',
+  'welcome.privacy.text':
+    'LocalApply heeft geen server, geen account en geen statistieken, en doet geen netwerkverzoeken. Je profiel en documenten verlaten je apparaat nooit.',
+  'welcome.later': 'Je kunt deze pagina opnieuw openen via de profielpagina.',
 };

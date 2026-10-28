@@ -285,6 +285,9 @@ export default function App() {
             </label>
             <PalettePicker />
             <ThemePicker />
+            <a className="link text-sm" href="welcome.html">
+              {t('options.howItWorks')}
+            </a>
           </div>
         </header>
 

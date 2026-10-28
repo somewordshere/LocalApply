@@ -1,4 +1,5 @@
 import { browser } from 'wxt/browser';
+import { companyKey, type Job } from '../engine/job';
 
 /** One application form LocalApply filled. Kept in this browser only, like the profile. */
 export interface Application {
@@ -69,6 +70,18 @@ export async function recordApplication(entry: Omit<Application, 'id' | 'date'>,
     profile: entry.profile ?? recent?.profile ?? '',
   };
   await saveLog([updated, ...log.filter((a) => a !== recent)]);
+}
+
+/**
+ * Earlier applications to the posting's employer, newest first: the same company under any posting, and
+ * this posting on an earlier day. Filling this page again the same day is still the same application.
+ */
+export function earlierApplications(log: Application[], job: Job, now = new Date()): Application[] {
+  const company = companyKey(job.company ?? '');
+  return log.filter((a) => {
+    if (job.url && a.url === job.url) return now.getTime() - Date.parse(a.date) >= SAME_APPLICATION_MS;
+    return Boolean(company) && companyKey(a.company) === company;
+  });
 }
 
 export async function removeApplication(id: string): Promise<void> {

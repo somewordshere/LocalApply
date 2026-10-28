@@ -239,4 +239,59 @@ export const it: Translation = {
     one: 'ripristina a mano {n} menu a tendina (bordo tratteggiato)',
     other: 'ripristina a mano {n} menu a tendina (bordo tratteggiato)',
   },
+
+  'learn.title': 'Salvare queste risposte per la prossima volta?',
+  'learn.summary': {
+    one: 'Hai risposto a {n} nuova domanda. Salvarla per la prossima volta?',
+    other: 'Hai risposto a {n} nuove domande. Salvarle per la prossima volta?',
+  },
+  'learn.review': 'Rivedi',
+  'learn.notNow': 'Non ora',
+  'learn.hint':
+    'Togli la spunta a ciò che non vuoi tenere, o modificalo prima. Una risposta salvata viene inserita quando la domanda si ripresenta.',
+  'learn.replaces': 'Sostituisce la risposta salvata in precedenza.',
+  'learn.placeholders':
+    '{company} e {position} stanno per azienda e posizione, così la risposta va bene per la prossima candidatura.',
+  'learn.saved': { one: '{n} risposta salvata', other: '{n} risposte salvate' },
+  'notice.placeholdersLeft':
+    'Questa pagina non indica né l’azienda né la posizione: sostituisci tu {company} o {position}.',
+  'menu.fillWith': 'Compila questo campo con',
+  'menu.fullName': 'Nome completo',
+  'menu.empty': 'Il profilo è ancora vuoto',
+  'popup.appliedBefore': 'Hai già inviato una candidatura a {company}',
+  'popup.filledBefore': 'Hai già compilato questa candidatura',
+  'popup.appliedMore': { one: 'e {n} altra', other: 'e altre {n}' },
+  'popup.seeLog': 'Apri il registro delle candidature',
+  'options.howItWorks': 'Come funziona LocalApply',
+  'welcome.pageTitle': 'Benvenuti · LocalApply',
+  'welcome.title': 'Ti diamo il benvenuto in LocalApply',
+  'welcome.subtitle':
+    'LocalApply compila i moduli di candidatura con un profilo che salvi una volta sola. È gratuito, senza account né abbonamento, e funziona offline.',
+  'welcome.start': 'Crea il tuo profilo',
+  'welcome.how': 'Come funziona',
+  'welcome.step1.title': 'Salva i tuoi dati una volta',
+  'welcome.step1.text':
+    'Inserisci nome, contatti, esperienze, formazione, CV e lettera di presentazione nella pagina del profilo. Tutto viene salvato mentre scrivi.',
+  'welcome.step2.title': 'Apri una candidatura e fai clic su Compila',
+  'welcome.step2.text':
+    'Su un modulo di candidatura, fai clic sul pulsante LocalApply nella barra degli strumenti, poi su Compila questa pagina.',
+  'welcome.step2.shortcut': 'Oppure premi',
+  'welcome.step2.pin': 'Non vedi il pulsante? Apri il menu delle estensioni (il pezzo di puzzle) e fissa LocalApply.',
+  'welcome.step3.title': 'Controlla il modulo e invialo tu',
+  'welcome.step3.text':
+    'Un bordo verde continuo indica ciò che è stato compilato, uno arancione tratteggiato ciò che resta a te. LocalApply non preme mai Invia, e Annulla rimette tutto com’era.',
+  'welcome.sampleQuestion': 'Perché vuoi lavorare con noi?',
+  'welcome.also': 'Inoltre',
+  'welcome.learn':
+    'Ricorda le risposte: rispondi a una nuova domanda e LocalApply ti propone di salvarla per la prossima volta.',
+  'welcome.menu': 'Compila singoli campi: clic destro su un campo, poi Compila questo campo con.',
+  'welcome.log':
+    'Tiene traccia: un registro delle candidature, e un avviso quando ti candidi di nuovo presso un’azienda.',
+  'welcome.profiles': 'Più profili, per esempio uno per lingua o per tipo di lavoro.',
+  'welcome.placeholders':
+    'Scrive all’azienda giusta: {company} e {position} nella lettera diventano l’azienda e la posizione.',
+  'welcome.privacy.title': 'I tuoi dati restano in questo browser',
+  'welcome.privacy.text':
+    'LocalApply non ha server, account né statistiche e non fa richieste di rete. Il tuo profilo e i tuoi documenti non lasciano mai il dispositivo.',
+  'welcome.later': 'Puoi riaprire questa pagina dalla pagina del profilo.',
 };

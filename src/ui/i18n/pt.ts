@@ -239,4 +239,58 @@ export const pt: Translation = {
     one: 'reponha manualmente {n} lista pendente (contorno tracejado)',
     other: 'reponha manualmente {n} listas pendentes (contorno tracejado)',
   },
+
+  'learn.title': 'Guardar estas respostas para a próxima vez?',
+  'learn.summary': {
+    one: 'Respondeu a {n} pergunta nova. Guardá-la para a próxima vez?',
+    other: 'Respondeu a {n} perguntas novas. Guardá-las para a próxima vez?',
+  },
+  'learn.review': 'Rever',
+  'learn.notNow': 'Agora não',
+  'learn.hint':
+    'Desmarque o que não quer guardar, ou altere-o primeiro. Uma resposta guardada é preenchida quando a pergunta voltar a aparecer.',
+  'learn.replaces': 'Substitui a resposta que guardou antes.',
+  'learn.placeholders':
+    '{company} e {position} representam a empresa e a vaga, para que a resposta sirva na próxima candidatura.',
+  'learn.saved': { one: '{n} resposta guardada', other: '{n} respostas guardadas' },
+  'notice.placeholdersLeft':
+    'Esta página não indica a empresa nem a vaga: substitua {company} ou {position} manualmente.',
+  'menu.fillWith': 'Preencher este campo com',
+  'menu.fullName': 'Nome completo',
+  'menu.empty': 'O perfil ainda está vazio',
+  'popup.appliedBefore': 'Já se candidatou à {company}',
+  'popup.filledBefore': 'Já preencheu esta candidatura',
+  'popup.appliedMore': { one: 'e mais {n}', other: 'e mais {n}' },
+  'popup.seeLog': 'Abrir o registo de candidaturas',
+  'options.howItWorks': 'Como funciona o LocalApply',
+  'welcome.pageTitle': 'Boas-vindas · LocalApply',
+  'welcome.title': 'Boas-vindas ao LocalApply',
+  'welcome.subtitle':
+    'O LocalApply preenche formulários de candidatura a partir de um perfil que guarda uma só vez. É gratuito, sem conta nem subscrição, e funciona offline.',
+  'welcome.start': 'Criar o seu perfil',
+  'welcome.how': 'Como funciona',
+  'welcome.step1.title': 'Guarde os seus dados uma vez',
+  'welcome.step1.text':
+    'Escreva o nome, os contactos, a experiência, a formação, o CV e a carta de apresentação na página do perfil. Tudo é guardado enquanto escreve.',
+  'welcome.step2.title': 'Abra uma candidatura e clique em Preencher',
+  'welcome.step2.text':
+    'Num formulário de candidatura, clique no botão LocalApply da barra de ferramentas e depois em Preencher esta página.',
+  'welcome.step2.shortcut': 'Ou prima',
+  'welcome.step2.pin': 'Não vê o botão? Abra o menu de extensões (a peça de puzzle) e afixe o LocalApply.',
+  'welcome.step3.title': 'Verifique o formulário e envie-o pessoalmente',
+  'welcome.step3.text':
+    'Um contorno verde contínuo marca o que foi preenchido, um laranja tracejado o que ainda falta. O LocalApply nunca carrega em Enviar, e Anular repõe tudo como estava.',
+  'welcome.sampleQuestion': 'Porque quer trabalhar connosco?',
+  'welcome.also': 'Além disso',
+  'welcome.learn':
+    'Lembra-se das respostas: responda a uma pergunta nova e o LocalApply propõe guardá-la para a próxima vez.',
+  'welcome.menu': 'Preenche campos soltos: clique com o botão direito num campo e escolha Preencher este campo com.',
+  'welcome.log':
+    'Mantém o registo: uma lista de onde se candidatou, e um aviso quando se candidata outra vez a uma empresa.',
+  'welcome.profiles': 'Vários perfis, por exemplo um por idioma ou tipo de vaga.',
+  'welcome.placeholders': 'Escreve à empresa certa: {company} e {position} na carta passam a ser a empresa e a vaga.',
+  'welcome.privacy.title': 'Os seus dados ficam neste navegador',
+  'welcome.privacy.text':
+    'O LocalApply não tem servidor, conta nem estatísticas, e não faz pedidos de rede. O seu perfil e os seus documentos nunca saem do seu dispositivo.',
+  'welcome.later': 'Pode voltar a abrir esta página a partir da página do perfil.',
 };

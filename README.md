@@ -25,8 +25,9 @@ Everything stays in the browser: no account, no server, no AI service, no networ
 - **Fills the repetitive part:** name, email, phone (including country-code pickers), address, date of birth, LinkedIn, GitHub, Xing and portfolio links, salary expectation, notice period, start date, years of experience, work authorisation, visa sponsorship and relocation questions, work history and education (one entry per block, even on forms that list several jobs or schools), highest education level, spoken languages and their level, driving licence, travel and salary-range questions, CV and cover letter.
 - **Works in eight languages:** recognises form labels in English, German, French, Spanish, Italian, Dutch, Portuguese and Polish, and the interface itself speaks all eight.
 - **Writes to the right company:** put `{company}` and `{position}` in your cover letter or saved answers and they are replaced with the employer and job title from the page, even when the form sits in an embedded frame.
-- **Keeps track:** every application it fills is noted in a log in your browser, with date, company, job title and link, ready to export as CSV. You can turn it off.
-- **Answers each question once:** save your reply to a recurring question like "How did you hear about us?" and it is filled in next time.
+- **Keeps track:** every application it fills is noted in a log in your browser, with date, company, job title and link, ready to export as CSV. The popup tells you when you applied to the same employer before. You can turn it off.
+- **Answers each question once:** type your reply to a question like "Why do you want to join us?" into the form and LocalApply offers to save it; next time it is filled in for you.
+- **Fills single fields:** right-click any form field and choose **Fill this field with** to pick one of your details or saved answers.
 - **Shows what it did:** filled fields get a solid green outline, open required questions a dashed amber one. **Undo** puts everything back.
 - **Never submits:** it doesn't press Submit or Next, doesn't tick consent boxes, and leaves fields you already filled alone.
 - **Several profiles:** keep one per language or kind of job (a German CV, a QA one) and pick it in the popup before you fill.
@@ -45,15 +46,15 @@ Each version's folder in [`releases/`](releases/) also has the source zip, relea
 
 ## 🧭 How to use it
 
-1. Enter your details once on the profile page. It opens by itself when you install LocalApply; later, click the LocalApply toolbar button, then **Edit profile**.
+1. Enter your details once on the profile page. Installing LocalApply opens a welcome page that explains it and leads there; later, click the LocalApply toolbar button, then **Edit profile**.
 2. Open a job application, click the LocalApply toolbar button and then **Fill this page**, or press **Alt+Shift+F**.
-3. Check the result, finish the outlined questions, and submit the form yourself.
+3. Check the result, finish the outlined questions, and submit the form yourself. Answers you type in are offered for saving, so the next form gets them.
 
 Your profile can be exported to a file and imported again, or deleted with one click.
 
 ## 🔐 Privacy
 
-Your profile, documents and saved answers are stored in your browser and never leave it. LocalApply makes no network requests, has no account and no analytics, and reads a page only when you ask it to fill one. It needs access to all websites because job applications are hosted on thousands of employer and recruiting sites, often inside embedded frames. Read the full [privacy policy](PRIVACY.md).
+Your profile, documents and saved answers are stored in your browser and never leave it. LocalApply makes no network requests, has no account and no analytics, and reads a page only once you ask it to fill one (after that, it notices answers you type so it can offer to save them; nothing is kept unless you press Save). It needs access to all websites because job applications are hosted on thousands of employer and recruiting sites, often inside embedded frames. Read the full [privacy policy](PRIVACY.md).
 
 ## 📦 Recent releases
 

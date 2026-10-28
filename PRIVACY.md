@@ -17,13 +17,15 @@ What you enter on its profile page, and the application log described below:
 
 To decide which form field needs which piece of your information, LocalApply reads the labels and structure of the form on the page you ask it to fill. When you ask it to fill a page, it also reads the employer's name and the job title from that page, to put them into your cover letter and saved answers where you wrote {company} or {position}. It never sends anything it reads from web pages anywhere, and it does not record the sites you browse.
 
+After it has filled a page, LocalApply notices what you type into the questions it couldn't answer, so it can offer to save those answers for next time. What you type is held only in that page's memory, is never written anywhere unless you press Save, and is forgotten when you leave the page. Password, payment and identity-number questions are never offered. When you choose an entry from its right-click menu ("Fill this field with"), it writes that one value into the field you clicked.
+
 ## Application log
 
-So you can see where you applied, LocalApply notes each application form it fills: the date, the employer's name and job title as read from the page, the name of the profile that filled it, and the page's address without anything after it (no "?…" query, which can contain tokens). The log is on unless you turn it off, and is stored only in your browser like your profile. On the profile page, under Applications, you can turn it off, remove single entries, clear it, or export it as a CSV file. Nothing is noted for pages you only visit, and "Delete all data" clears the log too.
+So you can see where you applied, LocalApply notes each application form it fills: the date, the employer's name and job title as read from the page, the name of the profile that filled it, and the page's address without anything after it (no "?…" query, which can contain tokens). The log is on unless you turn it off, and is stored only in your browser like your profile. On the profile page, under Applications, you can turn it off, remove single entries, clear it, or export it as a CSV file. Nothing is noted for pages you only visit, and "Delete all data" clears the log too. When you open LocalApply's toolbar button on a job page, it compares that page's employer and address with the log, in your browser, to tell you if you applied there before.
 
 ## How the information is used
 
-Solely to fill application forms you choose to fill: when you click "Fill this page" or press the keyboard shortcut. LocalApply never submits a form for you.
+Solely to fill application forms you choose to fill: when you click "Fill this page", press the keyboard shortcut or choose "Fill this field with" from the right-click menu. LocalApply never submits a form for you.
 
 ## Where it is stored
 

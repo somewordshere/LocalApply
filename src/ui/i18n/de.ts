@@ -239,4 +239,60 @@ export const de: Translation = {
     one: '{n} Auswahlliste bitte selbst zurückstellen (gestrichelter Rahmen)',
     other: '{n} Auswahllisten bitte selbst zurückstellen (gestrichelter Rahmen)',
   },
+
+  'learn.title': 'Diese Antworten fürs nächste Mal speichern?',
+  'learn.summary': {
+    one: 'Du hast {n} neue Frage beantwortet. Fürs nächste Mal speichern?',
+    other: 'Du hast {n} neue Fragen beantwortet. Fürs nächste Mal speichern?',
+  },
+  'learn.review': 'Ansehen',
+  'learn.notNow': 'Nicht jetzt',
+  'learn.hint':
+    'Nimm den Haken weg bei allem, was du nicht behalten willst, oder ändere es vorher. Eine gespeicherte Antwort wird eingetragen, wenn die Frage wieder kommt.',
+  'learn.replaces': 'Ersetzt die Antwort, die du vorher gespeichert hast.',
+  'learn.placeholders':
+    '{company} und {position} stehen für Arbeitgeber und Stelle, damit die Antwort zur nächsten Bewerbung passt.',
+  'learn.saved': { one: '{n} Antwort gespeichert', other: '{n} Antworten gespeichert' },
+  'notice.placeholdersLeft':
+    'Diese Seite nennt weder Arbeitgeber noch Stelle: Ersetze {company} oder {position} selbst.',
+  'menu.fillWith': 'Dieses Feld ausfüllen mit',
+  'menu.fullName': 'Vollständiger Name',
+  'menu.empty': 'Noch nichts im Profil',
+  'popup.appliedBefore': 'Du hast dich schon bei {company} beworben',
+  'popup.filledBefore': 'Du hast diese Bewerbung schon einmal ausgefüllt',
+  'popup.appliedMore': { one: 'und {n} weitere', other: 'und {n} weitere' },
+  'popup.seeLog': 'Bewerbungsliste öffnen',
+  'options.howItWorks': 'So funktioniert LocalApply',
+  'welcome.pageTitle': 'Willkommen · LocalApply',
+  'welcome.title': 'Willkommen bei LocalApply',
+  'welcome.subtitle':
+    'LocalApply füllt Bewerbungsformulare aus einem Profil aus, das du einmal anlegst. Kostenlos, ohne Konto und ohne Abo, und es funktioniert offline.',
+  'welcome.start': 'Profil anlegen',
+  'welcome.how': 'So funktioniert es',
+  'welcome.step1.title': 'Einmal deine Angaben speichern',
+  'welcome.step1.text':
+    'Trag auf der Profilseite Name, Kontaktdaten, Berufserfahrung, Ausbildung, Lebenslauf und Anschreiben ein. Alles wird beim Tippen gespeichert.',
+  'welcome.step2.title': 'Bewerbung öffnen und ausfüllen lassen',
+  'welcome.step2.text':
+    'Klicke auf einem Bewerbungsformular in der Symbolleiste auf LocalApply und dann auf Diese Seite ausfüllen.',
+  'welcome.step2.shortcut': 'Oder drücke',
+  'welcome.step2.pin':
+    'Du siehst das Symbol nicht? Öffne das Erweiterungsmenü (das Puzzleteil) und hefte LocalApply an.',
+  'welcome.step3.title': 'Formular prüfen und selbst absenden',
+  'welcome.step3.text':
+    'Ein durchgezogener grüner Rahmen zeigt, was ausgefüllt wurde, ein gestrichelter gelber, was noch du erledigen musst. LocalApply drückt nie auf Absenden, und Rückgängig stellt alles wieder her.',
+  'welcome.sampleQuestion': 'Warum möchtest du zu uns?',
+  'welcome.also': 'Außerdem',
+  'welcome.learn':
+    'Merkt sich Antworten: Beantworte eine neue Frage, und LocalApply bietet an, die Antwort fürs nächste Mal zu speichern.',
+  'welcome.menu': 'Füllt einzelne Felder: Rechtsklick in ein Feld, dann Dieses Feld ausfüllen mit.',
+  'welcome.log':
+    'Behält den Überblick: eine Liste, wo du dich beworben hast, und ein Hinweis, wenn du dich erneut bei einer Firma bewirbst.',
+  'welcome.profiles': 'Mehrere Profile, zum Beispiel eins pro Sprache oder Art von Stelle.',
+  'welcome.placeholders':
+    'Schreibt an die richtige Firma: {company} und {position} im Anschreiben werden zu Arbeitgeber und Stelle.',
+  'welcome.privacy.title': 'Deine Daten bleiben in diesem Browser',
+  'welcome.privacy.text':
+    'LocalApply hat keinen Server, kein Konto und keine Analyse und stellt keine Netzwerkanfragen. Dein Profil und deine Dokumente verlassen nie dein Gerät.',
+  'welcome.later': 'Du kannst diese Seite jederzeit über die Profilseite wieder öffnen.',
 };

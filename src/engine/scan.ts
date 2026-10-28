@@ -207,6 +207,20 @@ function addTo(groups: Map<string, HTMLInputElement[]>, key: string, input: HTML
   else groups.set(key, [input]);
 }
 
+/**
+ * The field one control (or something inside it, such as a paragraph of a rich text editor) belongs to,
+ * described as scan() would; null for anything scan() skips. Radios and checkboxes come back on their own.
+ */
+export function fieldOf(target: Element): Field | null {
+  const el = target.closest<HTMLElement>(FIELD_SELECTOR);
+  if (!el) return null;
+  const kind = kindOf(el);
+  if (!kind || !usable(el, kind)) return null;
+  const options: FieldOption[] =
+    el instanceof HTMLSelectElement ? [...el.options].map((o) => ({ text: o.text, value: o.value, el: o })) : [];
+  return describe(el, kind, labelOf(el), options);
+}
+
 /** Finds every fillable control under root, including inside open shadow roots. */
 export function scan(root: ParentNode): Field[] {
   const found: HTMLElement[] = [];

@@ -51,12 +51,17 @@ export function matchField(field: Field, hints: Hint[] = []): FieldKey | null {
 }
 
 /** Returns the saved answer whose keywords appear as whole words in the field label. */
-export function matchCustom(field: Field, answers: CustomAnswer[]): string | null {
+/** The saved answer whose keywords the field's label contains. */
+export function findCustom(field: Field, answers: CustomAnswer[]): CustomAnswer | null {
   const label = norm(field.label);
   if (!label) return null;
   for (const entry of answers) {
     const keys = entry.keywords.split(',').map(norm).filter(Boolean);
-    if (entry.answer && keys.some((k) => phrases([escapeRegex(k)]).test(label))) return entry.answer;
+    if (entry.answer && keys.some((k) => phrases([escapeRegex(k)]).test(label))) return entry;
   }
   return null;
+}
+
+export function matchCustom(field: Field, answers: CustomAnswer[]): string | null {
+  return findCustom(field, answers)?.answer ?? null;
 }

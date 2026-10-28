@@ -25,6 +25,13 @@ popup  ◄──────────── fill-start / fill-result messages
    - `undo.ts` records each field's state just before it is filled, so the last fill can be taken back. Custom dropdowns keep their choice and are listed for the applicant to change by hand.
    - `index.ts` orchestrates this and skips newsletter forms that share the page with the application.
 4. **Result.** The popup collects one result per frame and lists unanswered questions, each with "Save answer", which adds a custom answer to the profile.
+5. **Learning.** After a fill, the content script listens for `focusout` in that frame. `engine/learn.ts` turns what was typed into a question with no profile key into a `Learned` answer (free text only, sensitive questions skipped, employer and job title turned back into placeholders). The frame keeps them in memory and shows a card (`src/ui/learn-card.ts`); Save sends `save-answers` to the background, which writes them into the active profile.
+
+Other paths into a page:
+
+- **Right-click menu.** `src/core/menu.ts` builds "Fill this field with" in the background from the active profile and rebuilds it when the profile or the interface language changes. Every frame remembers where its last right-click landed; choosing an item sends `fill-field` to that frame, which fills that one control.
+- **Earlier applications.** When the popup opens, it asks the top frame for the posting and checks the application log with `earlierApplications()` (same employer by `companyKey()`, or the same address on an earlier day).
+- **Welcome page.** `entrypoints/welcome/` opens on install and leads to the profile page.
 
 ## Data
 
@@ -47,6 +54,9 @@ Nothing leaves the browser. The extension has no network code; keep it that way,
 | Which elements count as fields, label finding | `src/engine/scan.ts`                                                         |
 | Profile page                                  | `entrypoints/options/` (field list in `fields.ts`, cards in `sections/`)     |
 | Popup                                         | `entrypoints/popup/App.tsx`                                                  |
+| Welcome page (opens on install)               | `entrypoints/welcome/App.tsx`                                                |
+| Right-click menu                              | `src/core/menu.ts`                                                           |
+| Which typed answers are offered for saving    | `src/engine/learn.ts`                                                        |
 | Interface text, translations                  | `src/ui/i18n/` (`en.ts` is the base; every language must have every message) |
 | Manifest, permissions, build                  | `wxt.config.ts`                                                              |
 

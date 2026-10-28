@@ -1,8 +1,10 @@
 import { defineBackground } from 'wxt/utils/define-background';
 import { browser } from 'wxt/browser';
 import { logUrl, recordApplication } from '@/src/core/applications';
-import { fillTab } from '@/src/core/fill';
-import { activeProfileName } from '@/src/profile/store';
+import { fillTab, readTabJob } from '@/src/core/fill';
+import { isEditItem, menuValue, refreshMenu, watchMenu } from '@/src/core/menu';
+import { saveLearned, type Learned } from '@/src/engine/learn';
+import { activeProfileName, loadIndex, loadProfile, loadProfileById, saveProfile } from '@/src/profile/store';
 import type { Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { iconPath, loadPalette, watchPalette, type Palette } from '@/src/ui/palette';
@@ -27,10 +29,30 @@ export default defineBackground(() => {
   browser.runtime.onStartup.addListener(showSavedIcon);
   watchPalette(showIcon);
 
-  // A fresh install starts on the profile page: nothing can be filled until it has details.
+  // A fresh install starts on the welcome page, which explains LocalApply and leads to the profile.
   browser.runtime.onInstalled.addListener(({ reason }) => {
-    if (reason === 'install') void browser.runtime.openOptionsPage();
+    if (reason === 'install') void browser.tabs.create({ url: browser.runtime.getURL('/welcome.html') });
   });
+
+  // "Fill this field with": built from the active profile, rebuilt when it changes.
+  refreshMenu(0);
+  watchMenu();
+  browser.contextMenus.onClicked.addListener(async (info, tab) => {
+    const id = String(info.menuItemId);
+    if (isEditItem(id)) return void browser.runtime.openOptionsPage();
+    if (tab?.id === undefined) return;
+    const value = menuValue(id, await loadProfile());
+    if (value === null) return;
+    const job = await readTabJob(tab.id);
+    const message: Message = { type: 'fill-field', value, job };
+    browser.tabs.sendMessage(tab.id, message, { frameId: info.frameId ?? 0 }).catch(() => {});
+  });
+
+  /** Answers typed into a form, saved into the active profile. */
+  const saveAnswers = async (answers: Learned[]) => {
+    const { active } = await loadIndex();
+    await saveProfile(saveLearned(await loadProfileById(active), answers), active);
+  };
 
   browser.commands.onCommand.addListener(async (command) => {
     if (command !== 'fill-form') return;
@@ -71,5 +93,7 @@ export default defineBackground(() => {
       noteFill(sender.tab.id, sender.tab.url, message.result.filled.length, message.job);
     if (message?.type === 'relay-fill') void fillTab(sender.tab.id);
     if (message?.type === 'relay-undo') sendToTab(sender.tab.id, { type: 'undo' });
+    // The reply tells the page the answers are saved.
+    if (message?.type === 'save-answers') return saveAnswers(message.answers).then(() => true);
   });
 });

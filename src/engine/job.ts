@@ -72,6 +72,41 @@ export function readJob(doc: Document): Job {
   };
 }
 
+/** "GmbH", "Inc.", "Sp. z o.o." and the like at the end of a company name. */
+const LEGAL_FORM =
+  /[\s,]+(?:gmbh(?:\s*&\s*co\.?\s*kg)?|ag|se|kg|ohg|ug(?:\s*\(haftungsbeschränkt\))?|e\.\s?v\.|inc\.?|llc|ltd\.?|limited|plc|corp\.?|corporation|s\.\s?a\.|sas|s\.?r\.?l\.?|s\.?p\.?a\.?|b\.\s?v\.|bv|n\.\s?v\.|nv|sp\.\s?z\s?o\.\s?o\.|s\.\s?l\.|lda\.?)$/i;
+
+/** The company name without its legal form: "Acme GmbH" is "Acme". */
+export function shortCompany(name: string): string {
+  return clean(name).replace(LEGAL_FORM, '').trim();
+}
+
+/** A company name reduced for comparing: "ACME GmbH", "Acme" and "acme." are the same employer. */
+export function companyKey(name: string): string {
+  return shortCompany(name)
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+}
+
+const asWord = (s: string) =>
+  new RegExp(`(?<![\\p{L}\\p{N}])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\p{L}\\p{N}])`, 'giu');
+
+/**
+ * The reverse of fillPlaceholders: the posting's job title and employer in a text become {position} and
+ * {company}, so an answer written for one application fits the next.
+ */
+export function withPlaceholders(text: string, job: Job | undefined): string {
+  let out = text;
+  const position = clean(job?.position);
+  if (position.length > 1) out = out.replace(asWord(position), '{position}');
+  const company = clean(job?.company);
+  for (const name of new Set([company, shortCompany(company)])) {
+    if (name.length > 1) out = out.replace(asWord(name), '{company}');
+  }
+  return out;
+}
+
 const PLACEHOLDER = /\{\s*(company|employer|position|role|job|title)\s*\}/gi;
 
 /**

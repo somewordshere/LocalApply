@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { browser } from 'wxt/browser';
 import type { FillResult } from '@/src/engine/types';
 import type { UndoResult } from '@/src/engine/undo';
-import { fillTab } from '@/src/core/fill';
+import { earlierApplications, loadLog, type Application } from '@/src/core/applications';
+import { fillTab, readTabJob } from '@/src/core/fill';
+import type { Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { questionKeywords } from '@/src/profile/schema';
 import { loadIndex, loadProfile, saveProfile, switchProfile, type ProfileIndex } from '@/src/profile/store';
@@ -73,6 +75,38 @@ function SaveAnswer({ label }: { label: string }) {
   );
 }
 
+/** Says when the log shows an earlier application to this employer, so nobody applies twice by accident. */
+function AppliedBefore({ earlier, job }: { earlier: Application[]; job: Job }) {
+  const { lang, t } = useI18n();
+  const company = job.company || earlier[0].company;
+  const date = (iso: string) => new Intl.DateTimeFormat(lang, { dateStyle: 'medium' }).format(new Date(iso));
+  const SHOWN = 3;
+  return (
+    <div className="mb-3 rounded-md border border-warn/30 bg-warn/10 px-3 py-2 text-sm">
+      <p className="font-semibold text-warn">
+        {company ? t('popup.appliedBefore', { company }) : t('popup.filledBefore')}
+      </p>
+      <ul className="mt-1 space-y-0.5 text-ink-soft">
+        {earlier.slice(0, SHOWN).map((a) => (
+          <li key={a.id}>
+            {date(a.date)}
+            {a.position && ` · ${a.position}`}
+          </li>
+        ))}
+      </ul>
+      {earlier.length > SHOWN && (
+        <p className="text-xs text-ink-faint">{t('popup.appliedMore', { n: earlier.length - SHOWN })}</p>
+      )}
+      <button
+        className="link mt-1 text-xs"
+        onClick={() => void browser.tabs.create({ url: browser.runtime.getURL('/options.html#applications') })}
+      >
+        {t('popup.seeLog')}
+      </button>
+    </div>
+  );
+}
+
 /** Explains the outlines on the page by line style as well as colour. */
 function Legend() {
   const { t } = useI18n();
@@ -98,12 +132,20 @@ export default function App() {
   const [undone, setUndone] = useState<UndoResult>(NOTHING_UNDONE);
   const [profileEmpty, setProfileEmpty] = useState(false);
   const [profiles, setProfiles] = useState<ProfileIndex | null>(null);
+  const [earlier, setEarlier] = useState<{ job: Job; list: Application[] } | null>(null);
   const pending = useRef(0);
   const replied = useRef(false);
 
   useEffect(() => {
     loadProfile().then((p) => setProfileEmpty(!p.firstName && !p.lastName && !p.email));
     void loadIndex().then(setProfiles);
+    void (async () => {
+      const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+      const job = tab?.id === undefined ? undefined : await readTabJob(tab.id);
+      if (!job) return;
+      const list = earlierApplications(await loadLog(), job);
+      if (list.length) setEarlier({ job, list });
+    })();
 
     const onMessage = (message: Message) => {
       if (message?.type === 'fill-start') {
@@ -166,6 +208,8 @@ export default function App() {
           {t('popup.profileEmpty')}
         </p>
       )}
+
+      {earlier && <AppliedBefore earlier={earlier.list} job={earlier.job} />}
 
       {profiles && profiles.list.length > 1 && (
         <label className="mb-3 flex items-center gap-2 text-sm text-ink-soft">

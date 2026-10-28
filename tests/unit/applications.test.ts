@@ -16,8 +16,16 @@ vi.mock('wxt/browser', () => ({
   },
 }));
 
-const { clearLog, loadLog, logToCsv, logUrl, recordApplication, removeApplication, saveLogSetting } =
-  await import('../../src/core/applications');
+const {
+  clearLog,
+  earlierApplications,
+  loadLog,
+  logToCsv,
+  logUrl,
+  recordApplication,
+  removeApplication,
+  saveLogSetting,
+} = await import('../../src/core/applications');
 
 const HOUR = 60 * 60 * 1000;
 const at = (hours: number) => new Date(Date.UTC(2026, 9, 22, 9) + hours * HOUR);
@@ -71,5 +79,34 @@ describe('application log', () => {
     expect(csv).toBe(
       '"Date","Company","Position","URL","Profile"\r\n"2026-10-22","Acme, ""Inc""","\'=HYPERLINK(""x"")","https://a.example/",""\r\n',
     );
+  });
+});
+
+describe('earlier applications', () => {
+  const entry = (company: string, url: string, hours: number) => ({
+    id: `${company}-${hours}`,
+    date: at(hours).toISOString(),
+    company,
+    position: 'QA',
+    url,
+  });
+  const log = [
+    entry('ACME GmbH', 'https://acme.example/jobs/2', 20),
+    entry('Beta', 'https://beta.example/apply', 10),
+    entry('', 'https://jobs.example/7', 0),
+  ];
+
+  it('finds the same employer under any posting, ignoring legal form and case', () => {
+    const found = earlierApplications(log, { company: 'Acme', url: 'https://acme.example/jobs/9' }, at(30));
+    expect(found.map((a) => a.id)).toEqual(['ACME GmbH-20']);
+  });
+
+  it('finds the same posting from an earlier day, but not a refill the same day', () => {
+    expect(earlierApplications(log, { url: 'https://jobs.example/7' }, at(30)).map((a) => a.id)).toEqual(['-0']);
+    expect(earlierApplications(log, { url: 'https://jobs.example/7' }, at(2))).toEqual([]);
+  });
+
+  it('finds nothing for a page that names no employer and is new', () => {
+    expect(earlierApplications(log, { url: 'https://new.example/' }, at(30))).toEqual([]);
   });
 });

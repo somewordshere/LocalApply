@@ -76,15 +76,22 @@ try {
       await chrome.tabs.sendMessage(tab.id, { type: 'fill' });
     });
 
-  await step('installing opens the profile page with a note on where to start', async () => {
+  await step('installing opens the welcome page, which leads to the profile page', async () => {
     // The tab may already exist, still loading, by the time this runs; look for it rather than wait for a new one.
     let welcome;
     for (let tries = 0; !welcome && tries < 50; tries++) {
-      welcome = context.pages().find((page) => page.url() === `chrome-extension://${extensionId}/options.html`);
+      welcome = context.pages().find((page) => page.url() === `chrome-extension://${extensionId}/welcome.html`);
       if (!welcome) await new Promise((r) => setTimeout(r, 100));
     }
-    assert.ok(welcome, 'the profile page opened by itself');
-    await welcome.getByText(/^Start here:/).waitFor();
+    assert.ok(welcome, 'the welcome page opened by itself');
+    await welcome.getByRole('heading', { name: 'Welcome to LocalApply' }).waitFor();
+    await welcome.getByText('Alt+Shift+F').waitFor();
+    const opened = context.waitForEvent('page');
+    await welcome.getByRole('button', { name: 'Set up your profile' }).first().click();
+    const options = await opened;
+    await options.waitForURL(`chrome-extension://${extensionId}/options.html`);
+    await options.getByText(/^Start here:/).waitFor();
+    await options.close();
     await welcome.close();
   });
 
@@ -291,6 +298,21 @@ try {
     await options.close();
   });
 
+  await step('the popup says when the log holds an earlier application to the same employer', async () => {
+    // Another posting of the same employer (the route above serves Acme's posting for every path).
+    const job = await context.newPage();
+    await job.goto('https://jobs.example.com/acme/developer');
+    const popup = await context.newPage();
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    // The popup looks at the active tab when it opens: open it again while the posting is in front.
+    await job.bringToFront();
+    await popup.reload();
+    await popup.getByText('You applied to Acme before').waitFor();
+    await popup.getByText(/QA Engineer/).waitFor();
+    await popup.close();
+    await job.close();
+  });
+
   await step('work experience: jobs are added, reordered and saved as a list', async () => {
     const options = await context.newPage();
     await options.goto(`chrome-extension://${extensionId}/options.html#experience`);
@@ -416,6 +438,48 @@ try {
     await options.getByText('Light', { exact: true }).click();
     assert.equal(await paper(options), light);
     await options.close();
+  });
+
+  await step('an answer typed into the form after a fill is offered, edited and saved', async () => {
+    const page = await context.newPage();
+    await page.goto('https://boards.greenhouse.io/acme/jobs/1');
+    await page.bringToFront();
+    await fillActiveTab();
+    await page.getByRole('status').filter({ hasText: 'Filled' }).waitFor();
+    await page.fill('#why', 'I have used the product for years.');
+    await page.press('#why', 'Tab');
+    const card = page.getByRole('region', { name: 'Save these answers for next time?' });
+    await card.getByText('You answered 1 new question. Save it for next time?').waitFor();
+    await card.getByRole('button', { name: 'Review' }).click();
+    await card.getByLabel('Answer for Why do you want to join us?').fill('I have used the product since 2020.');
+    await card.getByRole('button', { name: 'Save', exact: true }).click();
+    await page.getByRole('status').filter({ hasText: 'Saved 1 answer' }).waitFor();
+    assert.deepEqual(
+      (await storedProfile()).customAnswers.find((a) => a.keywords === 'Why do you want to join us?')?.answer,
+      'I have used the product since 2020.',
+    );
+    // Leaving the box again offers nothing: the answer is saved.
+    await page.focus('#why');
+    await page.press('#why', 'Tab');
+    await page.waitForTimeout(300);
+    assert.equal(await card.count(), 0);
+    await page.close();
+  });
+
+  await step('"Fill this field with" puts the chosen text into the right-clicked box', async () => {
+    const page = await context.newPage();
+    await page.goto('https://boards.greenhouse.io/acme/jobs/2');
+    await page.bringToFront();
+    await page.click('#why', { button: 'right' }).catch(() => {});
+    await page.keyboard.press('Escape');
+    // What the background does when a menu item is chosen (entrypoints/background.ts).
+    await worker.evaluate(async () => {
+      const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+      await chrome.tabs.sendMessage(tab.id, { type: 'fill-field', value: 'Hello {company}', job: { company: 'Acme' } });
+    });
+    await page.waitForFunction(() => document.querySelector('#why')?.value === 'Hello Acme');
+    assert.equal(await page.inputValue('#first_name'), '', 'only the clicked box');
+    await page.close();
   });
 
   await step('no button and no errors on an ordinary page', async () => {

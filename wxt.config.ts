@@ -33,7 +33,8 @@ export default defineConfig({
     name: browser === 'firefox' ? '__MSG_extNameFirefox__' : '__MSG_extName__',
     short_name: 'LocalApply',
     description: '__MSG_extDescription__',
-    permissions: ['storage', 'unlimitedStorage'],
+    // contextMenus: "Fill this field with" on a right-click into a form field. It shows no install warning.
+    permissions: ['storage', 'unlimitedStorage', 'contextMenus'],
     commands: {
       'fill-form': {
         suggested_key: { default: 'Alt+Shift+F' },

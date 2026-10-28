@@ -2,12 +2,17 @@ import { defineContentScript } from 'wxt/utils/define-content-script';
 import { browser } from 'wxt/browser';
 import { pickAdapter } from '@/src/adapters';
 import { fillPage, undoLastFill, type FillResult, type UndoResult } from '@/src/engine';
+import { fillField } from '@/src/engine/fill';
+import { learnFrom, type Learned } from '@/src/engine/learn';
+import { highlight } from '@/src/engine/report';
+import { fieldOf } from '@/src/engine/scan';
 import { logUrl } from '@/src/core/applications';
-import { readJob, type Job } from '@/src/engine/job';
+import { fillPlaceholders, readJob, type Job } from '@/src/engine/job';
 import type { Message } from '@/src/core/messages';
 import { loadProfile } from '@/src/profile/store';
 import { translator, type Translate } from '@/src/ui/i18n';
 import { loadLanguage } from '@/src/ui/language';
+import { learnCard } from '@/src/ui/learn-card';
 import { DEFAULT_PALETTE, loadPalette, PALETTES } from '@/src/ui/palette';
 
 const HOST_ID = 'localapply-ui';
@@ -46,6 +51,24 @@ function ui(): ShadowRoot {
       .toast button { background: none; box-shadow: none; padding: 0; border-radius: 0; margin-left: 10px;
         color: var(--lighter, #93d6b5); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
       .toast button:hover { background: none; color: #fff; }
+      .learn { background: #1c1a16; color: #eee9df; padding: 12px 14px; border-radius: 8px; width: 320px; max-width: calc(100vw - 64px);
+        border-left: 3px solid var(--light, #74c79f); box-shadow: 0 6px 18px rgba(28,26,22,.28); }
+      .learn.open { width: 360px; }
+      .learn p { margin: 0; }
+      .learn .title { font-weight: 600; }
+      .learn .note { color: #b3ac9f; font-size: 12px; margin-top: 4px; }
+      .learn ul { list-style: none; margin: 10px 0 0; padding: 0; max-height: 45vh; overflow-y: auto; }
+      .learn li { padding: 8px 0; border-top: 1px solid #2d2a25; }
+      .learn .question { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; font-weight: 600; }
+      .learn input[type=checkbox] { margin: 2px 0 0; accent-color: var(--light, #74c79f); }
+      .learn textarea { display: block; box-sizing: border-box; width: 100%; margin-top: 6px; padding: 6px 8px; resize: vertical;
+        font: inherit; color: #eee9df; background: #2a2721; border: 1px solid #423e36; border-radius: 6px; }
+      .learn textarea:focus { outline: 2px solid var(--light, #74c79f); outline-offset: 0; }
+      .learn .actions { display: flex; gap: 14px; align-items: center; margin-top: 10px; }
+      .learn button { padding: 6px 12px; box-shadow: none; font-weight: 600; }
+      .learn button.quiet { background: none; padding: 0; border-radius: 0; color: var(--lighter, #93d6b5);
+        text-decoration: underline; text-underline-offset: 3px; }
+      .learn button.quiet:hover { background: none; color: #fff; }
     `;
     const stack = document.createElement('div');
     stack.className = 'stack';
@@ -118,6 +141,107 @@ function thisJob(): Job {
   return { ...readJob(document), url: logUrl(location.href) };
 }
 
+/*
+ * Learning answers. After a fill, what the applicant types into questions LocalApply couldn't answer is
+ * kept here, in this frame's memory only, and offered for saving. Nothing is written unless they press Save,
+ * and nothing is watched on a page that wasn't filled.
+ */
+let learning = false;
+let fillJob: Job | undefined;
+/** Answers on offer, by question. */
+const learned = new Map<string, Learned>();
+/**
+ * Answers already offered, by question, as they stand in the form: whether saved, edited in the card or
+ * turned down, they are not offered again unless the applicant changes them in the form.
+ */
+const offered = new Map<string, string>();
+let card: HTMLElement | null = null;
+
+function closeCard(): void {
+  card?.remove();
+  card = null;
+}
+
+async function showCard(): Promise<void> {
+  const [t] = await Promise.all([texts(), paint()]);
+  // An open list keeps what the applicant is editing; it is rebuilt the next time.
+  if (card?.classList.contains('open')) return;
+  closeCard();
+  if (!learned.size) return;
+  const items = [...learned.values()];
+  const settle = () => {
+    for (const item of items) {
+      offered.set(item.label, item.answer);
+      learned.delete(item.label);
+    }
+    closeCard();
+  };
+  card = learnCard(items, t, {
+    dismiss: settle,
+    save: (picked) => {
+      settle();
+      if (!picked.length) return;
+      const message: Message = { type: 'save-answers', answers: picked };
+      browser.runtime
+        .sendMessage(message)
+        .then(() => toast(t('learn.saved', { n: picked.length })))
+        .catch(() => toast(t('options.saveError')));
+    },
+  });
+  ui().querySelector('.stack')!.append(card);
+}
+
+/** The control an event really happened on, also inside shadow roots; null for LocalApply's own notice. */
+function eventTarget(event: Event): HTMLElement | null {
+  const target = event.composedPath()[0];
+  if (!(target instanceof HTMLElement)) return null;
+  const root = target.getRootNode();
+  return root instanceof ShadowRoot && (root.host as HTMLElement).id === HOST_ID ? null : target;
+}
+
+async function noticeAnswer(event: Event): Promise<void> {
+  const target = eventTarget(event);
+  if (!target) return;
+  const answer = learnFrom(target, await loadProfile(), {
+    hints: pickAdapter(location, document)?.hints,
+    job: fillJob,
+  });
+  if (!answer) {
+    // Emptied again: no longer an answer to offer.
+    const label = fieldOf(target)?.label;
+    if (label && learned.delete(label)) void showCard();
+    return;
+  }
+  if (offered.get(answer.label) === answer.answer || learned.get(answer.label)?.answer === answer.answer) return;
+  learned.set(answer.label, answer);
+  void showCard();
+}
+
+function startLearning(job: Job | undefined): void {
+  fillJob = job;
+  if (learning) return;
+  learning = true;
+  document.addEventListener('focusout', (event) => void noticeAnswer(event), true);
+}
+
+/*
+ * "Fill this field with" from the right-click menu. The menu says only which frame was clicked, so each
+ * frame remembers the control its last right-click was on.
+ */
+let menuTarget: HTMLElement | null = null;
+
+async function fillMenuTarget(value: string, job: Job | undefined): Promise<void> {
+  const field = menuTarget && fieldOf(menuTarget);
+  if (!field) return;
+  const text = fillPlaceholders(value, job);
+  // Asked for this text by name: put it in even when the page doesn't say the employer, and say what to finish.
+  if (await fillField(field, [text ?? value])) highlight(field, 'filled');
+  if (text === null) {
+    const [t] = await Promise.all([texts(), paint()]);
+    toast(t('notice.placeholdersLeft'));
+  }
+}
+
 async function run(overwrite: boolean, given?: Job): Promise<void> {
   if (running) return;
   // A fill started without the job (an older popup) can still read it here in the top frame.
@@ -128,6 +252,7 @@ async function run(overwrite: boolean, given?: Job): Promise<void> {
   try {
     const [profile, t] = await Promise.all([loadProfile(), texts(), paint()]);
     result = await fillPage(document, profile, { overwrite, location, job });
+    if (result.total > 0) startLearning(job);
     if (result.total > 0 && (window === window.top || result.filled.length > 0)) {
       const action = result.filled.length
         ? { label: t('notice.undo'), run: () => send({ type: 'relay-undo' }) }
@@ -176,9 +301,12 @@ export default defineContentScript({
     browser.runtime.onMessage.addListener((message: Message) => {
       if (message?.type === 'fill') void run(Boolean(message.overwrite), message.job);
       if (message?.type === 'undo' && !running) void undo();
+      if (message?.type === 'fill-field') void fillMenuTarget(message.value, message.job);
       // Only the top frame is asked; its answer is the reply.
       if (message?.type === 'read-job') return Promise.resolve(thisJob());
     });
+    // Only remembers where the menu opened; nothing on the page is read until an item is chosen.
+    document.addEventListener('contextmenu', (event) => (menuTarget = eventTarget(event)), true);
     if (SHOW_PAGE_BUTTON) watchForForm();
   },
 });

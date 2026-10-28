@@ -239,4 +239,58 @@ export const es: Translation = {
     one: 'restaura tú {n} lista desplegable (contorno discontinuo)',
     other: 'restaura tú {n} listas desplegables (contorno discontinuo)',
   },
+
+  'learn.title': '¿Guardar estas respuestas para la próxima vez?',
+  'learn.summary': {
+    one: 'Has respondido {n} pregunta nueva. ¿Guardarla para la próxima vez?',
+    other: 'Has respondido {n} preguntas nuevas. ¿Guardarlas para la próxima vez?',
+  },
+  'learn.review': 'Revisar',
+  'learn.notNow': 'Ahora no',
+  'learn.hint':
+    'Desmarca lo que no quieras guardar, o cámbialo antes. Una respuesta guardada se rellena cuando la pregunta vuelve a aparecer.',
+  'learn.replaces': 'Sustituye la respuesta que guardaste antes.',
+  'learn.placeholders':
+    '{company} y {position} representan la empresa y el puesto, para que la respuesta sirva en la próxima candidatura.',
+  'learn.saved': { one: '{n} respuesta guardada', other: '{n} respuestas guardadas' },
+  'notice.placeholdersLeft': 'Esta página no indica la empresa ni el puesto: sustituye tú {company} o {position}.',
+  'menu.fillWith': 'Rellenar este campo con',
+  'menu.fullName': 'Nombre completo',
+  'menu.empty': 'Tu perfil aún está vacío',
+  'popup.appliedBefore': 'Ya te postulaste en {company}',
+  'popup.filledBefore': 'Ya rellenaste esta candidatura',
+  'popup.appliedMore': { one: 'y {n} más', other: 'y {n} más' },
+  'popup.seeLog': 'Abrir el registro de candidaturas',
+  'options.howItWorks': 'Cómo funciona LocalApply',
+  'welcome.pageTitle': 'Bienvenida · LocalApply',
+  'welcome.title': 'Te damos la bienvenida a LocalApply',
+  'welcome.subtitle':
+    'LocalApply rellena formularios de candidatura con un perfil que guardas una sola vez. Es gratis, sin cuenta ni suscripción, y funciona sin conexión.',
+  'welcome.start': 'Crear tu perfil',
+  'welcome.how': 'Cómo funciona',
+  'welcome.step1.title': 'Guarda tus datos una vez',
+  'welcome.step1.text':
+    'Escribe tu nombre, tus datos de contacto, tu experiencia, tu formación, tu CV y tu carta de presentación en la página del perfil. Todo se guarda mientras escribes.',
+  'welcome.step2.title': 'Abre una candidatura y pulsa Rellenar',
+  'welcome.step2.text':
+    'En un formulario de candidatura, pulsa el botón de LocalApply en la barra de herramientas y luego Rellenar esta página.',
+  'welcome.step2.shortcut': 'O pulsa',
+  'welcome.step2.pin': '¿No ves el botón? Abre el menú de extensiones (la pieza de puzle) y fija LocalApply.',
+  'welcome.step3.title': 'Revisa el formulario y envíalo tú',
+  'welcome.step3.text':
+    'Un contorno verde continuo marca lo que se ha rellenado, uno naranja discontinuo lo que aún te toca a ti. LocalApply nunca pulsa Enviar, y Deshacer lo deja todo como estaba.',
+  'welcome.sampleQuestion': '¿Por qué quieres trabajar con nosotros?',
+  'welcome.also': 'Además',
+  'welcome.learn':
+    'Recuerda tus respuestas: responde a una pregunta nueva y LocalApply te ofrece guardarla para la próxima vez.',
+  'welcome.menu': 'Rellena campos sueltos: haz clic derecho en un campo y elige Rellenar este campo con.',
+  'welcome.log':
+    'Lleva la cuenta: un registro de dónde te has postulado, y un aviso cuando vuelves a postularte en una empresa.',
+  'welcome.profiles': 'Varios perfiles, por ejemplo uno por idioma o tipo de puesto.',
+  'welcome.placeholders':
+    'Escribe a la empresa correcta: {company} y {position} en tu carta se convierten en la empresa y el puesto.',
+  'welcome.privacy.title': 'Tus datos se quedan en este navegador',
+  'welcome.privacy.text':
+    'LocalApply no tiene servidor, cuenta ni analíticas, y no hace peticiones de red. Tu perfil y tus documentos nunca salen de tu dispositivo.',
+  'welcome.later': 'Puedes volver a abrir esta página desde la página del perfil.',
 };
